@@ -9,6 +9,7 @@ import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 import net.nova.cosmicore.Cosmicore;
 import net.nova.cosmicore.data.loot_table.ModLootTableProvider;
+import net.nova.cosmicore.data.recipe.ModRecipeProvider;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -30,6 +31,7 @@ public class DataGenerators {
             generator.addProvider(true, new ModBlockStateProvider(output, existingFileHelper));
             generator.addProvider(true, new ModBlockTagsProvider(output, lookupProvider, existingFileHelper));
             generator.addProvider(true, new ModLootTableProvider(output, lookupProvider));
+            generator.addProvider(true, new ModRecipeProvider(output, lookupProvider));
 
         } catch (RuntimeException e) {
             Cosmicore.logger.error("Failed to gather data", e);
