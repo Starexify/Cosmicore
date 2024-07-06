@@ -19,7 +19,6 @@ public class ModBlockStateProvider extends BlockStateProvider {
     protected void registerStatesAndModels() {
         normalBlock(ModBlocks.RAW_TITANIUM_BLOCK.get());
         normalBlock(ModBlocks.TITANIUM_BLOCK.get());
-        normalBlock(ModBlocks.METEOROID_BLOCK.get());
     }
 
     private void normalBlock(Block block) {

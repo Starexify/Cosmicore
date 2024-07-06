@@ -19,6 +19,12 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.RAW_TITANIUM.get());
         simpleItem(ModItems.TITANIUM_INGOT.get());
 
+        handheldItem(ModItems.TITANIUM_SHOVEL.get());
+        handheldItem(ModItems.TITANIUM_PICKAXE.get());
+        handheldItem(ModItems.TITANIUM_AXE.get());
+        handheldItem(ModItems.TITANIUM_HOE.get());
+        handheldItem(ModItems.TITANIUM_SWORD.get());
+
         simpleItem(ModItems.ASTRALITE_CLUSTER.get());
         simpleItem(ModItems.ASTRALITE_CRYSTAL.get());
 
@@ -32,6 +38,13 @@ public class ModItemModelProvider extends ItemModelProvider {
         String name = getItemName(item);
         getBuilder(name)
                 .parent(getExistingFile(mcLoc("item/generated")))
+                .texture("layer0", "item/" + name);
+    }
+
+    private void handheldItem(Item item) {
+        String name = getItemName(item);
+        getBuilder(name)
+                .parent(getExistingFile(mcLoc("item/handheld")))
                 .texture("layer0", "item/" + name);
     }
 

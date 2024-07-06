@@ -15,20 +15,18 @@ public class ModLangProvider extends LanguageProvider {
 
     @Override
     protected void addTranslations() {
-
         // Items
         addItem(ModItems.RAW_TITANIUM, "Raw Titanium");
         addItem(ModItems.TITANIUM_INGOT, "Titanium Ingot");
-        addItem(ModItems.ASTRALITE_CLUSTER, "Astralite Cluster");
-        addItem(ModItems.ASTRALITE_CRYSTAL, "Astralite Crystal");
-        addItem(ModItems.UNSTABLE_HYPERIONITE, "Unstable Hyperionite");
-        addItem(ModItems.STABLE_HYPERIONITE, "Stable Hyperionite");
-        addItem(ModItems.LONSDALEITE, "Lonsdaleite");
+        addItem(ModItems.TITANIUM_SHOVEL, "Titanium Shovel");
+        addItem(ModItems.TITANIUM_PICKAXE, "Titanium Pickaxe");
+        addItem(ModItems.TITANIUM_AXE, "Titanium Axe");
+        addItem(ModItems.TITANIUM_HOE, "Titanium Hoe");
+        addItem(ModItems.TITANIUM_SWORD, "Titanium Sword");
 
         // Blocks
         addBlock(ModBlocks.RAW_TITANIUM_BLOCK, "Raw Titanium Block");
         addBlock(ModBlocks.TITANIUM_BLOCK, "Titanium Block");
-        addBlock(ModBlocks.METEOROID_BLOCK, "Meteoroid Block");
 
         // Creative Tab
         add(ModCreativeTab.COSMICORE_TAB_TITLE, "Cosmicore");

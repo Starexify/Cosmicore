@@ -1,4 +1,4 @@
-package net.nova.cosmicore.data;
+package net.nova.cosmicore.data.tags;
 
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;

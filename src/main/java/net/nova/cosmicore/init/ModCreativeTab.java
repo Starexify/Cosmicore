@@ -37,7 +37,7 @@ public class ModCreativeTab {
                     .forEach(output::accept);
         });
 
-        builder.icon(() -> new ItemStack(ModBlocks.METEOROID_BLOCK));
+        builder.icon(() -> new ItemStack(ModBlocks.RAW_TITANIUM_BLOCK));
         builder.title(Component.translatable(COSMICORE_TAB_TITLE));
 
         return builder.build();
