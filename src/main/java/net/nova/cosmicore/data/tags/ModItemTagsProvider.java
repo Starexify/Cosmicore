@@ -27,5 +27,6 @@ public class ModItemTagsProvider extends ItemTagsProvider {
         tag(ItemTags.CHEST_ARMOR).add(ModItems.TITANIUM_CHESTPLATE.get());
         tag(ItemTags.LEG_ARMOR).add(ModItems.TITANIUM_LEGGINGS.get());
         tag(ItemTags.FOOT_ARMOR).add(ModItems.TITANIUM_BOOTS.get());
+        tag(ItemTags.TRIM_MATERIALS).add(ModItems.TITANIUM_INGOT.get());
     }
 }

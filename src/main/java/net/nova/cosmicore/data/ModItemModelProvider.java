@@ -106,8 +106,9 @@ public class ModItemModelProvider extends ItemModelProvider {
 
         getBuilder(name)
                 .texture("layer0", modLoc("item/" + name));
-
     }
+
+
 
     private String getItemName(Item item) {
         return BuiltInRegistries.ITEM.getKey(item).toString().replace(MODID + ":", "");

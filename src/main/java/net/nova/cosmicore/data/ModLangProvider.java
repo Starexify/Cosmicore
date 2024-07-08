@@ -34,5 +34,8 @@ public class ModLangProvider extends LanguageProvider {
 
         // Creative Tab
         add(ModCreativeTab.COSMICORE_TAB_TITLE, "Cosmicore");
+
+        // Trim Material
+        add("trim_material.cosmicore.titanium", "Titanium Material");
     }
 }
