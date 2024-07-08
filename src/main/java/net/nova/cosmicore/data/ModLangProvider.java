@@ -23,6 +23,10 @@ public class ModLangProvider extends LanguageProvider {
         addItem(ModItems.TITANIUM_AXE, "Titanium Axe");
         addItem(ModItems.TITANIUM_HOE, "Titanium Hoe");
         addItem(ModItems.TITANIUM_SWORD, "Titanium Sword");
+        addItem(ModItems.TITANIUM_HELMET, "Titanium Helmet");
+        addItem(ModItems.TITANIUM_CHESTPLATE, "Titanium Chestplate");
+        addItem(ModItems.TITANIUM_LEGGINGS, "Titanium Leggings");
+        addItem(ModItems.TITANIUM_BOOTS, "Titanium Boots");
 
         // Blocks
         addBlock(ModBlocks.RAW_TITANIUM_BLOCK, "Raw Titanium Block");

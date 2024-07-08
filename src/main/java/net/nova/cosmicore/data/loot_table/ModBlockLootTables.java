@@ -22,7 +22,6 @@ public class ModBlockLootTables extends BlockLootSubProvider {
     protected void generate() {
         dropSelf(ModBlocks.RAW_TITANIUM_BLOCK.get());
         dropSelf(ModBlocks.TITANIUM_BLOCK.get());
-        dropSelf(ModBlocks.METEOROID_BLOCK.get());
     }
 
     @Override

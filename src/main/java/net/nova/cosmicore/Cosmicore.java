@@ -2,6 +2,7 @@ package net.nova.cosmicore;
 
 import net.minecraft.resources.ResourceLocation;
 import net.nova.cosmicore.data.DataGenerators;
+import net.nova.cosmicore.init.ModArmorMaterial;
 import net.nova.cosmicore.init.ModBlocks;
 import net.nova.cosmicore.init.ModCreativeTab;
 import net.nova.cosmicore.init.ModItems;
@@ -19,6 +20,7 @@ public class Cosmicore {
     public static final Logger logger = LoggerFactory.getLogger(Cosmicore.class);
 
     public Cosmicore(IEventBus bus) {
+        ModArmorMaterial.ARMOR_MATERIALS.register(bus);
         ModCreativeTab.CREATIVE_TAB.register(bus);
         ModItems.ITEMS.register(bus);
         ModBlocks.BLOCKS.register(bus);

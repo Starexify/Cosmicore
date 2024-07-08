@@ -1,18 +1,16 @@
 {
-  "block.cosmicore.meteoroid_block": "Meteoroid Block",
   "block.cosmicore.raw_titanium_block": "Raw Titanium Block",
   "block.cosmicore.titanium_block": "Titanium Block",
   "cosmicore.creativetab": "Cosmicore",
-  "item.cosmicore.astralite_cluster": "Astralite Cluster",
-  "item.cosmicore.astralite_crystal": "Astralite Crystal",
-  "item.cosmicore.lonsdaleite": "Lonsdaleite",
   "item.cosmicore.raw_titanium": "Raw Titanium",
-  "item.cosmicore.stable_hyperionite": "Stable Hyperionite",
   "item.cosmicore.titanium_axe": "Titanium Axe",
+  "item.cosmicore.titanium_boots": "Titanium Boots",
+  "item.cosmicore.titanium_chestplate": "Titanium Chestplate",
+  "item.cosmicore.titanium_helmet": "Titanium Helmet",
   "item.cosmicore.titanium_hoe": "Titanium Hoe",
   "item.cosmicore.titanium_ingot": "Titanium Ingot",
+  "item.cosmicore.titanium_leggings": "Titanium Leggings",
   "item.cosmicore.titanium_pickaxe": "Titanium Pickaxe",
   "item.cosmicore.titanium_shovel": "Titanium Shovel",
-  "item.cosmicore.titanium_sword": "Titanium Sword",
-  "item.cosmicore.unstable_hyperionite": "Unstable Hyperionite"
+  "item.cosmicore.titanium_sword": "Titanium Sword"
 }
