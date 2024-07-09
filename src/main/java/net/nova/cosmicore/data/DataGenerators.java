@@ -37,6 +37,8 @@ public class DataGenerators {
             generator.addProvider(true, modBlockTagsProvider);
             generator.addProvider(true, new ModItemTagsProvider(output, lookupProvider, modBlockTagsProvider, existingFileHelper));
 
+            generator.addProvider(true, new ModAtlasesProvider(output, lookupProvider, existingFileHelper));
+
             generator.addProvider(true, new ModLootTableProvider(output, lookupProvider));
             generator.addProvider(true, new ModRecipeProvider(output, lookupProvider));
 

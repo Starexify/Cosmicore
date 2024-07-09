@@ -1,0 +1,39 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 200,
+  "experience": 0.1,
+  "ingredient": [
+    {
+      "item": "cosmicore:titanium_pickaxe"
+    },
+    {
+      "item": "cosmicore:titanium_shovel"
+    },
+    {
+      "item": "cosmicore:titanium_axe"
+    },
+    {
+      "item": "cosmicore:titanium_hoe"
+    },
+    {
+      "item": "cosmicore:titanium_sword"
+    },
+    {
+      "item": "cosmicore:titanium_helmet"
+    },
+    {
+      "item": "cosmicore:titanium_chestplate"
+    },
+    {
+      "item": "cosmicore:titanium_leggings"
+    },
+    {
+      "item": "cosmicore:titanium_boots"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "cosmicore:titanium_nugget"
+  }
+}

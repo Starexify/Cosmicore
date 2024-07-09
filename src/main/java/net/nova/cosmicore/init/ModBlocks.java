@@ -19,14 +19,14 @@ public class ModBlocks {
     public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(MODID);
 
 
-    public static final DeferredBlock<Block> RAW_TITANIUM_BLOCK = registerBlock("raw_titanium_block",
+    public static DeferredBlock<Block> RAW_TITANIUM_BLOCK = registerBlock("raw_titanium_block",
             () -> new Block(BlockBehaviour.Properties.of()
-                            .mapColor(MapColor.COLOR_CYAN)
+                            .mapColor(MapColor.COLOR_LIGHT_BLUE)
                             .instrument(NoteBlockInstrument.BASEDRUM)
                             .requiresCorrectToolForDrops()
                             .strength(5.0F, 6.0F)
             ));
-    public static final DeferredBlock<Block> TITANIUM_BLOCK = registerBlock("titanium_block",
+    public static DeferredBlock<Block> TITANIUM_BLOCK = registerBlock("titanium_block",
             () -> new Block(BlockBehaviour.Properties.of()
                             .mapColor(MapColor.METAL)
                             .instrument(NoteBlockInstrument.PLING)
