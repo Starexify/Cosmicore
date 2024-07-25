@@ -38,20 +38,22 @@ public class ModItemModelProvider extends ItemModelProvider {
 
     @Override
     protected void registerModels() {
-        basicItem(ModItems.RAW_TITANIUM.get());
-        basicItem(ModItems.TITANIUM_INGOT.get());
-        basicItem(ModItems.TITANIUM_NUGGET.get());
-
-        handheldItem(ModItems.TITANIUM_SHOVEL.get());
-        handheldItem(ModItems.TITANIUM_PICKAXE.get());
-        handheldItem(ModItems.TITANIUM_AXE.get());
-        handheldItem(ModItems.TITANIUM_HOE.get());
-        handheldItem(ModItems.TITANIUM_SWORD.get());
-
         trimmableArmorItem(ModItems.TITANIUM_HELMET.get());
         trimmableArmorItem(ModItems.TITANIUM_CHESTPLATE.get());
         trimmableArmorItem(ModItems.TITANIUM_LEGGINGS.get());
         trimmableArmorItem(ModItems.TITANIUM_BOOTS.get());
+
+        handheldItem(ModItems.TITANIUM_SWORD.get());
+        handheldItem(ModItems.TITANIUM_PICKAXE.get());
+        handheldItem(ModItems.TITANIUM_AXE.get());
+        handheldItem(ModItems.TITANIUM_SHOVEL.get());
+        handheldItem(ModItems.TITANIUM_HOE.get());
+
+        basicItem(ModItems.RAW_TITANIUM.get());
+        basicItem(ModItems.TITANIUM_NUGGET.get());
+        basicItem(ModItems.TITANIUM_INGOT.get());
+
+        basicItem(ModItems.TITANIUM_UPGRADE_SMITHING_TEMPLATE.get());
     }
 
     private void handheldItem(Item item) {

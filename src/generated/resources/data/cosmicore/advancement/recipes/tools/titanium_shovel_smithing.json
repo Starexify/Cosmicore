@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "cosmicore:titanium_axe"
+        "recipe": "cosmicore:titanium_shovel_smithing"
       },
       "trigger": "minecraft:recipe_unlocked"
     },
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "cosmicore:titanium_axe"
+      "cosmicore:titanium_shovel_smithing"
     ]
   }
 }

@@ -28,6 +28,7 @@ public class ModLangProvider extends LanguageProvider {
         addItem(ModItems.RAW_TITANIUM, "Raw Titanium");
         addItem(ModItems.TITANIUM_NUGGET, "Titanium Nugget");
         addItem(ModItems.TITANIUM_INGOT, "Titanium Ingot");
+        addItem(ModItems.TITANIUM_UPGRADE_SMITHING_TEMPLATE, "Smithing Template");
 
         // Blocks
         addBlock(ModBlocks.RAW_TITANIUM_BLOCK, "Raw Titanium Block");
@@ -41,5 +42,12 @@ public class ModLangProvider extends LanguageProvider {
 
         // Trim Material
         add("trim_material.cosmicore.titanium", "Titanium Material");
+
+        // Smithing Template
+        add("item.cosmicore.smithing_template.titanium_upgrade.additions_slot_description", "Add Titanium Ingot");
+        add("item.cosmicore.smithing_template.titanium_upgrade.applies_to", "Iron Equipment");
+        add("item.cosmicore.smithing_template.titanium_upgrade.base_slot_description", "Add iron armor, weapon, or tool");
+        add("item.cosmicore.smithing_template.titanium_upgrade.ingredients", "Titanium Ingot");
+        add("upgrade.cosmicore.titanium_upgrade", "Titanium Upgrade");
     }
 }

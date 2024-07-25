@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "cosmicore:titanium_helmet"
+        "recipe": "cosmicore:titanium_leggings_smithing"
       },
       "trigger": "minecraft:recipe_unlocked"
     },
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "cosmicore:titanium_helmet"
+      "cosmicore:titanium_leggings_smithing"
     ]
   }
 }

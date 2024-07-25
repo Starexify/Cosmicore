@@ -33,6 +33,8 @@ public class ModCreativeTab {
             output.accept(ModItems.TITANIUM_INGOT);
             output.accept(ModBlocks.RAW_TITANIUM_BLOCK);
             output.accept(ModBlocks.TITANIUM_BLOCK);
+            
+            output.accept(ModItems.TITANIUM_UPGRADE_SMITHING_TEMPLATE);
 
             output.accept(ModBlocks.ACHONDRITE);
             output.accept(ModBlocks.METEORITE);

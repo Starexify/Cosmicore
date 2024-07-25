@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": {
+    "item": "cosmicore:titanium_ingot"
+  },
+  "base": {
+    "item": "minecraft:iron_leggings"
+  },
+  "result": {
+    "count": 1,
+    "id": "cosmicore:titanium_leggings"
+  },
+  "template": {
+    "item": "cosmicore:titanium_upgrade_smithing_template"
+  }
+}

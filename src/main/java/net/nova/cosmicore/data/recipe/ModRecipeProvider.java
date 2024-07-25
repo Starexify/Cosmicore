@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableList;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.ItemLike;
@@ -86,73 +87,15 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_titanium_boots", has(ModItems.TITANIUM_BOOTS))
                 .save(recipeOutput, path + getBlastingRecipeName(ModItems.TITANIUM_NUGGET));
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.TITANIUM_PICKAXE)
-                .define('#', Items.STICK)
-                .define('X', ModItems.TITANIUM_INGOT)
-                .pattern("XXX")
-                .pattern(" # ")
-                .pattern(" # ")
-                .unlockedBy("has_titanium_ingot", has(ModItems.TITANIUM_INGOT))
-                .save(recipeOutput);
-        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.TITANIUM_SHOVEL)
-                .define('#', Items.STICK)
-                .define('X', ModItems.TITANIUM_INGOT)
-                .pattern("X")
-                .pattern("#")
-                .pattern("#")
-                .unlockedBy("has_titanium_ingot", has(ModItems.TITANIUM_INGOT))
-                .save(recipeOutput);
-        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.TITANIUM_SWORD)
-                .define('#', Items.STICK)
-                .define('X', ModItems.TITANIUM_INGOT)
-                .pattern("X")
-                .pattern("X")
-                .pattern("#")
-                .unlockedBy("has_titanium_ingot", has(ModItems.TITANIUM_INGOT))
-                .save(recipeOutput);
-        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.TITANIUM_HOE)
-                .define('#', Items.STICK)
-                .define('X', ModItems.TITANIUM_INGOT)
-                .pattern("XX")
-                .pattern(" #")
-                .pattern(" #")
-                .unlockedBy("has_titanium_ingot", has(ModItems.TITANIUM_INGOT))
-                .save(recipeOutput);
-        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.TITANIUM_AXE)
-                .define('#', Items.STICK)
-                .define('X', ModItems.TITANIUM_INGOT)
-                .pattern("XX")
-                .pattern("X#")
-                .pattern(" #")
-                .unlockedBy("has_titanium_ingot", has(ModItems.TITANIUM_INGOT))
-                .save(recipeOutput);
-
-        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModItems.TITANIUM_HELMET)
-                .define('X', ModItems.TITANIUM_INGOT)
-                .pattern("XXX")
-                .pattern("X X")
-                .unlockedBy("has_titanium_ingot", has(ModItems.TITANIUM_INGOT))
-                .save(recipeOutput);
-        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModItems.TITANIUM_CHESTPLATE)
-                .define('X', ModItems.TITANIUM_INGOT)
-                .pattern("X X")
-                .pattern("XXX")
-                .pattern("XXX")
-                .unlockedBy("has_titanium_ingot", has(ModItems.TITANIUM_INGOT))
-                .save(recipeOutput);
-        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModItems.TITANIUM_LEGGINGS)
-                .define('X', ModItems.TITANIUM_INGOT)
-                .pattern("XXX")
-                .pattern("X X")
-                .pattern("X X")
-                .unlockedBy("has_titanium_ingot", has(ModItems.TITANIUM_INGOT))
-                .save(recipeOutput);
-        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModItems.TITANIUM_BOOTS)
-                .define('X', ModItems.TITANIUM_INGOT)
-                .pattern("X X")
-                .pattern("X X")
-                .unlockedBy("has_titanium_ingot", has(ModItems.TITANIUM_INGOT))
-                .save(recipeOutput);
+        titaniumSmithing(recipeOutput, Items.IRON_CHESTPLATE, RecipeCategory.COMBAT, ModItems.TITANIUM_CHESTPLATE.get());
+        titaniumSmithing(recipeOutput, Items.IRON_LEGGINGS, RecipeCategory.COMBAT, ModItems.TITANIUM_LEGGINGS.get());
+        titaniumSmithing(recipeOutput, Items.IRON_HELMET, RecipeCategory.COMBAT, ModItems.TITANIUM_HELMET.get());
+        titaniumSmithing(recipeOutput, Items.IRON_BOOTS, RecipeCategory.COMBAT, ModItems.TITANIUM_BOOTS.get());
+        titaniumSmithing(recipeOutput, Items.IRON_SWORD, RecipeCategory.COMBAT, ModItems.TITANIUM_SWORD.get());
+        titaniumSmithing(recipeOutput, Items.IRON_AXE, RecipeCategory.TOOLS, ModItems.TITANIUM_AXE.get());
+        titaniumSmithing(recipeOutput, Items.IRON_PICKAXE, RecipeCategory.TOOLS, ModItems.TITANIUM_PICKAXE.get());
+        titaniumSmithing(recipeOutput, Items.IRON_HOE, RecipeCategory.TOOLS, ModItems.TITANIUM_HOE.get());
+        titaniumSmithing(recipeOutput, Items.IRON_SHOVEL, RecipeCategory.TOOLS, ModItems.TITANIUM_SHOVEL.get());
     }
 
     protected static void nineBlockStorageRecipes(RecipeOutput pRecipeOutput, RecipeCategory pUnpackedCategory, ItemLike pUnpacked, RecipeCategory pPackedCategory, ItemLike pPacked) {
@@ -186,5 +129,13 @@ public class ModRecipeProvider extends RecipeProvider {
                     .unlockedBy(getHasName(itemlike), has(itemlike))
                     .save(pRecipeOutput, path + getItemName(pResult) + pSuffix + "_" + getItemName(itemlike));
         }
+    }
+
+    protected static void titaniumSmithing(RecipeOutput pRecipeOutput, Item pIngredientItem, RecipeCategory pCategory, Item pResultItem) {
+        SmithingTransformRecipeBuilder.smithing(
+                        Ingredient.of(ModItems.TITANIUM_UPGRADE_SMITHING_TEMPLATE), Ingredient.of(pIngredientItem), Ingredient.of(ModItems.TITANIUM_INGOT), pCategory, pResultItem
+                )
+                .unlocks("has_titanium_ingot", has(ModItems.TITANIUM_INGOT))
+                .save(pRecipeOutput, path + getItemName(pResultItem) + "_smithing");
     }
 }
