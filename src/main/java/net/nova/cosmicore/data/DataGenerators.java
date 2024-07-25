@@ -31,7 +31,7 @@ public class DataGenerators {
             generator.addProvider(true, new ModLangProvider(output));
 
             generator.addProvider(true, new ModItemModelProvider(output, existingFileHelper));
-            generator.addProvider(true, new ModBlockStateProvider(output, existingFileHelper));
+            generator.addProvider(true, new ModBlockStateAndModelProvider(output, existingFileHelper));
 
             ModBlockTagsProvider modBlockTagsProvider = new ModBlockTagsProvider(output, lookupProvider, existingFileHelper);
             generator.addProvider(true, modBlockTagsProvider);

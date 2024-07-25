@@ -20,12 +20,21 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
     @Override
     protected void addTags(HolderLookup.Provider pProvider) {
         tag(BlockTags.MINEABLE_WITH_PICKAXE)
-                .add(ModBlocks.RAW_TITANIUM_BLOCK.getKey());
-        tag(BlockTags.MINEABLE_WITH_PICKAXE)
-                .add(ModBlocks.TITANIUM_BLOCK.getKey());
+                .add(ModBlocks.RAW_TITANIUM_BLOCK.getKey())
+                .add(ModBlocks.TITANIUM_BLOCK.getKey())
+                .add(ModBlocks.ACHONDRITE.getKey())
+                .add(ModBlocks.METEORITE.getKey())
+                .add(ModBlocks.PALLASITE.getKey());
+
         tag(BlockTags.NEEDS_IRON_TOOL)
-                .add(ModBlocks.RAW_TITANIUM_BLOCK.getKey());
-        tag(BlockTags.NEEDS_IRON_TOOL)
-                .add(ModBlocks.TITANIUM_BLOCK.getKey());
+                .add(ModBlocks.RAW_TITANIUM_BLOCK.getKey())
+                .add(ModBlocks.TITANIUM_BLOCK.getKey())
+                .add(ModBlocks.ACHONDRITE.getKey());
+
+        tag(BlockTags.NEEDS_DIAMOND_TOOL)
+                .add(ModBlocks.METEORITE.getKey());
+
+        tag(BlockTags.NEEDS_DIAMOND_TOOL)
+                .add(ModBlocks.PALLASITE.getKey());
     }
 }

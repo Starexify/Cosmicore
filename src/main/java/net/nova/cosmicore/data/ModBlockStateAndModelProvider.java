@@ -10,8 +10,8 @@ import net.nova.cosmicore.init.ModBlocks;
 
 import static net.nova.cosmicore.Cosmicore.MODID;
 
-public class ModBlockStateProvider extends BlockStateProvider {
-    public ModBlockStateProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
+public class ModBlockStateAndModelProvider extends BlockStateProvider {
+    public ModBlockStateAndModelProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
         super(output, MODID, existingFileHelper);
     }
 
@@ -19,6 +19,9 @@ public class ModBlockStateProvider extends BlockStateProvider {
     protected void registerStatesAndModels() {
         normalBlock(ModBlocks.RAW_TITANIUM_BLOCK.get());
         normalBlock(ModBlocks.TITANIUM_BLOCK.get());
+        normalBlock(ModBlocks.ACHONDRITE.get());
+        normalBlock(ModBlocks.METEORITE.get());
+        normalBlock(ModBlocks.PALLASITE.get());
     }
 
     private void normalBlock(Block block) {
@@ -27,5 +30,4 @@ public class ModBlockStateProvider extends BlockStateProvider {
         simpleBlock(block, models().cubeAll(path, modLoc("block/" + path)));
         simpleBlockItem(block, models().getExistingFile(modLoc("block/" + path)));
     }
-
 }

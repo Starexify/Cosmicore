@@ -12,9 +12,9 @@ public class ModItems {
 
     public static DeferredItem<Item> RAW_TITANIUM = ITEMS.register("raw_titanium",
             () -> new Item(new Item.Properties()));
-    public static DeferredItem<Item> TITANIUM_INGOT = ITEMS.register("titanium_ingot",
-            () -> new Item(new Item.Properties()));
     public static DeferredItem<Item> TITANIUM_NUGGET = ITEMS.register("titanium_nugget",
+            () -> new Item(new Item.Properties()));
+    public static DeferredItem<Item> TITANIUM_INGOT = ITEMS.register("titanium_ingot",
             () -> new Item(new Item.Properties()));
 
     public static DeferredItem<Item> TITANIUM_SHOVEL = ITEMS.register("titanium_shovel",

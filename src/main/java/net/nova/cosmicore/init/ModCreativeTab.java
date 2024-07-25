@@ -3,13 +3,9 @@ package net.nova.cosmicore.init;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
-
-import java.util.HashSet;
-import java.util.Set;
 
 import static net.nova.cosmicore.Cosmicore.MODID;
 
@@ -22,19 +18,25 @@ public class ModCreativeTab {
         CreativeModeTab.Builder builder = CreativeModeTab.builder();
 
         builder.displayItems((itemDisplay, output) -> {
-            Set<Item> addedItems = new HashSet<>();
+            output.accept(ModItems.TITANIUM_HELMET);
+            output.accept(ModItems.TITANIUM_CHESTPLATE);
+            output.accept(ModItems.TITANIUM_LEGGINGS);
+            output.accept(ModItems.TITANIUM_BOOTS);
+            output.accept(ModItems.TITANIUM_SWORD);
+            output.accept(ModItems.TITANIUM_PICKAXE);
+            output.accept(ModItems.TITANIUM_AXE);
+            output.accept(ModItems.TITANIUM_SHOVEL);
+            output.accept(ModItems.TITANIUM_HOE);
 
-            ModItems.ITEMS.getEntries()
-                    .stream()
-                    .map((item) -> item.get().asItem())
-                    .filter(addedItems::add)
-                    .forEach(output::accept);
+            output.accept(ModItems.RAW_TITANIUM);
+            output.accept(ModItems.TITANIUM_NUGGET);
+            output.accept(ModItems.TITANIUM_INGOT);
+            output.accept(ModBlocks.RAW_TITANIUM_BLOCK);
+            output.accept(ModBlocks.TITANIUM_BLOCK);
 
-            ModBlocks.BLOCKS.getEntries()
-                    .stream()
-                    .map((item) -> item.get().asItem())
-                    .filter(addedItems::add)
-                    .forEach(output::accept);
+            output.accept(ModBlocks.ACHONDRITE);
+            output.accept(ModBlocks.METEORITE);
+            output.accept(ModBlocks.PALLASITE);
         });
 
         builder.icon(() -> new ItemStack(ModBlocks.RAW_TITANIUM_BLOCK));
