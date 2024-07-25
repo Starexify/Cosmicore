@@ -25,6 +25,7 @@ public class Cosmicore {
         bus.addListener(DataGenerators::gatherData);
     }
 
+
     public static ResourceLocation rl(String path) {
         return ResourceLocation.fromNamespaceAndPath(MODID, path);
     }
