@@ -1,0 +1,6 @@
+{
+    "parent": "item/crossbow",
+    "textures": {
+        "layer0": "cosmicore:item/titanium_crossbow_pulling_2"
+    }
+}

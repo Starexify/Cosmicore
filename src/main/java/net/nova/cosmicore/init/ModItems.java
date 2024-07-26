@@ -1,9 +1,12 @@
 package net.nova.cosmicore.init;
 
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.*;
+import net.minecraft.world.item.component.ChargedProjectiles;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.nova.cosmicore.item.ModSmithingTemplateItem;
+import net.nova.cosmicore.item.TitaniumCrossbow;
 
 import static net.nova.cosmicore.Cosmicore.MODID;
 
@@ -30,6 +33,11 @@ public class ModItems {
     public static DeferredItem<Item> TITANIUM_HOE = ITEMS.register("titanium_hoe",
             () -> new HoeItem(ModToolTiers.TITANIUM, new Item.Properties().attributes(HoeItem.createAttributes(ModToolTiers.TITANIUM, -3.5F, 0.0F))));
 
+    public static DeferredItem<Item> TITANIUM_CROSSBOW = ITEMS.register("titanium_crossbow",
+            () -> new TitaniumCrossbow(new Item.Properties().stacksTo(1).durability(930).component(DataComponents.CHARGED_PROJECTILES, ChargedProjectiles.EMPTY)));
+
+
+
     public static DeferredItem<Item> RAW_TITANIUM = ITEMS.register("raw_titanium",
             () -> new Item(new Item.Properties()));
     public static DeferredItem<Item> TITANIUM_NUGGET = ITEMS.register("titanium_nugget",
@@ -39,6 +47,4 @@ public class ModItems {
 
     public static DeferredItem<Item> TITANIUM_UPGRADE_SMITHING_TEMPLATE = ITEMS.register("titanium_upgrade_smithing_template",
             () -> ModSmithingTemplateItem.createTitaniumUpgradeTemplate());
-
-
 }

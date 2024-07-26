@@ -25,6 +25,7 @@ public class ModLangProvider extends LanguageProvider {
         addItem(ModItems.TITANIUM_AXE, "Titanium Axe");
         addItem(ModItems.TITANIUM_SHOVEL, "Titanium Shovel");
         addItem(ModItems.TITANIUM_HOE, "Titanium Hoe");
+        addItem(ModItems.TITANIUM_CROSSBOW, "Titanium Crossbow");
         addItem(ModItems.RAW_TITANIUM, "Raw Titanium");
         addItem(ModItems.TITANIUM_NUGGET, "Titanium Nugget");
         addItem(ModItems.TITANIUM_INGOT, "Titanium Ingot");

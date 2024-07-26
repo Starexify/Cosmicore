@@ -28,6 +28,8 @@ public class ModCreativeTab {
             output.accept(ModItems.TITANIUM_SHOVEL);
             output.accept(ModItems.TITANIUM_HOE);
 
+            output.accept(ModItems.TITANIUM_CROSSBOW);
+
             output.accept(ModItems.RAW_TITANIUM);
             output.accept(ModItems.TITANIUM_NUGGET);
             output.accept(ModItems.TITANIUM_INGOT);
