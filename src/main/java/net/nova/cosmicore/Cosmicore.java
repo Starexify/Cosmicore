@@ -19,7 +19,7 @@ public class Cosmicore {
     public static final Logger logger = LoggerFactory.getLogger(Cosmicore.class);
 
     public Cosmicore(IEventBus bus) {
-        bus.addListener(this::setup);
+        bus.addListener(this::clientSetup);
         ModArmorMaterial.ARMOR_MATERIALS.register(bus);
         ModCreativeTab.CREATIVE_TAB.register(bus);
         ModItems.ITEMS.register(bus);
@@ -28,7 +28,7 @@ public class Cosmicore {
         bus.addListener(DataGenerators::gatherData);
     }
 
-    private void setup(final FMLClientSetupEvent event) {
+    private void clientSetup(final FMLClientSetupEvent event) {
         event.enqueueWork(() -> {
             ModItemProperties.addCustomItemProperties();
         });
