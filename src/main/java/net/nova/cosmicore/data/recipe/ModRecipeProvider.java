@@ -26,6 +26,7 @@ public class ModRecipeProvider extends RecipeProvider {
 
     @Override
     protected void buildRecipes(RecipeOutput recipeOutput) {
+        // Titanium Stuff
         nineBlockStorageRecipes(recipeOutput, RecipeCategory.MISC, ModItems.RAW_TITANIUM, RecipeCategory.BUILDING_BLOCKS, ModBlocks.RAW_TITANIUM_BLOCK);
         nineBlockStorageRecipesWithCustomPacking(recipeOutput, RecipeCategory.MISC, ModItems.TITANIUM_NUGGET, RecipeCategory.MISC, ModItems.TITANIUM_INGOT, "titanium_ingot_from_nuggets", "titanium_ingot");
         nineBlockStorageRecipesRecipesWithCustomUnpacking(recipeOutput, RecipeCategory.MISC, ModItems.TITANIUM_INGOT, RecipeCategory.BUILDING_BLOCKS, ModBlocks.TITANIUM_BLOCK, "titanium_ingot_from_titanium_block", "titanium_ingot");
@@ -87,9 +88,9 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_titanium_boots", has(ModItems.TITANIUM_BOOTS))
                 .save(recipeOutput, path + getBlastingRecipeName(ModItems.TITANIUM_NUGGET));
 
+        titaniumSmithing(recipeOutput, Items.IRON_HELMET, RecipeCategory.COMBAT, ModItems.TITANIUM_HELMET.get());
         titaniumSmithing(recipeOutput, Items.IRON_CHESTPLATE, RecipeCategory.COMBAT, ModItems.TITANIUM_CHESTPLATE.get());
         titaniumSmithing(recipeOutput, Items.IRON_LEGGINGS, RecipeCategory.COMBAT, ModItems.TITANIUM_LEGGINGS.get());
-        titaniumSmithing(recipeOutput, Items.IRON_HELMET, RecipeCategory.COMBAT, ModItems.TITANIUM_HELMET.get());
         titaniumSmithing(recipeOutput, Items.IRON_BOOTS, RecipeCategory.COMBAT, ModItems.TITANIUM_BOOTS.get());
         titaniumSmithing(recipeOutput, Items.IRON_SWORD, RecipeCategory.COMBAT, ModItems.TITANIUM_SWORD.get());
         titaniumSmithing(recipeOutput, Items.IRON_AXE, RecipeCategory.TOOLS, ModItems.TITANIUM_AXE.get());

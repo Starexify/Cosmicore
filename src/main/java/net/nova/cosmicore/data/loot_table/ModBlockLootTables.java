@@ -20,11 +20,14 @@ public class ModBlockLootTables extends BlockLootSubProvider {
 
     @Override
     protected void generate() {
+        // Titanium Drops
         dropSelf(ModBlocks.RAW_TITANIUM_BLOCK.get());
         dropSelf(ModBlocks.TITANIUM_BLOCK.get());
+
+        // Meteor Drops
         dropSelf(ModBlocks.ACHONDRITE.get());
-        add(ModBlocks.METEORITE.get(), p_251015_ -> this.createSingleItemTableWithSilkTouch(p_251015_, ModBlocks.ACHONDRITE));
-        add(ModBlocks.PALLASITE.get(), p_251015_ -> this.createSingleItemTableWithSilkTouch(p_251015_, ModBlocks.ACHONDRITE));
+        add(ModBlocks.METEORITE.get(), block -> this.createSingleItemTableWithSilkTouch(block, ModBlocks.ACHONDRITE));
+        add(ModBlocks.PALLASITE.get(), block -> this.createSingleItemTableWithSilkTouch(block, ModBlocks.ACHONDRITE));
     }
 
     @Override
