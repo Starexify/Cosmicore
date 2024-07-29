@@ -3,8 +3,8 @@
 
 <p align="center"><img width=85% src="https://raw.githubusercontent.com/Starexify/Cosmicore/1.21/src/main/resources/cosmicore_logo.png?token=GHSAT0AAAAAACTBPAKN3YXSWJCRIDHMQOYSZVHL2QA"></p>
 
-[![GitHub Issues or Pull Requests](https://img.shields.io/github/issues/Starexify/cosmicore)](https://github.com/Starexify/Cosmicore/issues)
-
+[![GitHub Issues](https://img.shields.io/github/issues/Starexify/cosmicore)](https://github.com/Starexify/Cosmicore/issues)
+![GitHub License](https://img.shields.io/github/license/Starexify/cosmicore?link=https%3A%2F%2Fgithub.com%2FStarexify%2FCosmicore%2Fblob%2F1.21%2FLICENSE)
 
 
 ## Links
