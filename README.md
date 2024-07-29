@@ -1,7 +1,11 @@
 
 
 
-<p align="center"><img width=60% src="https://raw.githubusercontent.com/Starexify/Cosmicore/1.21/src/main/resources/cosmicore_logo.png?token=GHSAT0AAAAAACTBPAKN3YXSWJCRIDHMQOYSZVHL2QA"></p>
+<p align="center"><img width=85% src="https://raw.githubusercontent.com/Starexify/Cosmicore/1.21/src/main/resources/cosmicore_logo.png?token=GHSAT0AAAAAACTBPAKN3YXSWJCRIDHMQOYSZVHL2QA"></p>
+
+[![GitHub Issues or Pull Requests](https://img.shields.io/github/issues/Starexify/cosmicore)](https://github.com/Starexify/Cosmicore/issues)
+
+
 
 ## Links
 
@@ -10,21 +14,3 @@
 
 [<img src=https://modrinth.com/favicon.ico height=16>](https://modrinth.com/mod/cosmicore)
 **[Modrinth Link](https://modrinth.com/mod/cosmicore)**
-
-
-
-# Util
-
-# Title
-
-## Subtitle
-
-> Note
-
-*Italic*
-
-**Bold**
-
-***Bold+Italic***
-
-`--refresh-dependencies`
