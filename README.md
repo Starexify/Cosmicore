@@ -1,24 +1,33 @@
 
-Cosmicore
-=======
+# Cosmicore
+
+
+## Links
+
+[<img src=https://media.forgecdn.net/avatars/130/458/636460205549127215.png height=16>](https://www.curseforge.com/minecraft/mc-mods/bedbreakbegone)
+[<img src=https://media.forgecdn.net/avatars/130/458/636460205549127215.png height=16>](https://www.curseforge.com/minecraft/mc-mods/bedbreakbegone)
+
+[<img src=https://modrinth.com/favicon.ico height=16>](https://modrinth.com/mod/cosmicore)
+[Modrinth Link](https://modrinth.com/mod/cosmicore)
 
 
 
-
-
-
-
-
-Old Desc
+Util
 ============
-This template repository can be directly cloned to get you started with a new
-mod. Simply create a new repository cloned from this one, by following the
-instructions at [github](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template).
 
-Once you have your clone, simply open the repository in the IDE of your choice. The usual recommendation for an IDE is either IntelliJ IDEA or Eclipse.
+# Title
 
-> **Note**: For Eclipse, use tasks in `Launch Group` instead of ones founds in `Java Application`. A preparation task must run before launching the game. NeoGradle uses launch groups to do these subsequently.
+## Subtitle
 
-If at any point you are missing libraries in your IDE, or you've run into problems you can
-run `gradlew --refresh-dependencies` to refresh the local cache. `gradlew clean` to reset everything 
-{this does not affect your code} and then start the process again.
+[link](link.html)
+
+
+> Note
+
+*Italic*
+
+**Bold**
+
+***Bold+Italic***
+
+`--refresh-dependencies`
