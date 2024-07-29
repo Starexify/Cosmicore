@@ -1,6 +1,7 @@
 
-# Cosmicore
 
+
+<p align="center"><img width=60% src="https://raw.githubusercontent.com/Starexify/Cosmicore/1.21/src/main/resources/cosmicore_logo.png?token=GHSAT0AAAAAACTBPAKN3YXSWJCRIDHMQOYSZVHL2QA"></p>
 
 ## Links
 
@@ -12,15 +13,11 @@
 
 
 
-Util
-============
+# Util
 
 # Title
 
 ## Subtitle
-
-[link](link.html)
-
 
 > Note
 
