@@ -18,6 +18,7 @@ public class ModCreativeTab {
         CreativeModeTab.Builder builder = CreativeModeTab.builder();
 
         builder.displayItems((itemDisplay, output) -> {
+            // Titanium Stuff
             output.accept(ModItems.TITANIUM_HELMET);
             output.accept(ModItems.TITANIUM_CHESTPLATE);
             output.accept(ModItems.TITANIUM_LEGGINGS);
@@ -38,9 +39,13 @@ public class ModCreativeTab {
             
             output.accept(ModItems.TITANIUM_UPGRADE_SMITHING_TEMPLATE);
 
+            // Meteorites
             output.accept(ModBlocks.ACHONDRITE);
             output.accept(ModBlocks.METEORITE);
             output.accept(ModBlocks.PALLASITE);
+
+            // Crusher
+            output.accept(ModBlocks.CRUSHER);
         });
 
         builder.icon(() -> new ItemStack(ModBlocks.RAW_TITANIUM_BLOCK));

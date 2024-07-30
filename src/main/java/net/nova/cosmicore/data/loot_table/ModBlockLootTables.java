@@ -28,6 +28,9 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         dropSelf(ModBlocks.ACHONDRITE.get());
         add(ModBlocks.METEORITE.get(), block -> this.createSingleItemTableWithSilkTouch(block, ModBlocks.ACHONDRITE));
         add(ModBlocks.PALLASITE.get(), block -> this.createSingleItemTableWithSilkTouch(block, ModBlocks.ACHONDRITE));
+
+        // Crusher
+        dropSelf(ModBlocks.CRUSHER.get());
     }
 
     @Override
