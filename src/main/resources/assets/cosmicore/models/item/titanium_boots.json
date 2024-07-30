@@ -60,6 +60,12 @@
       "predicate": {
         "minecraft:trim_type": 1.0
       }
+    },
+    {
+      "model": "cosmicore:item/titanium_boots_titanium_trim",
+      "predicate": {
+        "minecraft:trim_type": 1.1
+      }
     }
   ],
   "textures": {
