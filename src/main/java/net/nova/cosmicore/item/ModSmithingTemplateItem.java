@@ -15,22 +15,22 @@ public class ModSmithingTemplateItem extends SmithingTemplateItem {
     private static final ChatFormatting TITLE_FORMAT = ChatFormatting.GRAY;
     private static final ChatFormatting DESCRIPTION_FORMAT = ChatFormatting.BLUE;
 
-    private static final Component TITANIUM_UPGRADE = Component.translatable(
+    public static final Component TITANIUM_UPGRADE = Component.translatable(
                     Util.makeDescriptionId("upgrade", rl("titanium_upgrade"))
             )
             .withStyle(TITLE_FORMAT);
-    private static final Component TITANIUM_UPGRADE_APPLIES_TO = Component.translatable(
+    public static final Component TITANIUM_UPGRADE_APPLIES_TO = Component.translatable(
                     Util.makeDescriptionId("item", rl("smithing_template.titanium_upgrade.applies_to"))
             )
             .withStyle(DESCRIPTION_FORMAT);
-    private static final Component TITANIUM_UPGRADE_INGREDIENTS = Component.translatable(
+    public static final Component TITANIUM_UPGRADE_INGREDIENTS = Component.translatable(
                     Util.makeDescriptionId("item", rl("smithing_template.titanium_upgrade.ingredients"))
             )
             .withStyle(DESCRIPTION_FORMAT);
-    private static final Component TITANIUM_UPGRADE_BASE_SLOT_DESCRIPTION = Component.translatable(
+    public static final Component TITANIUM_UPGRADE_BASE_SLOT_DESCRIPTION = Component.translatable(
             Util.makeDescriptionId("item", rl("smithing_template.titanium_upgrade.base_slot_description"))
     );
-    private static final Component TITANIUM_UPGRADE_ADDITIONS_SLOT_DESCRIPTION = Component.translatable(
+    public static final Component TITANIUM_UPGRADE_ADDITIONS_SLOT_DESCRIPTION = Component.translatable(
             Util.makeDescriptionId("item", rl("smithing_template.titanium_upgrade.additions_slot_description"))
     );
     private static final ResourceLocation EMPTY_SLOT_HELMET = ResourceLocation.withDefaultNamespace("item/empty_armor_slot_helmet");

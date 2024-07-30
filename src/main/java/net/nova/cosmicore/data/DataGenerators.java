@@ -41,6 +41,7 @@ public class DataGenerators {
 
             generator.addProvider(true, new ModLootTableProvider(output, lookupProvider));
             generator.addProvider(true, new ModRecipeProvider(output, lookupProvider));
+            generator.addProvider(true, new ModDatapackProvider(output, lookupProvider));
 
         } catch (RuntimeException e) {
             Cosmicore.logger.error("Failed to gather data", e);

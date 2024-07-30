@@ -25,6 +25,7 @@ public class Cosmicore {
         ModItems.ITEMS.register(bus);
         ModBlocks.BLOCKS.register(bus);
 
+
         bus.addListener(DataGenerators::gatherData);
     }
 

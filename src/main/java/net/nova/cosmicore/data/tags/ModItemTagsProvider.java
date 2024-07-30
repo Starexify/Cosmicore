@@ -18,6 +18,7 @@ public class ModItemTagsProvider extends ItemTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider pProvider) {
+        // Titanium Stuff
         tag(ItemTags.SHOVELS).add(ModItems.TITANIUM_SHOVEL.get());
         tag(ItemTags.PICKAXES).add(ModItems.TITANIUM_PICKAXE.get());
         tag(ItemTags.AXES).add(ModItems.TITANIUM_AXE.get());

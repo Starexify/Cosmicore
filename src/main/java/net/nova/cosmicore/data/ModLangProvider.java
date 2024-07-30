@@ -5,6 +5,7 @@ import net.neoforged.neoforge.common.data.LanguageProvider;
 import net.nova.cosmicore.init.ModBlocks;
 import net.nova.cosmicore.init.ModCreativeTab;
 import net.nova.cosmicore.init.ModItems;
+import net.nova.cosmicore.item.ModSmithingTemplateItem;
 
 import static net.nova.cosmicore.Cosmicore.MODID;
 
@@ -45,10 +46,10 @@ public class ModLangProvider extends LanguageProvider {
         add("trim_material.cosmicore.titanium", "Titanium Material");
 
         // Smithing Template
-        add("item.cosmicore.smithing_template.titanium_upgrade.additions_slot_description", "Add Titanium Ingot");
-        add("item.cosmicore.smithing_template.titanium_upgrade.applies_to", "Iron Equipment");
-        add("item.cosmicore.smithing_template.titanium_upgrade.base_slot_description", "Add iron armor, weapon, or tool");
-        add("item.cosmicore.smithing_template.titanium_upgrade.ingredients", "Titanium Ingot");
-        add("upgrade.cosmicore.titanium_upgrade", "Titanium Upgrade");
+        add(ModSmithingTemplateItem.TITANIUM_UPGRADE_ADDITIONS_SLOT_DESCRIPTION.getString(), "Add Titanium Ingot");
+        add(ModSmithingTemplateItem.TITANIUM_UPGRADE_APPLIES_TO.getString(), "Iron Equipment");
+        add(ModSmithingTemplateItem.TITANIUM_UPGRADE_BASE_SLOT_DESCRIPTION.getString(), "Add iron armor, weapon, or tool");
+        add(ModSmithingTemplateItem.TITANIUM_UPGRADE_INGREDIENTS.getString(), "Titanium Ingot");
+        add(ModSmithingTemplateItem.TITANIUM_UPGRADE.getString(), "Titanium Upgrade");
     }
 }
