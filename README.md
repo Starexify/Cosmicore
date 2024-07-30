@@ -12,12 +12,3 @@
 </p>
 
 <p align="center"><a href="https://minecraft.curseforge.com/projects/cosmicore"><img alt="CurseForge Downloads" src="http://cf.way2muchnoise.eu/full_cosmicore_downloads.svg?badge_style=flat"></a></p>
-
-
-## Links
-
-[<img src=https://media.forgecdn.net/avatars/130/458/636460205549127215.png height=16>](https://www.curseforge.com/minecraft/mc-mods/cosmicore)
-**[Curseforge Link](https://www.curseforge.com/minecraft/mc-mods/cosmicore)**
-
-[<img src=https://modrinth.com/favicon.ico height=16>](https://modrinth.com/mod/cosmicore)
-**[Modrinth Link](https://modrinth.com/mod/cosmicore)**
