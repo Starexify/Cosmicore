@@ -28,8 +28,12 @@ public class ModBlockStateAndModelProvider extends BlockStateProvider {
         normalBlock(ModBlocks.PALLASITE.get());
 
         // Crusher
-        /*simpleBlock(ModBlocks.CRUSHER.get(),
-                new ModelFile.UncheckedModelFile(modLoc("block/crusher")));*/
+        customHorizontalBlock(ModBlocks.CRUSHER.get());
+    }
+
+    private void customHorizontalBlock(Block block) {
+        horizontalBlock(block, new ModelFile.UncheckedModelFile(modLoc("block/" + name(block))));
+        simpleBlockItem(block, new ModelFile.UncheckedModelFile(modLoc("block/" + name(block))));
     }
 
     private void normalBlock(Block block) {

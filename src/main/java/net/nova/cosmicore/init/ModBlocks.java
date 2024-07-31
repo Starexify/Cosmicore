@@ -62,7 +62,7 @@ public class ModBlocks {
     public static DeferredBlock<Block> CRUSHER = registerBlock("crusher", () -> new Crusher(BlockBehaviour.Properties.of()
             .mapColor(MapColor.METAL)
             .instrument(NoteBlockInstrument.BASEDRUM)
-
+            .sound(SoundType.NETHERITE_BLOCK)
             .strength(6F)
     ));
 

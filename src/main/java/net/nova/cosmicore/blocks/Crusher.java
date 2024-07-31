@@ -2,11 +2,14 @@ package net.nova.cosmicore.blocks;
 
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.block.BaseEntityBlock;
-import net.minecraft.world.level.block.RenderShape;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
@@ -14,10 +17,12 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
 public class Crusher extends BaseEntityBlock {
+    public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
     private static final VoxelShape SHAPE = makeShape();
 
     public Crusher(Properties properties) {
         super(properties);
+        this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH));
     }
 
     @Override
@@ -25,6 +30,7 @@ public class Crusher extends BaseEntityBlock {
         return null;
     }
 
+    // Block Shape
     @Override
     protected VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
         return SHAPE;
@@ -45,13 +51,37 @@ public class Crusher extends BaseEntityBlock {
         return SHAPE;
     }
 
+    // Blockstate Faces
+    @Nullable
+    @Override
+    public BlockState getStateForPlacement(BlockPlaceContext pContext) {
+        return this.defaultBlockState().setValue(FACING, pContext.getHorizontalDirection().getOpposite());
+    }
+
+    @Override
+    protected BlockState rotate(BlockState pState, Rotation pRotation) {
+        return pState.setValue(FACING, pRotation.rotate(pState.getValue(FACING)));
+    }
+
+    @Override
+    protected BlockState mirror(BlockState pState, Mirror pMirror) {
+        return pState.rotate(pMirror.getRotation(pState.getValue(FACING)));
+    }
+
+    @Override
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
+        pBuilder.add(FACING);
+
+    }
+
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-        return null;
+        return null; // TODO: Block Entity shit
     }
 
-    public static VoxelShape makeShape() {
+    // Block Shape
+    public static VoxelShape makeShape(){
         VoxelShape shape = Shapes.empty();
         shape = Shapes.join(shape, Shapes.box(0, 0.875, 0, 1, 1, 1), BooleanOp.OR);
         shape = Shapes.join(shape, Shapes.box(0, 0, 0, 1, 0.25, 1), BooleanOp.OR);
@@ -59,13 +89,7 @@ public class Crusher extends BaseEntityBlock {
         shape = Shapes.join(shape, Shapes.box(0.875, 0.25, 0, 1, 0.875, 0.125), BooleanOp.OR);
         shape = Shapes.join(shape, Shapes.box(0.875, 0.25, 0.875, 1, 0.875, 1), BooleanOp.OR);
         shape = Shapes.join(shape, Shapes.box(0, 0.25, 0.875, 0.125, 0.875, 1), BooleanOp.OR);
-        shape = Shapes.join(shape, Shapes.box(0.125, 0.55625, 0.125, 0.875, 0.74375, 0.875), BooleanOp.OR);
-        shape = Shapes.join(shape, Shapes.box(0.1875, 0.5625, 0.1875, 0.8125, 0.9937499999999999, 0.8125), BooleanOp.OR);
-        shape = Shapes.join(shape, Shapes.box(0.125, 0.125, 0.96875, 0.875, 0.875, 0.96875), BooleanOp.OR);
-        shape = Shapes.join(shape, Shapes.box(0.03125, 0.125, 0.125, 0.03125, 0.875, 0.875), BooleanOp.OR);
-        shape = Shapes.join(shape, Shapes.box(0.96875, 0.125, 0.125, 0.96875, 0.875, 0.875), BooleanOp.OR);
-        shape = Shapes.join(shape, Shapes.box(0.125, 0.6875, 0.03125, 0.875, 0.875, 0.03125), BooleanOp.OR);
-        shape = Shapes.join(shape, Shapes.box(0.125, 0.25, 0.03125, 0.875, 0.6875, 0.03125), BooleanOp.OR);
+        shape = Shapes.join(shape, Shapes.box(0.03125, 0.125, 0.046875, 0.96875, 0.875, 0.984375), BooleanOp.OR);
 
         return shape;
     }
