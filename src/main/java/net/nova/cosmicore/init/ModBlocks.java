@@ -11,6 +11,7 @@ import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.nova.cosmicore.blocks.Crusher;
+import net.nova.cosmicore.blocks.CrusherEntity;
 
 import java.util.function.Supplier;
 

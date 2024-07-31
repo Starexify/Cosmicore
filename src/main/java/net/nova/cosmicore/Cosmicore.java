@@ -24,6 +24,7 @@ public class Cosmicore {
         ModCreativeTab.CREATIVE_TAB.register(bus);
         ModItems.ITEMS.register(bus);
         ModBlocks.BLOCKS.register(bus);
+        ModBlockEntities.BLOCK_ENTITIES.register(bus);
 
 
         bus.addListener(DataGenerators::gatherData);
