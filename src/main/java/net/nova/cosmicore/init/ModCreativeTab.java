@@ -46,6 +46,13 @@ public class ModCreativeTab {
 
             // Crusher
             output.accept(ModBlocks.CRUSHER);
+
+            // Infernium
+            output.accept(ModItems.INFERNIUM_CRYSTAL);
+
+            // Gears
+            output.accept(ModItems.IRON_GEAR);
+            output.accept(ModItems.TITANIUM_GEAR);
         });
 
         builder.icon(() -> new ItemStack(ModBlocks.RAW_TITANIUM_BLOCK));

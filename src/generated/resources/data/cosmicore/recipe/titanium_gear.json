@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "G": {
+      "item": "cosmicore:iron_gear"
+    },
+    "I": {
+      "item": "cosmicore:titanium_ingot"
+    },
+    "N": {
+      "item": "cosmicore:titanium_nugget"
+    }
+  },
+  "pattern": [
+    "NIN",
+    "IGI",
+    "NIN"
+  ],
+  "result": {
+    "count": 1,
+    "id": "cosmicore:titanium_gear"
+  }
+}

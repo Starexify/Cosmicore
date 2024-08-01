@@ -56,7 +56,7 @@ public class ModBlocks {
             .requiresCorrectToolForDrops()
             .strength(35.0F, 600.0F)
             .sound(SoundType.AMETHYST)
-            .noOcclusion()
+            .lightLevel(light -> 9)
     ));
 
     // Crusher

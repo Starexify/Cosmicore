@@ -13,7 +13,7 @@ import static net.nova.cosmicore.Cosmicore.MODID;
 public class ModItems {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(MODID);
 
-    // Titanium Stuff
+    // Titanium Items
     public static DeferredItem<Item> TITANIUM_HELMET = ITEMS.register("titanium_helmet",
             () -> new ArmorItem(ModArmorMaterial.TITANIUM, ArmorItem.Type.HELMET, new Item.Properties().durability(ArmorItem.Type.HELMET.getDurability(29))));
     public static DeferredItem<Item> TITANIUM_CHESTPLATE = ITEMS.register("titanium_chestplate",
@@ -36,7 +36,6 @@ public class ModItems {
     public static DeferredItem<Item> TITANIUM_CROSSBOW = ITEMS.register("titanium_crossbow",
             () -> new TitaniumCrossbow(new Item.Properties().stacksTo(1).durability(930).component(DataComponents.CHARGED_PROJECTILES, ChargedProjectiles.EMPTY)));
 
-    // Other Titanium Stuff
     public static DeferredItem<Item> RAW_TITANIUM = ITEMS.register("raw_titanium",
             () -> new Item(new Item.Properties()));
     public static DeferredItem<Item> TITANIUM_NUGGET = ITEMS.register("titanium_nugget",
@@ -46,4 +45,14 @@ public class ModItems {
 
     public static DeferredItem<Item> TITANIUM_UPGRADE_SMITHING_TEMPLATE = ITEMS.register("titanium_upgrade_smithing_template",
             () -> ModSmithingTemplateItem.createTitaniumUpgradeTemplate());
+
+    // Infernium
+    public static DeferredItem<Item> INFERNIUM_CRYSTAL = ITEMS.register("infernium_crystal",
+            () -> new Item(new Item.Properties()));
+
+    // Gears
+    public static DeferredItem<Item> IRON_GEAR = ITEMS.register("iron_gear",
+            () -> new Item(new Item.Properties()));
+    public static DeferredItem<Item> TITANIUM_GEAR = ITEMS.register("titanium_gear",
+            () -> new Item(new Item.Properties()));
 }

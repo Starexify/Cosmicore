@@ -39,7 +39,7 @@ public class ModItemModelProvider extends ItemModelProvider {
 
     @Override
     protected void registerModels() {
-        // Titanium Stuff
+        // Titanium Models
         trimmableArmorItem(ModItems.TITANIUM_HELMET.get());
         trimmableArmorItem(ModItems.TITANIUM_CHESTPLATE.get());
         trimmableArmorItem(ModItems.TITANIUM_LEGGINGS.get());
@@ -56,6 +56,21 @@ public class ModItemModelProvider extends ItemModelProvider {
         basicItem(ModItems.TITANIUM_INGOT.get());
 
         basicItem(ModItems.TITANIUM_UPGRADE_SMITHING_TEMPLATE.get());
+
+        // Infernium Model
+        basicItem(ModItems.INFERNIUM_CRYSTAL.get());
+
+        // Gear Model
+        gearItem(ModItems.IRON_GEAR.get());
+        gearItem(ModItems.TITANIUM_GEAR.get());
+    }
+
+    private void gearItem(Item item) {
+        String name = getItemName(item);
+        getBuilder(name)
+                .parent(getExistingFile(modLoc("item/template_gear")))
+                .texture("0", "item/" + name);
+
     }
 
     private void handheldItem(Item item) {

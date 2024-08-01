@@ -31,6 +31,9 @@ public class ModLangProvider extends LanguageProvider {
         addItem(ModItems.TITANIUM_NUGGET, "Titanium Nugget");
         addItem(ModItems.TITANIUM_INGOT, "Titanium Ingot");
         addItem(ModItems.TITANIUM_UPGRADE_SMITHING_TEMPLATE, "Smithing Template");
+        addItem(ModItems.INFERNIUM_CRYSTAL, "Infernium Crystal");
+        addItem(ModItems.IRON_GEAR, "Iron Gear");
+        addItem(ModItems.TITANIUM_GEAR, "Titanium Gear");
 
         // Blocks
         addBlock(ModBlocks.RAW_TITANIUM_BLOCK, "Raw Titanium Block");

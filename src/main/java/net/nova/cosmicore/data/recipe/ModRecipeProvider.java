@@ -4,10 +4,13 @@ import com.google.common.collect.ImmutableList;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.block.Blocks;
 import net.nova.cosmicore.init.ModBlocks;
 import net.nova.cosmicore.init.ModItems;
 
@@ -97,8 +100,41 @@ public class ModRecipeProvider extends RecipeProvider {
         titaniumSmithing(recipeOutput, Items.IRON_PICKAXE, RecipeCategory.TOOLS, ModItems.TITANIUM_PICKAXE.get());
         titaniumSmithing(recipeOutput, Items.IRON_HOE, RecipeCategory.TOOLS, ModItems.TITANIUM_HOE.get());
         titaniumSmithing(recipeOutput, Items.IRON_SHOVEL, RecipeCategory.TOOLS, ModItems.TITANIUM_SHOVEL.get());
+
+        // Gears Recipes
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.IRON_GEAR)
+                .define('I', Items.IRON_INGOT)
+                .define('N', Items.IRON_NUGGET)
+                .pattern("NIN")
+                .pattern("I I")
+                .pattern("NIN")
+                .unlockedBy("has_iron_ingot", has(Items.IRON_INGOT))
+                .save(recipeOutput);
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.TITANIUM_GEAR)
+                .define('G', ModItems.IRON_GEAR)
+                .define('I', ModItems.TITANIUM_INGOT)
+                .define('N', ModItems.TITANIUM_NUGGET)
+                .pattern("NIN")
+                .pattern("IGI")
+                .pattern("NIN")
+                .unlockedBy("has_iron_gear", has(ModItems.IRON_GEAR))
+                .save(recipeOutput);
+
+        // Crusher
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, ModBlocks.CRUSHER)
+                .define('G', ModItems.IRON_GEAR)
+                .define('P', Blocks.PISTON)
+                .define('I', Items.IRON_INGOT)
+                .define('F', Blocks.GLASS_PANE)
+                .define('#', Blocks.IRON_BLOCK)
+                .pattern("GPG")
+                .pattern("IFI")
+                .pattern("###")
+                .unlockedBy("has_iron_gear", has(ModItems.IRON_GEAR))
+                .save(recipeOutput);
     }
 
+    // Recipes
     protected static void nineBlockStorageRecipes(RecipeOutput pRecipeOutput, RecipeCategory pUnpackedCategory, ItemLike pUnpacked, RecipeCategory pPackedCategory, ItemLike pPacked) {
         nineBlockStorageRecipes(pRecipeOutput, pUnpackedCategory, pUnpacked, pPackedCategory, pPacked, getSimpleRecipeName(pPacked), null, getSimpleRecipeName(pUnpacked), null);
     }
