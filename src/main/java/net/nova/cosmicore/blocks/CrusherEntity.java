@@ -11,6 +11,7 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.items.ItemStackHandler;
@@ -24,7 +25,7 @@ public class CrusherEntity extends BlockEntity implements MenuProvider {
 
     protected final ContainerData data;
     private int progress = 0;
-    private int maxProgress = 78;
+    private int maxProgress = 55;
 
     public CrusherEntity(BlockPos pPos, BlockState pBlockState) {
         super(ModBlockEntities.CRUSHER_BE.get(), pPos, pBlockState);
@@ -85,5 +86,19 @@ public class CrusherEntity extends BlockEntity implements MenuProvider {
         super.loadAdditional(pTag, pRegistries);
         itemHandler.deserializeNBT(pRegistries, pTag.getCompound("inventory"));
         progress = pTag.getInt("crusher.progress");
+    }
+
+    public void tick(Level pLevel, BlockPos pPos, BlockState pState) {
+        /*if (hasRecipe()) {
+            increaseCraftingProgress();
+            setChanged(pLevel, pPos, pState);
+
+            if (hasProgressFinished()) {
+                craftItem();
+                resetProgress();
+            }
+        } else {
+            resetProgress();
+        }*/ // TODO
     }
 }
