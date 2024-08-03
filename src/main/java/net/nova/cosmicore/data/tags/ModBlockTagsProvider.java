@@ -19,22 +19,22 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider pProvider) {
-        tag(BlockTags.MINEABLE_WITH_PICKAXE)
-                .add(ModBlocks.RAW_TITANIUM_BLOCK.getKey())
-                .add(ModBlocks.TITANIUM_BLOCK.getKey())
-                .add(ModBlocks.ACHONDRITE.getKey())
-                .add(ModBlocks.METEORITE.getKey())
-                .add(ModBlocks.PALLASITE.getKey());
+        // Tags
+        tag(BlockTags.MINEABLE_WITH_PICKAXE).add(
+                ModBlocks.RAW_TITANIUM_BLOCK.getKey(), ModBlocks.TITANIUM_BLOCK.getKey(),
+                ModBlocks.ACHONDRITE.getKey(), ModBlocks.METEORITE.getKey(), ModBlocks.PALLASITE.getKey(),
+                ModBlocks.INFERNIUM_CLUSTER.getKey()
+        );
 
-        tag(BlockTags.NEEDS_IRON_TOOL)
-                .add(ModBlocks.RAW_TITANIUM_BLOCK.getKey())
-                .add(ModBlocks.TITANIUM_BLOCK.getKey())
-                .add(ModBlocks.ACHONDRITE.getKey());
+        tag(BlockTags.NEEDS_IRON_TOOL).add(
+                ModBlocks.RAW_TITANIUM_BLOCK.getKey(), ModBlocks.TITANIUM_BLOCK.getKey(),
+                ModBlocks.ACHONDRITE.getKey()
+        );
 
-        tag(BlockTags.NEEDS_DIAMOND_TOOL)
-                .add(ModBlocks.METEORITE.getKey());
+        tag(BlockTags.NEEDS_DIAMOND_TOOL).add(
+                ModBlocks.METEORITE.getKey(), ModBlocks.PALLASITE.getKey(),
+                ModBlocks.INFERNIUM_CLUSTER.getKey()
+        );
 
-        tag(BlockTags.NEEDS_DIAMOND_TOOL)
-                .add(ModBlocks.PALLASITE.getKey());
     }
 }

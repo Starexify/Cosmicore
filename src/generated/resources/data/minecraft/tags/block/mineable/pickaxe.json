@@ -4,6 +4,7 @@
     "cosmicore:titanium_block",
     "cosmicore:achondrite",
     "cosmicore:meteorite",
-    "cosmicore:pallasite"
+    "cosmicore:pallasite",
+    "cosmicore:infernium_cluster"
   ]
 }

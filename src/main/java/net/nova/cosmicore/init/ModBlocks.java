@@ -2,11 +2,13 @@ package net.nova.cosmicore.init;
 
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.AmethystClusterBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
+import net.minecraft.world.level.material.PushReaction;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -66,6 +68,22 @@ public class ModBlocks {
             .sound(SoundType.NETHERITE_BLOCK)
             .strength(6F)
     ));
+
+    // Infernium
+    public static DeferredBlock<Block> INFERNIUM_CLUSTER = registerBlock("infernium_cluster", () -> new AmethystClusterBlock(
+            7.0F,
+            3.0F,
+            BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_RED)
+                    .forceSolidOn()
+                    .noOcclusion()
+                    .sound(SoundType.AMETHYST_CLUSTER)
+                    .strength(1.5F)
+                    .lightLevel(light -> 9)
+                    .pushReaction(PushReaction.DESTROY)
+                    .requiresCorrectToolForDrops()
+    ));
+
 
     // Registers
     private static <T extends Block> DeferredBlock<T> registerBlock(String name, Supplier<T> block) {

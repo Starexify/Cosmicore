@@ -11,6 +11,7 @@ import net.minecraft.world.item.armortrim.TrimMaterials;
 import net.neoforged.neoforge.client.model.generators.ItemModelProvider;
 import net.neoforged.neoforge.client.model.generators.ModelFile;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import net.nova.cosmicore.init.ModBlocks;
 import net.nova.cosmicore.init.ModItems;
 
 import java.util.LinkedHashMap;

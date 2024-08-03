@@ -42,6 +42,7 @@ public class ModLangProvider extends LanguageProvider {
         addBlock(ModBlocks.METEORITE, "Meteorite");
         addBlock(ModBlocks.PALLASITE, "Pallasite");
         addBlock(ModBlocks.CRUSHER, "Crusher");
+        addBlock(ModBlocks.INFERNIUM_CLUSTER, "Infernium Cluster");
 
         // Creative Tab
         add(ModCreativeTab.COSMICORE_TAB_TITLE, "Cosmicore");

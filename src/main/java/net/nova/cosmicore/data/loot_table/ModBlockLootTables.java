@@ -5,7 +5,9 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import net.nova.cosmicore.init.ModBlocks;
+import net.nova.cosmicore.init.ModItems;
 
 import java.util.Optional;
 import java.util.Set;
@@ -31,6 +33,9 @@ public class ModBlockLootTables extends BlockLootSubProvider {
 
         // Crusher
         dropSelf(ModBlocks.CRUSHER.get());
+
+        // Infernium
+        add(ModBlocks.INFERNIUM_CLUSTER.get(), this.createSingleItemTable(ModItems.INFERNIUM_CRYSTAL, UniformGenerator.between(2, 4)));
     }
 
     @Override
