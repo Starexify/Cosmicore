@@ -1,9 +1,11 @@
-package net.nova.cosmicore.blocks;
+package net.nova.cosmicore.block;
 
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -21,6 +23,7 @@ import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.nova.cosmicore.blockentity.CrusherTile;
 import net.nova.cosmicore.init.ModBlockEntities;
 import org.jetbrains.annotations.Nullable;
 
@@ -38,47 +41,55 @@ public class Crusher extends BaseEntityBlock {
         return null;
     }
 
-    // Block Entity
+    // Block Entity Stuff
+    // Drops item content
+    @Override
+    protected void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pMovedByPiston) {
+        if (!pState.is(pNewState.getBlock())) {
+            BlockEntity blockEntity = pLevel.getBlockEntity(pPos);
+            if (blockEntity instanceof CrusherTile) {
+                if (pLevel instanceof ServerLevel) {
+                    Containers.dropContents(pLevel, pPos, (CrusherTile) blockEntity);
+                }
+
+                super.onRemove(pState, pLevel, pPos, pNewState, pMovedByPiston);
+                pLevel.updateNeighbourForOutputSignal(pPos, this);
+            } else {
+                super.onRemove(pState, pLevel, pPos, pNewState, pMovedByPiston);
+            }
+        }
+    }
+
+    // Open block GUI (1.21 Network changed)
     @Override
     protected InteractionResult useWithoutItem(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, BlockHitResult pHitResult) {
         if (!pLevel.isClientSide) {
             BlockEntity blockEntity = pLevel.getBlockEntity(pPos);
-            // 1.21 Network changed
-            if (blockEntity instanceof CrusherEntity crusherEntity && pPlayer instanceof ServerPlayer serverPlayer) {
-                serverPlayer.openMenu(crusherEntity, pPos);
+            if (blockEntity instanceof CrusherTile crusherTile && pPlayer instanceof ServerPlayer serverPlayer) {
+                serverPlayer.openMenu(crusherTile, pPos);
             } else {
-                throw new IllegalStateException("Our Container provider is missing!");
+                throw new IllegalStateException("Crusher container provider is missing!");
             }
         }
         return InteractionResult.sidedSuccess(pLevel.isClientSide);
     }
 
+    // Block Entity Ticks
+    @Nullable
     @Override
-    protected void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pMovedByPiston) {
-        // Drops items from the BlockEntity
-        if (pState.getBlock() != pNewState.getBlock()) {
-            BlockEntity blockEntity = pLevel.getBlockEntity(pPos);
-            if (blockEntity instanceof CrusherEntity) {
-                ((CrusherEntity) blockEntity).drops();
-            }
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
+        if (pLevel.isClientSide()) {
+            return null;
         }
-        super.onRemove(pState, pLevel, pPos, pNewState, pMovedByPiston);
+
+        return createTickerHelper(pBlockEntityType, ModBlockEntities.CRUSHER_TILE.get(),
+                (pLevel1, pPos, pState1, pBlockEntity) -> pBlockEntity.serverTick(pLevel1, pPos, pState1));
     }
 
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-        return new CrusherEntity(pPos, pState);
-    }
-
-    @Nullable
-    @Override
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
-        if (pLevel.isClientSide) {
-            return null;
-        }
-        return createTickerHelper(pBlockEntityType, ModBlockEntities.CRUSHER_BE.get(),
-                (pLevel1, pPos, pState1, pBlockEntity) -> pBlockEntity.tick(pLevel1, pPos, pState1));
+        return new CrusherTile(pPos, pState);
     }
 
     // Block Shape

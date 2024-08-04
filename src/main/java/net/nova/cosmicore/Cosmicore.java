@@ -25,7 +25,7 @@ public class Cosmicore {
         ModItems.ITEMS.register(bus);
         ModBlocks.BLOCKS.register(bus);
         ModBlockEntities.BLOCK_ENTITIES.register(bus);
-
+        ModMenuTypes.MENUS.register(bus);
 
         bus.addListener(DataGenerators::gatherData);
     }

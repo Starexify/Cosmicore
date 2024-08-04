@@ -12,8 +12,7 @@ import net.minecraft.world.level.material.PushReaction;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
-import net.nova.cosmicore.blocks.Crusher;
-import net.nova.cosmicore.blocks.CrusherEntity;
+import net.nova.cosmicore.block.Crusher;
 
 import java.util.function.Supplier;
 
