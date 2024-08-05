@@ -11,7 +11,7 @@ import java.util.List;
 
 import static net.nova.cosmicore.Cosmicore.rl;
 
-public class ModSmithingTemplateItem extends SmithingTemplateItem {
+public class TitaniumSmithingTemplate extends SmithingTemplateItem {
     private static final ChatFormatting TITLE_FORMAT = ChatFormatting.GRAY;
     private static final ChatFormatting DESCRIPTION_FORMAT = ChatFormatting.BLUE;
 
@@ -44,12 +44,12 @@ public class ModSmithingTemplateItem extends SmithingTemplateItem {
     private static final ResourceLocation EMPTY_SLOT_PICKAXE = ResourceLocation.withDefaultNamespace("item/empty_slot_pickaxe");
     private static final ResourceLocation EMPTY_SLOT_INGOT = ResourceLocation.withDefaultNamespace("item/empty_slot_ingot");
 
-    public ModSmithingTemplateItem(Component pAppliesTo, Component pIngredients, Component pUpgradeDescription, Component pBaseSlotDescription, Component pAdditionsSlotDescription, List<ResourceLocation> pBaseSlotEmptyIcons, List<ResourceLocation> pAdditionalSlotEmptyIcons, FeatureFlag... pRequiredFeatures) {
+    public TitaniumSmithingTemplate(Component pAppliesTo, Component pIngredients, Component pUpgradeDescription, Component pBaseSlotDescription, Component pAdditionsSlotDescription, List<ResourceLocation> pBaseSlotEmptyIcons, List<ResourceLocation> pAdditionalSlotEmptyIcons, FeatureFlag... pRequiredFeatures) {
         super(pAppliesTo, pIngredients, pUpgradeDescription, pBaseSlotDescription, pAdditionsSlotDescription, pBaseSlotEmptyIcons, pAdditionalSlotEmptyIcons, pRequiredFeatures);
     }
 
-    public static ModSmithingTemplateItem createTitaniumUpgradeTemplate() {
-        return new ModSmithingTemplateItem(
+    public static TitaniumSmithingTemplate createTitaniumUpgradeTemplate() {
+        return new TitaniumSmithingTemplate(
                 TITANIUM_UPGRADE_APPLIES_TO,
                 TITANIUM_UPGRADE_INGREDIENTS,
                 TITANIUM_UPGRADE,

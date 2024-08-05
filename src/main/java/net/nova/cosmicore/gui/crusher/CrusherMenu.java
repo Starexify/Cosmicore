@@ -13,9 +13,8 @@ import net.neoforged.neoforge.items.wrapper.InvWrapper;
 import net.nova.cosmicore.blockentity.CrusherTile;
 import net.nova.cosmicore.gui.crusher.slots.CrusherCrystalSlot;
 import net.nova.cosmicore.gui.crusher.slots.CrusherResultSlot;
-import net.nova.cosmicore.init.ModBlocks;
-import net.nova.cosmicore.init.ModItems;
-import net.nova.cosmicore.init.ModMenuTypes;
+import net.nova.cosmicore.init.CBlocks;
+import net.nova.cosmicore.init.CMenuTypes;
 
 public class CrusherMenu extends BasicCrusherMenu {
     public final CrusherTile blockEntity;
@@ -28,7 +27,7 @@ public class CrusherMenu extends BasicCrusherMenu {
     }
 
     public CrusherMenu(int pContainerId, Inventory inventory, BlockEntity entity, ContainerData data) {
-        super(ModMenuTypes.CRUSHER_MENU.get(), pContainerId);
+        super(CMenuTypes.CRUSHER_MENU.get(), pContainerId);
         checkContainerSize(inventory, 4);
         blockEntity = ((CrusherTile) entity);
         this.level = inventory.player.level();
@@ -111,6 +110,6 @@ public class CrusherMenu extends BasicCrusherMenu {
     // Other stuff
     @Override
     public boolean stillValid(Player pPlayer) {
-        return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()), pPlayer, ModBlocks.CRUSHER.get());
+        return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()), pPlayer, CBlocks.CRUSHER.get());
     }
 }

@@ -14,10 +14,10 @@ import java.util.concurrent.CompletableFuture;
 
 import static net.nova.cosmicore.Cosmicore.MODID;
 
-public class ModAtlasesProvider extends SpriteSourceProvider {
+public class CAtlasesProvider extends SpriteSourceProvider {
     protected static final ResourceLocation ARMOR_TRIMS = ResourceLocation.withDefaultNamespace("armor_trims");
 
-    public ModAtlasesProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, ExistingFileHelper existingFileHelper) {
+    public CAtlasesProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, ExistingFileHelper existingFileHelper) {
         super(output, lookupProvider, MODID, existingFileHelper);
     }
 

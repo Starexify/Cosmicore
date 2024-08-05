@@ -6,7 +6,7 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
-import net.nova.cosmicore.init.ModItems;
+import net.nova.cosmicore.init.CItems;
 import org.jetbrains.annotations.Nullable;
 
 public class BasicCrusherMenu extends AbstractContainerMenu {
@@ -15,7 +15,7 @@ public class BasicCrusherMenu extends AbstractContainerMenu {
     }
 
     public boolean isCrystal(ItemStack pStack) {
-        return pStack.is(ModItems.INFERNIUM_CRYSTAL);
+        return pStack.is(CItems.INFERNIUM_CRYSTAL);
     }
 
     public void addPlayerSlots(Inventory playerInventory) {

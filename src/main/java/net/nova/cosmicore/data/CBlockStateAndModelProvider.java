@@ -3,48 +3,43 @@ package net.nova.cosmicore.data;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.models.blockstates.MultiVariantGenerator;
-import net.minecraft.data.models.blockstates.Variant;
-import net.minecraft.data.models.blockstates.VariantProperties;
-import net.minecraft.data.models.model.ModelTemplates;
-import net.minecraft.data.models.model.TextureMapping;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
 import net.neoforged.neoforge.client.model.generators.ModelFile;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
-import net.nova.cosmicore.init.ModBlocks;
+import net.nova.cosmicore.init.CBlocks;
 
 import static net.nova.cosmicore.Cosmicore.MODID;
 
-public class ModBlockStateAndModelProvider extends BlockStateProvider {
-    public ModBlockStateAndModelProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
+public class CBlockStateAndModelProvider extends BlockStateProvider {
+    public CBlockStateAndModelProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
         super(output, MODID, existingFileHelper);
     }
 
     @Override
     protected void registerStatesAndModels() {
-        // Titanium Stuff
-        normalBlock(ModBlocks.RAW_TITANIUM_BLOCK.get());
-        normalBlock(ModBlocks.TITANIUM_BLOCK.get());
+        // Titanium Models
+        normalBlock(CBlocks.RAW_TITANIUM_BLOCK.get());
+        normalBlock(CBlocks.TITANIUM_BLOCK.get());
 
-        // Meteors Stuff
-        normalBlock(ModBlocks.ACHONDRITE.get());
-        normalBlock(ModBlocks.METEORITE.get());
-        normalBlock(ModBlocks.PALLASITE.get());
+        // Meteors Models
+        normalBlock(CBlocks.ACHONDRITE.get());
+        normalBlock(CBlocks.METEORITE.get());
+        normalBlock(CBlocks.PALLASITE.get());
 
-        // Crusher
-        customHorizontalBlockWOModel(ModBlocks.CRUSHER.get());
+        // Crusher Model
+        customHorizontalBlockWOModel(CBlocks.CRUSHER.get());
 
-        // Infernium
-        customDirectionalBlock(ModBlocks.INFERNIUM_CLUSTER.get());
+        // Infernium Model
+        customDirectionalBlock(CBlocks.INFERNIUM_CLUSTER.get());
     }
 
     // Models
     private void customDirectionalBlock(Block block) {
         directionalBlock(block, models().cross(name(block), modLoc("block/" + name(block))).renderType(RenderType.CUTOUT.name));
         itemModels().getBuilder(name(block))
-                .parent(itemModels().getExistingFile(mcLoc("item/handheld")))
+                .parent(itemModels().getExistingFile(mcLoc("item/generated")))
                 .texture("layer0", "block/" + name(block));
     }
 

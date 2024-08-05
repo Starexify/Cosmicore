@@ -18,10 +18,10 @@ import java.util.stream.Collectors;
 
 import static net.nova.cosmicore.Cosmicore.MODID;
 
-public class ModLootTableProvider extends LootTableProvider {
+public class CLootTableProvider extends LootTableProvider {
 
-    public ModLootTableProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
-        super(output, Set.of(), List.of(new SubProviderEntry(ModBlockLootTables::new, LootContextParamSets.BLOCK)), registries);
+    public CLootTableProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
+        super(output, Set.of(), List.of(new SubProviderEntry(CBlockLootTables::new, LootContextParamSets.BLOCK)), registries);
     }
 
     @Override

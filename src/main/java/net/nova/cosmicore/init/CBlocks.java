@@ -18,7 +18,7 @@ import java.util.function.Supplier;
 
 import static net.nova.cosmicore.Cosmicore.MODID;
 
-public class ModBlocks {
+public class CBlocks {
     public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(MODID);
 
     // Titanium Stuff
@@ -92,6 +92,6 @@ public class ModBlocks {
     }
 
     private static <T extends Block> DeferredItem<Item> registerBlockItems(String name, DeferredBlock<T> block) {
-        return ModItems.ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties()));
+        return CItems.ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties()));
     }
 }

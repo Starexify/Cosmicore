@@ -24,7 +24,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.nova.cosmicore.blockentity.CrusherTile;
-import net.nova.cosmicore.init.ModBlockEntities;
+import net.nova.cosmicore.init.CBlockEntities;
 import org.jetbrains.annotations.Nullable;
 
 public class Crusher extends BaseEntityBlock {
@@ -82,7 +82,7 @@ public class Crusher extends BaseEntityBlock {
             return null;
         }
 
-        return createTickerHelper(pBlockEntityType, ModBlockEntities.CRUSHER_TILE.get(),
+        return createTickerHelper(pBlockEntityType, CBlockEntities.CRUSHER_TILE.get(),
                 (pLevel1, pPos, pState1, pBlockEntity) -> pBlockEntity.serverTick(pLevel1, pPos, pState1));
     }
 

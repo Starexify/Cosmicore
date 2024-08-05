@@ -20,9 +20,9 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.nova.cosmicore.gui.crusher.CrusherMenu;
-import net.nova.cosmicore.init.ModBlockEntities;
-import net.nova.cosmicore.init.ModBlocks;
-import net.nova.cosmicore.init.ModItems;
+import net.nova.cosmicore.init.CBlockEntities;
+import net.nova.cosmicore.init.CBlocks;
+import net.nova.cosmicore.init.CItems;
 import org.jetbrains.annotations.Nullable;
 
 public class CrusherTile extends BaseContainerBlockEntity {
@@ -67,7 +67,7 @@ public class CrusherTile extends BaseContainerBlockEntity {
     };
 
     public CrusherTile(BlockPos pPos, BlockState pBlockState) {
-        super(ModBlockEntities.CRUSHER_TILE.get(), pPos, pBlockState);
+        super(CBlockEntities.CRUSHER_TILE.get(), pPos, pBlockState);
     }
 
     // Crafting stuff
@@ -97,7 +97,7 @@ public class CrusherTile extends BaseContainerBlockEntity {
     }
 
     private boolean hasIgnis() { // TODO: Change fuel or add tags?
-        boolean hasFuel = this.inventory.get(FUEL_SLOT).getItem() == ModItems.INFERNIUM_CRYSTAL.get();
+        boolean hasFuel = this.inventory.get(FUEL_SLOT).getItem() == CItems.INFERNIUM_CRYSTAL.get();
         if (hasFuel && !isCharged()) {
             int chargeTime = 11;
 
@@ -108,6 +108,13 @@ public class CrusherTile extends BaseContainerBlockEntity {
             hasFuel = false;
         }
         return hasFuel;
+    }
+
+    private boolean hasRecipe() {
+        boolean hasCraftingItem = this.inventory.getFirst().getItem() == CBlocks.ACHONDRITE.asItem();
+        ItemStack result = new ItemStack(Blocks.COBBLESTONE);
+
+        return hasCraftingItem && canInsertAmountIntoOutputSlot(result.getCount()) && canInsertItemInOutputSlot(result.getItem());
     }
 
     private void craftItem() {
@@ -152,13 +159,6 @@ public class CrusherTile extends BaseContainerBlockEntity {
         }
     }
 
-    private boolean hasRecipe() {
-        boolean hasCraftingItem = this.inventory.get(INGREDIENT_SLOT).getItem() == ModBlocks.ACHONDRITE.asItem();
-        ItemStack result = new ItemStack(Blocks.COBBLESTONE);
-
-        return hasCraftingItem && canInsertAmountIntoOutputSlot(result.getCount()) && canInsertItemInOutputSlot(result.getItem());
-    }
-
     // Checking for recipes
     private boolean canInsertItemInOutputSlot(Item item) {
         return this.inventory.get(RESULT_SLOT_END).isEmpty() || this.inventory.get(RESULT_SLOT_END).is(item);
@@ -186,7 +186,7 @@ public class CrusherTile extends BaseContainerBlockEntity {
             return true;
         } else {
             ItemStack itemstack = this.inventory.get(FUEL_SLOT);
-            return pStack.is(ModItems.INFERNIUM_CRYSTAL) && !itemstack.is(Items.BUCKET);
+            return pStack.is(CItems.INFERNIUM_CRYSTAL) && !itemstack.is(Items.BUCKET);
         }
     }
 

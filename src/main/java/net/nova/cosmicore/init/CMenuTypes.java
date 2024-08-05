@@ -10,7 +10,7 @@ import java.util.function.Supplier;
 
 import static net.nova.cosmicore.Cosmicore.MODID;
 
-public class ModMenuTypes {
+public class CMenuTypes {
     public static final DeferredRegister<MenuType<?>> MENUS = DeferredRegister.create(Registries.MENU, MODID);
 
     public static Supplier<MenuType<CrusherMenu>> CRUSHER_MENU = MENUS.register("crusher_menu", () -> IMenuTypeExtension.create(CrusherMenu::new));

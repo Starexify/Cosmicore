@@ -8,26 +8,26 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.ArmorMaterial;
-import net.minecraft.world.item.ArmorMaterials;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.armortrim.TrimMaterial;
 import net.nova.cosmicore.Cosmicore;
-import net.nova.cosmicore.init.ModArmorMaterial;
-import net.nova.cosmicore.init.ModItems;
+import net.nova.cosmicore.init.CArmorMaterial;
+import net.nova.cosmicore.init.CItems;
 
 import java.util.Map;
 
-public class ModTrimMaterials {
+public class CTrimMaterials {
     public static final ResourceKey<TrimMaterial> TITANIUM = createKey("titanium");
+
+    public static void bootstrap(BootstrapContext<TrimMaterial> pContext) {
+        register(pContext, TITANIUM, CItems.TITANIUM_INGOT.get(), Style.EMPTY.withColor(16121855), 1.1F, Map.of(CArmorMaterial.TITANIUM, "titanium_darker"));
+    }
 
     private static ResourceKey<TrimMaterial> createKey(String name) {
         return ResourceKey.create(Registries.TRIM_MATERIAL, Cosmicore.rl(name));
     }
 
-    public static void bootstrap(BootstrapContext<TrimMaterial> pContext) {
-        register(pContext, TITANIUM, ModItems.TITANIUM_INGOT.get(), Style.EMPTY.withColor(16121855), 1.1F, Map.of(ModArmorMaterial.TITANIUM, "titanium_darker"));
-    }
-
+    // Registers
     private static void register(BootstrapContext<TrimMaterial> context, ResourceKey<TrimMaterial> materialKey, Item ingredient, Style style, float itemModelIndex) {
         register(context, materialKey, ingredient, style, itemModelIndex, Map.of());
     }

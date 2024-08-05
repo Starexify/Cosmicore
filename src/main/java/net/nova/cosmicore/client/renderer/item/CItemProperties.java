@@ -3,19 +3,18 @@ package net.nova.cosmicore.client.renderer.item;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.CrossbowItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.component.ChargedProjectiles;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
-import net.nova.cosmicore.init.ModItems;
+import net.nova.cosmicore.init.CItems;
 import net.nova.cosmicore.item.TitaniumCrossbow;
 
 @OnlyIn(Dist.CLIENT)
-public class ModItemProperties {
+public class CItemProperties {
     public static void addCustomItemProperties() {
-        makeCrossbow(ModItems.TITANIUM_CROSSBOW.get());
+        makeCrossbow(CItems.TITANIUM_CROSSBOW.get());
     }
 
     private static void makeCrossbow(Item item) {

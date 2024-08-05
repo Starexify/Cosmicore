@@ -11,14 +11,13 @@ import net.minecraft.world.item.armortrim.TrimMaterials;
 import net.neoforged.neoforge.client.model.generators.ItemModelProvider;
 import net.neoforged.neoforge.client.model.generators.ModelFile;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
-import net.nova.cosmicore.init.ModBlocks;
-import net.nova.cosmicore.init.ModItems;
+import net.nova.cosmicore.init.CItems;
 
 import java.util.LinkedHashMap;
 
 import static net.nova.cosmicore.Cosmicore.MODID;
 
-public class ModItemModelProvider extends ItemModelProvider {
+public class CItemModelProvider extends ItemModelProvider {
     public static LinkedHashMap<ResourceKey<TrimMaterial>, Float> trimMaterials = new LinkedHashMap<>();
 
     static {
@@ -34,38 +33,39 @@ public class ModItemModelProvider extends ItemModelProvider {
         trimMaterials.put(TrimMaterials.AMETHYST, 1.0F);
     }
 
-    public ModItemModelProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
+    public CItemModelProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
         super(output, MODID, existingFileHelper);
     }
 
     @Override
     protected void registerModels() {
         // Titanium Models
-        trimmableArmorItem(ModItems.TITANIUM_HELMET.get());
-        trimmableArmorItem(ModItems.TITANIUM_CHESTPLATE.get());
-        trimmableArmorItem(ModItems.TITANIUM_LEGGINGS.get());
-        trimmableArmorItem(ModItems.TITANIUM_BOOTS.get());
+        trimmableArmorItem(CItems.TITANIUM_HELMET.get());
+        trimmableArmorItem(CItems.TITANIUM_CHESTPLATE.get());
+        trimmableArmorItem(CItems.TITANIUM_LEGGINGS.get());
+        trimmableArmorItem(CItems.TITANIUM_BOOTS.get());
 
-        handheldItem(ModItems.TITANIUM_SWORD.get());
-        handheldItem(ModItems.TITANIUM_PICKAXE.get());
-        handheldItem(ModItems.TITANIUM_AXE.get());
-        handheldItem(ModItems.TITANIUM_SHOVEL.get());
-        handheldItem(ModItems.TITANIUM_HOE.get());
+        handheldItem(CItems.TITANIUM_SWORD.get());
+        handheldItem(CItems.TITANIUM_PICKAXE.get());
+        handheldItem(CItems.TITANIUM_AXE.get());
+        handheldItem(CItems.TITANIUM_SHOVEL.get());
+        handheldItem(CItems.TITANIUM_HOE.get());
 
-        basicItem(ModItems.RAW_TITANIUM.get());
-        basicItem(ModItems.TITANIUM_NUGGET.get());
-        basicItem(ModItems.TITANIUM_INGOT.get());
+        basicItem(CItems.RAW_TITANIUM.get());
+        basicItem(CItems.TITANIUM_NUGGET.get());
+        basicItem(CItems.TITANIUM_INGOT.get());
 
-        basicItem(ModItems.TITANIUM_UPGRADE_SMITHING_TEMPLATE.get());
+        basicItem(CItems.TITANIUM_UPGRADE_SMITHING_TEMPLATE.get());
 
         // Infernium Model
-        basicItem(ModItems.INFERNIUM_CRYSTAL.get());
+        basicItem(CItems.INFERNIUM_CRYSTAL.get());
 
         // Gear Model
-        gearItem(ModItems.IRON_GEAR.get());
-        gearItem(ModItems.TITANIUM_GEAR.get());
+        gearItem(CItems.IRON_GEAR.get());
+        gearItem(CItems.TITANIUM_GEAR.get());
     }
 
+    // Models
     private void gearItem(Item item) {
         String name = getItemName(item);
         getBuilder(name)

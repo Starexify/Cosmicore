@@ -11,10 +11,10 @@ import java.util.concurrent.CompletableFuture;
 
 import static net.nova.cosmicore.Cosmicore.MODID;
 
-public class ModDatapackProvider extends DatapackBuiltinEntriesProvider {
-    public ModDatapackProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
+public class DatapackProvider extends DatapackBuiltinEntriesProvider {
+    public DatapackProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
         super(output, registries, new RegistrySetBuilder()
-                        .add(Registries.TRIM_MATERIAL, ModTrimMaterials::bootstrap),
+                        .add(Registries.TRIM_MATERIAL, CTrimMaterials::bootstrap),
                 Set.of(MODID));
     }
 }

@@ -6,8 +6,8 @@ import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
-import net.nova.cosmicore.init.ModBlocks;
-import net.nova.cosmicore.init.ModItems;
+import net.nova.cosmicore.init.CBlocks;
+import net.nova.cosmicore.init.CItems;
 
 import java.util.Optional;
 import java.util.Set;
@@ -15,27 +15,27 @@ import java.util.stream.Collectors;
 
 import static net.nova.cosmicore.Cosmicore.MODID;
 
-public class ModBlockLootTables extends BlockLootSubProvider {
-    protected ModBlockLootTables(HolderLookup.Provider pProvider) {
+public class CBlockLootTables extends BlockLootSubProvider {
+    protected CBlockLootTables(HolderLookup.Provider pProvider) {
         super(Set.of(), FeatureFlags.REGISTRY.allFlags(), pProvider);
     }
 
     @Override
     protected void generate() {
         // Titanium Drops
-        dropSelf(ModBlocks.RAW_TITANIUM_BLOCK.get());
-        dropSelf(ModBlocks.TITANIUM_BLOCK.get());
+        dropSelf(CBlocks.RAW_TITANIUM_BLOCK.get());
+        dropSelf(CBlocks.TITANIUM_BLOCK.get());
 
         // Meteor Drops
-        dropSelf(ModBlocks.ACHONDRITE.get());
-        add(ModBlocks.METEORITE.get(), block -> this.createSingleItemTableWithSilkTouch(block, ModBlocks.ACHONDRITE));
-        add(ModBlocks.PALLASITE.get(), block -> this.createSingleItemTableWithSilkTouch(block, ModBlocks.ACHONDRITE));
+        dropSelf(CBlocks.ACHONDRITE.get());
+        add(CBlocks.METEORITE.get(), block -> this.createSingleItemTableWithSilkTouch(block, CBlocks.ACHONDRITE));
+        add(CBlocks.PALLASITE.get(), block -> this.createSingleItemTableWithSilkTouch(block, CBlocks.ACHONDRITE));
 
         // Crusher
-        dropSelf(ModBlocks.CRUSHER.get());
+        dropSelf(CBlocks.CRUSHER.get());
 
         // Infernium
-        add(ModBlocks.INFERNIUM_CLUSTER.get(), this.createSingleItemTable(ModItems.INFERNIUM_CRYSTAL, UniformGenerator.between(2, 4)));
+        add(CBlocks.INFERNIUM_CLUSTER.get(), this.createSingleItemTable(CItems.INFERNIUM_CRYSTAL, UniformGenerator.between(2, 4)));
     }
 
     @Override
