@@ -3,6 +3,8 @@ package net.nova.cosmicore;
 import net.minecraft.resources.ResourceLocation;
 import net.nova.cosmicore.data.DataGenerators;
 import net.nova.cosmicore.init.*;
+import net.nova.cosmicore.recipe.crusher.CRecipeSerializers;
+import net.nova.cosmicore.recipe.crusher.CRecipeTypes;
 import org.slf4j.Logger;
 
 import net.neoforged.bus.api.IEventBus;
@@ -21,6 +23,8 @@ public class Cosmicore {
         CCreativeTab.CREATIVE_TAB.register(bus);
         CItems.ITEMS.register(bus);
         CBlocks.BLOCKS.register(bus);
+        CRecipeTypes.RECIPE_TYPES.register(bus);
+        CRecipeSerializers.RECIPE_SERIALIZERS.register(bus);
         CBlockEntities.BLOCK_ENTITIES.register(bus);
         CMenuTypes.MENUS.register(bus);
 
