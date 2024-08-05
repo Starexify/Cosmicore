@@ -17,7 +17,7 @@ import net.nova.cosmicore.init.ModBlocks;
 import net.nova.cosmicore.init.ModItems;
 import net.nova.cosmicore.init.ModMenuTypes;
 
-public class CrusherMenu extends AbstractContainerMenu {
+public class CrusherMenu extends BasicCrusherMenu {
     public final CrusherTile blockEntity;
     private final ContainerData data;
     private final Level level;
@@ -38,9 +38,9 @@ public class CrusherMenu extends AbstractContainerMenu {
 
         addSlot(new SlotItemHandler(internal, 0, 80, 16));
         addSlot(new CrusherCrystalSlot(internal, 1, 152, 72, this));
-        addSlot(new CrusherResultSlot(internal, 2, 62, 72));
-        addSlot(new CrusherResultSlot(internal, 3, 80, 72));
-        addSlot(new CrusherResultSlot(internal, 4, 98, 72));
+        addSlot(new CrusherResultSlot(internal, 2, 62, 54));
+        addSlot(new CrusherResultSlot(internal, 3, 80, 54));
+        addSlot(new CrusherResultSlot(internal, 4, 98, 54));
         addSlot(new CrusherResultSlot(internal, 5, 62, 72));
         addSlot(new CrusherResultSlot(internal, 6, 80, 72));
         addSlot(new CrusherResultSlot(internal, 7, 98, 72));
@@ -65,7 +65,7 @@ public class CrusherMenu extends AbstractContainerMenu {
     public int getCrushingProgress() {
         int progress = this.data.get(2);
         int maxProgress = this.data.get(3);  // Max Progress
-        int progressArrowSize = 29;
+        int progressArrowSize = 18;
 
         return maxProgress != 0 && progress != 0 ? progress * progressArrowSize / maxProgress : 0;
     }
@@ -108,25 +108,9 @@ public class CrusherMenu extends AbstractContainerMenu {
         return itemstack;
     }
 
-    public boolean isCrystal(ItemStack pStack) {
-        return pStack.is(ModItems.INFERNIUM_CRYSTAL);
-    }
-
     // Other stuff
     @Override
     public boolean stillValid(Player pPlayer) {
         return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()), pPlayer, ModBlocks.CRUSHER.get());
-    }
-
-    private void addPlayerSlots(Inventory playerInventory) {
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 9; j++) {
-                this.addSlot(new Slot(playerInventory, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
-            }
-        }
-
-        for (int k = 0; k < 9; k++) {
-            this.addSlot(new Slot(playerInventory, k, 8 + k * 18, 142));
-        }
     }
 }

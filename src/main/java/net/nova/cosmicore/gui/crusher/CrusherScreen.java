@@ -17,15 +17,11 @@ public class CrusherScreen extends AbstractContainerScreen<CrusherMenu> {
 
     public CrusherScreen(CrusherMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
         super(pMenu, pPlayerInventory, pTitle);
-    }
-
-    @Override
-    protected void init() {
-        int i = 184;
-        this.titleLabelX = 6;
         this.imageHeight = 184;
-        this.inventoryLabelY = this.imageHeight - 103;
-        super.init();
+        this.titleLabelX = 8;
+        this.titleLabelY = 6;
+        this.inventoryLabelX = 8;
+        this.inventoryLabelY = this.imageHeight - 94;
     }
 
     @Override
@@ -33,18 +29,18 @@ public class CrusherScreen extends AbstractContainerScreen<CrusherMenu> {
         RenderSystem.setShader(GameRenderer::getPositionTexShader);
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
         RenderSystem.setShaderTexture(0, TEXTURE);
-        int x = (width - imageWidth) / 2;
-        int y = (height - imageHeight) / 2;
+        int i  = (this.width - this.imageWidth) / 2;
+        int j = (this.height - this.imageHeight) / 2;
 
-        guiGraphics.blit(TEXTURE, x, y, 0, 0, imageWidth, imageHeight);
+        guiGraphics.blit(TEXTURE, i, j, 0, 0, this.imageWidth, this.imageHeight);
 
         if (this.getMenu().isCharged()) {
-            int l = Mth.ceil(this.getMenu().getChargedProgress()) + 1;
-            guiGraphics.blitSprite(IGNIS_SPRITE, 8, 56, 0, 8 - l, x + 156, y + 15 + 56 - l, 8, l);
+            int l = Mth.ceil(this.getMenu().getChargedProgress());
+            guiGraphics.blitSprite(IGNIS_SPRITE, 8, 56, 0, 56 - l, i + 156, j + 15 + 56 - l, 8, l);
         }
 
         int j1 = Mth.ceil(this.getMenu().getCrushingProgress());
-        guiGraphics.blitSprite(CRUSHING_PROGRESS_SPRITE, 18, 18, 0, 0, x + 80, y + 34, 18, j1);
+        guiGraphics.blitSprite(CRUSHING_PROGRESS_SPRITE, 18, 18, 0, 0, i + 80, j + 34, 18, j1);
     }
 
     @Override
