@@ -44,7 +44,7 @@ public class CItems {
             () -> new Item(new Item.Properties()));
 
     public static DeferredItem<Item> TITANIUM_UPGRADE_SMITHING_TEMPLATE = ITEMS.register("titanium_upgrade_smithing_template",
-            () -> TitaniumSmithingTemplate.createTitaniumUpgradeTemplate());
+            TitaniumSmithingTemplate::createTitaniumUpgradeTemplate);
 
     // Infernium
     public static DeferredItem<Item> INFERNIUM_CRYSTAL = ITEMS.register("infernium_crystal",

@@ -1,9 +1,10 @@
-package net.nova.cosmicore.recipe.crusher;
+package net.nova.cosmicore.init;
 
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.nova.cosmicore.Cosmicore;
+import net.nova.cosmicore.recipe.crusher.CrushingRecipe;
 
 import java.util.function.Supplier;
 

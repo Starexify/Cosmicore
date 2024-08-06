@@ -4,6 +4,8 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
+import net.nova.cosmicore.init.CRecipeSerializers;
+import net.nova.cosmicore.init.CRecipeTypes;
 
 public class CrushingRecipe implements Recipe<SingleRecipeInput> {
     protected final Ingredient ingredient;
@@ -31,7 +33,7 @@ public class CrushingRecipe implements Recipe<SingleRecipeInput> {
 
     @Override
     public ItemStack getResultItem(HolderLookup.Provider pRegistries) {
-        return this.result;
+        return this.result.copy();
     }
 
     @Override

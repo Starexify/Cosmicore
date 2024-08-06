@@ -36,6 +36,10 @@ public class CRecipeProvider extends RecipeProvider {
     }
 
     // Recipes
+    protected static String getCrushingRecipeName(ItemLike pItemLike) {
+        return getItemName(pItemLike) + "_from_crushing";
+    }
+
     protected static void nineBlockStorageRecipes(RecipeOutput pRecipeOutput, RecipeCategory pUnpackedCategory, ItemLike pUnpacked, RecipeCategory pPackedCategory, ItemLike pPacked) {
         nineBlockStorageRecipes(pRecipeOutput, pUnpackedCategory, pUnpacked, pPackedCategory, pPacked, getSimpleRecipeName(pPacked), null, getSimpleRecipeName(pUnpacked), null);
     }

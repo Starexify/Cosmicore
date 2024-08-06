@@ -14,16 +14,19 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.world.item.crafting.SingleRecipeInput;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.nova.cosmicore.gui.crusher.CrusherMenu;
 import net.nova.cosmicore.init.CBlockEntities;
-import net.nova.cosmicore.init.CBlocks;
 import net.nova.cosmicore.init.CItems;
+import net.nova.cosmicore.init.CRecipeTypes;
+import net.nova.cosmicore.recipe.crusher.CrushingRecipe;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.Optional;
 
 public class CrusherTile extends BaseContainerBlockEntity {
     protected NonNullList<ItemStack> inventory = NonNullList.withSize(8, ItemStack.EMPTY);
@@ -36,7 +39,7 @@ public class CrusherTile extends BaseContainerBlockEntity {
     private int ignisCharge;
     private int ignisPower;
     private int crushingProgress;
-    private int maxCrushingProgress = 20; // TODO: Change ticks when done
+    private int maxCrushingProgress = 5; // TODO: Change ticks when done
 
     protected final ContainerData dataAccess = new ContainerData() {
         @Override
@@ -80,7 +83,7 @@ public class CrusherTile extends BaseContainerBlockEntity {
         hasIgnis();
         if (isCharged()) {
             if (hasRecipe()) {
-                crushingProgress++;
+                this.crushingProgress++;
                 setChanged(pLevel, pPos, pState);
 
                 if (hasProgressFinished()) {
@@ -96,76 +99,77 @@ public class CrusherTile extends BaseContainerBlockEntity {
         }
     }
 
-    private boolean hasIgnis() { // TODO: Change fuel or add tags?
-        boolean hasFuel = this.inventory.get(FUEL_SLOT).getItem() == CItems.INFERNIUM_CRYSTAL.get();
+    public boolean isFuel(ItemStack item) {
+        return item.is(CItems.INFERNIUM_CRYSTAL);
+    }
+
+    private void hasIgnis() { // TODO: Add tags?
+        boolean hasFuel = isFuel(this.inventory.get(FUEL_SLOT).getItem().getDefaultInstance());
         if (hasFuel && !isCharged()) {
             int chargeTime = 11;
 
             this.ignisCharge = chargeTime;
             this.ignisPower = chargeTime;
             this.inventory.get(FUEL_SLOT).setCount(this.inventory.get(FUEL_SLOT).getCount() - 1);
-        } else {
-            hasFuel = false;
         }
-        return hasFuel;
     }
 
     private boolean hasRecipe() {
-        boolean hasCraftingItem = this.inventory.getFirst().getItem() == CBlocks.ACHONDRITE.asItem();
-        ItemStack result = new ItemStack(Blocks.COBBLESTONE);
+        Optional<RecipeHolder<CrushingRecipe>> recipe = getCurrentRecipe(this.inventory.getFirst());
+        if (recipe.isEmpty()) return false;
 
-        return hasCraftingItem && canInsertAmountIntoOutputSlot(result.getCount()) && canInsertItemInOutputSlot(result.getItem());
+        ItemStack result = recipe.get().value().getResultItem(null);
+
+        return canInsertAmountIntoOutputSlot(result.getCount()) && canInsertItemInOutputSlot(result.getItem());
     }
 
     private void craftItem() {
-        ItemStack[] itemsToCraft = {
-                new ItemStack(Blocks.COBBLESTONE, 3),
-                new ItemStack(Items.DIAMOND, 1),
-                new ItemStack(Items.IRON_INGOT, 2)
-        };
+        Optional<RecipeHolder<CrushingRecipe>> recipe = getCurrentRecipe(this.inventory.getFirst());
+        ItemStack result = recipe.get().value().getResultItem(null);
+        this.inventory.getFirst().setCount(this.inventory.getFirst().getCount() - 1);
 
-        this.inventory.get(INGREDIENT_SLOT).setCount(this.inventory.get(INGREDIENT_SLOT).getCount() - 1);
-
-        for (ItemStack result : itemsToCraft) {
-            int remainingItemsToAdd = result.getCount();
-
-            for (int slot = RESULT_SLOT_START; slot <= RESULT_SLOT_END && remainingItemsToAdd > 0; slot++) {
-                ItemStack currentStack = this.inventory.get(slot);
-
-                // If the slot is empty, create a new stack with the remaining items
-                if (currentStack == null || currentStack.isEmpty()) {
-                    this.inventory.set(slot, new ItemStack(result.getItem(), remainingItemsToAdd));
-                    break; // Exit the loop since we've placed all remaining items
-                } else if (currentStack.is(result.getItem())) {
-                    // Calculate how many items we can add to this slot
-                    int maxStackSize = currentStack.getMaxStackSize();
-                    int spaceAvailable = maxStackSize - currentStack.getCount();
-
-                    if (spaceAvailable > 0) {
-                        // Determine how many items can be added to the current slot
-                        int itemsToAdd = Math.min(spaceAvailable, remainingItemsToAdd);
-
-                        // Add the items to the current slot
-                        currentStack.setCount(currentStack.getCount() + itemsToAdd);
-
-                        // Update the inventory with the modified stack
-                        this.inventory.set(slot, currentStack);
-
-                        // Decrease the remaining items to add
-                        remainingItemsToAdd -= itemsToAdd;
-                    }
-                }
+        // Find the first available result slot
+        for (int i = RESULT_SLOT_START; i <= RESULT_SLOT_END; i++) {
+            ItemStack slotStack = this.inventory.get(i);
+            if (slotStack.isEmpty()) {
+                this.inventory.set(i, result.copy());
+                break;
+            } else if (ItemStack.isSameItem(slotStack, result) && slotStack.getCount() + result.getCount() <= slotStack.getMaxStackSize()) {
+                slotStack.grow(result.getCount());
+                break;
             }
         }
     }
 
+    private Optional<RecipeHolder<CrushingRecipe>> getCurrentRecipe(ItemStack itemStack) {
+        return this.level.getRecipeManager().getRecipeFor(CRecipeTypes.CRUSHING_RECIPE_TYPE.get(), new SingleRecipeInput(itemStack), level);
+    }
+
     // Checking for recipes
     private boolean canInsertItemInOutputSlot(Item item) {
-        return this.inventory.get(RESULT_SLOT_END).isEmpty() || this.inventory.get(RESULT_SLOT_END).is(item);
+        for (int i = RESULT_SLOT_START; i <= RESULT_SLOT_END; i++) {
+            ItemStack slotStack = this.inventory.get(i);
+            if (slotStack.isEmpty() || (slotStack.is(item) && slotStack.getCount() < slotStack.getMaxStackSize())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private boolean canInsertAmountIntoOutputSlot(int count) {
-        return this.inventory.get(RESULT_SLOT_END).getCount() + count <= this.inventory.get(RESULT_SLOT_END).getMaxStackSize();
+        int availableSpace = 0;
+        for (int i = RESULT_SLOT_START; i <= RESULT_SLOT_END; i++) {
+            ItemStack slotStack = this.inventory.get(i);
+            if (slotStack.isEmpty()) {
+                availableSpace += slotStack.getMaxStackSize();
+            } else {
+                availableSpace += slotStack.getMaxStackSize() - slotStack.getCount();
+            }
+            if (availableSpace >= count) {
+                return true;
+            }
+        }
+        return false;
     }
 
     // Recipe progress Stuff
@@ -179,24 +183,19 @@ public class CrusherTile extends BaseContainerBlockEntity {
 
     // Place or take item out from slots (Hoppers or other mods ig)
     @Override
-    public boolean canPlaceItem(int pSlot, ItemStack pStack) {
-        if (pSlot == RESULT_SLOT_END) {
+    public boolean canPlaceItem(int slot, ItemStack item) {
+        if (slot >= RESULT_SLOT_START && slot <= RESULT_SLOT_END) {
             return false;
-        } else if (pSlot != FUEL_SLOT) {
-            return true;
-        } else {
-            ItemStack itemstack = this.inventory.get(FUEL_SLOT);
-            return pStack.is(CItems.INFERNIUM_CRYSTAL) && !itemstack.is(Items.BUCKET);
+        } else if (slot == FUEL_SLOT) {
+            return isFuel(item);
         }
+        return !isFuel(item);
     }
 
     @Override
     public boolean canTakeItem(Container pTarget, int pSlot, ItemStack pStack) {
-        if (pSlot == RESULT_SLOT_END) {
+        if (pSlot >= RESULT_SLOT_START && pSlot <= RESULT_SLOT_END) {
             return true;
-        } else if (pSlot == FUEL_SLOT) {
-            ItemStack itemstack = this.inventory.get(FUEL_SLOT);
-            return pStack.is(Items.BUCKET) && !itemstack.is(Items.LAVA_BUCKET);
         }
         return false;
     }
@@ -253,7 +252,6 @@ public class CrusherTile extends BaseContainerBlockEntity {
     protected void setItems(NonNullList<ItemStack> pItems) {
         this.inventory = pItems;
     }
-
 
     @Override
     public int getContainerSize() {

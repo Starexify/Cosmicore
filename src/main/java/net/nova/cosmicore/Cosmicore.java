@@ -3,8 +3,8 @@ package net.nova.cosmicore;
 import net.minecraft.resources.ResourceLocation;
 import net.nova.cosmicore.data.DataGenerators;
 import net.nova.cosmicore.init.*;
-import net.nova.cosmicore.recipe.crusher.CRecipeSerializers;
-import net.nova.cosmicore.recipe.crusher.CRecipeTypes;
+import net.nova.cosmicore.init.CRecipeSerializers;
+import net.nova.cosmicore.init.CRecipeTypes;
 import org.slf4j.Logger;
 
 import net.neoforged.bus.api.IEventBus;
