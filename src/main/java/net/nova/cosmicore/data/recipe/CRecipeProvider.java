@@ -8,6 +8,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.ItemLike;
 import net.nova.cosmicore.init.CItems;
+import net.nova.cosmicore.recipe.crusher.CrushingRecipe;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -31,6 +32,7 @@ public class CRecipeProvider extends RecipeProvider {
         new CraftingRecipes(output, lookupProvider, recipeOutput).build();
         new FurnaceRecipes(output, lookupProvider, recipeOutput).build();
         new CSmithingRecipes(output, lookupProvider, recipeOutput).build();
+        new CrushingRecipes(output, lookupProvider, recipeOutput).build();
     }
 
     // Recipes

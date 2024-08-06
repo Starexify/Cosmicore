@@ -9,15 +9,14 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 
 public class CrushingRecipeSerializer implements RecipeSerializer<CrushingRecipe> {
-
     public static final MapCodec<CrushingRecipe> CODEC = RecordCodecBuilder.mapCodec(inst -> inst.group(
-            Ingredient.CODEC_NONEMPTY.fieldOf("ingredient").forGetter(CrushingRecipe::getIngredient),
-            ItemStack.CODEC.fieldOf("result").forGetter(CrushingRecipe::getResult)
+            Ingredient.CODEC_NONEMPTY.fieldOf("ingredient").forGetter(recipe -> recipe.ingredient),
+            ItemStack.CODEC.fieldOf("result").forGetter(recipe -> recipe.result)
     ).apply(inst, CrushingRecipe::new));
 
     public static final StreamCodec<RegistryFriendlyByteBuf, CrushingRecipe> STREAM_CODEC = StreamCodec.composite(
-            Ingredient.CONTENTS_STREAM_CODEC, CrushingRecipe::getIngredient,
-            ItemStack.STREAM_CODEC, CrushingRecipe::getResult,
+            Ingredient.CONTENTS_STREAM_CODEC, recipe -> recipe.ingredient,
+            ItemStack.STREAM_CODEC, recipe -> recipe.result,
             CrushingRecipe::new
     );
 

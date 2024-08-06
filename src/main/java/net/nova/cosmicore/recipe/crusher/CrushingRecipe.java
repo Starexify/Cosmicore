@@ -43,12 +43,4 @@ public class CrushingRecipe implements Recipe<SingleRecipeInput> {
     public RecipeType<?> getType() {
         return CRecipeTypes.CRUSHING_RECIPE_TYPE.get();
     }
-
-    public Ingredient getIngredient() {
-        return this.ingredient;
-    }
-
-    public ItemStack getResult() {
-        return this.result;
-    }
 }
