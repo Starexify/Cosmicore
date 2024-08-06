@@ -46,3 +46,4 @@ public class CrushingRecipeBuilder implements RecipeBuilder {
         recipeOutput.accept(id, recipe, null);
     }
 }
+

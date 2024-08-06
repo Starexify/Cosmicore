@@ -3,7 +3,9 @@ package net.nova.cosmicore.data.recipe;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.RecipeOutput;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.block.Blocks;
 import net.nova.cosmicore.init.CBlocks;
 import net.nova.cosmicore.init.CItems;
 import net.nova.cosmicore.recipe.crusher.CrushingRecipeBuilder;
@@ -19,17 +21,17 @@ public class CrushingRecipes extends CRecipeProvider {
     }
 
     public void build() {
-/*        new CrushingRecipeBuilder(
+        new CrushingRecipeBuilder(
                 Ingredient.of(CBlocks.ACHONDRITE),
-                CItems.TITANIUM_AXE,
+                Blocks.COBBLESTONE,
                 2
-        ).save(recipeOutput, path + getCrushingRecipeName(CItems.TITANIUM_AXE));
+        ).save(recipeOutput, path + getCrushingRecipeName(Blocks.COBBLESTONE));
 
         new CrushingRecipeBuilder(
-                Ingredient.of(CBlocks.METEORITE),
-                CBlocks.ACHONDRITE,
-                3
-        ).save(recipeOutput, path + getCrushingRecipeName(CBlocks.ACHONDRITE));*/
+                Ingredient.of(CBlocks.ACHONDRITE),
+                Items.IRON_INGOT,
+                2
+        ).save(recipeOutput, path + getCrushingRecipeName(Items.IRON_INGOT));
     }
 
 }
