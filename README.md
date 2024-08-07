@@ -12,3 +12,12 @@
 </p>
 
 <p align="center"><a href="https://minecraft.curseforge.com/projects/cosmicore"><img alt="CurseForge Downloads" src="http://cf.way2muchnoise.eu/full_cosmicore_downloads.svg?badge_style=flat"></a></p>
+
+# Cosmicore
+
+**We're currently in Alpha development and releasing this initial version to gather your feedback!** Your opinions and ideas for the mod are welcomed so let us know what you think!
+
+## About
+Cosmicore is a brand-new meteors mod for minecraft, inspired by the nostalgia of the old Falling Meteors mod, but with a whole lot more.
+
+**Follow our progress and discover new and upcoming features on our Twitter page:** <a href="https://x.com/FoxiStar9">X Page</a>
