@@ -15,13 +15,15 @@
 
 
 # Cosmicore
+[Copsmicore News](#cosmicore-news)
+
 
 ⚠️**Please note that this is just an alpha version, so expect that features may be buggy or not fully implemented yet. We would appreciate your feedback and ideas as we work on this project!**
 
 
-## Cosmicore NEWS
+## Cosmicore News
 
-Nothing to see here
+Nothing to see here yet
 
 
 ## About
