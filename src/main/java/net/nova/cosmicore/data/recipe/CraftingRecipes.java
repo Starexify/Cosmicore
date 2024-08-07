@@ -57,5 +57,16 @@ public class CraftingRecipes extends CRecipeProvider {
                 .pattern("###")
                 .unlockedBy("has_iron_gear", has(CItems.IRON_GEAR))
                 .save(recipeOutput);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, CBlocks.ADVANCED_CRUSHER)
+                .define('G', CItems.TITANIUM_GEAR)
+                .define('T', CItems.TITANIUM_INGOT)
+                .define('C', CBlocks.CRUSHER)
+                .define('#', CBlocks.TITANIUM_BLOCK)
+                .pattern("GGG")
+                .pattern("TCT")
+                .pattern("###")
+                .unlockedBy("has_crusher", has(CBlocks.CRUSHER))
+                .save(recipeOutput);
     }
 }

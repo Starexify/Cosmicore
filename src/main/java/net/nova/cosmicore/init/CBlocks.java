@@ -65,15 +65,17 @@ public class CBlocks {
     public static DeferredBlock<Block> CRUSHER = registerBlock("crusher", () -> new Crusher(BlockBehaviour.Properties.of()
             .mapColor(MapColor.METAL)
             .instrument(NoteBlockInstrument.BASEDRUM)
-            .sound(SoundType.NETHERITE_BLOCK)
+            .requiresCorrectToolForDrops()
             .strength(6F)
+            .sound(SoundType.NETHERITE_BLOCK)
     ));
 
     public static DeferredBlock<Block> ADVANCED_CRUSHER = registerBlock("advanced_crusher", () -> new AdvancedCrusher(BlockBehaviour.Properties.of()
             .mapColor(MapColor.METAL)
             .instrument(NoteBlockInstrument.BASEDRUM)
-            .sound(SoundType.NETHERITE_BLOCK)
+            .requiresCorrectToolForDrops()
             .strength(6F)
+            .sound(SoundType.NETHERITE_BLOCK)
     ));
 
     // Infernium

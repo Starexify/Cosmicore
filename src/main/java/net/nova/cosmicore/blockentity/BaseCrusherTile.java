@@ -23,7 +23,7 @@ public class BaseCrusherTile extends BaseContainerBlockEntity {
     public int ignisCharge;
     public int ignisPower;
     public int crushingProgress;
-    public int maxCrushingProgress = 5; // TODO: Change progress with correct
+    public int maxCrushingProgress = 400; // TODO: Change progress with correct
 
     public int FUEL_SLOT;
     public int RESULT_SLOT_START;

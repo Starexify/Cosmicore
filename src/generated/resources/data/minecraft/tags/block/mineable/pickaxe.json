@@ -5,6 +5,8 @@
     "cosmicore:achondrite",
     "cosmicore:meteorite",
     "cosmicore:pallasite",
-    "cosmicore:infernium_cluster"
+    "cosmicore:infernium_cluster",
+    "cosmicore:crusher",
+    "cosmicore:advanced_crusher"
   ]
 }

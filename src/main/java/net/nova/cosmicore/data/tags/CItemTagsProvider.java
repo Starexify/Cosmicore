@@ -18,16 +18,26 @@ public class CItemTagsProvider extends ItemTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider pProvider) {
-        // Titanium Stuff
         tag(ItemTags.SHOVELS).add(CItems.TITANIUM_SHOVEL.get());
+
         tag(ItemTags.PICKAXES).add(CItems.TITANIUM_PICKAXE.get());
+
         tag(ItemTags.AXES).add(CItems.TITANIUM_AXE.get());
+
         tag(ItemTags.HOES).add(CItems.TITANIUM_HOE.get());
+
         tag(ItemTags.SWORDS).add(CItems.TITANIUM_SWORD.get());
+
         tag(ItemTags.HEAD_ARMOR).add(CItems.TITANIUM_HELMET.get());
+
         tag(ItemTags.CHEST_ARMOR).add(CItems.TITANIUM_CHESTPLATE.get());
+
         tag(ItemTags.LEG_ARMOR).add(CItems.TITANIUM_LEGGINGS.get());
+
         tag(ItemTags.FOOT_ARMOR).add(CItems.TITANIUM_BOOTS.get());
+
         tag(ItemTags.TRIM_MATERIALS).add(CItems.TITANIUM_INGOT.get());
+
+        tag(ItemTags.CROSSBOW_ENCHANTABLE).add(CItems.TITANIUM_CROSSBOW.get());
     }
 }
