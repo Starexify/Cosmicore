@@ -37,8 +37,6 @@ TBA
 
 **Follow our progress and discover new and upcoming features on our Twitter page:** <a href="https://x.com/FoxiStar9">Our X Page</a>
 
-## License and Modpack Permission
+## License
 
-This mod is licensed under the MIT License, allowing for free use, modification, and distribution. For more details, please see the full license text included with the mod.
-
-Feel free to include our mod into your modpack.
+This mod is licensed under the MIT License, allowing for free use, modification, and distribution, meaning you can use our mod in your modpacks. For more details, please see the full license included with the mod.
