@@ -14,8 +14,6 @@
 <p align="center"><a href="https://minecraft.curseforge.com/projects/cosmicore"><img alt="CurseForge Downloads" src="http://cf.way2muchnoise.eu/full_cosmicore_downloads.svg?badge_style=flat"></a></p>
 
 <p align="center">
-  <a href="#cosmicore" style="text-decoration:none;color:blue;">Cosmicore</a> | 
-  <a href="#cosmicore-news" style="text-decoration:none;color:blue;">Cosmicore NEWS</a> | 
   <a href="#about" style="text-decoration:none;color:blue;">About</a> | 
   <a href="#content" style="text-decoration:none;color:blue;">Content</a> | 
   <a href="#license" style="text-decoration:none;color:blue;">License</a> | 
