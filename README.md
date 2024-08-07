@@ -15,7 +15,8 @@
 
 <p align="center">
   <a href="#about" style="text-decoration:none;color:blue;">About</a> | 
-  <a href="#content" style="text-decoration:none;color:blue;">Content</a> | 
+  <a href="#features" style="text-decoration:none;color:blue;">Features</a> | 
+  <a href="#planned-updates" style="text-decoration:none;color:blue;">Planned Updates</a> | 
   <a href="#license" style="text-decoration:none;color:blue;">License</a> | 
   <a href="#social-media" style="text-decoration:none;color:blue;">Social Media</a>
 </p>
@@ -35,7 +36,12 @@ Nothing to see here yet
 Cosmicore is a brand-new meteors mod for minecraft, inspired by the nostalgia of the old Falling Meteors mod, but with a whole lot more content.
 
 
-## Content
+## Features
+
+TBA
+
+
+## Planned Updates
 
 TBA
 
