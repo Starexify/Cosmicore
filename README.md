@@ -38,7 +38,7 @@
       </td>
       <td align="center" style="border: none; padding: 10px;">
         <a href="#social-media" style="text-decoration: none; color: #9B59B6; font-size: 1.2em; font-weight: bold; transition: color 0.3s ease;">
-           Social Media
+          📢 Social Media
         </a>
       </td>
     </tr>
