@@ -15,11 +15,19 @@
 
 
 # Cosmicore
-[Copsmicore News](#cosmicore-news)
-
 
 ⚠️**Please note that this is just an alpha version, so expect that features may be buggy or not fully implemented yet. We would appreciate your feedback and ideas as we work on this project!**
 
+
+## Table of Contents
+
+<p align="center">
+  <a href="#cosmicore-news" style="text-decoration:none;color:blue;">Cosmicore NEWS</a> | 
+  <a href="#about" style="text-decoration:none;color:blue;">About</a> | 
+  <a href="#content" style="text-decoration:none;color:blue;">Content</a> | 
+  <a href="#license" style="text-decoration:none;color:blue;">License</a> | 
+  <a href="#social-media" style="text-decoration:none;color:blue;">Social Media</a>
+</p>
 
 ## Cosmicore News
 
@@ -35,9 +43,11 @@ Cosmicore is a brand-new meteors mod for minecraft, inspired by the nostalgia of
 
 TBA
 
-<br></br>
+
+## Social Media
 
 **Follow our progress and discover new and upcoming features on our Twitter page:** <a href="https://x.com/FoxiStar9">Our X Page</a>
+
 
 ## License
 
