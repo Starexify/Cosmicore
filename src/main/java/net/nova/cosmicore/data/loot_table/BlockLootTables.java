@@ -15,8 +15,8 @@ import java.util.stream.Collectors;
 
 import static net.nova.cosmicore.Cosmicore.MODID;
 
-public class CBlockLootTables extends BlockLootSubProvider {
-    protected CBlockLootTables(HolderLookup.Provider pProvider) {
+public class BlockLootTables extends BlockLootSubProvider {
+    protected BlockLootTables(HolderLookup.Provider pProvider) {
         super(Set.of(), FeatureFlags.REGISTRY.allFlags(), pProvider);
     }
 
@@ -33,6 +33,7 @@ public class CBlockLootTables extends BlockLootSubProvider {
 
         // Crusher
         dropSelf(CBlocks.CRUSHER.get());
+        dropSelf(CBlocks.ADVANCED_CRUSHER.get());
 
         // Infernium
         add(CBlocks.INFERNIUM_CLUSTER.get(), this.createSingleItemTable(CItems.INFERNIUM_CRYSTAL, UniformGenerator.between(2, 4)));

@@ -27,16 +27,16 @@ public class DataGenerators {
             ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
             CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
 
-            generator.addProvider(true, new CLangProvider(output));
+            generator.addProvider(true, new LangProvider(output));
 
             generator.addProvider(true, new CItemModelProvider(output, existingFileHelper));
-            generator.addProvider(true, new CBlockStateAndModelProvider(output, existingFileHelper));
+            generator.addProvider(true, new BlockStateAndModelProvider(output, existingFileHelper));
 
             CBlockTagsProvider modBlockTagsProvider = new CBlockTagsProvider(output, lookupProvider, existingFileHelper);
             generator.addProvider(true, modBlockTagsProvider);
             generator.addProvider(true, new CItemTagsProvider(output, lookupProvider, modBlockTagsProvider, existingFileHelper));
 
-            generator.addProvider(true, new CAtlasesProvider(output, lookupProvider, existingFileHelper));
+            generator.addProvider(true, new AtlasesProvider(output, lookupProvider, existingFileHelper));
 
             generator.addProvider(true, new CLootTableProvider(output, lookupProvider));
 

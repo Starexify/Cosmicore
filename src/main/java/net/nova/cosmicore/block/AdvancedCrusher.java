@@ -12,12 +12,12 @@ import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
-import net.nova.cosmicore.blockentity.CrusherTile;
+import net.nova.cosmicore.blockentity.AdvancedCrusherTile;
 import net.nova.cosmicore.init.CBlockEntities;
 import org.jetbrains.annotations.Nullable;
 
-public class Crusher extends BaseCrusher {
-    public Crusher(Properties properties) {
+public class AdvancedCrusher extends BaseCrusher{
+    public AdvancedCrusher(Properties properties) {
         super(properties);
     }
 
@@ -27,9 +27,9 @@ public class Crusher extends BaseCrusher {
     protected void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pMovedByPiston) {
         if (!pState.is(pNewState.getBlock())) {
             BlockEntity blockEntity = pLevel.getBlockEntity(pPos);
-            if (blockEntity instanceof CrusherTile) {
+            if (blockEntity instanceof AdvancedCrusherTile) {
                 if (pLevel instanceof ServerLevel) {
-                    Containers.dropContents(pLevel, pPos, (CrusherTile) blockEntity);
+                    Containers.dropContents(pLevel, pPos, (AdvancedCrusherTile) blockEntity);
                 }
 
                 super.onRemove(pState, pLevel, pPos, pNewState, pMovedByPiston);
@@ -45,10 +45,10 @@ public class Crusher extends BaseCrusher {
     protected InteractionResult useWithoutItem(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, BlockHitResult pHitResult) {
         if (!pLevel.isClientSide) {
             BlockEntity blockEntity = pLevel.getBlockEntity(pPos);
-            if (blockEntity instanceof CrusherTile crusherTile && pPlayer instanceof ServerPlayer serverPlayer) {
+            if (blockEntity instanceof AdvancedCrusherTile crusherTile && pPlayer instanceof ServerPlayer serverPlayer) {
                 serverPlayer.openMenu(crusherTile, pPos);
             } else {
-                throw new IllegalStateException("Crusher container provider is missing!");
+                throw new IllegalStateException("Advanced Crusher container provider is missing!");
             }
         }
         return InteractionResult.sidedSuccess(pLevel.isClientSide);
@@ -62,13 +62,13 @@ public class Crusher extends BaseCrusher {
             return null;
         }
 
-        return createTickerHelper(pBlockEntityType, CBlockEntities.CRUSHER_TILE.get(),
+        return createTickerHelper(pBlockEntityType, CBlockEntities.ADVANCED_CRUSHER_TILE.get(),
                 (pLevel1, pPos, pState1, pBlockEntity) -> pBlockEntity.serverTick(pLevel1, pPos, pState1));
     }
 
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-        return new CrusherTile(pPos, pState);
+        return new AdvancedCrusherTile(pPos, pState);
     }
 }

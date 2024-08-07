@@ -9,8 +9,8 @@ import net.nova.cosmicore.item.TitaniumSmithingTemplate;
 
 import static net.nova.cosmicore.Cosmicore.MODID;
 
-public class CLangProvider extends LanguageProvider {
-    public CLangProvider(PackOutput output) {
+public class LangProvider extends LanguageProvider {
+    public LangProvider(PackOutput output) {
         super(output, MODID, "en_us");
     }
 
@@ -41,8 +41,9 @@ public class CLangProvider extends LanguageProvider {
         addBlock(CBlocks.ACHONDRITE, "Achondrite");
         addBlock(CBlocks.METEORITE, "Meteorite");
         addBlock(CBlocks.PALLASITE, "Pallasite");
-        addBlock(CBlocks.CRUSHER, "Crusher");
         addBlock(CBlocks.INFERNIUM_CLUSTER, "Infernium Cluster");
+        addBlock(CBlocks.CRUSHER, "Crusher");
+        addBlock(CBlocks.ADVANCED_CRUSHER, "Advanced Crusher");
 
         // Creative Tab
         add(CCreativeTab.COSMICORE_TAB_TITLE, "Cosmicore");

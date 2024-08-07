@@ -13,27 +13,26 @@ import net.nova.cosmicore.recipe.WeightedResult;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
-public class CrushingRecipeBuilder implements RecipeBuilder {
+public class AdvancedCrushingRecipeBuilder implements RecipeBuilder {
     private final Ingredient ingredient;
     private final List<WeightedResult> results;
 
-    public CrushingRecipeBuilder(Ingredient ingredient) {
+    public AdvancedCrushingRecipeBuilder(Ingredient ingredient) {
         this.ingredient = ingredient;
         this.results = new ArrayList<>();
     }
 
-    public static CrushingRecipeBuilder crushing(Ingredient ingredient) {
-        return new CrushingRecipeBuilder(ingredient);
+    public static AdvancedCrushingRecipeBuilder crushing(Ingredient ingredient) {
+        return new AdvancedCrushingRecipeBuilder(ingredient);
     }
 
-    public CrushingRecipeBuilder addResult(ItemLike result, int count, float chance) {
+    public AdvancedCrushingRecipeBuilder addResult(ItemLike result, int count, float chance) {
         return addResult(new ItemStack(result, count), chance);
     }
 
-    public CrushingRecipeBuilder addResult(ItemStack result, float chance) {
+    public AdvancedCrushingRecipeBuilder addResult(ItemStack result, float chance) {
         this.results.add(new WeightedResult(result, chance));
         return this;
     }
@@ -55,7 +54,7 @@ public class CrushingRecipeBuilder implements RecipeBuilder {
 
     @Override
     public void save(RecipeOutput recipeOutput, ResourceLocation id) {
-        CrushingRecipe recipe = new CrushingRecipe(this.ingredient, this.results);
+        AdvancedCrushingRecipe recipe = new AdvancedCrushingRecipe(this.ingredient, this.results);
         recipeOutput.accept(id, recipe, null);
     }
 }

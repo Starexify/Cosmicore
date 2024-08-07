@@ -54,6 +54,7 @@ public class CCreativeTab {
 
             // Crusher
             output.accept(CBlocks.CRUSHER);
+            output.accept(CBlocks.ADVANCED_CRUSHER);
         });
 
         builder.icon(() -> new ItemStack(CBlocks.RAW_TITANIUM_BLOCK));

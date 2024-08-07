@@ -8,16 +8,15 @@ import net.nova.cosmicore.init.CRecipeSerializers;
 import net.nova.cosmicore.init.CRecipeTypes;
 import net.nova.cosmicore.recipe.WeightedResult;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.Random;
 
-public class CrushingRecipe implements Recipe<SingleRecipeInput> {
+public class AdvancedCrushingRecipe implements Recipe<SingleRecipeInput> {
     protected final Ingredient ingredient;
     protected final List<WeightedResult> results;
     private static final Random RANDOM = new Random();
 
-    public CrushingRecipe(Ingredient ingredient, List<WeightedResult> results) {
+    public AdvancedCrushingRecipe(Ingredient ingredient, List<WeightedResult> results) {
         this.ingredient = ingredient;
         this.results = results;
     }
@@ -59,11 +58,11 @@ public class CrushingRecipe implements Recipe<SingleRecipeInput> {
 
     @Override
     public RecipeSerializer<?> getSerializer() {
-        return CRecipeSerializers.CRUSHING_RECIPE_SERIALIZER.get();
+        return CRecipeSerializers.ADVANCED_CRUSHING_RECIPE_SERIALIZER.get();
     }
 
     @Override
     public RecipeType<?> getType() {
-        return CRecipeTypes.CRUSHING_RECIPE_TYPE.get();
+        return CRecipeTypes.ADVANCED_CRUSHING_RECIPE_TYPE.get();
     }
 }

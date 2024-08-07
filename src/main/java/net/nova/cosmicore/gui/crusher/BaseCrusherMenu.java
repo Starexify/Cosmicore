@@ -3,15 +3,19 @@ package net.nova.cosmicore.gui.crusher;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.nova.cosmicore.init.CItems;
 import org.jetbrains.annotations.Nullable;
 
-public class BasicCrusherMenu extends AbstractContainerMenu {
-    protected BasicCrusherMenu(@Nullable MenuType<?> pMenuType, int pContainerId) {
+public class BaseCrusherMenu extends AbstractContainerMenu {
+    public final ContainerData data;
+
+    protected BaseCrusherMenu(@Nullable MenuType<?> pMenuType, int pContainerId, ContainerData data) {
         super(pMenuType, pContainerId);
+        this.data = data;
     }
 
     public boolean isCrystal(ItemStack pStack) {
@@ -29,6 +33,27 @@ public class BasicCrusherMenu extends AbstractContainerMenu {
             this.addSlot(new Slot(playerInventory, k, 8 + k * 18, 160));
         }
     }
+
+    public boolean isCharged() {
+        return this.data.get(0) > 0;
+    }
+
+    public int getChargedProgress() {
+        int ignisCharge = this.data.get(0);
+        int ignisPower = this.data.get(1);
+        int ignisChargeSize = 56;
+
+        return ignisCharge != 0 ? ignisChargeSize * ignisCharge / ignisPower : 0;
+    }
+
+    public int getCrushingProgress() {
+        int progress = this.data.get(2);
+        int maxProgress = this.data.get(3);  // Max Progress
+        int progressArrowSize = 18;
+
+        return maxProgress != 0 && progress != 0 ? progress * progressArrowSize / maxProgress : 0;
+    }
+
 
     @Override
     public ItemStack quickMoveStack(Player pPlayer, int pIndex) {

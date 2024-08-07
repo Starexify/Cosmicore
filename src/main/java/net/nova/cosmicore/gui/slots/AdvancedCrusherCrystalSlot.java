@@ -1,14 +1,14 @@
-package net.nova.cosmicore.gui.crusher.slots;
+package net.nova.cosmicore.gui.slots;
 
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.SlotItemHandler;
-import net.nova.cosmicore.gui.crusher.CrusherMenu;
+import net.nova.cosmicore.gui.crusher.AdvancedCrusherMenu;
 
-public class CrusherCrystalSlot extends SlotItemHandler {
-    private final CrusherMenu menu;
+public class AdvancedCrusherCrystalSlot extends SlotItemHandler {
+    private final AdvancedCrusherMenu menu;
 
-    public CrusherCrystalSlot(IItemHandler itemHandler, int index, int xPosition, int yPosition, CrusherMenu menu) {
+    public AdvancedCrusherCrystalSlot(IItemHandler itemHandler, int index, int xPosition, int yPosition, AdvancedCrusherMenu menu) {
         super(itemHandler, index, xPosition, yPosition);
         this.menu = menu;
     }

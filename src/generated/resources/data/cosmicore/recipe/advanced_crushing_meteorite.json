@@ -1,0 +1,71 @@
+{
+  "type": "cosmicore:advanced_crushing",
+  "ingredient": {
+    "item": "cosmicore:meteorite"
+  },
+  "results": [
+    {
+      "chance": 0.01,
+      "item": {
+        "count": 1,
+        "id": "minecraft:diamond"
+      }
+    },
+    {
+      "chance": 0.1,
+      "item": {
+        "count": 2,
+        "id": "cosmicore:raw_titanium"
+      }
+    },
+    {
+      "chance": 0.25,
+      "item": {
+        "count": 1,
+        "id": "cosmicore:raw_titanium"
+      }
+    },
+    {
+      "chance": 0.21,
+      "item": {
+        "count": 3,
+        "id": "minecraft:raw_iron"
+      }
+    },
+    {
+      "chance": 0.3,
+      "item": {
+        "count": 2,
+        "id": "minecraft:raw_iron"
+      }
+    },
+    {
+      "chance": 0.27,
+      "item": {
+        "count": 5,
+        "id": "minecraft:raw_copper"
+      }
+    },
+    {
+      "chance": 0.4,
+      "item": {
+        "count": 3,
+        "id": "minecraft:raw_copper"
+      }
+    },
+    {
+      "chance": 0.12,
+      "item": {
+        "count": 2,
+        "id": "minecraft:coal"
+      }
+    },
+    {
+      "chance": 0.2,
+      "item": {
+        "count": 1,
+        "id": "minecraft:cobblestone"
+      }
+    }
+  ]
+}

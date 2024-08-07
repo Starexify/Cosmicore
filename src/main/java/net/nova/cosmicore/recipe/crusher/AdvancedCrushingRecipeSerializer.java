@@ -13,18 +13,18 @@ import net.nova.cosmicore.recipe.WeightedResult;
 
 import java.util.ArrayList;
 
-public class CrushingRecipeSerializer implements RecipeSerializer<CrushingRecipe> {
+public class AdvancedCrushingRecipeSerializer implements RecipeSerializer<AdvancedCrushingRecipe> {
     private static final Codec<WeightedResult> WEIGHTED_RESULT_CODEC = RecordCodecBuilder.create(inst -> inst.group(
             ItemStack.CODEC.fieldOf("item").forGetter(wr -> wr.item),
             Codec.FLOAT.fieldOf("chance").forGetter(wr -> wr.chance)
     ).apply(inst, WeightedResult::new));
 
-    public static final MapCodec<CrushingRecipe> CODEC = RecordCodecBuilder.mapCodec(inst -> inst.group(
+    public static final MapCodec<AdvancedCrushingRecipe> CODEC = RecordCodecBuilder.mapCodec(inst -> inst.group(
             Ingredient.CODEC_NONEMPTY.fieldOf("ingredient").forGetter(recipe -> recipe.ingredient),
             Codec.list(WEIGHTED_RESULT_CODEC).fieldOf("results").forGetter(recipe -> recipe.results)
-    ).apply(inst, CrushingRecipe::new));
+    ).apply(inst, AdvancedCrushingRecipe::new));
 
-    public static final StreamCodec<RegistryFriendlyByteBuf, CrushingRecipe> STREAM_CODEC = StreamCodec.composite(
+    public static final StreamCodec<RegistryFriendlyByteBuf, AdvancedCrushingRecipe> STREAM_CODEC = StreamCodec.composite(
             Ingredient.CONTENTS_STREAM_CODEC, recipe -> recipe.ingredient,
             ByteBufCodecs.collection(
                     ArrayList::new,
@@ -34,16 +34,16 @@ public class CrushingRecipeSerializer implements RecipeSerializer<CrushingRecipe
                             WeightedResult::new
                     )
             ), recipe -> recipe.results,
-            CrushingRecipe::new
+            AdvancedCrushingRecipe::new
     );
 
     @Override
-    public MapCodec<CrushingRecipe> codec() {
+    public MapCodec<AdvancedCrushingRecipe> codec() {
         return CODEC;
     }
 
     @Override
-    public StreamCodec<RegistryFriendlyByteBuf, CrushingRecipe> streamCodec() {
+    public StreamCodec<RegistryFriendlyByteBuf, AdvancedCrushingRecipe> streamCodec() {
         return STREAM_CODEC;
     }
 }

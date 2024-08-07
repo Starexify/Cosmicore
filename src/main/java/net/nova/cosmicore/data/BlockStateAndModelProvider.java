@@ -12,8 +12,8 @@ import net.nova.cosmicore.init.CBlocks;
 
 import static net.nova.cosmicore.Cosmicore.MODID;
 
-public class CBlockStateAndModelProvider extends BlockStateProvider {
-    public CBlockStateAndModelProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
+public class BlockStateAndModelProvider extends BlockStateProvider {
+    public BlockStateAndModelProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
         super(output, MODID, existingFileHelper);
     }
 
@@ -29,23 +29,27 @@ public class CBlockStateAndModelProvider extends BlockStateProvider {
         normalBlock(CBlocks.PALLASITE.get());
 
         // Crusher Model
-        customHorizontalBlockWOModel(CBlocks.CRUSHER.get());
+        crusherModel(CBlocks.CRUSHER.get());
+        crusherModel(CBlocks.ADVANCED_CRUSHER.get());
 
         // Infernium Model
         customDirectionalBlock(CBlocks.INFERNIUM_CLUSTER.get());
     }
 
     // Models
+    private void crusherModel(Block block) {
+        horizontalBlock(block, models().getBuilder(name(block))
+                .parent(models().getExistingFile(modLoc("template_crusher")))
+                .texture("layer0", "block/" + name(block))
+                .texture("particle", "block/crusher_base"));
+        simpleBlockItem(block, new ModelFile.UncheckedModelFile(modLoc("block/" + name(block))));
+    }
+
     private void customDirectionalBlock(Block block) {
         directionalBlock(block, models().cross(name(block), modLoc("block/" + name(block))).renderType(RenderType.CUTOUT.name));
         itemModels().getBuilder(name(block))
                 .parent(itemModels().getExistingFile(mcLoc("item/generated")))
                 .texture("layer0", "block/" + name(block));
-    }
-
-    private void customHorizontalBlockWOModel(Block block) {
-        horizontalBlock(block, new ModelFile.UncheckedModelFile(modLoc("block/" + name(block))));
-        simpleBlockItem(block, new ModelFile.UncheckedModelFile(modLoc("block/" + name(block))));
     }
 
     private void normalBlock(Block block) {

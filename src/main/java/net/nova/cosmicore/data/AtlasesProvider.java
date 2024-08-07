@@ -14,13 +14,20 @@ import java.util.concurrent.CompletableFuture;
 
 import static net.nova.cosmicore.Cosmicore.MODID;
 
-public class CAtlasesProvider extends SpriteSourceProvider {
+public class AtlasesProvider extends SpriteSourceProvider {
     protected static final ResourceLocation ARMOR_TRIMS = ResourceLocation.withDefaultNamespace("armor_trims");
 
-    public CAtlasesProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, ExistingFileHelper existingFileHelper) {
+    public AtlasesProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, ExistingFileHelper existingFileHelper) {
         super(output, lookupProvider, MODID, existingFileHelper);
     }
 
+    // Add here the palettes
+    private final Map<String, ResourceLocation> permutations = Map.of(
+            "titanium", Cosmicore.rl("trims/color_palettes/titanium"),
+            "titanium_darker", Cosmicore.rl("trims/color_palettes/titanium_darker")
+    );
+
+    // Just some lists of things idk
     private final List<ResourceLocation> textures = List.of(
             ResourceLocation.withDefaultNamespace("trims/items/leggings_trim"),
             ResourceLocation.withDefaultNamespace("trims/items/chestplate_trim"),
@@ -65,11 +72,6 @@ public class CAtlasesProvider extends SpriteSourceProvider {
             ResourceLocation.withDefaultNamespace("trims/models/armor/flow_leggings"),
             ResourceLocation.withDefaultNamespace("trims/models/armor/bolt"),
             ResourceLocation.withDefaultNamespace("trims/models/armor/bolt_leggings")
-    );
-
-    private final Map<String, ResourceLocation> permutations = Map.of(
-            "titanium", Cosmicore.rl("trims/color_palettes/titanium"),
-            "titanium_darker", Cosmicore.rl("trims/color_palettes/titanium_darker")
     );
 
     @Override

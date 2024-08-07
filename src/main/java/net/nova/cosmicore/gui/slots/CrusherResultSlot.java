@@ -1,4 +1,4 @@
-package net.nova.cosmicore.gui.crusher.slots;
+package net.nova.cosmicore.gui.slots;
 
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.items.IItemHandler;

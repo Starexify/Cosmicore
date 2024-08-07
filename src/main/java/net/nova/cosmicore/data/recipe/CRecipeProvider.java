@@ -8,7 +8,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.ItemLike;
 import net.nova.cosmicore.init.CItems;
-import net.nova.cosmicore.recipe.crusher.CrushingRecipe;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -36,8 +35,12 @@ public class CRecipeProvider extends RecipeProvider {
     }
 
     // Recipes
+    protected static String getAdvancedCrushingRecipeName(ItemLike pItemLike) {
+        return "advanced_crushing_" + getItemName(pItemLike);
+    }
+
     protected static String getCrushingRecipeName(ItemLike pItemLike) {
-        return getItemName(pItemLike) + "_from_crushing";
+        return "crushing_" + getItemName(pItemLike);
     }
 
     protected static void nineBlockStorageRecipes(RecipeOutput pRecipeOutput, RecipeCategory pUnpackedCategory, ItemLike pUnpacked, RecipeCategory pPackedCategory, ItemLike pPacked) {

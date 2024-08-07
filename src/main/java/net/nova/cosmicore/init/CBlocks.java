@@ -12,6 +12,7 @@ import net.minecraft.world.level.material.PushReaction;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
+import net.nova.cosmicore.block.AdvancedCrusher;
 import net.nova.cosmicore.block.Crusher;
 
 import java.util.function.Supplier;
@@ -62,6 +63,13 @@ public class CBlocks {
 
     // Crusher
     public static DeferredBlock<Block> CRUSHER = registerBlock("crusher", () -> new Crusher(BlockBehaviour.Properties.of()
+            .mapColor(MapColor.METAL)
+            .instrument(NoteBlockInstrument.BASEDRUM)
+            .sound(SoundType.NETHERITE_BLOCK)
+            .strength(6F)
+    ));
+
+    public static DeferredBlock<Block> ADVANCED_CRUSHER = registerBlock("advanced_crusher", () -> new AdvancedCrusher(BlockBehaviour.Properties.of()
             .mapColor(MapColor.METAL)
             .instrument(NoteBlockInstrument.BASEDRUM)
             .sound(SoundType.NETHERITE_BLOCK)

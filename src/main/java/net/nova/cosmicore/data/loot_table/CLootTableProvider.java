@@ -21,7 +21,7 @@ import static net.nova.cosmicore.Cosmicore.MODID;
 public class CLootTableProvider extends LootTableProvider {
 
     public CLootTableProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
-        super(output, Set.of(), List.of(new SubProviderEntry(CBlockLootTables::new, LootContextParamSets.BLOCK)), registries);
+        super(output, Set.of(), List.of(new SubProviderEntry(BlockLootTables::new, LootContextParamSets.BLOCK)), registries);
     }
 
     @Override

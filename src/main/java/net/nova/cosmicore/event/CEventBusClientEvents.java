@@ -6,6 +6,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.nova.cosmicore.client.renderer.item.CItemProperties;
+import net.nova.cosmicore.gui.crusher.AdvancedCrusherScreen;
 import net.nova.cosmicore.gui.crusher.CrusherScreen;
 import net.nova.cosmicore.init.CMenuTypes;
 
@@ -22,5 +23,6 @@ public class CEventBusClientEvents {
     @SubscribeEvent
     public static void registerScreens(RegisterMenuScreensEvent event) {
         event.register(CMenuTypes.CRUSHER_MENU.get(), CrusherScreen::new);
+        event.register(CMenuTypes.ADVANCED_CRUSHER_MENU.get(), AdvancedCrusherScreen::new);
     }
 }
