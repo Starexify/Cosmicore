@@ -24,14 +24,8 @@ public class CrushingRecipes extends CRecipeProvider {
         new CrushingRecipeBuilder(
                 Ingredient.of(CBlocks.ACHONDRITE),
                 Blocks.COBBLESTONE,
-                2
+                3
         ).save(recipeOutput, path + getCrushingRecipeName(Blocks.COBBLESTONE));
-
-        new CrushingRecipeBuilder(
-                Ingredient.of(CBlocks.ACHONDRITE),
-                Items.IRON_INGOT,
-                2
-        ).save(recipeOutput, path + getCrushingRecipeName(Items.IRON_INGOT));
     }
 
 }
