@@ -30,4 +30,5 @@ TBA
 
 <br></br>
 **Follow our progress and discover new and upcoming features on our Twitter page:** <a href="https://x.com/FoxiStar9">X Page</a>
+
 Feel free to include our mod into your modpack.
