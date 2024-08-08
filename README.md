@@ -72,8 +72,12 @@ Cosmicore is a brand-new meteors mod for minecraft, inspired by the nostalgia of
 
 ## Planned Updates
 
-TBA
-
+In the upcoming updates we plan to add:
+- ☄️ **MORE METEORS!!** and **FALLING METEORS** _(not the mod)_
+- More new machines
+- Even more structures
+- Even more materials
+- And more!
 
 ## Social Media
 
