@@ -13,40 +13,41 @@
 <p align="center"><a href="https://minecraft.curseforge.com/projects/cosmicore"><img alt="CurseForge Downloads" src="http://cf.way2muchnoise.eu/full_cosmicore_downloads.svg?badge_style=flat"></a></p>
 
 
-  <table align="center" style="border-collapse: collapse; margin: 20px auto; width: 80%;">
-    <tr>
-        <td align="center" style="border: none; padding: 10px;">
-        <a href="#🗞️-cosmicore-news" style="text-decoration: none; color: #808080; font-size: 1.2em; font-weight: bold; transition: color 0.3s ease;">
-          🗞️ News
-        </a>
-      </td>
-      <td align="center" style="border: none; padding: 10px;">
-        <a href="#ℹ️-about" style="text-decoration: none; color: #00A7E1; font-size: 1.2em; font-weight: bold; transition: color 0.3s ease;">
-          ℹ️ About 
-        </a>
-      </td>
-      <td align="center" style="border: none; padding: 10px;">
-        <a href="#✨-features" style="text-decoration: none; color: #FF4F58; font-size: 1.2em; font-weight: bold; transition: color 0.3s ease;">
-          ✨ Features
-        </a>
-      </td>
-      <td align="center" style="border: none; padding: 10px;">
-        <a href="#🚀-planned-updates" style="text-decoration: none; color: #FF9900; font-size: 1.2em; font-weight: bold; transition: color 0.3s ease;">
-          🚀 Planned Updates
-        </a>
-      </td>
-      <td align="center" style="border: none; padding: 10px;">
-        <a href="#📢-social-media" style="text-decoration: none; color: #9B59B6; font-size: 1.2em; font-weight: bold; transition: color 0.3s ease;">
-          📢 Social Media
-        </a>
-      </td>
-      <td align="center" style="border: none; padding: 10px;">
-        <a href="#📜-license" style="text-decoration: none; color: #00CC44; font-size: 1.2em; font-weight: bold; transition: color 0.3s ease;">
-          📜 License
-        </a>
-      </td>
-    </tr>
-  </table>
+<table align="center" style="border-collapse: collapse; margin: 20px auto; width: 80%;">
+  <tr>
+    <td align="center" style="border: none; padding: 10px;">
+      <a href="#🗞️-cosmicore-news" style="text-decoration: none; color: #808080; font-size: 1.2em; font-weight: bold; transition: color 0.3s ease;">
+        🗞️ News
+      </a>
+    </td>
+    <td align="center" style="border: none; padding: 10px;">
+      <a href="#ℹ️-about" style="text-decoration: none; color: #00A7E1; font-size: 1.2em; font-weight: bold; transition: color 0.3s ease;">
+        ℹ️ About 
+      </a>
+    </td>
+    <td align="center" style="border: none; padding: 10px;">
+      <a href="#✨-features" style="text-decoration: none; color: #FF4F58; font-size: 1.2em; font-weight: bold; transition: color 0.3s ease;">
+        ✨ Features
+      </a>
+    </td>
+    <td align="center" style="border: none; padding: 10px;">
+      <a href="#🚀-planned-updates" style="text-decoration: none; color: #FF9900; font-size: 1.2em; font-weight: bold; transition: color 0.3s ease;">
+        🚀 Planned Updates
+      </a>
+    </td>
+    <td align="center" style="border: none; padding: 10px;">
+      <a href="#📢-social-media" style="text-decoration: none; color: #9B59B6; font-size: 1.2em; font-weight: bold; transition: color 0.3s ease;">
+        📢 Social Media
+      </a>
+    </td>
+    <td align="center" style="border: none; padding: 10px;">
+      <a href="#📜-license" style="text-decoration: none; color: #00CC44; font-size: 1.2em; font-weight: bold; transition: color 0.3s ease;">
+        📜 License
+      </a>
+    </td>
+  </tr>
+</table>
+
 
 # Cosmicore
 
