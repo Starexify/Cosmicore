@@ -62,12 +62,26 @@ Cosmicore is a brand-new meteors mod for minecraft, inspired by the nostalgia of
 
 ## Features
 
-| List of Features      | Description                                                                                           |
-|-----------------------|-------------------------------------------------------------------------------------------------------|
-| 🏛️ **Structures**     | Two **Fallen Meteor Sites** where you can find the new meteors and *lore*. |
-| 🪨 **New Materials**  | **Titanium** and **Infernium** are two new materials. |
-| ⚙️ **Machines**       | **Two New Crushing Machines** are added to crush the meteors to a crust. |
-| ☄️ **METEORS!!**      | Three new types of meteors: **Achnorite**, **Meteorite**, and **Pallasite**. |
+<table align="center" style="border-collapse: collapse;">
+  <tbody>
+    <tr>
+      <td style="padding: 10px; text-align: left; border: none;"><strong>🏛️ Structures</strong></td>
+      <td style="padding: 10px; text-align: left; border: none;">Two <strong>Fallen Meteor Sites</strong> where you can find the new meteors and <em>lore</em>.</td>
+    </tr>
+    <tr>
+      <td style="padding: 10px; text-align: left; border: none;"><strong>🪨 New Materials</strong></td>
+      <td style="padding: 10px; text-align: left; border: none;"><strong>Titanium</strong> and <strong>Infernium</strong> are two new materials.</td>
+    </tr>
+    <tr>
+      <td style="padding: 10px; text-align: left; border: none;"><strong>⚙️ Machines</strong></td>
+      <td style="padding: 10px; text-align: left; border: none;"><strong>Two New Crushing Machines</strong> are added to crush the meteors to a crust.</td>
+    </tr>
+    <tr>
+      <td style="padding: 10px; text-align: left; border: none;"><strong>☄️ METEORS!!</strong></td>
+      <td style="padding: 10px; text-align: left; border: none;">Three new types of meteors: <strong>Achnorite</strong>, <strong>Meteorite</strong>, and <strong>Pallasite</strong>.</td>
+    </tr>
+  </tbody>
+</table>
 
 
 ## Planned Updates
