@@ -1,4 +1,3 @@
-
 <p align="center"><img width=85% src="https://raw.githubusercontent.com/Starexify/Cosmicore/1.21/src/main/resources/cosmicore_logo.png?token=GHSAT0AAAAAACTBPAKN3YXSWJCRIDHMQOYSZVHL2QA"></p>
 
 <p align="center">
@@ -13,11 +12,90 @@
 
 <p align="center"><a href="https://minecraft.curseforge.com/projects/cosmicore"><img alt="CurseForge Downloads" src="http://cf.way2muchnoise.eu/full_cosmicore_downloads.svg?badge_style=flat"></a></p>
 
+
+  <table align="center" style="border-collapse: collapse; margin: 20px auto; width: 80%;">
+    <tr>
+      <td align="center" style="border: none; padding: 10px;">
+        <a href="#about" style="text-decoration: none; color: #00A7E1; font-size: 1.2em; font-weight: bold; transition: color 0.3s ease;">
+          ℹ️ About 
+        </a>
+      </td>
+      <td align="center" style="border: none; padding: 10px;">
+        <a href="#features" style="text-decoration: none; color: #FF4F58; font-size: 1.2em; font-weight: bold; transition: color 0.3s ease;">
+          ✨ Features
+        </a>
+      </td>
+      <td align="center" style="border: none; padding: 10px;">
+        <a href="#planned-updates" style="text-decoration: none; color: #FF9900; font-size: 1.2em; font-weight: bold; transition: color 0.3s ease;">
+          🚀 Planned Updates
+        </a>
+      </td>
+      <td align="center" style="border: none; padding: 10px;">
+        <a href="#license" style="text-decoration: none; color: #00CC44; font-size: 1.2em; font-weight: bold; transition: color 0.3s ease;">
+          📜 License
+        </a>
+      </td>
+      <td align="center" style="border: none; padding: 10px;">
+        <a href="#social-media" style="text-decoration: none; color: #9B59B6; font-size: 1.2em; font-weight: bold; transition: color 0.3s ease;">
+          📢 Social Media
+        </a>
+      </td>
+    </tr>
+  </table>
+
 # Cosmicore
 
-**We're currently in Alpha development and releasing this initial version to gather your feedback!** Your opinions and ideas for the mod are welcomed so let us know what you think!
+⚠️**Please note that this is just an alpha version, so expect that features may be buggy or not fully implemented yet.
+We would appreciate your feedback and ideas as we work on this project!**
+
+## Cosmicore News
+
+Nothing to see here yet
 
 ## About
-Cosmicore is a brand-new meteors mod for minecraft, inspired by the nostalgia of the old Falling Meteors mod, but with a whole lot more.
 
-**Follow our progress and discover new and upcoming features on our Twitter page:** <a href="https://x.com/FoxiStar9">X Page</a>
+Cosmicore is a brand-new meteors mod for minecraft, inspired by the nostalgia of the old Falling Meteors mod, but with a
+whole lot more content.
+
+## Features
+
+<table align="center" style="border-collapse: collapse;">
+  <tbody>
+    <tr>
+      <td style="padding: 10px; text-align: left; border: none;"><strong>🏛️ Structures</strong></td>
+      <td style="padding: 10px; text-align: left; border: none;">Two <strong>Fallen Meteor Sites</strong> where you can find the new meteors and <em>lore</em>.</td>
+    </tr>
+    <tr>
+      <td style="padding: 10px; text-align: left; border: none;"><strong>🪨 New Materials</strong></td>
+      <td style="padding: 10px; text-align: left; border: none;"><strong>Titanium</strong> and <strong>Infernium</strong> are two new materials.</td>
+    </tr>
+    <tr>
+      <td style="padding: 10px; text-align: left; border: none;"><strong>⚙️ Machines</strong></td>
+      <td style="padding: 10px; text-align: left; border: none;"><strong>Two New Crushing Machines</strong> are added to crush the meteors to a crust.</td>
+    </tr>
+    <tr>
+      <td style="padding: 10px; text-align: left; border: none;"><strong>☄️ METEORS!!</strong></td>
+      <td style="padding: 10px; text-align: left; border: none;">Three new types of meteors: <strong>Achnorite</strong>, <strong>Meteorite</strong>, and <strong>Pallasite</strong>.</td>
+    </tr>
+  </tbody>
+</table>
+
+## Planned Updates
+
+In the upcoming updates we plan to add:
+
+- ☄️ **MORE METEORS!!** and **FALLING METEORS** _(not the mod)_
+- Even more structures
+- Even more materials
+- More new machines
+- And more!
+
+## Social Media
+
+**Follow our progress and discover new and upcoming features on our Twitter page:** <a href="https://x.com/FoxiStar9">
+Our X Page</a>
+
+## License
+
+This mod is licensed under the MIT License, allowing for free use, modification, and distribution, meaning you can use
+our mod in your modpacks. For more details, please see the full license included with the mod.
