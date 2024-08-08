@@ -15,6 +15,11 @@
 
   <table align="center" style="border-collapse: collapse; margin: 20px auto; width: 80%;">
     <tr>
+        <td align="center" style="border: none; padding: 10px;">
+        <a href="#cosmicore-news" style="text-decoration: none; color: #808080; font-size: 1.2em; font-weight: bold; transition: color 0.3s ease;">
+          🗞️ News
+        </a>
+      </td>
       <td align="center" style="border: none; padding: 10px;">
         <a href="#about" style="text-decoration: none; color: #00A7E1; font-size: 1.2em; font-weight: bold; transition: color 0.3s ease;">
           ℹ️ About 
@@ -48,16 +53,16 @@
 ⚠️**Please note that this is just an alpha version, so expect that features may be buggy or not fully implemented yet.
 We would appreciate your feedback and ideas as we work on this project!**
 
-## Cosmicore News
+## 🗞️ Cosmicore News
 
 Nothing to see here yet
 
-## About
+## ℹ️ About
 
 Cosmicore is a brand-new meteors mod for minecraft, inspired by the nostalgia of the old Falling Meteors mod, but with a
 whole lot more content.
 
-## Features
+## ✨ Features
 
 <table align="center" style="border-collapse: collapse;">
   <tbody>
@@ -80,7 +85,7 @@ whole lot more content.
   </tbody>
 </table>
 
-## Planned Updates
+## 🚀 Planned Updates
 
 In the upcoming updates we plan to add:
 
@@ -90,12 +95,12 @@ In the upcoming updates we plan to add:
 - More new machines
 - And more!
 
-## Social Media
+## 📢 Social Media
 
 **Follow our progress and discover new and upcoming features on our Twitter page:** <a href="https://x.com/FoxiStar9">
 Our X Page</a>
 
-## License
+## 📜 License
 
 This mod is licensed under the MIT License, allowing for free use, modification, and distribution, meaning you can use
 our mod in your modpacks. For more details, please see the full license included with the mod.
