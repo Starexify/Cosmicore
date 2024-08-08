@@ -31,13 +31,13 @@
         </a>
       </td>
       <td align="center" style="border: none; padding: 10px;">
-        <a href="#license" style="text-decoration: none; color: #00CC44; font-size: 1.2em; font-weight: bold; transition: color 0.3s ease;">
-          📜 License
+        <a href="#social-media" style="text-decoration: none; color: #9B59B6; font-size: 1.2em; font-weight: bold; transition: color 0.3s ease;">
+          📢 Social Media
         </a>
       </td>
       <td align="center" style="border: none; padding: 10px;">
-        <a href="#social-media" style="text-decoration: none; color: #9B59B6; font-size: 1.2em; font-weight: bold; transition: color 0.3s ease;">
-          📢 Social Media
+        <a href="#license" style="text-decoration: none; color: #00CC44; font-size: 1.2em; font-weight: bold; transition: color 0.3s ease;">
+          📜 License
         </a>
       </td>
     </tr>
