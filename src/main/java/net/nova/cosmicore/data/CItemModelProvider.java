@@ -70,7 +70,7 @@ public class CItemModelProvider extends ItemModelProvider {
         String name = getItemName(item);
         getBuilder(name)
                 .parent(getExistingFile(modLoc("item/template_gear")))
-                .texture("0", "item/" + name);
+                .texture("layer0", "item/" + name);
 
     }
 

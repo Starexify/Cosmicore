@@ -5,6 +5,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.ItemLike;
 import net.nova.cosmicore.init.CItems;
@@ -35,6 +36,18 @@ public class CRecipeProvider extends RecipeProvider {
     }
 
     // Recipes
+    protected static void copySmithingTemplate(RecipeOutput pRecipeOutput, ItemLike pTemplate, ItemLike pBaseItem, ItemLike pCopyItem) {
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, pTemplate, 2)
+                .define('#', pCopyItem)
+                .define('C', pBaseItem)
+                .define('S', pTemplate)
+                .pattern("#S#")
+                .pattern("#C#")
+                .pattern("###")
+                .unlockedBy(getHasName(pTemplate), has(pTemplate))
+                .save(pRecipeOutput);
+    }
+
     protected static String getAdvancedCrushingRecipeName(ItemLike pItemLike) {
         return "advanced_crushing_" + getItemName(pItemLike);
     }

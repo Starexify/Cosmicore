@@ -1,6 +1,6 @@
 {
   "parent": "cosmicore:item/template_gear",
   "textures": {
-    "0": "cosmicore:item/iron_gear"
+    "layer0": "cosmicore:item/iron_gear"
   }
 }
