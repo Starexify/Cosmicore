@@ -16,12 +16,12 @@
 <table align="center" style="border-collapse: collapse; margin: 20px auto; width: 80%;">
   <tr>
     <td align="center" style="border: none; padding: 10px;">
-      <a href="#-cosmicore-news" style="text-decoration: none; color: #808080; font-size: 1.2em; font-weight: bold; transition: color 0.3s ease;">
+      <a href="#%EF%B8%8F-cosmicore-news" style="text-decoration: none; color: #808080; font-size: 1.2em; font-weight: bold; transition: color 0.3s ease;">
         🗞️ News
       </a>
     </td>
     <td align="center" style="border: none; padding: 10px;">
-      <a href="#-about" style="text-decoration: none; color: #00A7E1; font-size: 1.2em; font-weight: bold; transition: color 0.3s ease;">
+      <a href="#%E2%84%B9%EF%B8%8F-about" style="text-decoration: none; color: #00A7E1; font-size: 1.2em; font-weight: bold; transition: color 0.3s ease;">
         ℹ️ About 
       </a>
     </td>
