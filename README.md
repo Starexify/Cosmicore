@@ -62,7 +62,12 @@ Cosmicore is a brand-new meteors mod for minecraft, inspired by the nostalgia of
 
 ## Features
 
-TBA
+| List of Features      | Description                                                                                           |
+|-----------------------|-------------------------------------------------------------------------------------------------------|
+| 🏛️ **Structures**     | Two **Fallen Meteor Sites** where you can find the new meteors and *lore*. |
+| 🔧 **New Materials**  | **Titanium** and **Infernium** are two new materials. |
+| ⚙️ **Machines**       | **Two New Crushing Machines** are added to crush the meteors to a crust. |
+| ☄️ **METEORS!!**      | Three new types of meteors: **Achnorite**, **Meteorite**, and **Pallasite**. |
 
 
 ## Planned Updates
