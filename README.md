@@ -10,9 +10,9 @@
 </p>
 
 <p align="center">
-  <a href="https://x.com/FoxiStar9"><img alt="X (formerly Twitter) URL" src="https://img.shields.io/twitter/url?url=https%3A%2F%2Fx.com%2FFoxiStar9&style=for-the-badge&logo=x&logoColor=000000&label=Follow%20Us&color=555555"></a>
-  <a href="https://github.com/Starexify/Cosmicore/issues"><img alt="GitHub Issues" src="https://img.shields.io/github/issues/Starexify/Cosmicore?style=for-the-badge&color=1B3193&logo=paintbrush&logoColor=white"></a>
-  <a href="https://github.com/Starexify/Cosmicore/blob/1.21/LICENSE"><img alt="GitHub License" src="https://img.shields.io/github/license/Starexify/Cosmicore?style=for-the-badge&color=1B3193&logo=paintbrush&logoColor=white"></a>
+  <a href="https://x.com/FoxiStar9"><img alt="X (formerly Twitter) URL" src="https://img.shields.io/twitter/url?url=https%3A%2F%2Fx.com%2FFoxiStar9&style=for-the-badge&logo=x&logoColor=000000&label=Follow%20Us&labelColor=1B3193&color=555555"></a>
+  <a href="https://github.com/Starexify/Cosmicore/issues"><img alt="GitHub Issues" src="https://img.shields.io/github/issues/Starexify/Cosmicore?style=for-the-badge&color=1B3193"></a>
+  <a href="https://github.com/Starexify/Cosmicore/blob/1.21/LICENSE"><img alt="GitHub License" src="https://img.shields.io/github/license/Starexify/Cosmicore?style=for-the-badge&color=1B3193"></a>
 </p>
 
 
@@ -36,11 +36,6 @@
     <td align="center" style="border: none; padding: 10px;">
       <a href="#-planned-updates" style="text-decoration: none; color: #FF9900; font-size: 1.2em; font-weight: bold; transition: color 0.3s ease;">
         🚀 Planned Updates
-      </a>
-    </td>
-    <td align="center" style="border: none; padding: 10px;">
-      <a href="#-social-media" style="text-decoration: none; color: #9B59B6; font-size: 1.2em; font-weight: bold; transition: color 0.3s ease;">
-        📢 Social Media
       </a>
     </td>
     <td align="center" style="border: none; padding: 10px;">
@@ -98,11 +93,6 @@ In the upcoming updates we plan to add:
 - Even more materials
 - More new machines
 - And more!
-
-## 📢 Social Media
-
-**Follow our progress and discover new and upcoming features on our Twitter page:** <a href="https://x.com/FoxiStar9">
-Our X Page</a>
 
 ## 📜 License
 
