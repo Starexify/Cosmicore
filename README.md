@@ -1,4 +1,4 @@
-<p align="center"><img width=85% src="https://raw.githubusercontent.com/Starexify/Cosmicore/1.21/src/main/resources/cosmicore_logo.png?token=GHSAT0AAAAAACTBPAKN3YXSWJCRIDHMQOYSZVHL2QA"></p>
+![Cosmicore Logo](https://raw.githubusercontent.com/Starexify/Cosmicore/1.21/src/main/resources/cosmicore_logo.png?token=GHSAT0AAAAAACTBPAKN3YXSWJCRIDHMQOYSZVHL2QA)
 
 <p align="center">
   <a href="https://minecraft.curseforge.com/projects/cosmicore"><img alt="curseforge" height="56" src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/available/curseforge_vector.svg"></a>
@@ -6,11 +6,13 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/Starexify/Cosmicore/issues"><img alt="GitHub Issues" src="https://custom-icon-badges.demolab.com/github/issues/Starexify/Cosmicore?style=for-the-badge&color=1B3193&logo=paintbrush&logoColor=white"></a>
-  <a href="https://github.com/Starexify/Cosmicore/blob/1.21/LICENSE"><img alt="GitHub License" src="https://custom-icon-badges.demolab.com/github/license/Starexify/Cosmicore?style=for-the-badge&color=1B3193&logo=paintbrush&logoColor=white"></a>
+  <a href="https://github.com/Starexify/Cosmicore/issues"><img alt="GitHub Issues" src="https://img.shields.io/github/issues/Starexify/Cosmicore?style=for-the-badge&color=1B3193&logo=paintbrush&logoColor=white"></a>
+  <a href="https://github.com/Starexify/Cosmicore/blob/1.21/LICENSE"><img alt="GitHub License" src="https://img.shields.io/github/license/Starexify/Cosmicore?style=for-the-badge&color=1B3193&logo=paintbrush&logoColor=white"></a>
 </p>
 
-<p align="center"><a href="https://minecraft.curseforge.com/projects/cosmicore"><img alt="CurseForge Downloads" src="http://cf.way2muchnoise.eu/full_cosmicore_downloads.svg?badge_style=flat"></a></p>
+<p align="center">
+  <a href="https://minecraft.curseforge.com/projects/cosmicore"><a href="https://minecraft.curseforge.com/projects/cosmicore"><img alt="CurseForge Downloads" src="https://img.shields.io/curseforge/dt/1057420?style=for-the-badge&logo=curseforge"></a>
+</p>
 
 
 <table align="center" style="border-collapse: collapse; margin: 20px auto; width: 80%;">
