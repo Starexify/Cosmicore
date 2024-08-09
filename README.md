@@ -10,7 +10,7 @@
 </p>
 
 <p align="center">
-  <a href="https://x.com/FoxiStar9"><img alt="X (formerly Twitter) URL" src="https://img.shields.io/twitter/url?url=https%3A%2F%2Fx.com%2FFoxiStar9&style=for-the-badge&logo=x&logoColor=000000&label=Follow%20Us&labelColor=1B3193&color=555555"></a>
+  <a href="https://x.com/FoxiStar9"><img alt="X (formerly Twitter) URL" src="https://img.shields.io/twitter/url?url=https%3A%2F%2Fx.com%2FFoxiStar9&style=for-the-badge&logo=x&logoColor=000000&label=Follow%20Us&color=555555"></a>
   <a href="https://github.com/Starexify/Cosmicore/issues"><img alt="GitHub Issues" src="https://img.shields.io/github/issues/Starexify/Cosmicore?style=for-the-badge&color=1B3193"></a>
   <a href="https://github.com/Starexify/Cosmicore/blob/1.21/LICENSE"><img alt="GitHub License" src="https://img.shields.io/github/license/Starexify/Cosmicore?style=for-the-badge&color=1B3193"></a>
 </p>
