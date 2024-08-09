@@ -30,28 +30,25 @@ public class Structures {
         HolderGetter<Biome> holdergetter = pContext.lookup(Registries.BIOME);
         HolderGetter<StructureTemplatePool> holdergetter1 = pContext.lookup(Registries.TEMPLATE_POOL);
 
-        pContext.register(
-                METEOR_SITE_1,
-                new JigsawStructure(
-                        new Structure.StructureSettings.Builder(holdergetter.getOrThrow(BiomeTags.HAS_PILLAGER_OUTPOST))
-                                .spawnOverrides(
-                                        Map.of(
-                                                MobCategory.MONSTER,
-                                                new StructureSpawnOverride(
-                                                        StructureSpawnOverride.BoundingBoxType.STRUCTURE,
-                                                        WeightedRandomList.create(new MobSpawnSettings.SpawnerData(EntityType.PILLAGER, 1, 1, 1))
-                                                )
+        pContext.register(METEOR_SITE_1, new JigsawStructure(
+                new Structure.StructureSettings.Builder(holdergetter.getOrThrow(BiomeTags.HAS_PILLAGER_OUTPOST))
+                        .spawnOverrides(
+                                Map.of(
+                                        MobCategory.MONSTER,
+                                        new StructureSpawnOverride(
+                                                StructureSpawnOverride.BoundingBoxType.STRUCTURE,
+                                                WeightedRandomList.create(new MobSpawnSettings.SpawnerData(EntityType.PILLAGER, 1, 1, 1))
                                         )
                                 )
-                                .terrainAdapation(TerrainAdjustment.BEARD_THIN)
-                                .build(),
-                        holdergetter1.getOrThrow(PillagerOutpostPools.START),
-                        7,
-                        ConstantHeight.of(VerticalAnchor.absolute(0)),
-                        true,
-                        Heightmap.Types.WORLD_SURFACE_WG
-                )
-        );
+                        )
+                        .terrainAdapation(TerrainAdjustment.BEARD_THIN)
+                        .build(),
+                holdergetter1.getOrThrow(PillagerOutpostPools.START),
+                7,
+                ConstantHeight.of(VerticalAnchor.absolute(0)),
+                true,
+                Heightmap.Types.WORLD_SURFACE_WG
+        ));
 
     }
 
