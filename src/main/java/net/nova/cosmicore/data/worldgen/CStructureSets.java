@@ -42,7 +42,7 @@ public class CStructureSets {
                         Vec3i.ZERO,
                         StructurePlacement.FrequencyReductionMethod.LEGACY_TYPE_1,
                         0.2F,
-                        165745296,
+                        165745297,
                         Optional.of(new StructurePlacement.ExclusionZone(reference, 10)),
                         32,
                         8,

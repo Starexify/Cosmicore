@@ -5,6 +5,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.core.WritableRegistry;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.loot.LootTableProvider;
+import net.minecraft.data.loot.packs.VanillaChestLoot;
 import net.minecraft.util.ProblemReporter;
 import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import net.minecraft.world.level.storage.loot.LootTable;
@@ -21,7 +22,10 @@ import static net.nova.cosmicore.Cosmicore.MODID;
 public class CLootTableProvider extends LootTableProvider {
 
     public CLootTableProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
-        super(output, Set.of(), List.of(new SubProviderEntry(BlockLootTables::new, LootContextParamSets.BLOCK)), registries);
+        super(output, Set.of(), List.of(
+                new SubProviderEntry(BlockLootTables::new, LootContextParamSets.BLOCK),
+                new SubProviderEntry(ChestLoot::new, LootContextParamSets.CHEST)
+        ), registries);
     }
 
     @Override
