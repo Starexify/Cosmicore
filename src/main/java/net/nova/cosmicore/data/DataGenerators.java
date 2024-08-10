@@ -10,6 +10,7 @@ import net.neoforged.neoforge.data.event.GatherDataEvent;
 import net.nova.cosmicore.Cosmicore;
 import net.nova.cosmicore.data.loot_table.CLootTableProvider;
 import net.nova.cosmicore.data.recipe.CRecipeProvider;
+import net.nova.cosmicore.data.tags.CBiomeTagsProvider;
 import net.nova.cosmicore.data.tags.CBlockTagsProvider;
 import net.nova.cosmicore.data.tags.CItemTagsProvider;
 
@@ -35,6 +36,7 @@ public class DataGenerators {
             CBlockTagsProvider modBlockTagsProvider = new CBlockTagsProvider(output, lookupProvider, existingFileHelper);
             generator.addProvider(true, modBlockTagsProvider);
             generator.addProvider(true, new CItemTagsProvider(output, lookupProvider, modBlockTagsProvider, existingFileHelper));
+            generator.addProvider(true, new CBiomeTagsProvider(output, lookupProvider, existingFileHelper));
 
             generator.addProvider(true, new AtlasesProvider(output, lookupProvider, existingFileHelper));
 
