@@ -6,7 +6,6 @@ import net.minecraft.core.Vec3i;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.levelgen.structure.BuiltinStructureSets;
 import net.minecraft.world.level.levelgen.structure.BuiltinStructures;
 import net.minecraft.world.level.levelgen.structure.Structure;
@@ -38,16 +37,18 @@ public class CStructureSets {
                 )
         );
 
-        pContext.register(METEOR_SITE_1, new StructureSet(holdergetter.getOrThrow(CStructures.METEOR_SITE_1), new RandomSpreadStructurePlacement(
-                Vec3i.ZERO,
-                StructurePlacement.FrequencyReductionMethod.LEGACY_TYPE_1,
-                0.2F,
-                165745296,
-                Optional.of(new StructurePlacement.ExclusionZone(reference, 10)),
-                32,
-                8,
-                RandomSpreadType.LINEAR
-        )));
+        pContext.register(METEOR_SITE_1, new StructureSet(holdergetter.getOrThrow(CStructures.METEOR_SITE_1),
+                new RandomSpreadStructurePlacement(
+                        Vec3i.ZERO,
+                        StructurePlacement.FrequencyReductionMethod.LEGACY_TYPE_1,
+                        0.2F,
+                        165745296,
+                        Optional.of(new StructurePlacement.ExclusionZone(reference, 10)),
+                        32,
+                        8,
+                        RandomSpreadType.LINEAR
+                )
+        ));
 
     }
 
