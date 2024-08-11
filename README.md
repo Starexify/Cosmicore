@@ -47,11 +47,12 @@
   </tr>
 </table>
 
-
-# Cosmicore
-
-⚠️**Please note that this is just an alpha version, so expect that features may be buggy or not fully implemented yet.
-We would appreciate your feedback and ideas as we work on this project!**
+<p align="center">
+    <strong>
+        ⚠️Please note that this is just an alpha version, so expect that features may be buggy or not fully implemented yet.
+        We would appreciate your feedback and ideas as we work on this project!
+    </strong>
+</p>
 
 ## 🗞️ Cosmicore News
 
