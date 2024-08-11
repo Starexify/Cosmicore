@@ -54,7 +54,7 @@ We would appreciate your feedback and ideas as we work on this project!**
 
 ## 🗞️ Cosmicore News
 
-Nothing to see here yet
+Version 1.0.0-alpha RELEASED!
 
 ## ℹ️ About
 
