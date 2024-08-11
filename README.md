@@ -61,7 +61,7 @@ Version 1.0.0-alpha RELEASED!
 ## ℹ️ About
 
 Cosmicore is a brand-new meteors mod for minecraft, inspired by the nostalgia of the old Falling Meteors mod, but with a
-whole lot more content.
+whole more content.
 
 ## ✨ Features
 
