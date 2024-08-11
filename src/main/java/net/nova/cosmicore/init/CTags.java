@@ -15,6 +15,8 @@ public class CTags {
 
     public static class BiomeTags {
         public static final TagKey<Biome> HAS_METEOR_SITE = create("has_structure/meteor_site");
+        public static final TagKey<Biome> HAS_DESERT_METEOR_SITE = create("has_structure/desert_meteor_site");
+        public static final TagKey<Biome> HAS_BADLANDS_METEOR_SITE = create("has_structure/badlands_meteor_site");
     }
 
     public static class ChestLootTags {

@@ -17,17 +17,38 @@ import net.nova.cosmicore.data.worldgen.meteor_site.MeteorSitePools;
 import net.nova.cosmicore.init.CTags;
 
 public class CStructures {
-    public static ResourceKey<Structure> METEOR_SITE_1 = createKey("meteor_site_1");
+    public static ResourceKey<Structure> METEOR_SITE = createKey("meteor_site");
+    public static ResourceKey<Structure> DESERT_METEOR_SITE = createKey("desert_meteor_site");
+    public static ResourceKey<Structure> BADLANDS_METEOR_SITE = createKey("badlands_meteor_site");
 
     public static void bootstrap(BootstrapContext<Structure> pContext) {
         HolderGetter<Biome> holdergetter = pContext.lookup(Registries.BIOME);
         HolderGetter<StructureTemplatePool> holdergetter1 = pContext.lookup(Registries.TEMPLATE_POOL);
 
-        pContext.register(METEOR_SITE_1, new JigsawStructure(
+        pContext.register(METEOR_SITE, new JigsawStructure(
                 new Structure.StructureSettings.Builder(holdergetter.getOrThrow(CTags.BiomeTags.HAS_METEOR_SITE))
-                        .terrainAdapation(TerrainAdjustment.BEARD_THIN)
-                        .build(),
-                holdergetter1.getOrThrow(MeteorSitePools.START),
+                        .terrainAdapation(TerrainAdjustment.BEARD_THIN).build(),
+                holdergetter1.getOrThrow(MeteorSitePools.METEOR_SITE),
+                7,
+                ConstantHeight.of(VerticalAnchor.absolute(0)),
+                true,
+                Heightmap.Types.WORLD_SURFACE_WG
+        ));
+
+        pContext.register(DESERT_METEOR_SITE, new JigsawStructure(
+                new Structure.StructureSettings.Builder(holdergetter.getOrThrow(CTags.BiomeTags.HAS_DESERT_METEOR_SITE))
+                        .terrainAdapation(TerrainAdjustment.BEARD_THIN).build(),
+                holdergetter1.getOrThrow(MeteorSitePools.DESERT_METEOR_SITE),
+                7,
+                ConstantHeight.of(VerticalAnchor.absolute(0)),
+                true,
+                Heightmap.Types.WORLD_SURFACE_WG
+        ));
+
+        pContext.register(BADLANDS_METEOR_SITE, new JigsawStructure(
+                new Structure.StructureSettings.Builder(holdergetter.getOrThrow(CTags.BiomeTags.HAS_BADLANDS_METEOR_SITE))
+                        .terrainAdapation(TerrainAdjustment.BEARD_THIN).build(),
+                holdergetter1.getOrThrow(MeteorSitePools.BADLANDS_METEOR_SITE),
                 7,
                 ConstantHeight.of(VerticalAnchor.absolute(0)),
                 true,

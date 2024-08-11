@@ -8,7 +8,7 @@
   "start_height": {
     "absolute": 0
   },
-  "start_pool": "cosmicore:meteor_site_1/base_plates",
+  "start_pool": "cosmicore:meteor_site/base_plates",
   "step": "surface_structures",
   "terrain_adaptation": "beard_thin",
   "use_expansion_hack": true

@@ -19,7 +19,9 @@ import java.util.List;
 import java.util.Optional;
 
 public class CStructureSets {
-    public static final ResourceKey<StructureSet> METEOR_SITE_1 = register("meteor_site_1");
+    public static final ResourceKey<StructureSet> METEOR_SITE = register("meteor_site");
+    public static final ResourceKey<StructureSet> DESERT_METEOR_SITE = register("desert_meteor_site");
+    public static final ResourceKey<StructureSet> BADLANDS_METEOR_SITE = register("badlands_meteor_site");
 
     public static void bootstrap(BootstrapContext<StructureSet> pContext) {
         HolderGetter<Structure> holdergetter = pContext.lookup(Registries.STRUCTURE);
@@ -37,7 +39,33 @@ public class CStructureSets {
                 )
         );
 
-        pContext.register(METEOR_SITE_1, new StructureSet(holdergetter.getOrThrow(CStructures.METEOR_SITE_1),
+        pContext.register(METEOR_SITE, new StructureSet(holdergetter.getOrThrow(CStructures.METEOR_SITE),
+                new RandomSpreadStructurePlacement(
+                        Vec3i.ZERO,
+                        StructurePlacement.FrequencyReductionMethod.LEGACY_TYPE_1,
+                        0.2F,
+                        165745297,
+                        Optional.of(new StructurePlacement.ExclusionZone(reference, 10)),
+                        32,
+                        8,
+                        RandomSpreadType.LINEAR
+                )
+        ));
+
+        pContext.register(DESERT_METEOR_SITE, new StructureSet(holdergetter.getOrThrow(CStructures.DESERT_METEOR_SITE),
+                new RandomSpreadStructurePlacement(
+                        Vec3i.ZERO,
+                        StructurePlacement.FrequencyReductionMethod.LEGACY_TYPE_1,
+                        0.2F,
+                        165745297,
+                        Optional.of(new StructurePlacement.ExclusionZone(reference, 10)),
+                        32,
+                        8,
+                        RandomSpreadType.LINEAR
+                )
+        ));
+
+        pContext.register(BADLANDS_METEOR_SITE, new StructureSet(holdergetter.getOrThrow(CStructures.BADLANDS_METEOR_SITE),
                 new RandomSpreadStructurePlacement(
                         Vec3i.ZERO,
                         StructurePlacement.FrequencyReductionMethod.LEGACY_TYPE_1,

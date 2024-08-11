@@ -13,27 +13,45 @@ import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
 import net.nova.cosmicore.data.worldgen.StructurePools;
 
 public class MeteorSitePools {
-    public static final ResourceKey<StructureTemplatePool> START = StructurePools.createKey("meteor_site_1/base_plates");
+    public static final ResourceKey<StructureTemplatePool> METEOR_SITE = StructurePools.createKey("meteor_site/base_plates");
+    public static final ResourceKey<StructureTemplatePool> DESERT_METEOR_SITE = StructurePools.createKey("desert_meteor_site/base_plates");
+    public static final ResourceKey<StructureTemplatePool> BADLANDS_METEOR_SITE = StructurePools.createKey("badlands_meteor_site/base_plates");
 
     public static void bootstrap(BootstrapContext<StructureTemplatePool> pContext) {
         HolderGetter<StructureTemplatePool> holdergetter = pContext.lookup(Registries.TEMPLATE_POOL);
         Holder<StructureTemplatePool> holder = holdergetter.getOrThrow(Pools.EMPTY);
 
-        // Base Plate
-        pContext.register(START, new StructureTemplatePool(holder, ImmutableList.of(
-                        Pair.of(StructurePoolElement.legacy("cosmicore:meteor_site_1/base_plate"), 1)
+        // Normal Meteor Site
+        pContext.register(METEOR_SITE, new StructureTemplatePool(holder, ImmutableList.of(
+                        Pair.of(StructurePoolElement.legacy("cosmicore:meteor_site/base_plate"), 1)
+                ), StructureTemplatePool.Projection.RIGID)
+        );
+        StructurePools.register(pContext, "meteor_site/towers", new StructureTemplatePool(holder, ImmutableList.of(
+                        Pair.of(StructurePoolElement.legacy("cosmicore:meteor_site/site_watchtower"), 1)
+                ), StructureTemplatePool.Projection.RIGID)
+        );
+        StructurePools.register(pContext, "meteor_site/meteor", new StructureTemplatePool(holder, ImmutableList.of(
+                        Pair.of(StructurePoolElement.legacy("cosmicore:meteor_site/meteor"), 1)
                 ), StructureTemplatePool.Projection.RIGID)
         );
 
-        // Watchtower
-        StructurePools.register(pContext, "meteor_site_1/towers", new StructureTemplatePool(holder, ImmutableList.of(
-                        Pair.of(StructurePoolElement.legacy("cosmicore:meteor_site_1/site_watchtower"), 1)
+        // Desert Meteor Site
+        pContext.register(DESERT_METEOR_SITE, new StructureTemplatePool(holder, ImmutableList.of(
+                        Pair.of(StructurePoolElement.legacy("cosmicore:desert_meteor_site/base_plate"), 1)
+                ), StructureTemplatePool.Projection.RIGID)
+        );
+        StructurePools.register(pContext, "desert_meteor_site/meteor", new StructureTemplatePool(holder, ImmutableList.of(
+                        Pair.of(StructurePoolElement.legacy("cosmicore:desert_meteor_site/desert_meteor"), 1)
                 ), StructureTemplatePool.Projection.RIGID)
         );
 
-        // Fallen Meteor
-        StructurePools.register(pContext, "meteor_site_1/meteor", new StructureTemplatePool(holder, ImmutableList.of(
-                        Pair.of(StructurePoolElement.legacy("cosmicore:meteor_site_1/meteor_site"), 1)
+        // Desert Meteor Site
+        pContext.register(BADLANDS_METEOR_SITE, new StructureTemplatePool(holder, ImmutableList.of(
+                        Pair.of(StructurePoolElement.legacy("cosmicore:badlands_meteor_site/base_plate"), 1)
+                ), StructureTemplatePool.Projection.RIGID)
+        );
+        StructurePools.register(pContext, "badlands_meteor_site/meteor", new StructureTemplatePool(holder, ImmutableList.of(
+                        Pair.of(StructurePoolElement.legacy("cosmicore:badlands_meteor_site/badlands_meteor"), 1)
                 ), StructureTemplatePool.Projection.RIGID)
         );
     }

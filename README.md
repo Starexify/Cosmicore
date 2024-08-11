@@ -34,8 +34,8 @@
       </a>
     </td>
     <td align="center" style="border: none; padding: 10px;">
-      <a href="#-planned-updates" style="text-decoration: none; color: #FF9900; font-size: 1.2em; font-weight: bold; transition: color 0.3s ease;">
-        🚀 Planned Updates
+      <a href="##%EF%B8%8F-planned-updates" style="text-decoration: none; color: #FF9900; font-size: 1.2em; font-weight: bold; transition: color 0.3s ease;">
+        🗓️ Planned Updates
       </a>
     </td>
     <td align="center" style="border: none; padding: 10px;">
@@ -67,7 +67,7 @@ whole lot more content.
   <tbody>
     <tr>
       <td style="padding: 10px; text-align: left; border: none;"><strong>🏛️ Structures</strong></td>
-      <td style="padding: 10px; text-align: left; border: none;">Two <strong>Fallen Meteor Sites</strong> where you can find the new meteors and <em>lore</em>.</td>
+      <td style="padding: 10px; text-align: left; border: none;">Three <strong>Fallen Meteor Sites</strong> where you can find the new meteors and <em>lore</em>.</td>
     </tr>
     <tr>
       <td style="padding: 10px; text-align: left; border: none;"><strong>🪨 New Materials</strong></td>
@@ -84,7 +84,7 @@ whole lot more content.
   </tbody>
 </table>
 
-## 🚀 Planned Updates
+## 🗓️ Planned Updates
 
 In the upcoming updates we plan to add:
 

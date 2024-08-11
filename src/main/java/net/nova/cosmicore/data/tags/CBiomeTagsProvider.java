@@ -20,8 +20,15 @@ public class CBiomeTagsProvider extends BiomeTagsProvider {
     @Override
     protected void addTags(HolderLookup.Provider pProvider) {
         tag(CTags.BiomeTags.HAS_METEOR_SITE).add(
-                Biomes.PLAINS
+                Biomes.PLAINS, Biomes.SNOWY_PLAINS, Biomes.SAVANNA, Biomes.SAVANNA_PLATEAU
         );
 
+        tag(CTags.BiomeTags.HAS_DESERT_METEOR_SITE).add(
+                Biomes.DESERT
+        );
+
+        tag(CTags.BiomeTags.HAS_BADLANDS_METEOR_SITE).add(
+                Biomes.BADLANDS, Biomes.WOODED_BADLANDS
+        );
     }
 }

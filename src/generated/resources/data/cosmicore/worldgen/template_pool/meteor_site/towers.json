@@ -3,7 +3,7 @@
     {
       "element": {
         "element_type": "minecraft:legacy_single_pool_element",
-        "location": "cosmicore:meteor_site_1/base_plate",
+        "location": "cosmicore:meteor_site/site_watchtower",
         "processors": {
           "processors": []
         },
