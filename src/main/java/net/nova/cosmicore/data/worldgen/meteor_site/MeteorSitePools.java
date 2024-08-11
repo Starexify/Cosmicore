@@ -40,7 +40,7 @@ public class MeteorSitePools {
                         Pair.of(StructurePoolElement.legacy("cosmicore:desert_meteor_site/base_plate"), 1)
                 ), StructureTemplatePool.Projection.RIGID)
         );
-        StructurePools.register(pContext, "desert_meteor_site/meteor", new StructureTemplatePool(holder, ImmutableList.of(
+        StructurePools.register(pContext, "desert_meteor_site/desert_meteor", new StructureTemplatePool(holder, ImmutableList.of(
                         Pair.of(StructurePoolElement.legacy("cosmicore:desert_meteor_site/desert_meteor"), 1)
                 ), StructureTemplatePool.Projection.RIGID)
         );
@@ -50,7 +50,7 @@ public class MeteorSitePools {
                         Pair.of(StructurePoolElement.legacy("cosmicore:badlands_meteor_site/base_plate"), 1)
                 ), StructureTemplatePool.Projection.RIGID)
         );
-        StructurePools.register(pContext, "badlands_meteor_site/meteor", new StructureTemplatePool(holder, ImmutableList.of(
+        StructurePools.register(pContext, "badlands_meteor_site/badlands_meteor", new StructureTemplatePool(holder, ImmutableList.of(
                         Pair.of(StructurePoolElement.legacy("cosmicore:badlands_meteor_site/badlands_meteor"), 1)
                 ), StructureTemplatePool.Projection.RIGID)
         );
