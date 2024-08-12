@@ -1,12 +1,12 @@
 ![Cosmicore Logo](https://raw.githubusercontent.com/Starexify/Cosmicore/1.21/src/main/resources/cosmicore_logo.png?token=GHSAT0AAAAAACTBPAKN3YXSWJCRIDHMQOYSZVHL2QA)
 
 <p align="center">
-  <a href="https://minecraft.curseforge.com/projects/cosmicore"><img alt="curseforge" height="56" src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/available/curseforge_vector.svg"></a>
+  <a href="https://www.curseforge.com/minecraft/mc-mods/cosmicore"><img alt="curseforge" height="56" src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/available/curseforge_vector.svg"></a>
   <a href="https://modrinth.com/mod/cosmicore"><img alt="modrinth" height="56" src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/available/modrinth_vector.svg"></a>
 </p>
 
 <p align="center">
-  <a href="https://minecraft.curseforge.com/projects/cosmicore"><img alt="CurseForge Downloads" src="https://img.shields.io/curseforge/dt/1057420?style=for-the-badge&logo=curseforge&color=1B3193"></a>
+  <a href="https://www.curseforge.com/minecraft/mc-mods/cosmicore"><img alt="CurseForge Downloads" src="https://img.shields.io/curseforge/dt/1057420?style=for-the-badge&logo=curseforge&color=1B3193"></a>
   <a href="https://modrinth.com/mod/cosmicore"><img alt="Modrinth Downloads" src="https://img.shields.io/modrinth/dt/I6sYca4V?style=for-the-badge&logo=modrinth&color=1B3193"></a>
 </p>
 
