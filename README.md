@@ -6,8 +6,8 @@
 </p>
 
 <p align="center">
-  <a href="https://minecraft.curseforge.com/projects/cosmicore"><img alt="CurseForge Downloads" src="https://img.shields.io/curseforge/dt/1057420?style=for-the-badge&logo=curseforge"></a>
-  <a href="https://modrinth.com/mod/cosmicore"><img alt="Modrinth Downloads" src="https://img.shields.io/modrinth/dt/I6sYca4V?style=for-the-badge&logo=modrinth"></a>
+  <a href="https://minecraft.curseforge.com/projects/cosmicore"><img alt="CurseForge Downloads" src="https://img.shields.io/curseforge/dt/1057420?style=for-the-badge&logo=curseforge&color=1B3193"></a>
+  <a href="https://modrinth.com/mod/cosmicore"><img alt="Modrinth Downloads" src="https://img.shields.io/modrinth/dt/I6sYca4V?style=for-the-badge&logo=modrinth&color=1B3193"></a>
 </p>
 
 <p align="center">
