@@ -59,7 +59,6 @@ public class BaseCrusherMenu extends AbstractContainerMenu {
         return maxProgress != 0 && progress != 0 ? progress * progressArrowSize / maxProgress : 0;
     }
 
-
     @Override
     public ItemStack quickMoveStack(Player pPlayer, int pIndex) {
         return null;
