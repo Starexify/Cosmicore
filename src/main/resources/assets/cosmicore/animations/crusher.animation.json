@@ -1,0 +1,45 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"crushing": {
+			"animation_length": 20,
+			"bones": {
+				"head": {
+					"position": {
+						"0.0": {
+							"vector": [0, 0, 0],
+							"easing": "linear"
+						},
+						"19.0": {
+							"vector": [0, -5, 0],
+							"easing": "easeOutSine"
+						},
+						"20.0": {
+							"vector": [0, 0, 0],
+							"easing": "easeInBack",
+							"easingArgs": []
+						}
+					}
+				},
+				"neck": {
+					"position": {
+						"0.0": {
+							"vector": [0, 0, 0],
+							"easing": "linear"
+						},
+						"19.0": {
+							"vector": [0, -2, 0],
+							"easing": "easeOutSine"
+						},
+						"20.0": {
+							"vector": [0, 0, 0],
+							"easing": "easeInBack",
+							"easingArgs": []
+						}
+					}
+				}
+			}
+		}
+	},
+	"azurelib_format_version": 2
+}

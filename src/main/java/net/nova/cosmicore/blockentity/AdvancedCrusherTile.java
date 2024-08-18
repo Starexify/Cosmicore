@@ -1,5 +1,12 @@
 package net.nova.cosmicore.blockentity;
 
+import mod.azure.azurelib.common.api.common.animatable.GeoBlockEntity;
+import mod.azure.azurelib.core.animatable.instance.AnimatableInstanceCache;
+import mod.azure.azurelib.core.animatable.instance.SingletonAnimatableInstanceCache;
+import mod.azure.azurelib.core.animation.AnimatableManager;
+import mod.azure.azurelib.core.animation.AnimationController;
+import mod.azure.azurelib.core.animation.RawAnimation;
+import mod.azure.azurelib.core.object.PlayState;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.chat.Component;
@@ -17,9 +24,9 @@ import net.nova.cosmicore.recipe.crusher.AdvancedCrushingRecipe;
 
 import java.util.Optional;
 
-public class AdvancedCrusherTile extends BaseCrusherTile {
+public class AdvancedCrusherTile extends BaseCrusherTile implements GeoBlockEntity {
+    private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
     private static final int ADDITIONAL_SLOT = 1;
-
     protected final ContainerData dataAccess = new ContainerData() {
         @Override
         public int get(int pIndex) {
@@ -59,7 +66,7 @@ public class AdvancedCrusherTile extends BaseCrusherTile {
 
     // Crafting stuff
     @Override
-    public void hasIgnis() { // TODO: Add tags?
+    public void hasIgnis() {
         boolean hasFuel = isFuel(this.inventory.get(FUEL_SLOT).getItem().getDefaultInstance());
         if (hasFuel && !isCharged()) {
             int chargeTime = 11;
@@ -70,6 +77,30 @@ public class AdvancedCrusherTile extends BaseCrusherTile {
         }
     }
 
+    // Crushing Animation
+    @Override
+    public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
+        controllers.add(new AnimationController<>(this, event -> {
+            if (isCrafting()) { // TODO: Make it only if the block has charge
+                return event.setAndContinue(RawAnimation.begin().thenLoop("crushing"));
+            } else {
+                event.getController().forceAnimationReset();
+                return PlayState.STOP;
+            }
+        }));
+    }
+
+    public boolean isCrafting() {
+        return hasRecipe() && isFuel(this.inventory.get(FUEL_SLOT).getItem().getDefaultInstance());
+    }
+
+    // AzureLib Stuff
+    @Override
+    public AnimatableInstanceCache getAnimatableInstanceCache() {
+        return cache;
+    }
+
+    // Crafting stuff
     @Override
     public boolean hasRecipe() {
         Optional<RecipeHolder<AdvancedCrushingRecipe>> recipe = getCurrentRecipe(this.inventory.getFirst());

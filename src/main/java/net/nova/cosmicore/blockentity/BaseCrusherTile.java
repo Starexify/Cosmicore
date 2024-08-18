@@ -23,7 +23,7 @@ public class BaseCrusherTile extends BaseContainerBlockEntity {
     public int ignisCharge;
     public int ignisPower;
     public int crushingProgress;
-    public int maxCrushingProgress = 400; // TODO: Change progress with correct
+    public int maxCrushingProgress = 400;
 
     public int FUEL_SLOT;
     public int RESULT_SLOT_START;
@@ -34,40 +34,41 @@ public class BaseCrusherTile extends BaseContainerBlockEntity {
     }
 
     // Crafting Stuff
-    public boolean isCharged() {
-        return this.ignisCharge > 0;
-    }
 
     // Logic for GUI
-    public void serverTick(Level pLevel, BlockPos pPos, BlockState pState) {
+    public void serverTick(Level level, BlockPos pos, BlockState state) {
         hasIgnis();
-        if (isCharged()) {
-            if (hasRecipe()) {
-                this.crushingProgress++;
-                setChanged(pLevel, pPos, pState);
+        if (isCharged() && hasRecipe()) {
+            this.crushingProgress++;
+            setChanged(level, pos, state);
 
-                if (hasProgressFinished()) {
-                    craftItem();
-                    resetProgress();
-                    this.ignisCharge--;
-                }
-            } else {
+            if (hasProgressFinished()) {
+                craftItem();
                 resetProgress();
+                this.ignisCharge--;
             }
         } else {
             resetProgress();
         }
     }
 
+    public boolean isCharged() {
+        return this.ignisCharge > 0;
+    }
+
     public boolean isFuel(ItemStack item) {
         return item.is(CItems.INFERNIUM_CRYSTAL);
     }
 
-    public void hasIgnis() {}
+    public void hasIgnis() {
+    }
 
-    public boolean hasRecipe() {return false;}
+    public boolean hasRecipe() {
+        return false;
+    }
 
-    public void craftItem() {}
+    public void craftItem() {
+    }
 
     public void insertOrMergeResult(ItemStack result) {
         for (int i = RESULT_SLOT_START; i <= RESULT_SLOT_END; i++) {

@@ -16,7 +16,7 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
-public class BaseCrusher extends BaseEntityBlock {
+public class BaseCrusher extends BaseEntityBlock  {
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
     private static final VoxelShape SHAPE = makeShape();
 
@@ -65,7 +65,7 @@ public class BaseCrusher extends BaseEntityBlock {
 
     @Override
     protected RenderShape getRenderShape(BlockState pState) {
-        return RenderShape.MODEL;
+        return RenderShape.ENTITYBLOCK_ANIMATED;
     }
 
     @Override

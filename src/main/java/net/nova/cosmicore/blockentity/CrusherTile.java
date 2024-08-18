@@ -1,5 +1,14 @@
 package net.nova.cosmicore.blockentity;
 
+import mod.azure.azurelib.common.api.common.animatable.GeoBlockEntity;
+import mod.azure.azurelib.common.internal.client.util.RenderUtils;
+import mod.azure.azurelib.common.internal.common.animatable.SingletonGeoAnimatable;
+import mod.azure.azurelib.core.animatable.instance.AnimatableInstanceCache;
+import mod.azure.azurelib.core.animatable.instance.SingletonAnimatableInstanceCache;
+import mod.azure.azurelib.core.animation.AnimatableManager;
+import mod.azure.azurelib.core.animation.AnimationController;
+import mod.azure.azurelib.core.animation.RawAnimation;
+import mod.azure.azurelib.core.object.PlayState;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.chat.Component;
@@ -9,6 +18,7 @@ import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.SingleRecipeInput;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.nova.cosmicore.gui.crusher.CrusherMenu;
 import net.nova.cosmicore.init.CBlockEntities;
@@ -17,7 +27,8 @@ import net.nova.cosmicore.recipe.crusher.CrushingRecipe;
 
 import java.util.Optional;
 
-public class CrusherTile extends BaseCrusherTile {
+public class CrusherTile extends BaseCrusherTile implements GeoBlockEntity {
+    private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
     protected final ContainerData dataAccess = new ContainerData() {
         @Override
         public int get(int pIndex) {
@@ -53,11 +64,35 @@ public class CrusherTile extends BaseCrusherTile {
         this.RESULT_SLOT_END = 7;
 
         this.inventory = NonNullList.withSize(8, ItemStack.EMPTY);
+        SingletonGeoAnimatable.registerSyncedAnimatable(this);
+    }
+
+    // Crushing Animation
+    @Override
+    public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
+        controllers.add(new AnimationController<>(this, event -> {
+            if (isCrafting()) { // TODO: Make it only if the block has charge
+                return event.setAndContinue(RawAnimation.begin().thenLoop("crushing"));
+            } else {
+                event.getController().forceAnimationReset();
+                return PlayState.STOP;
+            }
+        }));
+    }
+
+    public boolean isCrafting() {
+        return hasRecipe() && isFuel(this.inventory.get(FUEL_SLOT).getItem().getDefaultInstance());
+    }
+
+    // AzureLib Stuff
+    @Override
+    public AnimatableInstanceCache getAnimatableInstanceCache() {
+        return cache;
     }
 
     // Crafting stuff
     @Override
-    public void hasIgnis() { // TODO: Add tags?
+    public void hasIgnis() {
         boolean hasFuel = isFuel(this.inventory.get(FUEL_SLOT).getItem().getDefaultInstance());
         if (hasFuel && !isCharged()) {
             int chargeTime = 11;

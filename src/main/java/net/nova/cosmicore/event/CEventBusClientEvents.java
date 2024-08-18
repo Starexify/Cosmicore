@@ -1,13 +1,17 @@
 package net.nova.cosmicore.event;
 
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
+import net.nova.cosmicore.client.renderer.block.AdvancedCrusherTileRenderer;
+import net.nova.cosmicore.client.renderer.block.CrusherTileRenderer;
 import net.nova.cosmicore.client.renderer.item.CItemProperties;
 import net.nova.cosmicore.gui.crusher.AdvancedCrusherScreen;
 import net.nova.cosmicore.gui.crusher.CrusherScreen;
+import net.nova.cosmicore.init.CBlockEntities;
 import net.nova.cosmicore.init.CMenuTypes;
 
 import static net.nova.cosmicore.Cosmicore.MODID;
@@ -17,6 +21,8 @@ public class CEventBusClientEvents {
     @SubscribeEvent
     public static void setupClient(FMLClientSetupEvent event) {
         event.enqueueWork(CItemProperties::addCustomItemProperties);
+        BlockEntityRenderers.register(CBlockEntities.CRUSHER_TILE.get(), CrusherTileRenderer::new);
+        BlockEntityRenderers.register(CBlockEntities.ADVANCED_CRUSHER_TILE.get(), AdvancedCrusherTileRenderer::new);
     }
 
     // Connect Screen to Menu

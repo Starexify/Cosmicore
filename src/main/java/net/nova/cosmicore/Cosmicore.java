@@ -1,5 +1,6 @@
 package net.nova.cosmicore;
 
+import mod.azure.azurelib.common.internal.common.AzureLib;
 import net.minecraft.resources.ResourceLocation;
 import net.nova.cosmicore.data.DataGenerators;
 import net.nova.cosmicore.init.*;
@@ -27,6 +28,8 @@ public class Cosmicore {
         CRecipeSerializers.RECIPE_SERIALIZERS.register(bus);
         CBlockEntities.BLOCK_ENTITIES.register(bus);
         CMenuTypes.MENUS.register(bus);
+
+        AzureLib.initialize();
 
         bus.addListener(DataGenerators::gatherData);
     }
