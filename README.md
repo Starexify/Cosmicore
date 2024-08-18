@@ -56,7 +56,7 @@
 
 ## 🗞️ Cosmicore News
 
-Version 1.0.0-alpha RELEASED!
+Version 1.0.0-beta RELEASED!
 
 ## ℹ️ About
 
