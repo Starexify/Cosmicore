@@ -16,7 +16,7 @@ import net.nova.cosmicore.blockentity.AdvancedCrusherTile;
 import net.nova.cosmicore.init.CBlockEntities;
 import org.jetbrains.annotations.Nullable;
 
-public class AdvancedCrusher extends BaseCrusher{
+public class AdvancedCrusher extends BaseCrusher {
     public AdvancedCrusher(Properties properties) {
         super(properties);
     }

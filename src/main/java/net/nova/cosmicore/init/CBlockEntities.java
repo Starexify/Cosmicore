@@ -19,5 +19,4 @@ public class CBlockEntities {
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<AdvancedCrusherTile>> ADVANCED_CRUSHER_TILE = BLOCK_ENTITIES.register(
             "advanced_crusher_tile", () -> BlockEntityType.Builder.of(AdvancedCrusherTile::new, CBlocks.ADVANCED_CRUSHER.get()).build(null)
     );
-
 }

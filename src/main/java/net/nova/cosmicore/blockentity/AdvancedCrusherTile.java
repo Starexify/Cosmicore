@@ -1,12 +1,5 @@
 package net.nova.cosmicore.blockentity;
 
-import mod.azure.azurelib.common.api.common.animatable.GeoBlockEntity;
-import mod.azure.azurelib.core.animatable.instance.AnimatableInstanceCache;
-import mod.azure.azurelib.core.animatable.instance.SingletonAnimatableInstanceCache;
-import mod.azure.azurelib.core.animation.AnimatableManager;
-import mod.azure.azurelib.core.animation.AnimationController;
-import mod.azure.azurelib.core.animation.RawAnimation;
-import mod.azure.azurelib.core.object.PlayState;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.chat.Component;
@@ -24,8 +17,7 @@ import net.nova.cosmicore.recipe.crusher.AdvancedCrushingRecipe;
 
 import java.util.Optional;
 
-public class AdvancedCrusherTile extends BaseCrusherTile implements GeoBlockEntity {
-    private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
+public class AdvancedCrusherTile extends BaseCrusherTile {
     private static final int ADDITIONAL_SLOT = 1;
     protected final ContainerData dataAccess = new ContainerData() {
         @Override
@@ -77,27 +69,13 @@ public class AdvancedCrusherTile extends BaseCrusherTile implements GeoBlockEnti
         }
     }
 
-    // Crushing Animation
-    @Override
-    public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
-        controllers.add(new AnimationController<>(this, event -> {
-            if (isCrafting()) { // TODO: Make it only if the block has charge
-                return event.setAndContinue(RawAnimation.begin().thenLoop("crushing"));
-            } else {
-                event.getController().forceAnimationReset();
-                return PlayState.STOP;
-            }
-        }));
+    // Render Item
+    public ItemStack getRenderedStack() {
+        return inventory.getFirst();
     }
 
-    public boolean isCrafting() {
-        return hasRecipe() && isFuel(this.inventory.get(FUEL_SLOT).getItem().getDefaultInstance());
-    }
-
-    // AzureLib Stuff
-    @Override
-    public AnimatableInstanceCache getAnimatableInstanceCache() {
-        return cache;
+    public ItemStack getRenderedAddition() {
+        return inventory.get(ADDITIONAL_SLOT);
     }
 
     // Crafting stuff

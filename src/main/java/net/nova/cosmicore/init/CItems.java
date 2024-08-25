@@ -5,8 +5,8 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.item.component.ChargedProjectiles;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
-import net.nova.cosmicore.item.TitaniumSmithingTemplate;
 import net.nova.cosmicore.item.TitaniumCrossbow;
+import net.nova.cosmicore.item.TitaniumSmithingTemplate;
 
 import static net.nova.cosmicore.Cosmicore.MODID;
 

@@ -1,15 +1,11 @@
 package net.nova.cosmicore;
 
-import mod.azure.azurelib.common.internal.common.AzureLib;
 import net.minecraft.resources.ResourceLocation;
-import net.nova.cosmicore.data.DataGenerators;
-import net.nova.cosmicore.init.*;
-import net.nova.cosmicore.init.CRecipeSerializers;
-import net.nova.cosmicore.init.CRecipeTypes;
-import org.slf4j.Logger;
-
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
+import net.nova.cosmicore.data.DataGenerators;
+import net.nova.cosmicore.init.*;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import static net.nova.cosmicore.Cosmicore.MODID;
@@ -27,9 +23,8 @@ public class Cosmicore {
         CRecipeTypes.RECIPE_TYPES.register(bus);
         CRecipeSerializers.RECIPE_SERIALIZERS.register(bus);
         CBlockEntities.BLOCK_ENTITIES.register(bus);
+        CEntities.ENTITY_TYPES.register(bus);
         CMenuTypes.MENUS.register(bus);
-
-        AzureLib.initialize();
 
         bus.addListener(DataGenerators::gatherData);
     }

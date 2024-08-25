@@ -81,7 +81,7 @@ whole more content.
     </tr>
     <tr>
       <td style="padding: 10px; text-align: left; border: none;"><strong>☄️ METEORS!!</strong></td>
-      <td style="padding: 10px; text-align: left; border: none;">Three new types of meteors: <strong>Achnorite</strong>, <strong>Meteorite</strong>, and <strong>Pallasite</strong>.</td>
+      <td style="padding: 10px; text-align: left; border: none;">Three new types of meteors: <strong>Achondrite</strong>, <strong>Meteorite</strong>, and <strong>Pallasite</strong>.</td>
     </tr>
   </tbody>
 </table>
