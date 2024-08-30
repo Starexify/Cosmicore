@@ -9,7 +9,6 @@ import net.neoforged.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public final class MeteorFallingAnimation {
-
     public static final AnimationDefinition FALLING_ROTATION_ANIMATION = AnimationDefinition.Builder.withLength(4f).looping()
             .addAnimation("root",
                     new AnimationChannel(AnimationChannel.Targets.ROTATION,
@@ -19,6 +18,7 @@ public final class MeteorFallingAnimation {
                                     AnimationChannel.Interpolations.LINEAR),
                             new Keyframe(4f, KeyframeAnimations.degreeVec(-360f, 0f, 0f),
                                     AnimationChannel.Interpolations.LINEAR))).build();
+
     public static final AnimationDefinition DEATH_ANIMATION = AnimationDefinition.Builder.withLength(1f)
             .addAnimation("root",
                     new AnimationChannel(AnimationChannel.Targets.POSITION,

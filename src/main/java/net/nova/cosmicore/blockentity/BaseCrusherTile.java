@@ -15,6 +15,7 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -24,10 +25,10 @@ import org.jetbrains.annotations.Nullable;
 public class BaseCrusherTile extends BaseContainerBlockEntity {
     protected NonNullList<ItemStack> inventory;
 
-    public int ignisCharge;
-    public int ignisPower;
-    public int crushingProgress;
-    public int maxCrushingProgress = 400;
+    protected int ignisCharge;
+    protected int ignisPower;
+    protected int crushingProgress;
+    protected int maxCrushingProgress = 400;
 
     public int FUEL_SLOT;
     public int RESULT_SLOT_START;
@@ -45,6 +46,7 @@ public class BaseCrusherTile extends BaseContainerBlockEntity {
         if (isCharged() && hasRecipe()) {
             this.crushingProgress++;
             setChanged(level, pos, state);
+            level.sendBlockUpdated(pos, state, state, Block.UPDATE_ALL);
 
             if (hasProgressFinished()) {
                 craftItem();
@@ -152,6 +154,22 @@ public class BaseCrusherTile extends BaseContainerBlockEntity {
         return null;
     }
 
+    // Stuff idk
+    @Override
+    protected NonNullList<ItemStack> getItems() {
+        return this.inventory;
+    }
+
+    @Override
+    protected void setItems(NonNullList<ItemStack> pItems) {
+        this.inventory = pItems;
+    }
+
+    @Override
+    public int getContainerSize() {
+        return this.inventory.size();
+    }
+
     // Block nbt data
     @Override
     protected void loadAdditional(CompoundTag pTag, HolderLookup.Provider pRegistries) {
@@ -171,30 +189,22 @@ public class BaseCrusherTile extends BaseContainerBlockEntity {
         pTag.putInt("CrushingProgress", crushingProgress);
     }
 
-    // Stuff idk
+    // Updates for Rendering
     @Override
-    protected NonNullList<ItemStack> getItems() {
-        return this.inventory;
-    }
-
-    @Override
-    protected void setItems(NonNullList<ItemStack> pItems) {
-        this.inventory = pItems;
-    }
-
-    @Override
-    public int getContainerSize() {
-        return this.inventory.size();
-    }
-
-    // Updates
-    @Override
-    public @Nullable Packet<ClientGamePacketListener> getUpdatePacket() {
-        return ClientboundBlockEntityDataPacket.create(this);
+    public void handleUpdateTag(CompoundTag tag, HolderLookup.Provider lookupProvider) {
+        ContainerHelper.loadAllItems(tag, inventory, lookupProvider);
+        crushingProgress = tag.getInt("CrushingProgress");
     }
 
     @Override
     public CompoundTag getUpdateTag(HolderLookup.Provider pRegistries) {
-        return saveWithoutMetadata(pRegistries);
+        CompoundTag pTag = super.getUpdateTag(pRegistries);
+        pTag.putInt("CrushingProgress", crushingProgress);
+        return pTag;
+    }
+
+    @Override
+    public @Nullable Packet<ClientGamePacketListener> getUpdatePacket() {
+        return ClientboundBlockEntityDataPacket.create(this);
     }
 }

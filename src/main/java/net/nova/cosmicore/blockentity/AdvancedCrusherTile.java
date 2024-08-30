@@ -56,6 +56,19 @@ public class AdvancedCrusherTile extends BaseCrusherTile {
         this.inventory = NonNullList.withSize(11, ItemStack.EMPTY);
     }
 
+    // Render Item
+    public ItemStack getRenderedStack() {
+        return inventory.getFirst();
+    }
+
+    public ItemStack getRenderedAddition() {
+        return inventory.get(ADDITIONAL_SLOT);
+    }
+
+    public int getCrushingProgress() {
+        return crushingProgress;
+    }
+
     // Crafting stuff
     @Override
     public void hasIgnis() {
@@ -69,16 +82,6 @@ public class AdvancedCrusherTile extends BaseCrusherTile {
         }
     }
 
-    // Render Item
-    public ItemStack getRenderedStack() {
-        return inventory.getFirst();
-    }
-
-    public ItemStack getRenderedAddition() {
-        return inventory.get(ADDITIONAL_SLOT);
-    }
-
-    // Crafting stuff
     @Override
     public boolean hasRecipe() {
         Optional<RecipeHolder<AdvancedCrushingRecipe>> recipe = getCurrentRecipe(this.inventory.getFirst());

@@ -6,6 +6,8 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
+import net.nova.cosmicore.client.model.AdvancedCrusherPistonModel;
+import net.nova.cosmicore.client.model.CrusherPistonModel;
 import net.nova.cosmicore.client.renderer.block.AdvancedCrusherTileRenderer;
 import net.nova.cosmicore.client.renderer.block.CrusherTileRenderer;
 import net.nova.cosmicore.client.renderer.item.CItemProperties;
@@ -37,14 +39,16 @@ public class CEventBusClientEvents {
     @SubscribeEvent
     public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
         event.registerLayerDefinition(AchondriteModel.LAYER_LOCATION, AchondriteModel::createLayer);
+
+        event.registerLayerDefinition(CrusherPistonModel.LAYER_LOCATION, CrusherPistonModel::createLayer);
+        event.registerLayerDefinition(AdvancedCrusherPistonModel.LAYER_LOCATION, AdvancedCrusherPistonModel::createLayer);
     }
 
     // Entity Renderers
     @SubscribeEvent
     public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
-        // Entities
         event.registerEntityRenderer(CEntities.ACHONDRITE.get(), AchondriteRenderer::new);
-        // Tiles
+
         event.registerBlockEntityRenderer(CBlockEntities.CRUSHER_TILE.get(), CrusherTileRenderer::new);
         event.registerBlockEntityRenderer(CBlockEntities.ADVANCED_CRUSHER_TILE.get(), AdvancedCrusherTileRenderer::new);
     }
