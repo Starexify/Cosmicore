@@ -1,3 +1,6 @@
 {
-  "parent": "cosmicore:block/crusher"
+  "parent": "cosmicore:item/template_crusher",
+  "textures": {
+    "layer0": "cosmicore:block/crusher"
+  }
 }

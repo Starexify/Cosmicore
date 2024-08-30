@@ -42,7 +42,10 @@ public class BlockStateAndModelProvider extends BlockStateProvider {
                 .parent(models().getExistingFile(modLoc("template_crusher")))
                 .texture("layer0", "block/" + name(block))
                 .texture("particle", "block/crusher_base"));
-        simpleBlockItem(block, new ModelFile.UncheckedModelFile(modLoc("block/" + name(block))));
+
+        itemModels().getBuilder(name(block))
+                .parent(models().getExistingFile(modLoc("item/template_crusher")))
+                .texture("layer0", "block/" + name(block));
     }
 
     private void customDirectionalBlock(Block block) {
