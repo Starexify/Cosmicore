@@ -11,7 +11,7 @@ import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.armortrim.TrimMaterial;
 import net.nova.cosmicore.Cosmicore;
-import net.nova.cosmicore.init.CArmorMaterial;
+import net.nova.cosmicore.init.CArmorMaterials;
 import net.nova.cosmicore.init.CItems;
 
 import java.util.Map;
@@ -20,7 +20,7 @@ public class CTrimMaterials {
     public static final ResourceKey<TrimMaterial> TITANIUM = createKey("titanium");
 
     public static void bootstrap(BootstrapContext<TrimMaterial> pContext) {
-        register(pContext, TITANIUM, CItems.TITANIUM_INGOT.get(), Style.EMPTY.withColor(16121855), 1.1F, Map.of(CArmorMaterial.TITANIUM, "titanium_darker"));
+        register(pContext, TITANIUM, CItems.TITANIUM_INGOT.get(), Style.EMPTY.withColor(16121855), 0.2F, Map.of(CArmorMaterials.TITANIUM, "titanium_darker"));
     }
 
     private static ResourceKey<TrimMaterial> createKey(String name) {

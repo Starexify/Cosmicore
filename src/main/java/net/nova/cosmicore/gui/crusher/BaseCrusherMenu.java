@@ -7,6 +7,7 @@ import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
+import net.nova.cosmicore.blockentity.BaseCrusherTile;
 import net.nova.cosmicore.init.CItems;
 import org.jetbrains.annotations.Nullable;
 
@@ -19,7 +20,7 @@ public class BaseCrusherMenu extends AbstractContainerMenu {
     }
 
     public boolean isCrystal(ItemStack pStack) {
-        return pStack.is(CItems.INFERNIUM_CRYSTAL);
+        return BaseCrusherTile.FUEL_MAP.containsKey(pStack.getItem());
     }
 
     public void addPlayerSlots(Inventory playerInventory) {
@@ -47,7 +48,6 @@ public class BaseCrusherMenu extends AbstractContainerMenu {
         if (ignisPower == 0) {
             return 0;
         }
-
         return ignisCharge * ignisChargeSize / ignisPower;
     }
 

@@ -19,14 +19,17 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.nova.cosmicore.init.CBlocks;
 import net.nova.cosmicore.init.CItems;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.Map;
 
 public class BaseCrusherTile extends BaseContainerBlockEntity {
     protected NonNullList<ItemStack> inventory;
 
     protected int ignisCharge;
-    protected int ignisPower;
+    protected int ignisPower = 44;
     protected int crushingProgress;
     protected int maxCrushingProgress = 400;
 
@@ -62,8 +65,13 @@ public class BaseCrusherTile extends BaseContainerBlockEntity {
         return this.ignisCharge > 0;
     }
 
+    public static final Map<Item, Integer> FUEL_MAP = Map.of(
+            CItems.INFERNIUM_CRYSTAL.asItem(), 11,
+            CBlocks.INFERNIUM_BLOCK.asItem(), 44
+    );
+
     public boolean isFuel(ItemStack item) {
-        return item.is(CItems.INFERNIUM_CRYSTAL);
+        return FUEL_MAP.containsKey(item.getItem());
     }
 
     public void hasIgnis() {

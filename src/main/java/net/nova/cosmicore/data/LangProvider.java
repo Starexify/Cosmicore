@@ -27,6 +27,7 @@ public class LangProvider extends LanguageProvider {
         addItem(CItems.TITANIUM_SHOVEL, "Titanium Shovel");
         addItem(CItems.TITANIUM_HOE, "Titanium Hoe");
         addItem(CItems.TITANIUM_CROSSBOW, "Titanium Crossbow");
+        addItem(CItems.TITANIUM_HORSE_ARMOR, "Titanium Horse Armor");
         addItem(CItems.RAW_TITANIUM, "Raw Titanium");
         addItem(CItems.TITANIUM_NUGGET, "Titanium Nugget");
         addItem(CItems.TITANIUM_INGOT, "Titanium Ingot");
@@ -42,6 +43,7 @@ public class LangProvider extends LanguageProvider {
         addBlock(CBlocks.METEORITE, "Meteorite");
         addBlock(CBlocks.PALLASITE, "Pallasite");
         addBlock(CBlocks.INFERNIUM_CLUSTER, "Infernium Cluster");
+        addBlock(CBlocks.INFERNIUM_BLOCK, "Infernium Block");
         addBlock(CBlocks.CRUSHER, "Crusher");
         addBlock(CBlocks.ADVANCED_CRUSHER, "Advanced Crusher");
         addBlock(CBlocks.COSMIC_SHIELD, "Cosmic Shield");

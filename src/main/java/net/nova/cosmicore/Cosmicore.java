@@ -16,7 +16,7 @@ public class Cosmicore {
     public static final Logger logger = LoggerFactory.getLogger(Cosmicore.class);
 
     public Cosmicore(IEventBus bus) {
-        CArmorMaterial.ARMOR_MATERIALS.register(bus);
+        CArmorMaterials.ARMOR_MATERIALS.register(bus);
         CCreativeTab.CREATIVE_TAB.register(bus);
         CItems.ITEMS.register(bus);
         CBlocks.BLOCKS.register(bus);

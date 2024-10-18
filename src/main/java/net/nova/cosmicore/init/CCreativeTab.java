@@ -30,6 +30,7 @@ public class CCreativeTab {
             output.accept(CItems.TITANIUM_HOE);
 
             output.accept(CItems.TITANIUM_CROSSBOW);
+            output.accept(CItems.TITANIUM_HORSE_ARMOR);
 
             output.accept(CItems.RAW_TITANIUM);
             output.accept(CItems.TITANIUM_NUGGET);
@@ -47,6 +48,7 @@ public class CCreativeTab {
             // Infernium
             output.accept(CBlocks.INFERNIUM_CLUSTER);
             output.accept(CItems.INFERNIUM_CRYSTAL);
+            output.accept(CBlocks.INFERNIUM_BLOCK);
 
             // Gears
             output.accept(CItems.IRON_GEAR);

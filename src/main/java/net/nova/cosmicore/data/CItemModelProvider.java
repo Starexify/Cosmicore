@@ -51,6 +51,8 @@ public class CItemModelProvider extends ItemModelProvider {
         handheldItem(CItems.TITANIUM_SHOVEL.get());
         handheldItem(CItems.TITANIUM_HOE.get());
 
+        basicItem(CItems.TITANIUM_HORSE_ARMOR.get());
+
         basicItem(CItems.RAW_TITANIUM.get());
         basicItem(CItems.TITANIUM_NUGGET.get());
         basicItem(CItems.TITANIUM_INGOT.get());

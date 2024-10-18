@@ -70,5 +70,7 @@ public class CraftingRecipes extends CRecipeProvider {
                 .pattern("###")
                 .unlockedBy("has_crusher", has(CBlocks.CRUSHER))
                 .save(recipeOutput);
+
+        twoByTwoPacker(recipeOutput, RecipeCategory.BUILDING_BLOCKS, CBlocks.INFERNIUM_BLOCK, CItems.INFERNIUM_CRYSTAL);
     }
 }

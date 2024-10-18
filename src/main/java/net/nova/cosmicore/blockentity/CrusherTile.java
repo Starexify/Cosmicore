@@ -6,6 +6,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.SingleRecipeInput;
@@ -67,12 +68,12 @@ public class CrusherTile extends BaseCrusherTile {
     // Crafting stuff
     @Override
     public void hasIgnis() {
+        Item fuelItem = this.inventory.get(FUEL_SLOT).getItem().getDefaultInstance().getItem();
         boolean hasFuel = isFuel(this.inventory.get(FUEL_SLOT).getItem().getDefaultInstance());
-        if (hasFuel && !isCharged()) {
-            int chargeTime = 11;
+        int fuel = FUEL_MAP.getOrDefault(fuelItem, 0);
 
-            this.ignisCharge = chargeTime;
-            this.ignisPower = chargeTime;
+        if (hasFuel && this.ignisCharge <= this.ignisPower - fuel) {
+            this.ignisCharge += fuel;
             this.inventory.get(FUEL_SLOT).setCount(this.inventory.get(FUEL_SLOT).getCount() - 1);
         }
     }

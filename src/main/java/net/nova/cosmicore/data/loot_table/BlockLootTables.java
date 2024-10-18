@@ -40,6 +40,7 @@ public class BlockLootTables extends BlockLootSubProvider {
 
         // Infernium
         add(CBlocks.INFERNIUM_CLUSTER.get(), this.createSingleItemTable(CItems.INFERNIUM_CRYSTAL, UniformGenerator.between(2, 4)));
+        dropSelf(CBlocks.INFERNIUM_BLOCK.get());
     }
 
     @Override

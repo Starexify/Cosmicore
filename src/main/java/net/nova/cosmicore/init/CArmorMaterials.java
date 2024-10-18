@@ -15,7 +15,7 @@ import java.util.List;
 
 import static net.nova.cosmicore.Cosmicore.MODID;
 
-public class CArmorMaterial {
+public class CArmorMaterials {
     public static final DeferredRegister<ArmorMaterial> ARMOR_MATERIALS = DeferredRegister.create(Registries.ARMOR_MATERIAL, MODID);
 
     public static Holder<ArmorMaterial> TITANIUM = ARMOR_MATERIALS.register("titanium", () -> new ArmorMaterial(
@@ -24,7 +24,7 @@ public class CArmorMaterial {
                 map.put(ArmorItem.Type.LEGGINGS, 6);
                 map.put(ArmorItem.Type.CHESTPLATE, 8);
                 map.put(ArmorItem.Type.HELMET, 3);
-                map.put(ArmorItem.Type.BODY, 11);
+                map.put(ArmorItem.Type.BODY, 7);
             }),17, SoundEvents.ARMOR_EQUIP_IRON, () -> Ingredient.of(CItems.TITANIUM_INGOT),
             List.of(new ArmorMaterial.Layer(
                     Cosmicore.rl("titanium")

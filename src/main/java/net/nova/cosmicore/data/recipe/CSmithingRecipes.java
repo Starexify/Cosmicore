@@ -28,5 +28,6 @@ public class CSmithingRecipes extends CRecipeProvider {
         titaniumSmithing(recipeOutput, Items.IRON_PICKAXE, RecipeCategory.TOOLS, CItems.TITANIUM_PICKAXE.get());
         titaniumSmithing(recipeOutput, Items.IRON_HOE, RecipeCategory.TOOLS, CItems.TITANIUM_HOE.get());
         titaniumSmithing(recipeOutput, Items.IRON_SHOVEL, RecipeCategory.TOOLS, CItems.TITANIUM_SHOVEL.get());
+        titaniumSmithing(recipeOutput, Items.IRON_HORSE_ARMOR, RecipeCategory.TOOLS, CItems.TITANIUM_HORSE_ARMOR.get());
     }
 }

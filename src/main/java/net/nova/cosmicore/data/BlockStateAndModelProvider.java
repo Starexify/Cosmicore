@@ -37,6 +37,7 @@ public class BlockStateAndModelProvider extends BlockStateProvider {
 
         // Infernium Model
         customDirectionalBlock(CBlocks.INFERNIUM_CLUSTER.get());
+        normalBlock(CBlocks.INFERNIUM_BLOCK.get());
     }
 
     // Models
