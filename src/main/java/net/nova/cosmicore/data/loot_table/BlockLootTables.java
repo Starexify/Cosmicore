@@ -35,6 +35,9 @@ public class BlockLootTables extends BlockLootSubProvider {
         dropSelf(CBlocks.CRUSHER.get());
         dropSelf(CBlocks.ADVANCED_CRUSHER.get());
 
+        // Cosmic Shield
+        dropSelf(CBlocks.COSMIC_SHIELD.get());
+
         // Infernium
         add(CBlocks.INFERNIUM_CLUSTER.get(), this.createSingleItemTable(CItems.INFERNIUM_CRYSTAL, UniformGenerator.between(2, 4)));
     }

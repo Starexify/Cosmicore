@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "cosmicore:block/cosmic_shield",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "cosmicore:block/cosmic_shield"
+    },
+    "facing=south": {
+      "model": "cosmicore:block/cosmic_shield",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "cosmicore:block/cosmic_shield",
+      "y": 270
+    }
+  }
+}

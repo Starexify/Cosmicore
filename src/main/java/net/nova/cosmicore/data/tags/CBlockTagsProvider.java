@@ -24,13 +24,15 @@ public class CBlockTagsProvider extends BlockTagsProvider {
                 CBlocks.RAW_TITANIUM_BLOCK.getKey(), CBlocks.TITANIUM_BLOCK.getKey(),
                 CBlocks.ACHONDRITE.getKey(), CBlocks.METEORITE.getKey(), CBlocks.PALLASITE.getKey(),
                 CBlocks.INFERNIUM_CLUSTER.getKey(),
-                CBlocks.CRUSHER.getKey(), CBlocks.ADVANCED_CRUSHER.getKey()
+                CBlocks.CRUSHER.getKey(), CBlocks.ADVANCED_CRUSHER.getKey(),
+                CBlocks.COSMIC_SHIELD.getKey()
         );
 
         tag(BlockTags.NEEDS_IRON_TOOL).add(
                 CBlocks.RAW_TITANIUM_BLOCK.getKey(), CBlocks.TITANIUM_BLOCK.getKey(),
                 CBlocks.ACHONDRITE.getKey(),
-                CBlocks.CRUSHER.getKey(), CBlocks.ADVANCED_CRUSHER.getKey()
+                CBlocks.CRUSHER.getKey(), CBlocks.ADVANCED_CRUSHER.getKey(),
+                CBlocks.COSMIC_SHIELD.getKey()
         );
 
         tag(BlockTags.NEEDS_DIAMOND_TOOL).add(

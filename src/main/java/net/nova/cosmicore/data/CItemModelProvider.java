@@ -74,13 +74,6 @@ public class CItemModelProvider extends ItemModelProvider {
 
     }
 
-    private void handheldItem(Item item) {
-        String name = getItemName(item);
-        getBuilder(name)
-                .parent(getExistingFile(mcLoc("item/handheld")))
-                .texture("layer0", "item/" + name);
-    }
-
     private void trimmableArmorItem(Item item) {
         if (item instanceof ArmorItem armorItem) {
             trimMaterials.entrySet().forEach(entry -> {

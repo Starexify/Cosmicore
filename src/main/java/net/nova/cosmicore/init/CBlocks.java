@@ -13,6 +13,7 @@ import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.nova.cosmicore.block.AdvancedCrusher;
+import net.nova.cosmicore.block.CosmicShield;
 import net.nova.cosmicore.block.Crusher;
 
 import java.util.function.Supplier;
@@ -73,6 +74,14 @@ public class CBlocks {
     public static DeferredBlock<Block> ADVANCED_CRUSHER = registerBlock("advanced_crusher", () -> new AdvancedCrusher(BlockBehaviour.Properties.of()
             .mapColor(MapColor.METAL)
             .instrument(NoteBlockInstrument.BASEDRUM)
+            .requiresCorrectToolForDrops()
+            .strength(6F)
+            .sound(SoundType.NETHERITE_BLOCK)
+    ));
+
+    // Cosmic Shield
+    public static DeferredBlock<Block> COSMIC_SHIELD = registerBlock("cosmic_shield", () -> new CosmicShield(BlockBehaviour.Properties.of()
+            .mapColor(MapColor.METAL)
             .requiresCorrectToolForDrops()
             .strength(6F)
             .sound(SoundType.NETHERITE_BLOCK)

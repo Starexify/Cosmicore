@@ -7,8 +7,10 @@ import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.nova.cosmicore.client.model.AdvancedCrusherPistonModel;
+import net.nova.cosmicore.client.model.CosmicShieldTopModel;
 import net.nova.cosmicore.client.model.CrusherPistonModel;
 import net.nova.cosmicore.client.renderer.block.AdvancedCrusherTileRenderer;
+import net.nova.cosmicore.client.renderer.block.CosmicShieldTileRenderer;
 import net.nova.cosmicore.client.renderer.block.CrusherTileRenderer;
 import net.nova.cosmicore.client.renderer.item.CItemProperties;
 import net.nova.cosmicore.entity.AchondriteModel;
@@ -42,6 +44,7 @@ public class CEventBusClientEvents {
 
         event.registerLayerDefinition(CrusherPistonModel.LAYER_LOCATION, CrusherPistonModel::createLayer);
         event.registerLayerDefinition(AdvancedCrusherPistonModel.LAYER_LOCATION, AdvancedCrusherPistonModel::createLayer);
+        event.registerLayerDefinition(CosmicShieldTopModel.LAYER_LOCATION, CosmicShieldTopModel::createLayer);
     }
 
     // Entity Renderers
@@ -51,5 +54,6 @@ public class CEventBusClientEvents {
 
         event.registerBlockEntityRenderer(CBlockEntities.CRUSHER_TILE.get(), CrusherTileRenderer::new);
         event.registerBlockEntityRenderer(CBlockEntities.ADVANCED_CRUSHER_TILE.get(), AdvancedCrusherTileRenderer::new);
+        event.registerBlockEntityRenderer(CBlockEntities.COSMIC_SHIELD.get(), CosmicShieldTileRenderer::new);
     }
 }

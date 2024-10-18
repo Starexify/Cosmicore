@@ -44,6 +44,7 @@ public class LangProvider extends LanguageProvider {
         addBlock(CBlocks.INFERNIUM_CLUSTER, "Infernium Cluster");
         addBlock(CBlocks.CRUSHER, "Crusher");
         addBlock(CBlocks.ADVANCED_CRUSHER, "Advanced Crusher");
+        addBlock(CBlocks.COSMIC_SHIELD, "Cosmic Shield");
 
         // Creative Tab
         add(CCreativeTab.COSMICORE_TAB_TITLE, "Cosmicore");

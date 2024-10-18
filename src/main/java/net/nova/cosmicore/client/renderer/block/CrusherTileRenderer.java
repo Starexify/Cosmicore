@@ -57,7 +57,6 @@ public class CrusherTileRenderer implements BlockEntityRenderer<CrusherTile> {
 
         VertexConsumer vertexConsumer = bufferSource.getBuffer(RenderType.entityCutout(pistonTexture));
 
-
         // Render neck
         poseStack.pushPose();
         poseStack.translate(0.5, 1 + neckOffset, 0.5);

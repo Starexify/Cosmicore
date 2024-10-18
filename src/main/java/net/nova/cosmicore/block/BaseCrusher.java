@@ -18,11 +18,12 @@ import org.jetbrains.annotations.Nullable;
 
 public class BaseCrusher extends BaseEntityBlock  {
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
-    private static final VoxelShape SHAPE = makeShape();
+    private final VoxelShape SHAPE;
 
     public BaseCrusher(Properties properties) {
         super(properties);
         this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH));
+        this.SHAPE = makeShape();
     }
 
     @Override
@@ -79,7 +80,7 @@ public class BaseCrusher extends BaseEntityBlock  {
     }
 
     // Block Shape
-    public static VoxelShape makeShape() {
+    protected VoxelShape makeShape() {
         VoxelShape shape = Shapes.empty();
         shape = Shapes.join(shape, Shapes.box(0, 0.875, 0, 1, 1, 1), BooleanOp.OR);
         shape = Shapes.join(shape, Shapes.box(0, 0, 0, 1, 0.25, 1), BooleanOp.OR);

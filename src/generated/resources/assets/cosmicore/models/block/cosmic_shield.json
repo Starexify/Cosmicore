@@ -1,0 +1,7 @@
+{
+  "parent": "cosmicore:block/template_cosmic_shield",
+  "textures": {
+    "layer0": "cosmicore:block/cosmic_shield",
+    "particle": "cosmicore:block/crusher_base"
+  }
+}
