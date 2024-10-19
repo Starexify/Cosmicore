@@ -5,6 +5,7 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.item.component.ChargedProjectiles;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
+import net.nova.cosmicore.item.LonsdaleiteSmithingTemplate;
 import net.nova.cosmicore.item.TitaniumCrossbow;
 import net.nova.cosmicore.item.TitaniumSmithingTemplate;
 
@@ -32,6 +33,19 @@ public class CItems {
     public static final DeferredItem<Item> TITANIUM_INGOT = ITEMS.register("titanium_ingot", () -> new Item(new Item.Properties()));
 
     public static final DeferredItem<Item> TITANIUM_UPGRADE_SMITHING_TEMPLATE = ITEMS.register("titanium_upgrade_smithing_template", TitaniumSmithingTemplate::createTitaniumUpgradeTemplate);
+
+    // Lonsdaleite Items
+    public static final DeferredItem<Item> LONSDALEITE_HELMET = ITEMS.register("lonsdaleite_helmet", () -> new ArmorItem(CArmorMaterials.LONSDALEITE, ArmorItem.Type.HELMET, new Item.Properties().durability(ArmorItem.Type.HELMET.getDurability(29))));
+    public static final DeferredItem<Item> LONSDALEITE_CHESTPLATE = ITEMS.register("lonsdaleite_chestplate", () -> new ArmorItem(CArmorMaterials.LONSDALEITE, ArmorItem.Type.CHESTPLATE, new Item.Properties().durability(ArmorItem.Type.CHESTPLATE.getDurability(29))));
+    public static final DeferredItem<Item> LONSDALEITE_LEGGINGS = ITEMS.register("lonsdaleite_leggings", () -> new ArmorItem(CArmorMaterials.LONSDALEITE, ArmorItem.Type.LEGGINGS, new Item.Properties().durability(ArmorItem.Type.LEGGINGS.getDurability(29))));
+    public static final DeferredItem<Item> LONSDALEITE_BOOTS = ITEMS.register("lonsdaleite_boots", () -> new ArmorItem(CArmorMaterials.LONSDALEITE, ArmorItem.Type.BOOTS, new Item.Properties().durability(ArmorItem.Type.BOOTS.getDurability(29))));
+
+    public static final DeferredItem<Item> LONSDALEITE_HORSE_ARMOR = ITEMS.register("lonsdaleite_horse_armor", () -> new AnimalArmorItem(CArmorMaterials.LONSDALEITE, AnimalArmorItem.BodyType.EQUESTRIAN, false, new Item.Properties().stacksTo(1)));
+
+    public static final DeferredItem<Item> LONSDALEITE = ITEMS.register("lonsdaleite", () -> new Item(new Item.Properties()));
+
+    public static final DeferredItem<Item> LONSDALEITE_UPGRADE_SMITHING_TEMPLATE = ITEMS.register("lonsdaleite_upgrade_smithing_template", LonsdaleiteSmithingTemplate::createLonsdaleiteUpgradeTemplate);
+
 
     // Infernium
     public static final DeferredItem<Item> INFERNIUM_CRYSTAL = ITEMS.register("infernium_crystal", () -> new Item(new Item.Properties()));

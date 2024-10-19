@@ -28,11 +28,17 @@ public class CItemTagsProvider extends ItemTagsProvider {
 
         tag(ItemTags.SWORDS).add(CItems.TITANIUM_SWORD.get());
 
-        tag(ItemTags.HEAD_ARMOR).add(CItems.TITANIUM_HELMET.get());
+        tag(ItemTags.HEAD_ARMOR).add(
+                CItems.TITANIUM_HELMET.get(), CItems.LONSDALEITE_HELMET.get()
+        );
 
-        tag(ItemTags.CHEST_ARMOR).add(CItems.TITANIUM_CHESTPLATE.get());
+        tag(ItemTags.CHEST_ARMOR).add(
+                CItems.TITANIUM_CHESTPLATE.get(), CItems.LONSDALEITE_CHESTPLATE.get()
+        );
 
-        tag(ItemTags.LEG_ARMOR).add(CItems.TITANIUM_LEGGINGS.get());
+        tag(ItemTags.LEG_ARMOR).add(
+                CItems.TITANIUM_LEGGINGS.get(), CItems.LONSDALEITE_LEGGINGS.get()
+        );
 
         tag(ItemTags.FOOT_ARMOR).add(CItems.TITANIUM_BOOTS.get());
 

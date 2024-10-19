@@ -28,6 +28,19 @@ public class CArmorMaterials {
             }),17, SoundEvents.ARMOR_EQUIP_IRON, () -> Ingredient.of(CItems.TITANIUM_INGOT),
             List.of(new ArmorMaterial.Layer(
                     Cosmicore.rl("titanium")
-            )),2.5F,0.1F
+            )),2.5F,0.09F
+    ));
+
+    public static Holder<ArmorMaterial> LONSDALEITE = ARMOR_MATERIALS.register("lonsdaleite", () -> new ArmorMaterial(
+            Util.make(new EnumMap<>(ArmorItem.Type.class), map -> {
+                map.put(ArmorItem.Type.BOOTS, 3);
+                map.put(ArmorItem.Type.LEGGINGS, 6);
+                map.put(ArmorItem.Type.CHESTPLATE, 8);
+                map.put(ArmorItem.Type.HELMET, 3);
+                map.put(ArmorItem.Type.BODY, 13);
+            }),18, SoundEvents.ARMOR_EQUIP_DIAMOND, () -> Ingredient.of(CItems.LONSDALEITE),
+            List.of(new ArmorMaterial.Layer(
+                    Cosmicore.rl("lonsdaleite")
+            )),3.5F,0.15F
     ));
 }

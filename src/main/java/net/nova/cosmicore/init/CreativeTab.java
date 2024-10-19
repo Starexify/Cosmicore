@@ -9,7 +9,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 
 import static net.nova.cosmicore.Cosmicore.MODID;
 
-public class CCreativeTab {
+public class CreativeTab {
     public static DeferredRegister<CreativeModeTab> CREATIVE_TAB = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MODID);
 
     public static String COSMICORE_TAB_TITLE = "cosmicore.creativetab";
@@ -39,6 +39,18 @@ public class CCreativeTab {
             output.accept(CBlocks.TITANIUM_BLOCK);
             
             output.accept(CItems.TITANIUM_UPGRADE_SMITHING_TEMPLATE);
+
+            // Lonsdaleite Stuff
+            output.accept(CItems.LONSDALEITE_HELMET);
+            output.accept(CItems.LONSDALEITE_CHESTPLATE);
+            output.accept(CItems.LONSDALEITE_LEGGINGS);
+            output.accept(CItems.LONSDALEITE_BOOTS);
+
+            output.accept(CItems.LONSDALEITE_HORSE_ARMOR);
+
+            output.accept(CItems.LONSDALEITE);
+
+            output.accept(CItems.LONSDALEITE_UPGRADE_SMITHING_TEMPLATE);
 
             // Meteorites
             output.accept(CBlocks.ACHONDRITE);

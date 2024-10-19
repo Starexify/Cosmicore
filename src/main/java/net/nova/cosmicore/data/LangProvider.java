@@ -3,9 +3,10 @@ package net.nova.cosmicore.data;
 import net.minecraft.data.PackOutput;
 import net.neoforged.neoforge.common.data.LanguageProvider;
 import net.nova.cosmicore.init.CBlocks;
-import net.nova.cosmicore.init.CCreativeTab;
+import net.nova.cosmicore.init.CreativeTab;
 import net.nova.cosmicore.init.CEntities;
 import net.nova.cosmicore.init.CItems;
+import net.nova.cosmicore.item.LonsdaleiteSmithingTemplate;
 import net.nova.cosmicore.item.TitaniumSmithingTemplate;
 
 import static net.nova.cosmicore.Cosmicore.MODID;
@@ -33,6 +34,14 @@ public class LangProvider extends LanguageProvider {
         addItem(CItems.TITANIUM_NUGGET, "Titanium Nugget");
         addItem(CItems.TITANIUM_INGOT, "Titanium Ingot");
         addItem(CItems.TITANIUM_UPGRADE_SMITHING_TEMPLATE, "Smithing Template");
+        addItem(CItems.LONSDALEITE_HELMET, "Lonsdaleite Helmet");
+        addItem(CItems.LONSDALEITE_CHESTPLATE, "Lonsdaleite Chestplate");
+        addItem(CItems.LONSDALEITE_LEGGINGS, "Lonsdaleite Leggings");
+        addItem(CItems.LONSDALEITE_BOOTS, "Lonsdaleite Boots");
+        addItem(CItems.LONSDALEITE_HORSE_ARMOR, "Lonsdaleite Horse Armor");
+        addItem(CItems.LONSDALEITE,"Lonsdaleite");
+        addItem(CItems.LONSDALEITE_UPGRADE_SMITHING_TEMPLATE,"Smithing Template");
+
         addItem(CItems.INFERNIUM_CRYSTAL, "Infernium Crystal");
         addItem(CItems.IRON_GEAR, "Iron Gear");
         addItem(CItems.TITANIUM_GEAR, "Titanium Gear");
@@ -50,7 +59,7 @@ public class LangProvider extends LanguageProvider {
         addBlock(CBlocks.COSMIC_SHIELD, "Cosmic Shield");
 
         // Creative Tab
-        add(CCreativeTab.COSMICORE_TAB_TITLE, "Cosmicore");
+        add(CreativeTab.COSMICORE_TAB_TITLE, "Cosmicore");
 
         // Trim Material
         add("trim_material.cosmicore.titanium", "Titanium Material");
@@ -61,6 +70,11 @@ public class LangProvider extends LanguageProvider {
         add(TitaniumSmithingTemplate.TITANIUM_UPGRADE_BASE_SLOT_DESCRIPTION.getString(), "Add iron armor, weapon, or tool");
         add(TitaniumSmithingTemplate.TITANIUM_UPGRADE_INGREDIENTS.getString(), "Titanium Ingot");
         add(TitaniumSmithingTemplate.TITANIUM_UPGRADE.getString(), "Titanium Upgrade");
+        add(LonsdaleiteSmithingTemplate.LONSDALEITE_UPGRADE_ADDITIONS_SLOT_DESCRIPTION.getString(), "Add Lonsdaleite Ingot");
+        add(LonsdaleiteSmithingTemplate.LONSDALEITE_UPGRADE_APPLIES_TO.getString(), "Diamond Equipment");
+        add(LonsdaleiteSmithingTemplate.LONSDALEITE_UPGRADE_BASE_SLOT_DESCRIPTION.getString(), "Add iron armor, weapon, or tool");
+        add(LonsdaleiteSmithingTemplate.LONSDALEITE_UPGRADE_INGREDIENTS.getString(), "Lonsdaleite");
+        add(LonsdaleiteSmithingTemplate.LONSDALEITE_UPGRADE.getString(), "Lonsdaleite Upgrade");
 
         // Entities
         add(CEntities.ACHONDRITE.get(), "Achondrite");

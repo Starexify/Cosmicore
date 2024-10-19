@@ -59,6 +59,19 @@ public class CItemModelProvider extends ItemModelProvider {
 
         basicItem(CItems.TITANIUM_UPGRADE_SMITHING_TEMPLATE.get());
 
+        // Lonsdaleite Models
+        trimmableArmorItem(CItems.LONSDALEITE_HELMET.get());
+        trimmableArmorItem(CItems.LONSDALEITE_CHESTPLATE.get());
+        trimmableArmorItem(CItems.LONSDALEITE_LEGGINGS.get());
+        trimmableArmorItem(CItems.LONSDALEITE_BOOTS.get());
+
+        trimmableArmorItem(CItems.TITANIUM_BOOTS.get());
+        basicItem(CItems.LONSDALEITE_HORSE_ARMOR.get());
+
+        basicItem(CItems.LONSDALEITE.get());
+
+        basicItem(CItems.LONSDALEITE_UPGRADE_SMITHING_TEMPLATE.get());
+
         // Infernium Model
         basicItem(CItems.INFERNIUM_CRYSTAL.get());
 
