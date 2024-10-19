@@ -7,25 +7,31 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.AnimationState;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.ChunkGenerator;
-import net.minecraft.world.level.levelgen.structure.BoundingBox;
-import net.minecraft.world.level.levelgen.structure.Structure;
-import net.minecraft.world.level.levelgen.structure.StructureStart;
+import net.minecraft.world.level.levelgen.structure.*;
 import net.minecraft.world.phys.Vec3;
 import net.nova.cosmicore.Cosmicore;
 import net.nova.cosmicore.data.worldgen.CStructures;
+import net.nova.cosmicore.init.CTags;
 
 public class Achondrite extends Entity {
-    private static final int DEATH_ANIMATION_DURATION = 40;
+    public static final int DEATH_ANIMATION_DURATION = 40;
     public final AnimationState fallingAnimationState = new AnimationState();
     public final AnimationState explodedAnimationState = new AnimationState();
-    private int deathAnimationTimer = -1;
+    public int deathAnimationTimer = -1;
+    public BlockPos landingPos;
+    public boolean isLanded = false;
+    public static final int DESTRUCTION_RADIUS = 5;
 
     public Achondrite(EntityType<?> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
@@ -35,6 +41,7 @@ public class Achondrite extends Entity {
     public void tick() {
         super.tick();
 
+        // *dies*
         if (deathAnimationTimer >= 0) {
             deathAnimationTimer--;
 
@@ -49,8 +56,12 @@ public class Achondrite extends Entity {
             return;
         }
 
-        double currentY = this.getY();
+        // Destroy blocks around and update death animations
+        if (this.level().isClientSide()) {
+            updateClientAnimations();
+        }
 
+        double currentY = this.getY();
         double fallSpeed = -0.05;
         double forwardSpeed = 0.01;
 
@@ -65,23 +76,16 @@ public class Achondrite extends Entity {
         double motionXPart = deltaMovement.x;
         double motionZPart = deltaMovement.z;
 
-        if (this.onGround()) {
-            // Explosion Animation
-            if (!this.isRemoved()) {
-                if (this.level().isClientSide()) {
-                    this.fallingAnimationState.stop();
-                    this.explodedAnimationState.startIfStopped(this.tickCount);
-                }
-                this.level().addParticle(ParticleTypes.GUST_EMITTER_LARGE, this.getX(), this.getY(), this.getZ(), 0.0, 0.0, 0.0);
+        if (this.onGround() && !isLanded) {
+            handleLanding();
+        }
 
-                // Start the death animation timer
-                this.deathAnimationTimer = DEATH_ANIMATION_DURATION;
-            }
-            this.setDeltaMovement(Vec3.ZERO);
-        } else {
-            // Falling Animation
+        // Handle Falling
+        if (!this.onGround()) {
             if (this.level().isClientSide()) {
                 this.fallingAnimationState.startIfStopped(this.tickCount);
+            } else {
+                destroyNearbyBlocks();
             }
 
             for (int i = 0; i < 4; i++) {
@@ -113,8 +117,50 @@ public class Achondrite extends Entity {
         }
     }
 
+    public void updateClientAnimations() {
+        if (this.onGround() && !isLanded) {
+            this.fallingAnimationState.stop();
+            this.explodedAnimationState.startIfStopped(this.tickCount);
+        } else if (!this.onGround()) {
+            this.fallingAnimationState.startIfStopped(this.tickCount);
+        }
+    }
+
+    public void handleLanding() {
+        isLanded = true;
+        this.landingPos = this.blockPosition();
+        this.setDeltaMovement(Vec3.ZERO);
+        this.level().addParticle(ParticleTypes.GUST_EMITTER_LARGE, this.getX(), this.getY(), this.getZ(), 0.0, 0.0, 0.0);
+
+        // Start the death animation timer
+        this.deathAnimationTimer = DEATH_ANIMATION_DURATION;
+    }
+
+    // Destroy Blocks Nearby method
+    public void destroyNearbyBlocks() {
+        ServerLevel serverLevel = (ServerLevel) this.level();
+        BlockPos centerPos = this.blockPosition();
+        RandomSource random = serverLevel.getRandom();
+
+        final double DROP_CHANCE = 0.5;
+        boolean shouldDrop = random.nextDouble() < DROP_CHANCE;
+
+        for (BlockPos pos : BlockPos.betweenClosed(
+                centerPos.offset(-DESTRUCTION_RADIUS, -DESTRUCTION_RADIUS, -DESTRUCTION_RADIUS),
+                centerPos.offset(DESTRUCTION_RADIUS, DESTRUCTION_RADIUS, DESTRUCTION_RADIUS))) {
+            BlockState state = serverLevel.getBlockState(pos);
+            if (shouldDestroyBlock(state)) {
+                serverLevel.destroyBlock(pos, shouldDrop);
+            }
+        }
+    }
+
+    public boolean shouldDestroyBlock(BlockState state) {
+        return state.is(CTags.BlockTags.METEOR_BREAKABLES);
+    }
+
     public Structure getStructure() {
-        return level().registryAccess().registryOrThrow(CStructures.DESERT_METEOR_SITE.registryKey()).getHolderOrThrow(CStructures.DESERT_METEOR_SITE).value();
+        return level().registryAccess().registryOrThrow(BuiltinStructures.SWAMP_HUT.registryKey()).getHolderOrThrow(BuiltinStructures.SWAMP_HUT).value();
     }
 
     public void placeStructure() {
@@ -138,6 +184,17 @@ public class Achondrite extends Entity {
                 Cosmicore.logger.error("Failed to place Structure");
             } else {
                 BoundingBox boundingbox = structurestart.getBoundingBox();
+
+                // Calculate the offset to center the structure on the given position
+                int offsetX = landingPos.getX() - (boundingbox.minX() + boundingbox.maxX()) / 2;
+                int offsetY = landingPos.getY() - boundingbox.minY();
+                int offsetZ = landingPos.getZ() - (boundingbox.minZ() + boundingbox.maxZ()) / 2;
+                boundingbox = boundingbox.move(offsetX, offsetY, offsetZ);
+
+                for (StructurePiece piece : structurestart.getPieces()) {
+                    piece.move(offsetX, offsetY, offsetZ);
+                }
+
                 ChunkPos chunkpos = new ChunkPos(SectionPos.blockToSectionCoord(boundingbox.minX()), SectionPos.blockToSectionCoord(boundingbox.minZ()));
                 ChunkPos chunkpos1 = new ChunkPos(SectionPos.blockToSectionCoord(boundingbox.maxX()), SectionPos.blockToSectionCoord(boundingbox.maxZ()));
                 ChunkPos.rangeClosed(chunkpos, chunkpos1)
@@ -168,10 +225,19 @@ public class Achondrite extends Entity {
 
     @Override
     protected void readAdditionalSaveData(CompoundTag pCompound) {
+        if (pCompound.contains("LandingPos")) {
+            int[] pos = pCompound.getIntArray("LandingPos");
+            if (pos.length == 3) {
+                this.landingPos = new BlockPos(pos[0], pos[1], pos[2]);
+            }
+        }
     }
 
     @Override
     protected void addAdditionalSaveData(CompoundTag pCompound) {
+        if (landingPos != null) {
+            pCompound.putIntArray("LandingPos", new int[]{landingPos.getX(), landingPos.getY(), landingPos.getZ()});
+        }
     }
 
     @Override

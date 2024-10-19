@@ -57,6 +57,9 @@ public class CCreativeTab {
             // Crusher
             output.accept(CBlocks.CRUSHER);
             output.accept(CBlocks.ADVANCED_CRUSHER);
+
+            // Sgield
+            output.accept(CBlocks.COSMIC_SHIELD);
         });
 
         builder.icon(() -> new ItemStack(CBlocks.RAW_TITANIUM_BLOCK));
