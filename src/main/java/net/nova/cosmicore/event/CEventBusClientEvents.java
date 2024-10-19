@@ -6,6 +6,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
+import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
 import net.nova.cosmicore.client.model.AdvancedCrusherPistonModel;
 import net.nova.cosmicore.client.model.CosmicShieldTopModel;
 import net.nova.cosmicore.client.model.CrusherPistonModel;
@@ -19,6 +20,7 @@ import net.nova.cosmicore.gui.crusher.AdvancedCrusherScreen;
 import net.nova.cosmicore.gui.crusher.CrusherScreen;
 import net.nova.cosmicore.init.CBlockEntities;
 import net.nova.cosmicore.init.CEntities;
+import net.nova.cosmicore.init.CItems;
 import net.nova.cosmicore.init.CMenuTypes;
 
 import static net.nova.cosmicore.Cosmicore.MODID;
