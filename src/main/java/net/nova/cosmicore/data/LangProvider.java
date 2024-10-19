@@ -4,6 +4,7 @@ import net.minecraft.data.PackOutput;
 import net.neoforged.neoforge.common.data.LanguageProvider;
 import net.nova.cosmicore.init.CBlocks;
 import net.nova.cosmicore.init.CCreativeTab;
+import net.nova.cosmicore.init.CEntities;
 import net.nova.cosmicore.init.CItems;
 import net.nova.cosmicore.item.TitaniumSmithingTemplate;
 
@@ -60,5 +61,8 @@ public class LangProvider extends LanguageProvider {
         add(TitaniumSmithingTemplate.TITANIUM_UPGRADE_BASE_SLOT_DESCRIPTION.getString(), "Add iron armor, weapon, or tool");
         add(TitaniumSmithingTemplate.TITANIUM_UPGRADE_INGREDIENTS.getString(), "Titanium Ingot");
         add(TitaniumSmithingTemplate.TITANIUM_UPGRADE.getString(), "Titanium Upgrade");
+
+        // Entities
+        add(CEntities.ACHONDRITE.get(), "Achondrite");
     }
 }

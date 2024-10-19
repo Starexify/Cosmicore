@@ -1,5 +1,6 @@
 package net.nova.cosmicore.entity;
 
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.SectionPos;
 import net.minecraft.core.particles.ParticleTypes;
@@ -22,6 +23,7 @@ import net.minecraft.world.level.levelgen.structure.*;
 import net.minecraft.world.phys.Vec3;
 import net.nova.cosmicore.Cosmicore;
 import net.nova.cosmicore.data.worldgen.CStructures;
+import net.nova.cosmicore.init.CBlocks;
 import net.nova.cosmicore.init.CTags;
 
 public class Achondrite extends Entity {
@@ -31,15 +33,28 @@ public class Achondrite extends Entity {
     public int deathAnimationTimer = -1;
     public BlockPos landingPos;
     public boolean isLanded = false;
-    public static final int DESTRUCTION_RADIUS = 5;
+    public static final int DESTRUCTION_RADIUS = 8;
+    public static int SHIELD_RADIUS = 200;
 
     public Achondrite(EntityType<?> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
+
+        if (!pLevel.isClientSide()) {
+            ServerLevel serverLevel = (ServerLevel) pLevel;
+            Component message = Component.literal("A meteor has entered the atmosphere!")
+                    .withStyle(ChatFormatting.RED, ChatFormatting.BOLD);
+            serverLevel.getServer().getPlayerList().broadcastSystemMessage(message, false);
+        }
     }
 
     @Override
     public void tick() {
         super.tick();
+
+/*        if (isShieldNearby()) {
+            this.remove(RemovalReason.KILLED);
+            return;
+        }*/
 
         // *dies*
         if (deathAnimationTimer >= 0) {
@@ -116,6 +131,25 @@ public class Achondrite extends Entity {
             this.move(MoverType.SELF, this.getDeltaMovement());
         }
     }
+
+    private boolean isShieldNearby() {
+        ServerLevel serverLevel = (ServerLevel) this.level();
+        BlockPos centerPos = this.blockPosition();
+
+        for (BlockPos pos : BlockPos.betweenClosed(
+                centerPos.offset(-SHIELD_RADIUS, -SHIELD_RADIUS, -SHIELD_RADIUS),
+                centerPos.offset(SHIELD_RADIUS, SHIELD_RADIUS, SHIELD_RADIUS))) {
+
+            BlockState state = serverLevel.getBlockState(pos);
+
+            if (state.is(CBlocks.COSMIC_SHIELD)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
 
     public void updateClientAnimations() {
         if (this.onGround() && !isLanded) {
