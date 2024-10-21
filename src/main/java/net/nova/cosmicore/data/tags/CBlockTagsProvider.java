@@ -24,6 +24,7 @@ public class CBlockTagsProvider extends BlockTagsProvider {
         // Tags
         tag(BlockTags.MINEABLE_WITH_PICKAXE).add(
                 CBlocks.RAW_TITANIUM_BLOCK.getKey(), CBlocks.TITANIUM_BLOCK.getKey(),
+                CBlocks.LONSDALEITE_BLOCK.getKey(),
                 CBlocks.ACHONDRITE.getKey(), CBlocks.METEORITE.getKey(), CBlocks.PALLASITE.getKey(),
                 CBlocks.INFERNIUM_CLUSTER.getKey(), CBlocks.INFERNIUM_BLOCK.getKey(),
                 CBlocks.CRUSHER.getKey(), CBlocks.ADVANCED_CRUSHER.getKey(),
@@ -38,6 +39,7 @@ public class CBlockTagsProvider extends BlockTagsProvider {
         );
 
         tag(BlockTags.NEEDS_DIAMOND_TOOL).add(
+                CBlocks.LONSDALEITE_BLOCK.getKey(),
                 CBlocks.METEORITE.getKey(), CBlocks.PALLASITE.getKey(),
                 CBlocks.INFERNIUM_CLUSTER.getKey(), CBlocks.INFERNIUM_BLOCK.getKey()
         );

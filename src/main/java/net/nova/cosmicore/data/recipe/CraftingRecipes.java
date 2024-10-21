@@ -25,6 +25,7 @@ public class CraftingRecipes extends CRecipeProvider {
         nineBlockStorageRecipes(recipeOutput, RecipeCategory.MISC, CItems.RAW_TITANIUM, RecipeCategory.BUILDING_BLOCKS, CBlocks.RAW_TITANIUM_BLOCK);
         nineBlockStorageRecipesWithCustomPacking(recipeOutput, RecipeCategory.MISC, CItems.TITANIUM_NUGGET, RecipeCategory.MISC, CItems.TITANIUM_INGOT, "titanium_ingot_from_nuggets", "titanium_ingot");
         nineBlockStorageRecipesRecipesWithCustomUnpacking(recipeOutput, RecipeCategory.MISC, CItems.TITANIUM_INGOT, RecipeCategory.BUILDING_BLOCKS, CBlocks.TITANIUM_BLOCK, "titanium_ingot_from_titanium_block", "titanium_ingot");
+        nineBlockStorageRecipesRecipesWithCustomUnpacking(recipeOutput, RecipeCategory.MISC, CItems.LONSDALEITE, RecipeCategory.BUILDING_BLOCKS, CBlocks.LONSDALEITE_BLOCK, "lonsdaleite_from_lonsdaleite_block", "lonsdaleite");
 
         copySmithingTemplate(recipeOutput, CItems.TITANIUM_UPGRADE_SMITHING_TEMPLATE, CBlocks.METEORITE, Items.IRON_INGOT);
         copySmithingTemplate(recipeOutput, CItems.LONSDALEITE_UPGRADE_SMITHING_TEMPLATE, CBlocks.PALLASITE, Items.DIAMOND);

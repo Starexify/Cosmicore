@@ -49,7 +49,8 @@ public class CreativeTabs {
             output.accept(CItems.LONSDALEITE);
             output.accept(CBlocks.RAW_TITANIUM_BLOCK);
             output.accept(CBlocks.TITANIUM_BLOCK);
-            
+            output.accept(CBlocks.LONSDALEITE_BLOCK);
+
             output.accept(CItems.TITANIUM_UPGRADE_SMITHING_TEMPLATE);
             output.accept(CItems.LONSDALEITE_UPGRADE_SMITHING_TEMPLATE);
 

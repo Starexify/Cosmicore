@@ -22,6 +22,9 @@ public class BlockStateAndModelProvider extends BlockStateProvider {
         normalBlock(CBlocks.RAW_TITANIUM_BLOCK.get());
         normalBlock(CBlocks.TITANIUM_BLOCK.get());
 
+        // Lonsdaleite Models
+        translucentBlock(CBlocks.LONSDALEITE_BLOCK.get());
+
         // Meteors Models
         normalBlock(CBlocks.ACHONDRITE.get());
         normalBlock(CBlocks.METEORITE.get());
@@ -62,6 +65,10 @@ public class BlockStateAndModelProvider extends BlockStateProvider {
         directionalBlock(block, models().cross(name(block), modLoc("block/" + name(block))).renderType(RenderType.cutout().name));
         itemModels().withExistingParent(name(block), mcLoc("item/generated"))
                 .texture("layer0", "block/" + name(block));
+    }
+
+    public void translucentBlock(Block block) {
+        simpleBlockWithItem(block, models().cubeAll(name(block), modLoc("block/" + name(block))).renderType(RenderType.translucent().name));
     }
 
     public void normalBlock(Block block) {

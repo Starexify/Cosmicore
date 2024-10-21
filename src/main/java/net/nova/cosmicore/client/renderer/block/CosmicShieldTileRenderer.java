@@ -16,8 +16,6 @@ import net.neoforged.api.distmarker.OnlyIn;
 import net.nova.cosmicore.blockentity.CosmicShieldTile;
 import net.nova.cosmicore.client.model.CosmicShieldTopModel;
 
-import java.util.Random;
-
 @OnlyIn(Dist.CLIENT)
 public class CosmicShieldTileRenderer implements BlockEntityRenderer<CosmicShieldTile> {
     private final ResourceLocation shieldTopTexture = CosmicShieldTopModel.TEXTURE;

@@ -10,24 +10,24 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
-import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import org.jetbrains.annotations.Nullable;
 
-public class BaseCrusher extends BaseEntityBlock  {
+import javax.annotation.Nullable;
+
+public class BaseModel extends BaseEntityBlock {
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
     private final VoxelShape SHAPE;
 
-    public BaseCrusher(Properties properties) {
+    public BaseModel(Properties properties) {
         super(properties);
         this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH));
         this.SHAPE = makeShape();
     }
 
     @Override
-    public @Nullable BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
+    public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
         return null;
     }
 
@@ -82,14 +82,6 @@ public class BaseCrusher extends BaseEntityBlock  {
     // Block Shape
     protected VoxelShape makeShape() {
         VoxelShape shape = Shapes.empty();
-        shape = Shapes.join(shape, Shapes.box(0, 0.875, 0, 1, 1, 1), BooleanOp.OR);
-        shape = Shapes.join(shape, Shapes.box(0, 0, 0, 1, 0.25, 1), BooleanOp.OR);
-        shape = Shapes.join(shape, Shapes.box(0, 0.25, 0, 0.125, 0.875, 0.125), BooleanOp.OR);
-        shape = Shapes.join(shape, Shapes.box(0.875, 0.25, 0, 1, 0.875, 0.125), BooleanOp.OR);
-        shape = Shapes.join(shape, Shapes.box(0.875, 0.25, 0.875, 1, 0.875, 1), BooleanOp.OR);
-        shape = Shapes.join(shape, Shapes.box(0, 0.25, 0.875, 0.125, 0.875, 1), BooleanOp.OR);
-        shape = Shapes.join(shape, Shapes.box(0.03125, 0.125, 0.046875, 0.96875, 0.875, 0.984375), BooleanOp.OR);
-
         return shape;
     }
 }

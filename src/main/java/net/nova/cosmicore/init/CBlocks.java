@@ -36,6 +36,14 @@ public class CBlocks {
             .sound(SoundType.METAL)
     ));
 
+    // Lonsdaleite Stuff
+    public static final DeferredBlock<Block> LONSDALEITE_BLOCK = registerBlock("lonsdaleite_block", () -> new HalfTransparentBlock(BlockBehaviour.Properties.of()
+            .requiresCorrectToolForDrops()
+            .strength(5.0F, 6.0F)
+            .sound(SoundType.GLASS)
+            .noOcclusion()
+    ));
+
     // Meteorites
     public static final DeferredBlock<Block> ACHONDRITE = registerBlock("achondrite", () -> new Block(BlockBehaviour.Properties.of()
             .mapColor(MapColor.COLOR_LIGHT_GRAY)

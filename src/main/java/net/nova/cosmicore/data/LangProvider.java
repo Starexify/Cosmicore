@@ -59,6 +59,7 @@ public class LangProvider extends LanguageProvider {
         // Blocks
         addBlock(CBlocks.RAW_TITANIUM_BLOCK, "Raw Titanium Block");
         addBlock(CBlocks.TITANIUM_BLOCK, "Titanium Block");
+        addBlock(CBlocks.LONSDALEITE_BLOCK, "Lonsdaleite Block");
         addBlock(CBlocks.ACHONDRITE, "Achondrite");
         addBlock(CBlocks.METEORITE, "Meteorite");
         addBlock(CBlocks.PALLASITE, "Pallasite");

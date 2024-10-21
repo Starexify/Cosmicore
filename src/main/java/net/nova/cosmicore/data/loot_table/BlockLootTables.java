@@ -26,6 +26,9 @@ public class BlockLootTables extends BlockLootSubProvider {
         dropSelf(CBlocks.RAW_TITANIUM_BLOCK.get());
         dropSelf(CBlocks.TITANIUM_BLOCK.get());
 
+        // Lonsdaleite Drops
+        dropSelf(CBlocks.LONSDALEITE_BLOCK.get());
+
         // Meteor Drops
         dropSelf(CBlocks.ACHONDRITE.get());
         add(CBlocks.METEORITE.get(), block -> this.createSingleItemTableWithSilkTouch(block, CBlocks.ACHONDRITE));
