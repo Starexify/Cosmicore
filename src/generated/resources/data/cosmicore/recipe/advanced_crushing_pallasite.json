@@ -1,0 +1,85 @@
+{
+  "type": "cosmicore:advanced_crushing",
+  "ingredient": {
+    "item": "cosmicore:pallasite"
+  },
+  "results": [
+    {
+      "chance": 0.005,
+      "item": {
+        "count": 2,
+        "id": "cosmicore:lonsdaleite"
+      }
+    },
+    {
+      "chance": 0.02,
+      "item": {
+        "count": 1,
+        "id": "cosmicore:lonsdaleite"
+      }
+    },
+    {
+      "chance": 0.02,
+      "item": {
+        "count": 2,
+        "id": "minecraft:diamond"
+      }
+    },
+    {
+      "chance": 0.06,
+      "item": {
+        "count": 1,
+        "id": "minecraft:diamond"
+      }
+    },
+    {
+      "chance": 0.15,
+      "item": {
+        "count": 3,
+        "id": "cosmicore:raw_titanium"
+      }
+    },
+    {
+      "chance": 0.23,
+      "item": {
+        "count": 2,
+        "id": "cosmicore:raw_titanium"
+      }
+    },
+    {
+      "chance": 0.4,
+      "item": {
+        "count": 1,
+        "id": "cosmicore:raw_titanium"
+      }
+    },
+    {
+      "chance": 0.25,
+      "item": {
+        "count": 4,
+        "id": "minecraft:raw_gold"
+      }
+    },
+    {
+      "chance": 0.37,
+      "item": {
+        "count": 2,
+        "id": "minecraft:raw_gold"
+      }
+    },
+    {
+      "chance": 0.18,
+      "item": {
+        "count": 6,
+        "id": "minecraft:raw_iron"
+      }
+    },
+    {
+      "chance": 0.3,
+      "item": {
+        "count": 4,
+        "id": "minecraft:raw_iron"
+      }
+    }
+  ]
+}
