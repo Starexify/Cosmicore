@@ -54,7 +54,9 @@ public class CItemTagsProvider extends ItemTagsProvider {
                 CItems.TITANIUM_BOOTS.get(), CItems.LONSDALEITE_BOOTS.get()
         );
 
-        tag(ItemTags.TRIM_MATERIALS).add(CItems.TITANIUM_INGOT.get());
+        tag(ItemTags.TRIM_MATERIALS).add(
+                CItems.TITANIUM_INGOT.get(), CItems.LONSDALEITE.get()
+        );
 
         tag(ItemTags.CROSSBOW_ENCHANTABLE).add(CItems.TITANIUM_CROSSBOW.get());
     }

@@ -82,7 +82,7 @@ public class LangProvider extends LanguageProvider {
         add(TitaniumSmithingTemplate.TITANIUM_UPGRADE.getString(), "Titanium Upgrade");
         add(LonsdaleiteSmithingTemplate.LONSDALEITE_UPGRADE_ADDITIONS_SLOT_DESCRIPTION.getString(), "Add Lonsdaleite");
         add(LonsdaleiteSmithingTemplate.LONSDALEITE_UPGRADE_APPLIES_TO.getString(), "Diamond Equipment");
-        add(LonsdaleiteSmithingTemplate.LONSDALEITE_UPGRADE_BASE_SLOT_DESCRIPTION.getString(), "Add iron armor, weapon, or tool");
+        add(LonsdaleiteSmithingTemplate.LONSDALEITE_UPGRADE_BASE_SLOT_DESCRIPTION.getString(), "Add diamond armor, weapon, or tool");
         add(LonsdaleiteSmithingTemplate.LONSDALEITE_UPGRADE_INGREDIENTS.getString(), "Lonsdaleite");
         add(LonsdaleiteSmithingTemplate.LONSDALEITE_UPGRADE.getString(), "Lonsdaleite Upgrade");
 

@@ -5,8 +5,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.flag.FeatureFlag;
 
-import java.util.List;
-
 import static net.nova.cosmicore.Cosmicore.rl;
 
 public class TitaniumSmithingTemplate extends BaseSmithingTemplate {
@@ -25,6 +23,12 @@ public class TitaniumSmithingTemplate extends BaseSmithingTemplate {
     public static final Component TITANIUM_UPGRADE_ADDITIONS_SLOT_DESCRIPTION = Component.translatable(
             Util.makeDescriptionId("item", rl("smithing_template.titanium_upgrade.additions_slot_description"))
     );
+
+    public static final ResourceLocation EMPTY_SLOT_INGOT = ResourceLocation.withDefaultNamespace("item/empty_slot_ingot");
+
+    static {
+        addMaterialSlot(EMPTY_SLOT_INGOT);
+    }
 
     public TitaniumSmithingTemplate(Component pAppliesTo, Component pIngredients, Component pUpgradeDescription, Component pBaseSlotDescription, Component pAdditionsSlotDescription, FeatureFlag... pRequiredFeatures) {
         super(pAppliesTo, pIngredients, pUpgradeDescription, pBaseSlotDescription, pAdditionsSlotDescription, pRequiredFeatures);

@@ -26,9 +26,7 @@ public class BaseSmithingTemplate extends SmithingTemplateItem {
             ResourceLocation.withDefaultNamespace("item/empty_slot_pickaxe")
     ));
 
-    protected static final List<ResourceLocation> MATERIAL_SLOTS = new ArrayList<>(Arrays.asList(
-            ResourceLocation.withDefaultNamespace("item/empty_slot_ingot")
-    ));
+    protected static final List<ResourceLocation> MATERIAL_SLOTS = new ArrayList<>(Arrays.asList());
 
     public BaseSmithingTemplate(Component appliesTo, Component ingredients, Component upgradeDescription, Component baseSlotDescription, Component additionsSlotDescription, List<ResourceLocation> baseSlotEmptyIcons, List<ResourceLocation> additionalSlotEmptyIcons, FeatureFlag... requiredFeatures) {
         super(appliesTo, ingredients, upgradeDescription, baseSlotDescription, additionsSlotDescription, baseSlotEmptyIcons, additionalSlotEmptyIcons, requiredFeatures);
