@@ -3,8 +3,6 @@ package net.nova.cosmicore.event;
 import net.minecraft.client.model.HorseModel;
 import net.minecraft.client.model.geom.builders.CubeDeformation;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
-import net.minecraft.client.renderer.ItemBlockRenderTypes;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.neoforged.api.distmarker.Dist;
@@ -14,21 +12,23 @@ import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
-import net.nova.cosmicore.client.model.AdvancedCrusherPistonModel;
 import net.nova.cosmicore.client.model.CosmicShieldTopModel;
 import net.nova.cosmicore.client.model.CrusherPistonModel;
-import net.nova.cosmicore.client.renderer.entity.layers.TranslucentHorseArmorLayer;
 import net.nova.cosmicore.client.renderer.ISTERProvider;
-import net.nova.cosmicore.client.renderer.entity.TranslucentHorseRenderer;
 import net.nova.cosmicore.client.renderer.block.AdvancedCrusherTileRenderer;
 import net.nova.cosmicore.client.renderer.block.CosmicShieldTileRenderer;
 import net.nova.cosmicore.client.renderer.block.CrusherTileRenderer;
+import net.nova.cosmicore.client.renderer.entity.TranslucentHorseRenderer;
+import net.nova.cosmicore.client.renderer.entity.layers.TranslucentHorseArmorLayer;
 import net.nova.cosmicore.client.renderer.item.CItemProperties;
 import net.nova.cosmicore.entity.AchondriteModel;
 import net.nova.cosmicore.entity.AchondriteRenderer;
 import net.nova.cosmicore.gui.crusher.AdvancedCrusherScreen;
 import net.nova.cosmicore.gui.crusher.CrusherScreen;
-import net.nova.cosmicore.init.*;
+import net.nova.cosmicore.init.CBlockEntities;
+import net.nova.cosmicore.init.CEntities;
+import net.nova.cosmicore.init.CItems;
+import net.nova.cosmicore.init.CMenuTypes;
 
 import static net.nova.cosmicore.Cosmicore.MODID;
 
@@ -55,7 +55,6 @@ public class CEventBusClientEvents {
         event.registerLayerDefinition(AchondriteModel.LAYER_LOCATION, AchondriteModel::createLayer);
 
         event.registerLayerDefinition(CrusherPistonModel.LAYER_LOCATION, CrusherPistonModel::createLayer);
-        event.registerLayerDefinition(AdvancedCrusherPistonModel.LAYER_LOCATION, AdvancedCrusherPistonModel::createLayer);
         event.registerLayerDefinition(CosmicShieldTopModel.LAYER_LOCATION, CosmicShieldTopModel::createLayer);
 
         event.registerLayerDefinition(TranslucentHorseArmorLayer.HORSE_ARMOR, () -> LayerDefinition.create(HorseModel.createBodyMesh(new CubeDeformation(0.1F)), 64, 64));
@@ -79,6 +78,7 @@ public class CEventBusClientEvents {
         });
     }
 
+    // Registering ISTER
     @SubscribeEvent
     public static void onRegisterClientExtensions(RegisterClientExtensionsEvent event) {
         event.registerItem(ISTERProvider.translucentArmor(EquipmentSlot.HEAD), CItems.LONSDALEITE_HELMET);

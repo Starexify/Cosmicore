@@ -52,7 +52,7 @@ public class AdvancedCrusherTile extends BaseCrusherTile {
         super(CBlockEntities.ADVANCED_CRUSHER_TILE.get(), pPos, pBlockState);
         this.FUEL_SLOT = 2;
         this.RESULT_SLOT_START = 3;
-        this.RESULT_SLOT_END = 11;
+        this.RESULT_SLOT_END = 10;
 
         this.inventory = NonNullList.withSize(11, ItemStack.EMPTY);
     }

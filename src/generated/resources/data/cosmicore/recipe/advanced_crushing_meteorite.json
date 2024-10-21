@@ -5,6 +5,13 @@
   },
   "results": [
     {
+      "chance": 0.001,
+      "item": {
+        "count": 1,
+        "id": "cosmicore:lonsdaleite"
+      }
+    },
+    {
       "chance": 0.01,
       "item": {
         "count": 1,

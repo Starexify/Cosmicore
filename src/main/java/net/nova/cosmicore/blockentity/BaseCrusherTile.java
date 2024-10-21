@@ -37,6 +37,11 @@ public class BaseCrusherTile extends BaseContainerBlockEntity {
     public int RESULT_SLOT_START;
     public int RESULT_SLOT_END;
 
+    public static final Map<Item, Integer> FUEL_MAP = Map.of(
+            CItems.INFERNIUM_CRYSTAL.asItem(), 11,
+            CBlocks.INFERNIUM_BLOCK.asItem(), 44
+    );
+
     protected BaseCrusherTile(BlockEntityType<?> pType, BlockPos pPos, BlockState pBlockState) {
         super(pType, pPos, pBlockState);
     }
@@ -64,11 +69,6 @@ public class BaseCrusherTile extends BaseContainerBlockEntity {
     public boolean isCharged() {
         return this.ignisCharge > 0;
     }
-
-    public static final Map<Item, Integer> FUEL_MAP = Map.of(
-            CItems.INFERNIUM_CRYSTAL.asItem(), 11,
-            CBlocks.INFERNIUM_BLOCK.asItem(), 44
-    );
 
     public boolean isFuel(ItemStack item) {
         return FUEL_MAP.containsKey(item.getItem());

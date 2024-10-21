@@ -32,7 +32,7 @@ public class CrushingRecipes extends CRecipeProvider {
                 .addResult(Items.COBBLESTONE, 3, 0.25f)
                 .addResult(Items.COBBLESTONE, 2, 0.35f)
                 .addResult(Items.COBBLESTONE, 1, 0.5f)
-                .save(recipeOutput, path + getCrushingRecipeName(CBlocks.ACHONDRITE));
+                .save(recipeOutput, getCrushingRecipeName(CBlocks.ACHONDRITE));
 
         CrushingRecipeBuilder.crushing(Ingredient.of(CBlocks.METEORITE))
                 .addResult(CItems.RAW_TITANIUM, 2, 0.05f)
@@ -44,7 +44,7 @@ public class CrushingRecipes extends CRecipeProvider {
                 .addResult(Items.COAL, 3, 0.12f)
                 .addResult(Items.COAL, 2, 0.27f)
                 .addResult(Items.COBBLESTONE, 1, 0.2f)
-                .save(recipeOutput, path + getCrushingRecipeName(CBlocks.METEORITE));
+                .save(recipeOutput, getCrushingRecipeName(CBlocks.METEORITE));
 
         // Advanced Crusher Recipes
         AdvancedCrushingRecipeBuilder.crushing(Ingredient.of(CBlocks.ACHONDRITE))
@@ -57,9 +57,10 @@ public class CrushingRecipes extends CRecipeProvider {
                 .addResult(Items.COBBLESTONE, 3, 0.2f)
                 .addResult(Items.COBBLESTONE, 2, 0.3f)
                 .addResult(Items.COBBLESTONE, 1, 0.45f)
-                .save(recipeOutput, path + getAdvancedCrushingRecipeName(CBlocks.ACHONDRITE));
+                .save(recipeOutput, getAdvancedCrushingRecipeName(CBlocks.ACHONDRITE));
 
         AdvancedCrushingRecipeBuilder.crushing(Ingredient.of(CBlocks.METEORITE))
+                .addResult(CItems.LONSDALEITE, 1, 0.001f)
                 .addResult(Items.DIAMOND, 1, 0.01f)
                 .addResult(CItems.RAW_TITANIUM, 2, 0.1f)
                 .addResult(CItems.RAW_TITANIUM, 1, 0.25f)
@@ -69,7 +70,7 @@ public class CrushingRecipes extends CRecipeProvider {
                 .addResult(Items.RAW_COPPER, 3, 0.4f)
                 .addResult(Items.COAL, 2, 0.12f)
                 .addResult(Items.COBBLESTONE, 1, 0.2f)
-                .save(recipeOutput, path + getAdvancedCrushingRecipeName(CBlocks.METEORITE));
+                .save(recipeOutput, getAdvancedCrushingRecipeName(CBlocks.METEORITE));
     }
 
 }

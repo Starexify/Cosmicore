@@ -18,7 +18,8 @@ public class CRecipeProvider extends RecipeProvider {
     public final PackOutput output;
     public final CompletableFuture<HolderLookup.Provider> lookupProvider;
     public static String path = MODID + ":";
-    public static final ImmutableList<ItemLike> TITANIUM_SMELTABLES = ImmutableList.of(CItems.RAW_TITANIUM);
+
+    protected static final ImmutableList<ItemLike> TITANIUM_SMELTABLES = ImmutableList.of(CItems.RAW_TITANIUM);
 
     public CRecipeProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider) {
         super(output, lookupProvider);
@@ -48,11 +49,11 @@ public class CRecipeProvider extends RecipeProvider {
     }
 
     public static String getAdvancedCrushingRecipeName(ItemLike pItemLike) {
-        return "advanced_crushing_" + getItemName(pItemLike);
+        return path + "advanced_crushing_" + getItemName(pItemLike);
     }
 
     public static String getCrushingRecipeName(ItemLike pItemLike) {
-        return "crushing_" + getItemName(pItemLike);
+        return path + "crushing_" + getItemName(pItemLike);
     }
 
     public static void nineBlockStorageRecipes(RecipeOutput pRecipeOutput, RecipeCategory pUnpackedCategory, ItemLike pUnpacked, RecipeCategory pPackedCategory, ItemLike pPacked) {
@@ -101,6 +102,10 @@ public class CRecipeProvider extends RecipeProvider {
     }
 
     public static String getSimpleRecipeName(ItemLike pItemLike) {
-        return path + getItemName(pItemLike);
+        return getPath() + getItemName(pItemLike);
+    }
+
+    public static String getPath() {
+        return path;
     }
 }
