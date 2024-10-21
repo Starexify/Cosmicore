@@ -1,5 +1,6 @@
 package net.nova.cosmicore.data;
 
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -91,6 +92,10 @@ public class LangProvider extends LanguageProvider {
     }
 
     public void addTrim(Supplier<? extends Item> item, String trim) {
-        add("trim_material." + MODID + "." + item.get(), trim);
+        add("trim_material." + MODID + "." + getItemName(item.get()), trim);
+    }
+
+    private String getItemName(Item item) {
+        return BuiltInRegistries.ITEM.getKey(item).toString().replace(MODID + ":", "");
     }
 }

@@ -4,6 +4,8 @@
       "type": "minecraft:paletted_permutations",
       "palette_key": "minecraft:trims/color_palettes/trim_palette",
       "permutations": {
+        "lonsdaleite": "cosmicore:trims/color_palettes/lonsdaleite",
+        "lonsdaleite_darker": "cosmicore:trims/color_palettes/lonsdaleite_darker",
         "titanium": "cosmicore:trims/color_palettes/titanium",
         "titanium_darker": "cosmicore:trims/color_palettes/titanium_darker"
       },

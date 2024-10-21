@@ -22,8 +22,8 @@ public class CTrimMaterials {
     public static final ResourceKey<TrimMaterial> LONSDALEITE = createKey("lonsdaleite");
 
     public static void bootstrap(BootstrapContext<TrimMaterial> pContext) {
-        register(pContext, TITANIUM, CItems.TITANIUM_INGOT.get(), Style.EMPTY.withColor(TextColor.parseColor("f5ffff").getOrThrow()), 0.2F, Map.of(CArmorMaterials.TITANIUM, "titanium_darker"));
-        register(pContext, LONSDALEITE, CItems.LONSDALEITE.get(), Style.EMPTY.withColor(TextColor.parseColor("f5ffff").getOrThrow()), 0.8F, Map.of(CArmorMaterials.LONSDALEITE, "lonsdaleite_darker"));
+        register(pContext, TITANIUM, CItems.TITANIUM_INGOT.get(), Style.EMPTY.withColor(TextColor.parseColor("#f5ffff").getOrThrow()), 0.2F, Map.of(CArmorMaterials.TITANIUM, "titanium_darker"));
+        register(pContext, LONSDALEITE, CItems.LONSDALEITE.get(), Style.EMPTY.withColor(TextColor.parseColor("#ccffff").getOrThrow()), 0.8F, Map.of(CArmorMaterials.LONSDALEITE, "lonsdaleite_darker"));
     }
 
     // Registers

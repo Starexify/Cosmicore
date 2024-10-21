@@ -13,38 +13,39 @@ import net.nova.cosmicore.item.TitaniumCrossbow;
 
 @OnlyIn(Dist.CLIENT)
 public class CItemProperties {
+    public static ResourceLocation pullPredicate = ResourceLocation.withDefaultNamespace("pull");
+    public static ResourceLocation pullingPredicate = ResourceLocation.withDefaultNamespace("pulling");
+    public static ResourceLocation chargedPredicate = ResourceLocation.withDefaultNamespace("charged");
+    public static ResourceLocation fireworkPredicate = ResourceLocation.withDefaultNamespace("firework");
+
     public static void addCustomItemProperties() {
         makeCrossbow(CItems.TITANIUM_CROSSBOW.get());
     }
 
     private static void makeCrossbow(Item item) {
-        ItemProperties.register(item, ResourceLocation.withDefaultNamespace("pull"),
-                (p_351682_, p_351683_, p_351684_, p_351685_) -> {
-                    if (p_351684_ == null) {
+        ItemProperties.register(item, pullPredicate, (stack, level, entity, seed) -> {
+                    if (entity == null) {
                         return 0.0F;
                     } else {
-                        return TitaniumCrossbow.isCharged(p_351682_)
+                        return TitaniumCrossbow.isCharged(stack)
                                 ? 0.0F
-                                : (float) (p_351682_.getUseDuration(p_351684_) - p_351684_.getUseItemRemainingTicks())
-                                / (float) TitaniumCrossbow.getChargeDuration(p_351682_, p_351684_);
+                                : (float) (stack.getUseDuration(entity) - entity.getUseItemRemainingTicks())
+                                / (float) TitaniumCrossbow.getChargeDuration(stack, entity);
                     }
                 }
         );
-        ItemProperties.register(item, ResourceLocation.withDefaultNamespace("pulling"),
-                (p_174605_, p_174606_, p_174607_, p_174608_) -> p_174607_ != null
-                        && p_174607_.isUsingItem()
-                        && p_174607_.getUseItem() == p_174605_
-                        && !TitaniumCrossbow.isCharged(p_174605_)
-                        ? 1.0F
-                        : 0.0F
+        ItemProperties.register(item, pullingPredicate, (stack, level, entity, seed) -> entity != null
+                && entity.isUsingItem()
+                && entity.getUseItem() == stack
+                && !TitaniumCrossbow.isCharged(stack)
+                ? 1.0F
+                : 0.0F
         );
 
-        ItemProperties.register(item, ResourceLocation.withDefaultNamespace("charged"),
-                (p_275891_, p_275892_, p_275893_, p_275894_) -> TitaniumCrossbow.isCharged(p_275891_) ? 1.0F : 0.0F
-        );
+        ItemProperties.register(item, chargedPredicate, (stack, level, entity, seed) -> TitaniumCrossbow.isCharged(stack) ? 1.0F : 0.0F);
 
-        ItemProperties.register(item, ResourceLocation.withDefaultNamespace("firework"), (p_329796_, p_329797_, p_329798_, p_329799_) -> {
-            ChargedProjectiles chargedprojectiles = p_329796_.get(DataComponents.CHARGED_PROJECTILES);
+        ItemProperties.register(item, fireworkPredicate, (stack, level, entity, seed) -> {
+            ChargedProjectiles chargedprojectiles = stack.get(DataComponents.CHARGED_PROJECTILES);
             return chargedprojectiles != null && chargedprojectiles.contains(Items.FIREWORK_ROCKET) ? 1.0F : 0.0F;
         });
     }

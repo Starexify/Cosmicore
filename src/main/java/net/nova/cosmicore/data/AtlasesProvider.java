@@ -24,7 +24,9 @@ public class AtlasesProvider extends SpriteSourceProvider {
     // Add here the palettes
     private final Map<String, ResourceLocation> permutations = Map.of(
             "titanium", Cosmicore.rl("trims/color_palettes/titanium"),
-            "titanium_darker", Cosmicore.rl("trims/color_palettes/titanium_darker")
+            "titanium_darker", Cosmicore.rl("trims/color_palettes/titanium_darker"),
+            "lonsdaleite", Cosmicore.rl("trims/color_palettes/lonsdaleite"),
+            "lonsdaleite_darker", Cosmicore.rl("trims/color_palettes/lonsdaleite_darker")
     );
 
     // Just some lists of things idk
