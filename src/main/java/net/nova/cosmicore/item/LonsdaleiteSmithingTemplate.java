@@ -4,8 +4,7 @@ import net.minecraft.Util;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.flag.FeatureFlag;
-
-import java.util.List;
+import net.nova.cosmicore.Cosmicore;
 
 import static net.nova.cosmicore.Cosmicore.rl;
 
@@ -25,6 +24,12 @@ public class LonsdaleiteSmithingTemplate extends BaseSmithingTemplate{
     public static final Component LONSDALEITE_UPGRADE_ADDITIONS_SLOT_DESCRIPTION = Component.translatable(
             Util.makeDescriptionId("item", rl("smithing_template.lonsdaleite_upgrade.additions_slot_description"))
     );
+
+    public static final ResourceLocation EMPTY_SLOT_LONSDALEITE = Cosmicore.rl("item/empty_slot_lonsdaleite");
+
+    static {
+        addMaterialSlot(EMPTY_SLOT_LONSDALEITE);
+    }
 
     public LonsdaleiteSmithingTemplate(Component pAppliesTo, Component pIngredients, Component pUpgradeDescription, Component pBaseSlotDescription, Component pAdditionsSlotDescription, FeatureFlag... pRequiredFeatures) {
         super(pAppliesTo, pIngredients, pUpgradeDescription, pBaseSlotDescription, pAdditionsSlotDescription, pRequiredFeatures);

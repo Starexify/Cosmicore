@@ -3,7 +3,7 @@ package net.nova.cosmicore.data;
 import net.minecraft.data.PackOutput;
 import net.neoforged.neoforge.common.data.LanguageProvider;
 import net.nova.cosmicore.init.CBlocks;
-import net.nova.cosmicore.init.CreativeTab;
+import net.nova.cosmicore.init.CreativeTabs;
 import net.nova.cosmicore.init.CEntities;
 import net.nova.cosmicore.init.CItems;
 import net.nova.cosmicore.item.LonsdaleiteSmithingTemplate;
@@ -38,6 +38,11 @@ public class LangProvider extends LanguageProvider {
         addItem(CItems.LONSDALEITE_CHESTPLATE, "Lonsdaleite Chestplate");
         addItem(CItems.LONSDALEITE_LEGGINGS, "Lonsdaleite Leggings");
         addItem(CItems.LONSDALEITE_BOOTS, "Lonsdaleite Boots");
+        addItem(CItems.LONSDALEITE_SWORD, "Lonsdaleite Sword");
+        addItem(CItems.LONSDALEITE_PICKAXE, "Lonsdaleite Pickaxe");
+        addItem(CItems.LONSDALEITE_AXE, "Lonsdaleite Axe");
+        addItem(CItems.LONSDALEITE_SHOVEL, "Lonsdaleite Shovel");
+        addItem(CItems.LONSDALEITE_HOE, "Lonsdaleite Hoe");
         addItem(CItems.LONSDALEITE_HORSE_ARMOR, "Lonsdaleite Horse Armor");
         addItem(CItems.LONSDALEITE,"Lonsdaleite");
         addItem(CItems.LONSDALEITE_UPGRADE_SMITHING_TEMPLATE,"Smithing Template");
@@ -59,7 +64,7 @@ public class LangProvider extends LanguageProvider {
         addBlock(CBlocks.COSMIC_SHIELD, "Cosmic Shield");
 
         // Creative Tab
-        add(CreativeTab.COSMICORE_TAB_TITLE, "Cosmicore");
+        add(CreativeTabs.COSMICORE_TAB_TITLE, "Cosmicore");
 
         // Trim Material
         add("trim_material.cosmicore.titanium", "Titanium Material");

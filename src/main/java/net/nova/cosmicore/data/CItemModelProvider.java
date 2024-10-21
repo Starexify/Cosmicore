@@ -65,7 +65,12 @@ public class CItemModelProvider extends ItemModelProvider {
         trimmableArmorItem(CItems.LONSDALEITE_LEGGINGS.get());
         trimmableArmorItem(CItems.LONSDALEITE_BOOTS.get());
 
-        trimmableArmorItem(CItems.TITANIUM_BOOTS.get());
+        handheldItem(CItems.LONSDALEITE_SWORD.get());
+        handheldItem(CItems.LONSDALEITE_PICKAXE.get());
+        handheldItem(CItems.LONSDALEITE_AXE.get());
+        handheldItem(CItems.LONSDALEITE_SHOVEL.get());
+        handheldItem(CItems.LONSDALEITE_HOE.get());
+
         basicItem(CItems.LONSDALEITE_HORSE_ARMOR.get());
 
         basicItem(CItems.LONSDALEITE.get());

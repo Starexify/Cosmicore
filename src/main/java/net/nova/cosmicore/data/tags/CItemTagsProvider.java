@@ -18,15 +18,25 @@ public class CItemTagsProvider extends ItemTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider pProvider) {
-        tag(ItemTags.SHOVELS).add(CItems.TITANIUM_SHOVEL.get());
+        tag(ItemTags.SWORDS).add(
+                CItems.TITANIUM_SWORD.get(), CItems.LONSDALEITE_SWORD.get()
+        );
 
-        tag(ItemTags.PICKAXES).add(CItems.TITANIUM_PICKAXE.get());
+        tag(ItemTags.PICKAXES).add(
+                CItems.TITANIUM_PICKAXE.get(), CItems.LONSDALEITE_PICKAXE.get()
+        );
 
-        tag(ItemTags.AXES).add(CItems.TITANIUM_AXE.get());
+        tag(ItemTags.AXES).add(
+                CItems.TITANIUM_AXE.get(), CItems.LONSDALEITE_AXE.get()
+        );
 
-        tag(ItemTags.HOES).add(CItems.TITANIUM_HOE.get());
+        tag(ItemTags.SHOVELS).add(
+                CItems.TITANIUM_SHOVEL.get(), CItems.LONSDALEITE_SHOVEL.get()
+        );
 
-        tag(ItemTags.SWORDS).add(CItems.TITANIUM_SWORD.get());
+        tag(ItemTags.HOES).add(
+                CItems.TITANIUM_HOE.get(), CItems.LONSDALEITE_HOE.get()
+        );
 
         tag(ItemTags.HEAD_ARMOR).add(
                 CItems.TITANIUM_HELMET.get(), CItems.LONSDALEITE_HELMET.get()
@@ -40,7 +50,9 @@ public class CItemTagsProvider extends ItemTagsProvider {
                 CItems.TITANIUM_LEGGINGS.get(), CItems.LONSDALEITE_LEGGINGS.get()
         );
 
-        tag(ItemTags.FOOT_ARMOR).add(CItems.TITANIUM_BOOTS.get());
+        tag(ItemTags.FOOT_ARMOR).add(
+                CItems.TITANIUM_BOOTS.get(), CItems.LONSDALEITE_BOOTS.get()
+        );
 
         tag(ItemTags.TRIM_MATERIALS).add(CItems.TITANIUM_INGOT.get());
 

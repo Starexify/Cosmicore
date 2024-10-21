@@ -6,22 +6,29 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.flag.FeatureFlag;
 import net.minecraft.world.item.SmithingTemplateItem;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class BaseSmithingTemplate extends SmithingTemplateItem {
     public static final ChatFormatting TITLE_FORMAT = ChatFormatting.GRAY;
     public static final ChatFormatting DESCRIPTION_FORMAT = ChatFormatting.BLUE;
 
-    public static final ResourceLocation EMPTY_SLOT_HELMET = ResourceLocation.withDefaultNamespace("item/empty_armor_slot_helmet");
-    public static final ResourceLocation EMPTY_SLOT_CHESTPLATE = ResourceLocation.withDefaultNamespace("item/empty_armor_slot_chestplate");
-    public static final ResourceLocation EMPTY_SLOT_LEGGINGS = ResourceLocation.withDefaultNamespace("item/empty_armor_slot_leggings");
-    public static final ResourceLocation EMPTY_SLOT_BOOTS = ResourceLocation.withDefaultNamespace("item/empty_armor_slot_boots");
-    public static final ResourceLocation EMPTY_SLOT_HOE = ResourceLocation.withDefaultNamespace("item/empty_slot_hoe");
-    public static final ResourceLocation EMPTY_SLOT_AXE = ResourceLocation.withDefaultNamespace("item/empty_slot_axe");
-    public static final ResourceLocation EMPTY_SLOT_SWORD = ResourceLocation.withDefaultNamespace("item/empty_slot_sword");
-    public static final ResourceLocation EMPTY_SLOT_SHOVEL = ResourceLocation.withDefaultNamespace("item/empty_slot_shovel");
-    public static final ResourceLocation EMPTY_SLOT_PICKAXE = ResourceLocation.withDefaultNamespace("item/empty_slot_pickaxe");
-    public static final ResourceLocation EMPTY_SLOT_INGOT = ResourceLocation.withDefaultNamespace("item/empty_slot_ingot");
+    protected static final List<ResourceLocation> EMPTY_SLOTS = new ArrayList<>(Arrays.asList(
+            ResourceLocation.withDefaultNamespace("item/empty_armor_slot_helmet"),
+            ResourceLocation.withDefaultNamespace("item/empty_armor_slot_chestplate"),
+            ResourceLocation.withDefaultNamespace("item/empty_armor_slot_leggings"),
+            ResourceLocation.withDefaultNamespace("item/empty_armor_slot_boots"),
+            ResourceLocation.withDefaultNamespace("item/empty_slot_hoe"),
+            ResourceLocation.withDefaultNamespace("item/empty_slot_axe"),
+            ResourceLocation.withDefaultNamespace("item/empty_slot_sword"),
+            ResourceLocation.withDefaultNamespace("item/empty_slot_shovel"),
+            ResourceLocation.withDefaultNamespace("item/empty_slot_pickaxe")
+    ));
+
+    protected static final List<ResourceLocation> MATERIAL_SLOTS = new ArrayList<>(Arrays.asList(
+            ResourceLocation.withDefaultNamespace("item/empty_slot_ingot")
+    ));
 
     public BaseSmithingTemplate(Component appliesTo, Component ingredients, Component upgradeDescription, Component baseSlotDescription, Component additionsSlotDescription, List<ResourceLocation> baseSlotEmptyIcons, List<ResourceLocation> additionalSlotEmptyIcons, FeatureFlag... requiredFeatures) {
         super(appliesTo, ingredients, upgradeDescription, baseSlotDescription, additionsSlotDescription, baseSlotEmptyIcons, additionalSlotEmptyIcons, requiredFeatures);
@@ -31,21 +38,19 @@ public class BaseSmithingTemplate extends SmithingTemplateItem {
         super(appliesTo, ingredients, upgradeDescription, baseSlotDescription, additionsSlotDescription, createBasicUpgradeIconList(), createBasicUpgradeMaterialList(), requiredFeatures);
     }
 
-    public static List<ResourceLocation> createBasicUpgradeIconList() {
-        return List.of(
-                EMPTY_SLOT_HELMET,
-                EMPTY_SLOT_SWORD,
-                EMPTY_SLOT_CHESTPLATE,
-                EMPTY_SLOT_PICKAXE,
-                EMPTY_SLOT_LEGGINGS,
-                EMPTY_SLOT_AXE,
-                EMPTY_SLOT_BOOTS,
-                EMPTY_SLOT_HOE,
-                EMPTY_SLOT_SHOVEL
-        );
+    protected static List<ResourceLocation> createBasicUpgradeIconList() {
+        return new ArrayList<>(EMPTY_SLOTS);
     }
 
-    public static List<ResourceLocation> createBasicUpgradeMaterialList() {
-        return List.of(EMPTY_SLOT_INGOT);
+    protected static List<ResourceLocation> createBasicUpgradeMaterialList() {
+        return new ArrayList<>(MATERIAL_SLOTS);
+    }
+
+    protected static void addEmptySlot(ResourceLocation slot) {
+        EMPTY_SLOTS.add(slot);
+    }
+
+    protected static void addMaterialSlot(ResourceLocation slot) {
+        MATERIAL_SLOTS.add(slot);
     }
 }

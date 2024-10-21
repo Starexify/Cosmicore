@@ -17,7 +17,7 @@ public class Cosmicore {
 
     public Cosmicore(IEventBus bus) {
         CArmorMaterials.ARMOR_MATERIALS.register(bus);
-        CreativeTab.CREATIVE_TAB.register(bus);
+        CreativeTabs.CREATIVE_TAB.register(bus);
         CItems.ITEMS.register(bus);
         CBlocks.BLOCKS.register(bus);
         CRecipeTypes.RECIPE_TYPES.register(bus);

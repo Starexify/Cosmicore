@@ -9,7 +9,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 
 import static net.nova.cosmicore.Cosmicore.MODID;
 
-public class CreativeTab {
+public class CreativeTabs {
     public static DeferredRegister<CreativeModeTab> CREATIVE_TAB = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MODID);
 
     public static String COSMICORE_TAB_TITLE = "cosmicore.creativetab";
@@ -18,7 +18,7 @@ public class CreativeTab {
         CreativeModeTab.Builder builder = CreativeModeTab.builder();
 
         builder.displayItems((itemDisplay, output) -> {
-            // Titanium Stuff
+            // Armors & Tools Stuff
             output.accept(CItems.TITANIUM_HELMET);
             output.accept(CItems.TITANIUM_CHESTPLATE);
             output.accept(CItems.TITANIUM_LEGGINGS);
@@ -29,27 +29,28 @@ public class CreativeTab {
             output.accept(CItems.TITANIUM_SHOVEL);
             output.accept(CItems.TITANIUM_HOE);
 
-            output.accept(CItems.TITANIUM_CROSSBOW);
-            output.accept(CItems.TITANIUM_HORSE_ARMOR);
-
-            output.accept(CItems.RAW_TITANIUM);
-            output.accept(CItems.TITANIUM_NUGGET);
-            output.accept(CItems.TITANIUM_INGOT);
-            output.accept(CBlocks.RAW_TITANIUM_BLOCK);
-            output.accept(CBlocks.TITANIUM_BLOCK);
-            
-            output.accept(CItems.TITANIUM_UPGRADE_SMITHING_TEMPLATE);
-
-            // Lonsdaleite Stuff
             output.accept(CItems.LONSDALEITE_HELMET);
             output.accept(CItems.LONSDALEITE_CHESTPLATE);
             output.accept(CItems.LONSDALEITE_LEGGINGS);
             output.accept(CItems.LONSDALEITE_BOOTS);
+            output.accept(CItems.LONSDALEITE_SWORD);
+            output.accept(CItems.LONSDALEITE_PICKAXE);
+            output.accept(CItems.LONSDALEITE_AXE);
+            output.accept(CItems.LONSDALEITE_SHOVEL);
+            output.accept(CItems.LONSDALEITE_HOE);
 
+            output.accept(CItems.TITANIUM_CROSSBOW);
+            output.accept(CItems.TITANIUM_HORSE_ARMOR);
             output.accept(CItems.LONSDALEITE_HORSE_ARMOR);
 
+            output.accept(CItems.RAW_TITANIUM);
+            output.accept(CItems.TITANIUM_NUGGET);
+            output.accept(CItems.TITANIUM_INGOT);
             output.accept(CItems.LONSDALEITE);
-
+            output.accept(CBlocks.RAW_TITANIUM_BLOCK);
+            output.accept(CBlocks.TITANIUM_BLOCK);
+            
+            output.accept(CItems.TITANIUM_UPGRADE_SMITHING_TEMPLATE);
             output.accept(CItems.LONSDALEITE_UPGRADE_SMITHING_TEMPLATE);
 
             // Meteorites
