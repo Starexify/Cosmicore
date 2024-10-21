@@ -4,6 +4,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.Connection;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
@@ -60,9 +61,11 @@ public class BaseCrusherTile extends BaseContainerBlockEntity {
                 craftItem();
                 resetProgress();
                 this.ignisCharge--;
+                level.sendBlockUpdated(pos, state, state, Block.UPDATE_ALL);
             }
         } else {
             resetProgress();
+            level.sendBlockUpdated(pos, state, state, Block.UPDATE_ALL);
         }
     }
 
@@ -199,6 +202,14 @@ public class BaseCrusherTile extends BaseContainerBlockEntity {
 
     // Updates for Rendering
     @Override
+    public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt, HolderLookup.Provider lookupProvider) {
+        if (level != null && level.isClientSide) {
+            CompoundTag tag = pkt.getTag();
+            handleUpdateTag(tag, level.registryAccess());
+        }
+    }
+
+    @Override
     public void handleUpdateTag(CompoundTag tag, HolderLookup.Provider lookupProvider) {
         ContainerHelper.loadAllItems(tag, inventory, lookupProvider);
         crushingProgress = tag.getInt("CrushingProgress");
@@ -206,9 +217,10 @@ public class BaseCrusherTile extends BaseContainerBlockEntity {
 
     @Override
     public CompoundTag getUpdateTag(HolderLookup.Provider pRegistries) {
-        CompoundTag pTag = super.getUpdateTag(pRegistries);
-        pTag.putInt("CrushingProgress", crushingProgress);
-        return pTag;
+        CompoundTag tag = super.getUpdateTag(pRegistries);
+        ContainerHelper.saveAllItems(tag, inventory, pRegistries);
+        tag.putInt("CrushingProgress", crushingProgress);
+        return tag;
     }
 
     @Override

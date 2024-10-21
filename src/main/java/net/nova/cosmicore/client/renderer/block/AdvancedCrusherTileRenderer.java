@@ -25,22 +25,42 @@ public class AdvancedCrusherTileRenderer extends AbstractCrusherTileRenderer<Adv
     public void render(AdvancedCrusherTile advancedCrusherTile, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, int packedOverlay) {
         // Render the item in crusher
         poseStack.pushPose();
-        renderCrushedItem(advancedCrusherTile, poseStack, bufferSource);
+        renderCrushedItems(advancedCrusherTile, poseStack, bufferSource);
         poseStack.popPose();
 
         super.render(advancedCrusherTile, partialTick, poseStack, bufferSource, packedLight, packedOverlay);
     }
 
-    private void renderCrushedItem(AdvancedCrusherTile advancedCrusherTile, PoseStack poseStack, MultiBufferSource bufferSource) {
+    private void renderCrushedItems(AdvancedCrusherTile advancedCrusherTile, PoseStack poseStack, MultiBufferSource bufferSource) {
         ItemRenderer itemRenderer = Minecraft.getInstance().getItemRenderer();
-        ItemStack itemStack = advancedCrusherTile.getRenderedStack();
+        ItemStack mainStack = advancedCrusherTile.getRenderedStack();
+        ItemStack additionalStack = advancedCrusherTile.getRenderedAddition();
 
-        poseStack.pushPose();
-        poseStack.translate(0.5f, 0.4f, 0.5f);
-        poseStack.scale(0.6f, 0.6f, 0.6f);
-        itemRenderer.renderStatic(itemStack, ItemDisplayContext.FIXED, getLightLevel(advancedCrusherTile.getLevel(), advancedCrusherTile.getBlockPos()),
-                OverlayTexture.NO_OVERLAY, poseStack, bufferSource, advancedCrusherTile.getLevel(), 1);
-        poseStack.popPose();
+        if (!mainStack.isEmpty() && additionalStack.isEmpty() || mainStack.isEmpty() && !additionalStack.isEmpty()) {
+            ItemStack stackToRender = !mainStack.isEmpty() ? mainStack : additionalStack;
+            poseStack.pushPose();
+            poseStack.translate(0.5f, 0.4f, 0.5f);
+            poseStack.scale(0.6f, 0.6f, 0.6f);
+            itemRenderer.renderStatic(stackToRender, ItemDisplayContext.FIXED, getLightLevel(advancedCrusherTile.getLevel(), advancedCrusherTile.getBlockPos()),
+                    OverlayTexture.NO_OVERLAY, poseStack, bufferSource, advancedCrusherTile.getLevel(), 1);
+            poseStack.popPose();
+        } else if (!mainStack.isEmpty() && !additionalStack.isEmpty()) {
+            // Render main item
+            poseStack.pushPose();
+            poseStack.translate(0.65f, 0.4f, 0.65f);
+            poseStack.scale(0.6f, 0.6f, 0.6f);
+            itemRenderer.renderStatic(mainStack, ItemDisplayContext.FIXED, getLightLevel(advancedCrusherTile.getLevel(), advancedCrusherTile.getBlockPos()),
+                    OverlayTexture.NO_OVERLAY, poseStack, bufferSource, advancedCrusherTile.getLevel(), 1);
+            poseStack.popPose();
+
+            // Render additional item
+            poseStack.pushPose();
+            poseStack.translate(0.35f, 0.4f, 0.35f);
+            poseStack.scale(0.6f, 0.6f, 0.6f);
+            itemRenderer.renderStatic(additionalStack, ItemDisplayContext.FIXED, getLightLevel(advancedCrusherTile.getLevel(), advancedCrusherTile.getBlockPos()),
+                    OverlayTexture.NO_OVERLAY, poseStack, bufferSource, advancedCrusherTile.getLevel(), 1);
+            poseStack.popPose();
+        }
     }
 
     @Override

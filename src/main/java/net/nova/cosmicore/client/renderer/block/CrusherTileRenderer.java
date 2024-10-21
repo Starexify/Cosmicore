@@ -32,15 +32,17 @@ public class CrusherTileRenderer extends AbstractCrusherTileRenderer<CrusherTile
     }
 
     public void renderCrushedItem(CrusherTile crusherTile, PoseStack poseStack, MultiBufferSource bufferSource) {
-        ItemRenderer itemRenderer = Minecraft.getInstance().getItemRenderer();
         ItemStack itemStack = crusherTile.getRenderedStack();
 
-        poseStack.pushPose();
-        poseStack.translate(0.5f, 0.4f, 0.5f);
-        poseStack.scale(0.6f, 0.6f, 0.6f);
-        itemRenderer.renderStatic(itemStack, ItemDisplayContext.FIXED, getLightLevel(crusherTile.getLevel(), crusherTile.getBlockPos()),
-                OverlayTexture.NO_OVERLAY, poseStack, bufferSource, crusherTile.getLevel(), 1);
-        poseStack.popPose();
+        if (!itemStack.isEmpty()) {
+            ItemRenderer itemRenderer = Minecraft.getInstance().getItemRenderer();
+            poseStack.pushPose();
+            poseStack.translate(0.5f, 0.4f, 0.5f);
+            poseStack.scale(0.6f, 0.6f, 0.6f);
+            itemRenderer.renderStatic(itemStack, ItemDisplayContext.FIXED, getLightLevel(crusherTile.getLevel(), crusherTile.getBlockPos()),
+                    OverlayTexture.NO_OVERLAY, poseStack, bufferSource, crusherTile.getLevel(), 1);
+            poseStack.popPose();
+        }
     }
 
     @Override
