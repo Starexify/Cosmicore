@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": {
+    "item": "cosmicore:lonsdaleite"
+  },
+  "base": {
+    "item": "minecraft:diamond_helmet"
+  },
+  "result": {
+    "count": 1,
+    "id": "cosmicore:lonsdaleite_helmet"
+  },
+  "template": {
+    "item": "cosmicore:lonsdaleite_upgrade_smithing_template"
+  }
+}

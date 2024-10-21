@@ -1,6 +1,8 @@
 package net.nova.cosmicore.data;
 
 import net.minecraft.data.PackOutput;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.data.LanguageProvider;
 import net.nova.cosmicore.init.CBlocks;
 import net.nova.cosmicore.init.CreativeTabs;
@@ -8,6 +10,8 @@ import net.nova.cosmicore.init.CEntities;
 import net.nova.cosmicore.init.CItems;
 import net.nova.cosmicore.item.LonsdaleiteSmithingTemplate;
 import net.nova.cosmicore.item.TitaniumSmithingTemplate;
+
+import java.util.function.Supplier;
 
 import static net.nova.cosmicore.Cosmicore.MODID;
 
@@ -67,7 +71,8 @@ public class LangProvider extends LanguageProvider {
         add(CreativeTabs.COSMICORE_TAB_TITLE, "Cosmicore");
 
         // Trim Material
-        add("trim_material.cosmicore.titanium", "Titanium Material");
+        addTrim(CItems.TITANIUM_INGOT, "Titanium Material");
+        addTrim(CItems.LONSDALEITE, "Lonsdaleite Material");
 
         // Smithing Template
         add(TitaniumSmithingTemplate.TITANIUM_UPGRADE_ADDITIONS_SLOT_DESCRIPTION.getString(), "Add Titanium Ingot");
@@ -75,7 +80,7 @@ public class LangProvider extends LanguageProvider {
         add(TitaniumSmithingTemplate.TITANIUM_UPGRADE_BASE_SLOT_DESCRIPTION.getString(), "Add iron armor, weapon, or tool");
         add(TitaniumSmithingTemplate.TITANIUM_UPGRADE_INGREDIENTS.getString(), "Titanium Ingot");
         add(TitaniumSmithingTemplate.TITANIUM_UPGRADE.getString(), "Titanium Upgrade");
-        add(LonsdaleiteSmithingTemplate.LONSDALEITE_UPGRADE_ADDITIONS_SLOT_DESCRIPTION.getString(), "Add Lonsdaleite Ingot");
+        add(LonsdaleiteSmithingTemplate.LONSDALEITE_UPGRADE_ADDITIONS_SLOT_DESCRIPTION.getString(), "Add Lonsdaleite");
         add(LonsdaleiteSmithingTemplate.LONSDALEITE_UPGRADE_APPLIES_TO.getString(), "Diamond Equipment");
         add(LonsdaleiteSmithingTemplate.LONSDALEITE_UPGRADE_BASE_SLOT_DESCRIPTION.getString(), "Add iron armor, weapon, or tool");
         add(LonsdaleiteSmithingTemplate.LONSDALEITE_UPGRADE_INGREDIENTS.getString(), "Lonsdaleite");
@@ -83,5 +88,9 @@ public class LangProvider extends LanguageProvider {
 
         // Entities
         add(CEntities.ACHONDRITE.get(), "Achondrite");
+    }
+
+    public void addTrim(Supplier<? extends Item> item, String trim) {
+        add("trim_material." + MODID + "." + item.get(), trim);
     }
 }

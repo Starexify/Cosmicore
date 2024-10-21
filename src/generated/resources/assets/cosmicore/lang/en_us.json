@@ -26,7 +26,7 @@
   "item.cosmicore.lonsdaleite_sword": "Lonsdaleite Sword",
   "item.cosmicore.lonsdaleite_upgrade_smithing_template": "Smithing Template",
   "item.cosmicore.raw_titanium": "Raw Titanium",
-  "item.cosmicore.smithing_template.lonsdaleite_upgrade.additions_slot_description": "Add Lonsdaleite Ingot",
+  "item.cosmicore.smithing_template.lonsdaleite_upgrade.additions_slot_description": "Add Lonsdaleite",
   "item.cosmicore.smithing_template.lonsdaleite_upgrade.applies_to": "Diamond Equipment",
   "item.cosmicore.smithing_template.lonsdaleite_upgrade.base_slot_description": "Add iron armor, weapon, or tool",
   "item.cosmicore.smithing_template.lonsdaleite_upgrade.ingredients": "Lonsdaleite",
@@ -49,7 +49,8 @@
   "item.cosmicore.titanium_shovel": "Titanium Shovel",
   "item.cosmicore.titanium_sword": "Titanium Sword",
   "item.cosmicore.titanium_upgrade_smithing_template": "Smithing Template",
-  "trim_material.cosmicore.titanium": "Titanium Material",
+  "trim_material.cosmicore.cosmicore:lonsdaleite": "Lonsdaleite Material",
+  "trim_material.cosmicore.cosmicore:titanium_ingot": "Titanium Material",
   "upgrade.cosmicore.lonsdaleite_upgrade": "Lonsdaleite Upgrade",
   "upgrade.cosmicore.titanium_upgrade": "Titanium Upgrade"
 }

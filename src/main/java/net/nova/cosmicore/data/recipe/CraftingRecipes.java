@@ -27,6 +27,7 @@ public class CraftingRecipes extends CRecipeProvider {
         nineBlockStorageRecipesRecipesWithCustomUnpacking(recipeOutput, RecipeCategory.MISC, CItems.TITANIUM_INGOT, RecipeCategory.BUILDING_BLOCKS, CBlocks.TITANIUM_BLOCK, "titanium_ingot_from_titanium_block", "titanium_ingot");
 
         copySmithingTemplate(recipeOutput, CItems.TITANIUM_UPGRADE_SMITHING_TEMPLATE, CBlocks.METEORITE, Items.IRON_INGOT);
+        copySmithingTemplate(recipeOutput, CItems.LONSDALEITE_UPGRADE_SMITHING_TEMPLATE, CBlocks.PALLASITE, Items.DIAMOND);
 
         // Gears Recipes
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, CItems.IRON_GEAR)
