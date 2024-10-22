@@ -50,6 +50,8 @@
   "item.cosmicore.titanium_shovel": "Titanium Shovel",
   "item.cosmicore.titanium_sword": "Titanium Sword",
   "item.cosmicore.titanium_upgrade_smithing_template": "Smithing Template",
+  "message.cosmicore.meteor_fall": "A meteor has entered the atmosphere!",
+  "message.cosmicore.meteor_shielded": "The meteor has been blocked by a meteor shield.",
   "trim_material.cosmicore.lonsdaleite": "Lonsdaleite Material",
   "trim_material.cosmicore.titanium_ingot": "Titanium Material",
   "upgrade.cosmicore.lonsdaleite_upgrade": "Lonsdaleite Upgrade",

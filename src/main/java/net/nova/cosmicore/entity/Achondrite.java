@@ -1,18 +1,14 @@
 package net.nova.cosmicore.entity;
 
-import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.SectionPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.TickTask;
 import net.minecraft.server.level.ServerChunkCache;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.AnimationState;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.level.ChunkPos;
@@ -23,14 +19,13 @@ import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.structure.*;
 import net.minecraft.world.phys.Vec3;
 import net.nova.cosmicore.Cosmicore;
-import net.nova.cosmicore.init.CBlocks;
 import net.nova.cosmicore.init.CTags;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
-public class Achondrite extends Entity {
+public class Achondrite extends BaseMeteor {
     public static final int DEATH_ANIMATION_DURATION = 40;
     public final AnimationState fallingAnimationState = new AnimationState();
     public final AnimationState explodedAnimationState = new AnimationState();
@@ -38,19 +33,10 @@ public class Achondrite extends Entity {
     public BlockPos landingPos;
     public boolean isLanded = false;
     public static final int DESTRUCTION_RADIUS = 8;
-    public static final int SHIELD_CHECK_RADIUS = 100; // 100 blocks in each direction, creating a 200x200 area
-    public static final int SHIELD_CHECK_INTERVAL = 20; // Check every second (20 ticks)
     public int shieldCheckCounter = 0;
 
-    public Achondrite(EntityType<?> pEntityType, Level pLevel) {
-        super(pEntityType, pLevel);
-
-        if (!pLevel.isClientSide()) {
-            ServerLevel serverLevel = (ServerLevel) pLevel;
-            Component message = Component.literal("A meteor has entered the atmosphere!")
-                    .withStyle(ChatFormatting.RED, ChatFormatting.BOLD);
-            serverLevel.getServer().getPlayerList().broadcastSystemMessage(message, false);
-        }
+    public Achondrite(EntityType<?> entityType, Level level) {
+        super(entityType, level);
     }
 
     @Override
@@ -61,9 +47,14 @@ public class Achondrite extends Entity {
             shieldCheckCounter = 0;
             if (isShieldNearby()) {
                 this.remove(RemovalReason.KILLED);
+                if (!level().isClientSide()) {
+                    ServerLevel serverLevel = (ServerLevel) level();
+                    serverLevel.getServer().getPlayerList().broadcastSystemMessage(METEOR_SHIELDED_MESSAGE, false);
+                }
                 return;
             }
         }
+
         // *dies*
         if (deathAnimationTimer >= 0) {
             deathAnimationTimer--;
@@ -141,57 +132,6 @@ public class Achondrite extends Entity {
             this.setDeltaMovement(this.getDeltaMovement().add(motionX, fallSpeed, motionZ));
             this.move(MoverType.SELF, this.getDeltaMovement());
         }
-    }
-
-    private boolean isShieldNearby() {
-        if (this.level() instanceof ServerLevel serverLevel) {
-            BlockPos centerPos = this.blockPosition();
-            int chunkRadius = SHIELD_CHECK_RADIUS >> 4; // Convert block radius to chunk radius
-
-            for (int chunkX = -chunkRadius; chunkX <= chunkRadius; chunkX++) {
-                for (int chunkZ = -chunkRadius; chunkZ <= chunkRadius; chunkZ++) {
-                    ChunkPos chunkPos = new ChunkPos(
-                            SectionPos.blockToSectionCoord(centerPos.getX()) + chunkX,
-                            SectionPos.blockToSectionCoord(centerPos.getZ()) + chunkZ
-                    );
-
-                    // Only check loaded chunks to avoid lag
-                    if (serverLevel.isLoaded(chunkPos.getWorldPosition())) {
-                        if (checkChunkForShield(serverLevel, chunkPos, centerPos)) {
-                            return true;
-                        }
-                    }
-                }
-            }
-        }
-        return false;
-    }
-
-    private boolean checkChunkForShield(ServerLevel serverLevel, ChunkPos chunkPos, BlockPos centerPos) {
-        int minX = chunkPos.getMinBlockX();
-        int minZ = chunkPos.getMinBlockZ();
-        int maxX = chunkPos.getMaxBlockX();
-        int maxZ = chunkPos.getMaxBlockZ();
-
-        for (int x = minX; x <= maxX; x++) {
-            for (int z = minZ; z <= maxZ; z++) {
-                if (Math.abs(x - centerPos.getX()) <= SHIELD_CHECK_RADIUS &&
-                        Math.abs(z - centerPos.getZ()) <= SHIELD_CHECK_RADIUS) {
-                    for (int y = serverLevel.getMinBuildHeight(); y < serverLevel.getMaxBuildHeight(); y++) {
-                        BlockPos pos = new BlockPos(x, y, z);
-                        BlockState state = serverLevel.getBlockState(pos);
-                        if (isShieldBlock(state)) {
-                            return true;
-                        }
-                    }
-                }
-            }
-        }
-        return false;
-    }
-
-    private boolean isShieldBlock(BlockState state) {
-        return state.is(CBlocks.COSMIC_SHIELD);
     }
 
     public void updateClientAnimations() {
@@ -317,10 +257,6 @@ public class Achondrite extends Entity {
     }
 
     @Override
-    protected void defineSynchedData(SynchedEntityData.Builder pBuilder) {
-    }
-
-    @Override
     protected void readAdditionalSaveData(CompoundTag pCompound) {
         if (pCompound.contains("LandingPos")) {
             int[] pos = pCompound.getIntArray("LandingPos");
@@ -335,10 +271,5 @@ public class Achondrite extends Entity {
         if (landingPos != null) {
             pCompound.putIntArray("LandingPos", new int[]{landingPos.getX(), landingPos.getY(), landingPos.getZ()});
         }
-    }
-
-    @Override
-    public boolean isAttackable() {
-        return false;
     }
 }

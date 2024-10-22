@@ -46,13 +46,12 @@ public class CosmicShieldTileRenderer implements BlockEntityRenderer<CosmicShiel
         poseStack.pushPose();
         poseStack.translate(0.8, 0, 0.8);
 
-
-        long gameTime = cosmicShieldTile.getLevel().getGameTime();
+/*        long gameTime = cosmicShieldTile.getLevel().getGameTime();
         float rotationSpeed = 0.05f; // Adjust this value to change rotation speed
         float rotationProgress = (gameTime * rotationSpeed) % 1.0f;
         float yRotation = rotationProgress * 90f; // Rotate from 0 to 90 degrees
 
-        poseStack.mulPose(Axis.YP.rotationDegrees(yRotation));
+        poseStack.mulPose(Axis.YP.rotationDegrees(yRotation));*/
 
         poseStack.scale(1, -1, -1);
         shieldTopModel.antenna.render(poseStack, vertexConsumer, packedLight, packedOverlay);

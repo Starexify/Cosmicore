@@ -5,6 +5,7 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.data.LanguageProvider;
+import net.nova.cosmicore.entity.Achondrite;
 import net.nova.cosmicore.init.CBlocks;
 import net.nova.cosmicore.init.CreativeTabs;
 import net.nova.cosmicore.init.CEntities;
@@ -90,6 +91,10 @@ public class LangProvider extends LanguageProvider {
 
         // Entities
         add(CEntities.ACHONDRITE.get(), "Achondrite");
+
+        // Messages
+        add(Achondrite.METEOR_FALL_MESSAGE.getString(), "A meteor has entered the atmosphere!");
+        add(Achondrite.METEOR_SHIELDED_MESSAGE.getString(), "The meteor has been blocked by a meteor shield.");
     }
 
     public void addTrim(Supplier<? extends Item> item, String trim) {
