@@ -41,14 +41,14 @@ public class BaseCrusherMenu extends AbstractContainerMenu {
 
     // Crash maybe?
     public int getChargedProgress() {
-        int ignisCharge = this.data.get(0);
-        int ignisPower = this.data.get(1);
+        int currentIgnis = this.data.get(0);
+        int maxIgnis = this.data.get(1);
         int ignisChargeSize = 56;
 
-        if (ignisPower == 0) {
+        if (maxIgnis == 0) {
             return 0;
         }
-        return ignisCharge * ignisChargeSize / ignisPower;
+        return currentIgnis * ignisChargeSize / maxIgnis;
     }
 
     public int getCrushingProgress() {

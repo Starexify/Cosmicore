@@ -6,6 +6,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.data.LanguageProvider;
 import net.nova.cosmicore.entity.Achondrite;
+import net.nova.cosmicore.gui.crusher.CrusherScreen;
 import net.nova.cosmicore.init.CBlocks;
 import net.nova.cosmicore.init.CreativeTabs;
 import net.nova.cosmicore.init.CEntities;
@@ -95,6 +96,9 @@ public class LangProvider extends LanguageProvider {
         // Messages
         add(Achondrite.METEOR_FALL_MESSAGE.getString(), "A meteor has entered the atmosphere!");
         add(Achondrite.METEOR_SHIELDED_MESSAGE.getString(), "The meteor has been blocked by a meteor shield.");
+
+        // Crusher Tooltips
+        add(CrusherScreen.IGNIS_TOOLTIP, "%s/%s Ignis");
     }
 
     public void addTrim(Supplier<? extends Item> item, String trim) {

@@ -43,7 +43,7 @@ public class CItems {
     public static final DeferredItem<Item> LONSDALEITE_PICKAXE = ITEMS.register("lonsdaleite_pickaxe", () -> new PickaxeItem(CTiers.LONSDALEITE, new Item.Properties().attributes(PickaxeItem.createAttributes(CTiers.LONSDALEITE, 1.0F, -2.8F))));
     public static final DeferredItem<Item> LONSDALEITE_AXE = ITEMS.register("lonsdaleite_axe", () -> new AxeItem(CTiers.LONSDALEITE, new Item.Properties().attributes(AxeItem.createAttributes(CTiers.LONSDALEITE, 5.0F, -2.9F))));
     public static final DeferredItem<Item> LONSDALEITE_SHOVEL = ITEMS.register("lonsdaleite_shovel", () -> new ShovelItem(CTiers.LONSDALEITE, new Item.Properties().attributes(ShovelItem.createAttributes(CTiers.LONSDALEITE, 1.5F, -3.0F))));
-    public static final DeferredItem<Item> LONSDALEITE_HOE = ITEMS.register("lonsdaleite_hoe", () -> new HoeItem(CTiers.LONSDALEITE, new Item.Properties().attributes(HoeItem.createAttributes(CTiers.LONSDALEITE, -3.5F, -1.2F))));
+    public static final DeferredItem<Item> LONSDALEITE_HOE = ITEMS.register("lonsdaleite_hoe", () -> new HoeItem(CTiers.LONSDALEITE, new Item.Properties().attributes(HoeItem.createAttributes(CTiers.LONSDALEITE, -4.7F, 0.0F))));
 
     public static final DeferredItem<Item> LONSDALEITE_HORSE_ARMOR = ITEMS.register("lonsdaleite_horse_armor", () -> new AnimalArmorItem(CArmorMaterials.LONSDALEITE, AnimalArmorItem.BodyType.EQUESTRIAN, false, new Item.Properties().stacksTo(1)));
 
