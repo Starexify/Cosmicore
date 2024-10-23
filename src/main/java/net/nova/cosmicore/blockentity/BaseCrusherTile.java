@@ -51,20 +51,25 @@ public class BaseCrusherTile extends BaseContainerBlockEntity {
 
     // Logic for GUI
     public void serverTick(Level level, BlockPos pos, BlockState state) {
+        boolean changed = false;
+
         hasIgnis();
         if (isCharged() && hasRecipe()) {
             this.crushingProgress++;
-            setChanged(level, pos, state);
-            level.sendBlockUpdated(pos, state, state, Block.UPDATE_ALL);
+            changed = true;
 
             if (hasProgressFinished()) {
                 craftItem();
                 resetProgress();
                 this.ignisCharge--;
-                level.sendBlockUpdated(pos, state, state, Block.UPDATE_ALL);
+                changed = true;
             }
         } else {
             resetProgress();
+        }
+
+        if (changed) {
+            setChanged(level, pos, state);
             level.sendBlockUpdated(pos, state, state, Block.UPDATE_ALL);
         }
     }
@@ -167,37 +172,38 @@ public class BaseCrusherTile extends BaseContainerBlockEntity {
 
     // Stuff idk
     @Override
+    public int getContainerSize() {
+        return this.inventory.size();
+    }
+
+    @Override
     protected NonNullList<ItemStack> getItems() {
         return this.inventory;
     }
 
     @Override
-    protected void setItems(NonNullList<ItemStack> pItems) {
-        this.inventory = pItems;
-    }
-
-    @Override
-    public int getContainerSize() {
-        return this.inventory.size();
+    protected void setItems(NonNullList<ItemStack> items) {
+        this.inventory = items;
     }
 
     // Block nbt data
     @Override
-    protected void loadAdditional(CompoundTag pTag, HolderLookup.Provider pRegistries) {
-        super.loadAdditional(pTag, pRegistries);
-        ContainerHelper.loadAllItems(pTag, inventory, pRegistries);
-        ignisCharge = pTag.getInt("IgnisCharge");
-        ignisPower = pTag.getInt("IgnisPower");
-        crushingProgress = pTag.getInt("CrushingProgress");
+    protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
+        super.loadAdditional(tag, registries);
+        this.inventory = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
+        ContainerHelper.loadAllItems(tag, inventory, registries);
+        ignisCharge = tag.getInt("IgnisCharge");
+        ignisPower = tag.getInt("IgnisPower");
+        crushingProgress = tag.getInt("CrushingProgress");
     }
 
     @Override
-    protected void saveAdditional(CompoundTag pTag, HolderLookup.Provider pRegistries) {
-        super.saveAdditional(pTag, pRegistries);
-        ContainerHelper.saveAllItems(pTag, inventory, pRegistries);
-        pTag.putInt("IgnisCharge", ignisCharge);
-        pTag.putInt("IgnisPower", ignisPower);
-        pTag.putInt("CrushingProgress", crushingProgress);
+    protected void saveAdditional(CompoundTag tag, HolderLookup.Provider pRegistries) {
+        super.saveAdditional(tag, pRegistries);
+        tag.putInt("IgnisCharge", ignisCharge);
+        tag.putInt("IgnisPower", ignisPower);
+        tag.putInt("CrushingProgress", crushingProgress);
+        ContainerHelper.saveAllItems(tag, inventory, pRegistries);
     }
 
     // Updates for Rendering

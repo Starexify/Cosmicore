@@ -91,11 +91,10 @@ public class CrusherTile extends BaseCrusherTile {
     @Override
     public void craftItem() {
         Optional<RecipeHolder<CrushingRecipe>> recipe = getCurrentRecipe(this.inventory.getFirst());
-        ItemStack result = recipe.get().value().getResultItem(null);
-        this.inventory.getFirst().setCount(this.inventory.getFirst().getCount() - 1);
-
-        // Find the first available result slot
         if (recipe.isPresent()) {
+            ItemStack result = recipe.get().value().getResultItem(null);
+            this.inventory.getFirst().shrink(1);
+
             insertOrMergeResult(result);
         }
     }
