@@ -20,9 +20,9 @@ public abstract class AbstractCrusherScreen<T extends AbstractContainerMenu> ext
 
     // Ignis bar position
     public static final int IGNIS_X = 156;
-    public static final int IGNIS_Y = 15;
+    public static final int IGNIS_Y = 21;
     public static final int IGNIS_WIDTH = 8;
-    public static final int IGNIS_TEXTURE_HEIGHT = 56;
+    public static final int IGNIS_TEXTURE_HEIGHT = 45;
 
     public AbstractCrusherScreen(T menu, Inventory playerInventory, Component title, ResourceLocation texture) {
         super(menu, playerInventory, title);
@@ -52,7 +52,7 @@ public abstract class AbstractCrusherScreen<T extends AbstractContainerMenu> ext
 
         if (this.isCharged()) {
             int l = Mth.ceil(this.getChargedProgress());
-            guiGraphics.blitSprite(IGNIS_SPRITE, 8, 56, 0, 56 - l, i + 156, j + 15 + 56 - l, 8, l);
+            guiGraphics.blitSprite(IGNIS_SPRITE, IGNIS_WIDTH, IGNIS_TEXTURE_HEIGHT, 0, IGNIS_TEXTURE_HEIGHT - l, i + IGNIS_X, j + IGNIS_Y + IGNIS_TEXTURE_HEIGHT - l, IGNIS_WIDTH, l);
         }
 
         int j1 = Mth.ceil(this.getCrushingProgress());

@@ -34,7 +34,7 @@ public class CrusherMenu extends BaseCrusherMenu {
         this.internal = new InvWrapper(blockEntity);
 
         addSlot(new SlotItemHandler(internal, 0, 80, 16));
-        addSlot(new CrusherCrystalSlot(internal, 1, 152, 72, this));
+        addSlot(new CrusherCrystalSlot(internal, 1, 152, 67, this));
         addSlot(new CrusherResultSlot(internal, 2, 62, 54));
         addSlot(new CrusherResultSlot(internal, 3, 80, 54));
         addSlot(new CrusherResultSlot(internal, 4, 98, 54));

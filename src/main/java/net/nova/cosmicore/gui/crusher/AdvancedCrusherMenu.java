@@ -38,7 +38,7 @@ public class AdvancedCrusherMenu extends BaseCrusherMenu {
 
         addSlot(new SlotItemHandler(internal, 0, 71, 16));
         addSlot(new SlotItemHandler(internal, 1, 89, 16));
-        addSlot(new AdvancedCrusherCrystalSlot(internal, 2, 152, 72, this));
+        addSlot(new AdvancedCrusherCrystalSlot(internal, 2, 152, 67, this));
         addSlot(new CrusherResultSlot(internal, 3, 53, 54));
         addSlot(new CrusherResultSlot(internal, 4, 71, 54));
         addSlot(new CrusherResultSlot(internal, 5, 89, 54));
