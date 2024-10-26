@@ -9,7 +9,6 @@ import net.nova.cosmicore.Cosmicore;
 import net.nova.cosmicore.data.worldgen.meteor_site.MeteorSitePools;
 
 public class StructurePools {
-
     public static ResourceKey<StructureTemplatePool> createKey(String name) {
         return ResourceKey.create(Registries.TEMPLATE_POOL, Cosmicore.rl(name));
     }

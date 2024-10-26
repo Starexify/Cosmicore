@@ -18,8 +18,15 @@ import net.nova.cosmicore.init.CBlocks;
 import static net.nova.cosmicore.Cosmicore.rl;
 
 public class BaseMeteor extends Entity {
+    public static final int DEATH_ANIMATION_DURATION = 40;
+    public int deathAnimationTimer = -1;
+    public BlockPos landingPos;
+
+    public static final int DESTRUCTION_RADIUS = 10;
+
     public static final int SHIELD_CHECK_RADIUS = 100; // 100 blocks in each direction, creating a 200x200 area
     public static final int SHIELD_CHECK_INTERVAL = 20; // Check every second (20 ticks)
+    public int shieldCheckCounter = 0;
 
     public static final Component METEOR_FALL_MESSAGE = Component.translatable(
             Util.makeDescriptionId("message", rl("meteor_fall"))
@@ -36,6 +43,12 @@ public class BaseMeteor extends Entity {
             ServerLevel serverLevel = (ServerLevel) level;
             serverLevel.getServer().getPlayerList().broadcastSystemMessage(METEOR_FALL_MESSAGE, false);
         }
+    }
+
+    @Override
+    public void tick() {
+        super.tick();
+
     }
 
     // Shield Detection
@@ -101,12 +114,19 @@ public class BaseMeteor extends Entity {
     }
 
     @Override
-    protected void readAdditionalSaveData(CompoundTag compound) {
-
+    protected void readAdditionalSaveData(CompoundTag pCompound) {
+        if (pCompound.contains("LandingPos")) {
+            int[] pos = pCompound.getIntArray("LandingPos");
+            if (pos.length == 3) {
+                this.landingPos = new BlockPos(pos[0], pos[1], pos[2]);
+            }
+        }
     }
 
     @Override
-    protected void addAdditionalSaveData(CompoundTag compound) {
-
+    protected void addAdditionalSaveData(CompoundTag pCompound) {
+        if (landingPos != null) {
+            pCompound.putIntArray("LandingPos", new int[]{landingPos.getX(), landingPos.getY(), landingPos.getZ()});
+        }
     }
 }

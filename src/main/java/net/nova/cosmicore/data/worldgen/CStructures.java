@@ -1,6 +1,7 @@
 package net.nova.cosmicore.data.worldgen;
 
 import net.minecraft.core.HolderGetter;
+import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
@@ -20,6 +21,7 @@ public class CStructures {
     public static ResourceKey<Structure> METEOR_SITE = createKey("meteor_site");
     public static ResourceKey<Structure> DESERT_METEOR_SITE = createKey("desert_meteor_site");
     public static ResourceKey<Structure> BADLANDS_METEOR_SITE = createKey("badlands_meteor_site");
+    public static ResourceKey<Structure> ACHONDRITE_CRATER = createKey("achondrite_crater");
 
     public static void bootstrap(BootstrapContext<Structure> pContext) {
         HolderGetter<Biome> holdergetter = pContext.lookup(Registries.BIOME);
@@ -55,9 +57,18 @@ public class CStructures {
                 Heightmap.Types.WORLD_SURFACE_WG
         ));
 
+        pContext.register(ACHONDRITE_CRATER, new JigsawStructure(
+                new Structure.StructureSettings.Builder(HolderSet.empty())
+                        .terrainAdapation(TerrainAdjustment.BEARD_THIN).build(),
+                holdergetter1.getOrThrow(MeteorSitePools.ACHONDRITE_CRATER),
+                7,
+                ConstantHeight.of(VerticalAnchor.absolute(0)),
+                true,
+                Heightmap.Types.WORLD_SURFACE
+        ));
     }
 
-    private static ResourceKey<Structure> createKey(String name) {
+    public static ResourceKey<Structure> createKey(String name) {
         return ResourceKey.create(Registries.STRUCTURE, Cosmicore.rl(name));
     }
 }

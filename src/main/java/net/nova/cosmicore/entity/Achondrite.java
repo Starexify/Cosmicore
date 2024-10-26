@@ -3,8 +3,7 @@ package net.nova.cosmicore.entity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.SectionPos;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.server.TickTask;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerChunkCache;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
@@ -19,6 +18,7 @@ import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.structure.*;
 import net.minecraft.world.phys.Vec3;
 import net.nova.cosmicore.Cosmicore;
+import net.nova.cosmicore.data.worldgen.CStructures;
 import net.nova.cosmicore.init.CTags;
 
 import java.util.ArrayList;
@@ -26,14 +26,9 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 public class Achondrite extends BaseMeteor {
-    public static final int DEATH_ANIMATION_DURATION = 40;
     public final AnimationState fallingAnimationState = new AnimationState();
     public final AnimationState explodedAnimationState = new AnimationState();
-    public int deathAnimationTimer = -1;
-    public BlockPos landingPos;
     public boolean isLanded = false;
-    public static final int DESTRUCTION_RADIUS = 8;
-    public int shieldCheckCounter = 0;
 
     public Achondrite(EntityType<?> entityType, Level level) {
         super(entityType, level);
@@ -64,10 +59,8 @@ public class Achondrite extends BaseMeteor {
             }
 
             if (deathAnimationTimer <= 0) {
-                if (!this.level().isClientSide()) {
-                    ServerLevel serverLevel = (ServerLevel) this.level();
-                    serverLevel.getServer().tell(new TickTask(1, this::safeStructurePlacement));
-                }
+                craterPlacement();
+
                 this.remove(RemovalReason.KILLED);
                 return;
             }
@@ -134,6 +127,89 @@ public class Achondrite extends BaseMeteor {
         }
     }
 
+    public Structure getStructure() {
+        return level().registryAccess().registryOrThrow(CStructures.ACHONDRITE_CRATER.registryKey()).getHolderOrThrow(CStructures.ACHONDRITE_CRATER).value();
+    }
+
+    public void craterPlacement() {
+        if (!(level() instanceof ServerLevel serverlevel)) {
+            return;
+        }
+
+        BlockPos pos = this.landingPos != null ? this.landingPos : this.blockPosition();
+        Structure structure = getStructure();
+        ChunkGenerator chunkgenerator = serverlevel.getChunkSource().getGenerator();
+        StructureStart structurestart = structure.generate(
+                serverlevel.registryAccess(),
+                chunkgenerator,
+                chunkgenerator.getBiomeSource(),
+                serverlevel.getChunkSource().randomState(),
+                serverlevel.getStructureManager(),
+                serverlevel.getSeed(),
+                new ChunkPos(pos),
+                0,
+                serverlevel,
+                p_214580_ -> true
+        );
+
+        if (!structurestart.isValid()) {
+            Cosmicore.logger.error("[Cosmicore] Failed to generate Crater");
+            return;
+        }
+
+        BoundingBox boundingbox = structurestart.getBoundingBox();
+        int structureHeight = boundingbox.maxY() - boundingbox.minY();
+
+        // Calculate the offset to center the structure on the given position
+        int offsetX = pos.getX() - (boundingbox.minX() + boundingbox.maxX()) / 2;
+        int targetY = pos.getY() - 41; // Your desired Y position
+        int offsetY = targetY - boundingbox.minY(); // Offset from current minimum Y to target Y
+        int offsetZ = pos.getZ() - (boundingbox.minZ() + boundingbox.maxZ()) / 2;
+
+        if (!level().isClientSide()) {
+            ServerLevel serverLevel = (ServerLevel) level();
+            serverLevel.getServer().getPlayerList().broadcastSystemMessage(Component.literal("Bounding Box maxY: " + boundingbox.maxY()), false);
+            serverLevel.getServer().getPlayerList().broadcastSystemMessage(Component.literal("Bounding Box minY: " + boundingbox.minY()), false);
+            serverLevel.getServer().getPlayerList().broadcastSystemMessage(Component.literal("structureHeight: " + structureHeight), false);
+            serverLevel.getServer().getPlayerList().broadcastSystemMessage(Component.literal("offsetY: " + offsetY), false);
+        }
+
+        boundingbox = boundingbox.moved(offsetX, offsetY, offsetZ);
+
+        for (StructurePiece piece : structurestart.getPieces()) {
+            piece.move(offsetX, offsetY, offsetZ);
+        }
+
+        ChunkPos chunkpos = new ChunkPos(SectionPos.blockToSectionCoord(boundingbox.minX()), SectionPos.blockToSectionCoord(boundingbox.minZ()));
+        ChunkPos chunkpos1 = new ChunkPos(SectionPos.blockToSectionCoord(boundingbox.maxX()), SectionPos.blockToSectionCoord(boundingbox.maxZ()));
+
+        List<CompletableFuture<ChunkAccess>> chunkLoadFutures = new ArrayList<>();
+
+        CompletableFuture.allOf(chunkLoadFutures.toArray(new CompletableFuture[0])).thenRun(() -> {
+            for (int x = chunkpos.x; x <= chunkpos1.x; x++) {
+                for (int z = chunkpos.z; z <= chunkpos1.z; z++) {
+                    ChunkPos currentChunkPos = new ChunkPos(x, z);
+                    structurestart.placeInChunk(
+                            serverlevel,
+                            serverlevel.structureManager(),
+                            chunkgenerator,
+                            serverlevel.getRandom(),
+                            new BoundingBox(
+                                    currentChunkPos.getMinBlockX(),
+                                    serverlevel.getMinBuildHeight(),
+                                    currentChunkPos.getMinBlockZ(),
+                                    currentChunkPos.getMaxBlockX(),
+                                    serverlevel.getMaxBuildHeight(),
+                                    currentChunkPos.getMaxBlockZ()
+                            ),
+                            currentChunkPos
+                    );
+                }
+            }
+            Cosmicore.logger.info("[Cosmicore] Crater placed successfully");
+        });
+    }
+
     public void updateClientAnimations() {
         if (this.onGround() && !isLanded) {
             this.fallingAnimationState.stop();
@@ -147,6 +223,7 @@ public class Achondrite extends BaseMeteor {
         isLanded = true;
         this.landingPos = this.blockPosition();
         this.setDeltaMovement(Vec3.ZERO);
+
         this.level().addParticle(ParticleTypes.GUST_EMITTER_LARGE, this.getX(), this.getY(), this.getZ(), 0.0, 0.0, 0.0);
 
         // Start the death animation timer
@@ -174,102 +251,5 @@ public class Achondrite extends BaseMeteor {
 
     public boolean shouldDestroyBlock(BlockState state) {
         return state.is(CTags.BlockTags.METEOR_BREAKABLES);
-    }
-
-    public Structure getStructure() {
-        return level().registryAccess().registryOrThrow(BuiltinStructures.SWAMP_HUT.registryKey()).getHolderOrThrow(BuiltinStructures.SWAMP_HUT).value();
-    }
-
-    public void safeStructurePlacement() {
-        if (!(level() instanceof ServerLevel serverlevel)) {
-            return;
-        }
-
-        BlockPos pos = this.landingPos != null ? this.landingPos : this.blockPosition();
-        Structure structure = getStructure();
-        ChunkGenerator chunkgenerator = serverlevel.getChunkSource().getGenerator();
-        ServerChunkCache chunkCache = serverlevel.getChunkSource();
-        StructureStart structurestart = structure.generate(
-                serverlevel.registryAccess(),
-                chunkgenerator,
-                chunkgenerator.getBiomeSource(),
-                serverlevel.getChunkSource().randomState(),
-                serverlevel.getStructureManager(),
-                serverlevel.getSeed(),
-                new ChunkPos(pos),
-                0,
-                serverlevel,
-                p_214580_ -> true
-        );
-
-
-        if (!structurestart.isValid()) {
-            Cosmicore.logger.error("Failed to generate Structure");
-            return;
-        }
-
-        BoundingBox boundingbox = structurestart.getBoundingBox();
-
-        // Calculate the offset to center the structure on the given position
-        int offsetX = pos.getX() - (boundingbox.minX() + boundingbox.maxX()) / 2;
-        int offsetY = pos.getY() - boundingbox.minY();
-        int offsetZ = pos.getZ() - (boundingbox.minZ() + boundingbox.maxZ()) / 2;
-        boundingbox = boundingbox.move(offsetX, offsetY, offsetZ);
-
-        for (StructurePiece piece : structurestart.getPieces()) {
-            piece.move(offsetX, offsetY, offsetZ);
-        }
-
-        ChunkPos chunkpos = new ChunkPos(SectionPos.blockToSectionCoord(boundingbox.minX()), SectionPos.blockToSectionCoord(boundingbox.minZ()));
-        ChunkPos chunkpos1 = new ChunkPos(SectionPos.blockToSectionCoord(boundingbox.maxX()), SectionPos.blockToSectionCoord(boundingbox.maxZ()));
-
-        List<CompletableFuture<ChunkAccess>> chunkLoadFutures = new ArrayList<>();
-
-/*        for (int x = chunkpos.x; x <= chunkpos1.x; x++) {
-            for (int z = chunkpos.z; z <= chunkpos1.z; z++) {
-                chunkLoadFutures.add(chunkCache.getChunkFutureMainThread(x, z, ChunkStatus.FULL, true));
-            }
-        }*/
-
-        CompletableFuture.allOf(chunkLoadFutures.toArray(new CompletableFuture[0])).thenRun(() -> {
-            for (int x = chunkpos.x; x <= chunkpos1.x; x++) {
-                for (int z = chunkpos.z; z <= chunkpos1.z; z++) {
-                    ChunkPos currentChunkPos = new ChunkPos(x, z);
-                    structurestart.placeInChunk(
-                            serverlevel,
-                            serverlevel.structureManager(),
-                            chunkgenerator,
-                            serverlevel.getRandom(),
-                            new BoundingBox(
-                                    currentChunkPos.getMinBlockX(),
-                                    serverlevel.getMinBuildHeight(),
-                                    currentChunkPos.getMinBlockZ(),
-                                    currentChunkPos.getMaxBlockX(),
-                                    serverlevel.getMaxBuildHeight(),
-                                    currentChunkPos.getMaxBlockZ()
-                            ),
-                            currentChunkPos
-                    );
-                }
-            }
-            Cosmicore.logger.info("Structure placement completed successfully");
-        });
-    }
-
-    @Override
-    protected void readAdditionalSaveData(CompoundTag pCompound) {
-        if (pCompound.contains("LandingPos")) {
-            int[] pos = pCompound.getIntArray("LandingPos");
-            if (pos.length == 3) {
-                this.landingPos = new BlockPos(pos[0], pos[1], pos[2]);
-            }
-        }
-    }
-
-    @Override
-    protected void addAdditionalSaveData(CompoundTag pCompound) {
-        if (landingPos != null) {
-            pCompound.putIntArray("LandingPos", new int[]{landingPos.getX(), landingPos.getY(), landingPos.getZ()});
-        }
     }
 }

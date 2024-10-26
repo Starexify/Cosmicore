@@ -77,7 +77,6 @@ public class CStructureSets {
                         RandomSpreadType.LINEAR
                 )
         ));
-
     }
 
     private static ResourceKey<StructureSet> register(String name) {
