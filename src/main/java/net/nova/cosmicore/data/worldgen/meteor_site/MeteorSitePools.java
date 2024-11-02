@@ -16,7 +16,6 @@ public class MeteorSitePools {
     public static final ResourceKey<StructureTemplatePool> METEOR_SITE = StructurePools.createKey("meteor_site/base_plates");
     public static final ResourceKey<StructureTemplatePool> DESERT_METEOR_SITE = StructurePools.createKey("desert_meteor_site/base_plates");
     public static final ResourceKey<StructureTemplatePool> BADLANDS_METEOR_SITE = StructurePools.createKey("badlands_meteor_site/base_plates");
-    public static final ResourceKey<StructureTemplatePool> ACHONDRITE_CRATER = StructurePools.createKey("achondrite_crater");
 
     public static void bootstrap(BootstrapContext<StructureTemplatePool> pContext) {
         HolderGetter<StructureTemplatePool> holdergetter = pContext.lookup(Registries.TEMPLATE_POOL);
@@ -53,12 +52,6 @@ public class MeteorSitePools {
         );
         StructurePools.register(pContext, "badlands_meteor_site/badlands_meteor", new StructureTemplatePool(holder, ImmutableList.of(
                         Pair.of(StructurePoolElement.legacy("cosmicore:badlands_meteor_site/badlands_meteor"), 1)
-                ), StructureTemplatePool.Projection.RIGID)
-        );
-
-        // Meteor Crater
-        pContext.register(ACHONDRITE_CRATER, new StructureTemplatePool(holder, ImmutableList.of(
-                        Pair.of(StructurePoolElement.legacy("cosmicore:achondrite_crater/crater_1"), 1)
                 ), StructureTemplatePool.Projection.RIGID)
         );
     }

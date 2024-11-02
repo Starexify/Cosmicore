@@ -61,9 +61,9 @@ public record ChestLoot(HolderLookup.Provider registries) implements LootTableSu
                 .add(LootItem.lootTableItem(CItems.INFERNIUM_CRYSTAL).setWeight(6).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 3.0F))))
 
         ).withPool(LootPool.lootPool()
-                .setRolls(ConstantValue.exactly(1.0f))
-                .add(EmptyLootItem.emptyItem().setWeight(16))
-                .add(LootItem.lootTableItem(CItems.INFERNIUM_CRYSTAL).setWeight(2).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 3.0F))))
+                .setRolls(ConstantValue.exactly(1.0F))
+                .add(EmptyLootItem.emptyItem().setWeight(10))
+                .add(LootItem.lootTableItem(CItems.METEORITE_BANNER_PATTERN).setWeight(6).apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F))))
         );
     }
 }

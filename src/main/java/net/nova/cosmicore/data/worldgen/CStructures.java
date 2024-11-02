@@ -14,6 +14,7 @@ import net.minecraft.world.level.levelgen.structure.TerrainAdjustment;
 import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
 import net.minecraft.world.level.levelgen.structure.structures.JigsawStructure;
 import net.nova.cosmicore.Cosmicore;
+import net.nova.cosmicore.data.worldgen.meteor_site.MeteorPools;
 import net.nova.cosmicore.data.worldgen.meteor_site.MeteorSitePools;
 import net.nova.cosmicore.init.CTags;
 
@@ -21,7 +22,7 @@ public class CStructures {
     public static ResourceKey<Structure> METEOR_SITE = createKey("meteor_site");
     public static ResourceKey<Structure> DESERT_METEOR_SITE = createKey("desert_meteor_site");
     public static ResourceKey<Structure> BADLANDS_METEOR_SITE = createKey("badlands_meteor_site");
-    public static ResourceKey<Structure> ACHONDRITE_CRATER = createKey("achondrite_crater");
+    public static ResourceKey<Structure> ACHONDRITE_METEOR = createKey("achondrite_meteor");
 
     public static void bootstrap(BootstrapContext<Structure> pContext) {
         HolderGetter<Biome> holdergetter = pContext.lookup(Registries.BIOME);
@@ -57,10 +58,10 @@ public class CStructures {
                 Heightmap.Types.WORLD_SURFACE_WG
         ));
 
-        pContext.register(ACHONDRITE_CRATER, new JigsawStructure(
+        pContext.register(ACHONDRITE_METEOR, new JigsawStructure(
                 new Structure.StructureSettings.Builder(HolderSet.empty())
                         .terrainAdapation(TerrainAdjustment.BEARD_THIN).build(),
-                holdergetter1.getOrThrow(MeteorSitePools.ACHONDRITE_CRATER),
+                holdergetter1.getOrThrow(MeteorPools.ACHONDRITE_METEOR),
                 7,
                 ConstantHeight.of(VerticalAnchor.absolute(0)),
                 true,

@@ -128,7 +128,7 @@ public class Achondrite extends BaseMeteor {
     }
 
     public Structure getStructure() {
-        return level().registryAccess().registryOrThrow(CStructures.ACHONDRITE_CRATER.registryKey()).getHolderOrThrow(CStructures.ACHONDRITE_CRATER).value();
+        return level().registryAccess().registryOrThrow(CStructures.ACHONDRITE_METEOR.registryKey()).getHolderOrThrow(CStructures.ACHONDRITE_METEOR).value();
     }
 
     public void craterPlacement() {
@@ -162,7 +162,7 @@ public class Achondrite extends BaseMeteor {
 
         // Calculate the offset to center the structure on the given position
         int offsetX = pos.getX() - (boundingbox.minX() + boundingbox.maxX()) / 2;
-        int targetY = pos.getY() - 41; // Your desired Y position
+        int targetY = pos.getY() - 39; // Your desired Y position
         int offsetY = targetY - boundingbox.minY(); // Offset from current minimum Y to target Y
         int offsetZ = pos.getZ() - (boundingbox.minZ() + boundingbox.maxZ()) / 2;
 

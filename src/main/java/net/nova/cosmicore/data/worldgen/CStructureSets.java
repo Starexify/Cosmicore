@@ -79,7 +79,7 @@ public class CStructureSets {
         ));
     }
 
-    private static ResourceKey<StructureSet> register(String name) {
+    public static ResourceKey<StructureSet> register(String name) {
         return ResourceKey.create(Registries.STRUCTURE_SET, Cosmicore.rl(name));
     }
 }

@@ -5,6 +5,7 @@ import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
 import net.nova.cosmicore.Cosmicore;
+import net.nova.cosmicore.data.worldgen.meteor_site.MeteorPools;
 import net.nova.cosmicore.data.worldgen.meteor_site.MeteorSitePools;
 
 public class StructurePools {
@@ -18,5 +19,6 @@ public class StructurePools {
 
     public static void bootstrap(BootstrapContext<StructureTemplatePool> pContext) {
         MeteorSitePools.bootstrap(pContext);
+        MeteorPools.bootstrap(pContext);
     }
 }
