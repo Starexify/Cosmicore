@@ -1,6 +1,7 @@
 package net.nova.cosmicore.init;
 
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.tags.BannerPatternTags;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.component.ChargedProjectiles;
 import net.neoforged.neoforge.registries.DeferredItem;
@@ -57,4 +58,7 @@ public class CItems {
     // Gears
     public static final DeferredItem<Item> IRON_GEAR = ITEMS.register("iron_gear", () -> new Item(new Item.Properties()));
     public static final DeferredItem<Item> TITANIUM_GEAR = ITEMS.register("titanium_gear", () -> new Item(new Item.Properties()));
+
+    // Banner Pattern
+    public static final DeferredItem<BannerPatternItem> METEORITE_BANNER_PATTERN = ITEMS.register("meteorite_banner_pattern", () -> new BannerPatternItem(CTags.BannerPatternTags.PATTERN_ITEM_METEORITE, new Item.Properties().stacksTo(1).rarity(Rarity.RARE)));
 }

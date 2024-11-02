@@ -83,6 +83,9 @@ public class CItemModelProvider extends ItemModelProvider {
         // Gear Model
         gearItem(CItems.IRON_GEAR.get());
         gearItem(CItems.TITANIUM_GEAR.get());
+
+        // Banner Patterns
+        basicItem(CItems.METEORITE_BANNER_PATTERN.get());
     }
 
     // Models

@@ -20,7 +20,8 @@ public class DatapackProvider extends DatapackBuiltinEntriesProvider {
                         .add(Registries.STRUCTURE, CStructures::bootstrap)
                         .add(Registries.TEMPLATE_POOL, StructurePools::bootstrap)
                         .add(Registries.STRUCTURE_SET, CStructureSets::bootstrap)
-                        .add(Registries.TRIM_MATERIAL, CTrimMaterials::bootstrap),
+                        .add(Registries.TRIM_MATERIAL, CTrimMaterials::bootstrap)
+                        .add(Registries.BANNER_PATTERN, CBannerPatterns::bootstrap),
                 Set.of(MODID));
     }
 }

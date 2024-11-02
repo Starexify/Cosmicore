@@ -58,6 +58,9 @@ public class LangProvider extends LanguageProvider {
         addItem(CItems.IRON_GEAR, "Iron Gear");
         addItem(CItems.TITANIUM_GEAR, "Titanium Gear");
 
+        // Banner Patterns
+        addBannerPattern(CItems.METEORITE_BANNER_PATTERN, "Meteorite");
+
         // Blocks
         addBlock(CBlocks.RAW_TITANIUM_BLOCK, "Raw Titanium Block");
         addBlock(CBlocks.TITANIUM_BLOCK, "Titanium Block");
@@ -101,11 +104,16 @@ public class LangProvider extends LanguageProvider {
         add(CrusherScreen.IGNIS_TOOLTIP, "%s/%s Ignis");
     }
 
+    public void addBannerPattern(Supplier<? extends Item> item, String pattern) {
+        addItem(item, "Banner Pattern");
+        add(item.get().getDescriptionId() + ".desc", pattern);
+    }
+
     public void addTrim(Supplier<? extends Item> item, String trim) {
         add("trim_material." + MODID + "." + getItemName(item.get()), trim);
     }
 
-    private String getItemName(Item item) {
+    public String getItemName(Item item) {
         return BuiltInRegistries.ITEM.getKey(item).toString().replace(MODID + ":", "");
     }
 }

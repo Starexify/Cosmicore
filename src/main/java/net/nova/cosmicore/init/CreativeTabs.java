@@ -54,6 +54,8 @@ public class CreativeTabs {
             output.accept(CItems.TITANIUM_UPGRADE_SMITHING_TEMPLATE);
             output.accept(CItems.LONSDALEITE_UPGRADE_SMITHING_TEMPLATE);
 
+            output.accept(CItems.METEORITE_BANNER_PATTERN);
+
             // Meteorites
             output.accept(CBlocks.ACHONDRITE);
             output.accept(CBlocks.METEORITE);

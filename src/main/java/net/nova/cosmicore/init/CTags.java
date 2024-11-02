@@ -6,6 +6,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BannerPattern;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.nova.cosmicore.Cosmicore;
 
@@ -29,6 +30,10 @@ public class CTags {
         public static final ResourceKey<LootTable> METEOR_SITE_1 = register("chests/meteor_site_1");
     }
 
+    public static class BannerPatternTags {
+        public static final TagKey<BannerPattern> PATTERN_ITEM_METEORITE = createBanner("pattern_item/meteorite");
+    }
+
     // Register Tags
     public static TagKey<Block> createBlockTag(String name) {
         return TagKey.create(Registries.BLOCK, Cosmicore.rl(name));
@@ -48,5 +53,9 @@ public class CTags {
         } else {
             throw new IllegalArgumentException(pName.location() + " is already a registered built-in loot table");
         }
+    }
+
+    public static TagKey<BannerPattern> createBanner(String name) {
+        return TagKey.create(Registries.BANNER_PATTERN, Cosmicore.rl(name));
     }
 }

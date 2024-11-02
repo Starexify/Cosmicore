@@ -8,6 +8,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.level.storage.loot.entries.EmptyLootItem;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.functions.EnchantRandomlyFunction;
 import net.minecraft.world.level.storage.loot.functions.SetInstrumentFunction;
@@ -45,12 +46,11 @@ public record ChestLoot(HolderLookup.Provider registries) implements LootTableSu
                 .add(LootItem.lootTableItem(Items.EXPERIENCE_BOTTLE).setWeight(6))
                 .add(LootItem.lootTableItem(Items.ARROW).setWeight(3).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 7.0F))))
                 .add(LootItem.lootTableItem(Items.IRON_INGOT).setWeight(5).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F))))
-                .add(LootItem.lootTableItem(Items.BOOK).setWeight(1).apply(EnchantRandomlyFunction.randomApplicableEnchantment(this.registries)))
+                .add(LootItem.lootTableItem(Items.BOOK).setWeight(1).apply(EnchantRandomlyFunction.randomApplicableEnchantment(registries)))
 
         ).withPool(LootPool.lootPool()
                 .setRolls(UniformGenerator.between(0.0F, 1.0F))
-                .add(LootItem.lootTableItem(Items.GOAT_HORN))
-                .apply(SetInstrumentFunction.setInstrumentOptions(InstrumentTags.REGULAR_GOAT_HORNS))
+                .add(LootItem.lootTableItem(Items.GOAT_HORN)).apply(SetInstrumentFunction.setInstrumentOptions(InstrumentTags.REGULAR_GOAT_HORNS))
 
         ).withPool(LootPool.lootPool()
                 .setRolls(ConstantValue.exactly(1.0F))
@@ -59,6 +59,11 @@ public record ChestLoot(HolderLookup.Provider registries) implements LootTableSu
         ).withPool(LootPool.lootPool()
                 .setRolls(UniformGenerator.between(2.0F, 3.0f))
                 .add(LootItem.lootTableItem(CItems.INFERNIUM_CRYSTAL).setWeight(6).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 3.0F))))
+
+        ).withPool(LootPool.lootPool()
+                .setRolls(ConstantValue.exactly(1.0f))
+                .add(EmptyLootItem.emptyItem().setWeight(16))
+                .add(LootItem.lootTableItem(CItems.INFERNIUM_CRYSTAL).setWeight(2).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 3.0F))))
         );
     }
 }
