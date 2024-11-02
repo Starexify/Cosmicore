@@ -7,7 +7,7 @@
         "processors": {
           "processors": []
         },
-        "projection": "terrain_matching"
+        "projection": "rigid"
       },
       "weight": 5
     },
@@ -18,7 +18,7 @@
         "processors": {
           "processors": []
         },
-        "projection": "terrain_matching"
+        "projection": "rigid"
       },
       "weight": 1
     }

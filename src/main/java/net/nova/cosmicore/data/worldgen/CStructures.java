@@ -60,7 +60,7 @@ public class CStructures {
 
         pContext.register(ACHONDRITE_METEOR, new JigsawStructure(
                 new Structure.StructureSettings.Builder(HolderSet.empty())
-                        .terrainAdapation(TerrainAdjustment.BEARD_THIN).build(),
+                        .terrainAdapation(TerrainAdjustment.ENCAPSULATE).build(),
                 holdergetter1.getOrThrow(MeteorPools.ACHONDRITE_METEOR),
                 7,
                 ConstantHeight.of(VerticalAnchor.absolute(0)),

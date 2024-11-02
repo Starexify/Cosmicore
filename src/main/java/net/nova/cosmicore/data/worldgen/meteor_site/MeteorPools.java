@@ -23,7 +23,7 @@ public class MeteorPools {
         pContext.register(ACHONDRITE_METEOR, new StructureTemplatePool(holder, ImmutableList.of(
                         Pair.of(StructurePoolElement.legacy("cosmicore:achondrite_meteor/crater_1"), 5),
                         Pair.of(StructurePoolElement.legacy("cosmicore:achondrite_meteor/crater_2"), 1)
-                ), StructureTemplatePool.Projection.TERRAIN_MATCHING)
+                ), StructureTemplatePool.Projection.RIGID)
         );
     }
 }
