@@ -71,11 +71,11 @@ public class CEventBusClientEvents {
         event.registerBlockEntityRenderer(CBlockEntities.COSMIC_SHIELD.get(), CosmicShieldTileRenderer::new);
 
         // Letting Horse Armor be Transparent
-        event.registerEntityRenderer(EntityType.HORSE, (context) -> {
+/*        event.registerEntityRenderer(EntityType.HORSE, (context) -> {
             TranslucentHorseRenderer renderer = new TranslucentHorseRenderer(context);
-            renderer.addLayer(new TranslucentHorseArmorLayer(renderer, context.getModelSet()));
+            renderer.addLayer(new TranslucentHorseArmorLayer(renderer, context.getModelSet(), ));
             return renderer;
-        });
+        });*/
     }
 
     // Registering ISTER

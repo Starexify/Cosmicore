@@ -6,7 +6,6 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -41,7 +40,7 @@ public class CosmicShield extends BaseModel {
 
     // Interaction
     @Override
-    protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
+    protected InteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
         Item INFERNIUM_CRYSTAL = CItems.INFERNIUM_CRYSTAL.get();
         BlockEntity blockEntity = level.getBlockEntity(pos);
         if (blockEntity instanceof CosmicShieldTile cosmicShieldTile) {
@@ -61,9 +60,9 @@ public class CosmicShield extends BaseModel {
                 level.playSound(player, pos, SoundEvents.ITEM_FRAME_REMOVE_ITEM, SoundSource.BLOCKS, 1f, 2f);
                 level.sendBlockUpdated(pos, state, state, 3);
             }
-            return ItemInteractionResult.SUCCESS;
+            return InteractionResult.SUCCESS;
         }
-        return ItemInteractionResult.FAIL;
+        return InteractionResult.FAIL;
     }
 
     @Nullable

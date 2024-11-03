@@ -8,9 +8,8 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.TextColor;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.armortrim.TrimMaterial;
+import net.minecraft.world.item.equipment.trim.TrimMaterial;
 import net.nova.cosmicore.Cosmicore;
 import net.nova.cosmicore.init.CArmorMaterials;
 import net.nova.cosmicore.init.CItems;
@@ -23,7 +22,7 @@ public class CTrimMaterials {
 
     public static void bootstrap(BootstrapContext<TrimMaterial> pContext) {
         register(pContext, TITANIUM, CItems.TITANIUM_INGOT.get(), Style.EMPTY.withColor(TextColor.parseColor("#f5ffff").getOrThrow()), 0.2F, Map.of(CArmorMaterials.TITANIUM, "titanium_darker"));
-        register(pContext, LONSDALEITE, CItems.LONSDALEITE.get(), Style.EMPTY.withColor(TextColor.parseColor("#ccffff").getOrThrow()), 0.8F, Map.of(CArmorMaterials.LONSDALEITE, "lonsdaleite_darker"));
+        register(pContext, LONSDALEITE, CItems.LONSDALEITE.get(), Style.EMPTY.withColor(TextColor.parseColor("#ccffff").getOrThrow()), 0.8F, Map.of(CArmorMaterials.LONSDALEITE.getData(), "lonsdaleite_darker"));
     }
 
     // Registers
@@ -38,5 +37,8 @@ public class CTrimMaterials {
     public static void register(BootstrapContext<TrimMaterial> pContext, ResourceKey<TrimMaterial> pMaterialKey, Item pIngredient, Style pStyle, float pItemModelIndex, Map<Holder<ArmorMaterial>, String> pOverrideArmorMaterials) {
         TrimMaterial trimmaterial = TrimMaterial.create(pMaterialKey.location().getPath(), pIngredient, pItemModelIndex, Component.translatable(Util.makeDescriptionId("trim_material", pMaterialKey.location())).withStyle(pStyle), pOverrideArmorMaterials);
         pContext.register(pMaterialKey, trimmaterial);
+    }
+
+    private static class ArmorMaterial {
     }
 }
