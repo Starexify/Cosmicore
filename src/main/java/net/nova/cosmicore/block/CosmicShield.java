@@ -47,7 +47,7 @@ public class CosmicShield extends BaseModel {
         if (blockEntity instanceof CosmicShieldTile cosmicShieldTile) {
             if (cosmicShieldTile.isEmpty() && stack.getItem() == INFERNIUM_CRYSTAL) {
                 cosmicShieldTile.setItem(0, stack);
-                stack.shrink(1);
+                stack.consume(1, player);
                 level.playSound(player, pos, SoundEvents.ITEM_PICKUP, SoundSource.BLOCKS, 1f, 2f);
             } else if (!cosmicShieldTile.isEmpty()) {
                 ItemStack tileStack = cosmicShieldTile.getItem(0);
