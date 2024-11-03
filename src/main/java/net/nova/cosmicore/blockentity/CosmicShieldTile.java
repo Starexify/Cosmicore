@@ -4,6 +4,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
@@ -18,15 +19,10 @@ import net.nova.cosmicore.init.CBlockEntities;
 import javax.annotation.Nullable;
 
 public class CosmicShieldTile extends BlockEntity implements Container {
-    private final NonNullList<ItemStack> inventory = NonNullList.withSize(1, ItemStack.EMPTY);
+    protected NonNullList<ItemStack> inventory = NonNullList.withSize(1, ItemStack.EMPTY);
 
     public CosmicShieldTile(BlockPos pPos, BlockState pBlockState) {
         super(CBlockEntities.COSMIC_SHIELD.get(), pPos, pBlockState);
-    }
-
-    @Override
-    public int getContainerSize() {
-        return inventory.size();
     }
 
     @Override
@@ -62,8 +58,8 @@ public class CosmicShieldTile extends BlockEntity implements Container {
 
     @Override
     public void setItem(int pSlot, ItemStack pStack) {
-        setChanged();
         inventory.set(pSlot, pStack.copyWithCount(1));
+        setChanged();
     }
 
     @Override
@@ -77,6 +73,12 @@ public class CosmicShieldTile extends BlockEntity implements Container {
     }
 
     @Override
+    public int getContainerSize() {
+        return inventory.size();
+    }
+
+    // Block nbt data
+    @Override
     protected void saveAdditional(CompoundTag pTag, HolderLookup.Provider pRegistries) {
         super.saveAdditional(pTag, pRegistries);
         ContainerHelper.saveAllItems(pTag, inventory, pRegistries);
@@ -88,14 +90,31 @@ public class CosmicShieldTile extends BlockEntity implements Container {
         ContainerHelper.loadAllItems(pTag, inventory, pRegistries);
     }
 
-    @Nullable
+    // Updates for Rendering
     @Override
-    public Packet<ClientGamePacketListener> getUpdatePacket() {
-        return ClientboundBlockEntityDataPacket.create(this);
+    public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt, HolderLookup.Provider lookupProvider) {
+        if (level != null && level.isClientSide) {
+            CompoundTag tag = pkt.getTag();
+            handleUpdateTag(tag, level.registryAccess());
+        }
+    }
+
+    @Override
+    public void handleUpdateTag(CompoundTag tag, HolderLookup.Provider lookupProvider) {
+        ContainerHelper.loadAllItems(tag, inventory, lookupProvider);
     }
 
     @Override
     public CompoundTag getUpdateTag(HolderLookup.Provider pRegistries) {
+        CompoundTag tag = super.getUpdateTag(pRegistries);
+        ContainerHelper.saveAllItems(tag, inventory, pRegistries);
+        // return tag;
         return saveWithoutMetadata(pRegistries);
+    }
+
+    @Nullable
+    @Override
+    public Packet<ClientGamePacketListener> getUpdatePacket() {
+        return ClientboundBlockEntityDataPacket.create(this);
     }
 }

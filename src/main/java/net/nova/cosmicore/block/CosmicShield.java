@@ -5,6 +5,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -28,36 +29,47 @@ public class CosmicShield extends BaseModel {
     // Block Entity Stuff
     // Drops item content
     @Override
-    protected void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pMovedByPiston) {
-        if (!pState.is(pNewState.getBlock())) {
+    protected void onRemove(BlockState state, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pMovedByPiston) {
+        if (!state.is(pNewState.getBlock())) {
             if (pLevel.getBlockEntity(pPos) instanceof CosmicShieldTile cosmicShieldTierITile) {
                 Containers.dropContents(pLevel, pPos, cosmicShieldTierITile);
                 pLevel.updateNeighbourForOutputSignal(pPos, this);
             }
-            super.onRemove(pState, pLevel, pPos, pNewState, pMovedByPiston);
+            super.onRemove(state, pLevel, pPos, pNewState, pMovedByPiston);
         }
     }
 
     // Interaction
     @Override
-    protected ItemInteractionResult useItemOn(ItemStack pStack, BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHitResult) {
+    protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
         Item INFERNIUM_CRYSTAL = CItems.INFERNIUM_CRYSTAL.get();
-        if (pLevel.getBlockEntity(pPos) instanceof CosmicShieldTile cosmicShieldTile && pStack.getItem() == INFERNIUM_CRYSTAL) {
-            if (cosmicShieldTile.isEmpty() && !pStack.isEmpty()) {
-                cosmicShieldTile.setItem(0, pStack);
-                pStack.shrink(1);
-                pLevel.playSound(pPlayer, pPos, SoundEvents.ITEM_PICKUP, SoundSource.BLOCKS, 1f, 2f);
+        BlockEntity blockEntity = level.getBlockEntity(pos);
+        if (blockEntity instanceof CosmicShieldTile cosmicShieldTile) {
+            if (cosmicShieldTile.isEmpty() && stack.getItem() == INFERNIUM_CRYSTAL) {
+                cosmicShieldTile.setItem(0, stack);
+                stack.shrink(1);
+                level.playSound(player, pos, SoundEvents.ITEM_PICKUP, SoundSource.BLOCKS, 1f, 2f);
+            } else if (!cosmicShieldTile.isEmpty()) {
+                ItemStack tileStack = cosmicShieldTile.getItem(0);
+                if (player.getItemInHand(InteractionHand.MAIN_HAND).isEmpty()) {
+                    player.setItemInHand(InteractionHand.MAIN_HAND, tileStack);
+                } else {
+                    player.getInventory().placeItemBackInInventory(tileStack, true);
+                }
+                cosmicShieldTile.setItem(0, ItemStack.EMPTY);
+                cosmicShieldTile.setChanged();
+                level.playSound(player, pos, SoundEvents.ITEM_FRAME_REMOVE_ITEM, SoundSource.BLOCKS, 1f, 2f);
+                level.sendBlockUpdated(pos, state, state, 3);
             }
             return ItemInteractionResult.SUCCESS;
-        } else {
-            return ItemInteractionResult.FAIL;
         }
+        return ItemInteractionResult.FAIL;
     }
 
     @Nullable
     @Override
-    public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-        return new CosmicShieldTile(pPos, pState);
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return new CosmicShieldTile(pos, state);
     }
 
     @Override

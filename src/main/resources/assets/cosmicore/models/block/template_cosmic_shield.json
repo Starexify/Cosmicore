@@ -2,8 +2,8 @@
 	"credit": "Made with Blockbench",
 	"texture_size": [64, 64],
 	"textures": {
-		"particle": "cosmic_shield",
-		"layer0": "cosmic_shield"
+		"layer0": "cosmicore:block/cosmic_shield",
+		"particle": "cosmicore:block/crusher_base"
 	},
 	"elements": [
 		{

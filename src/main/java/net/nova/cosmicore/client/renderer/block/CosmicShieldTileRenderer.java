@@ -32,7 +32,9 @@ public class CosmicShieldTileRenderer implements BlockEntityRenderer<CosmicShiel
         poseStack.pushPose();
 
         // Render the crystal
-        renderCrystal(cosmicShieldTile, partialTick, poseStack, bufferSource, packedLight, packedOverlay);
+        if (!cosmicShieldTile.isEmpty()) {
+            renderCrystal(cosmicShieldTile, partialTick, poseStack, bufferSource, packedLight, packedOverlay);
+        }
 
         poseStack.popPose();
     }
@@ -55,7 +57,6 @@ public class CosmicShieldTileRenderer implements BlockEntityRenderer<CosmicShiel
         poseStack.mulPose(Axis.YP.rotation(rotationTime * ((float) Math.PI / 180F)));
 
         poseStack.scale(1, -1, -1);
-        tierIModel.modelRoot.render(poseStack, vertexConsumer, packedLight, packedOverlay);
         tierIModel.renderToBuffer(poseStack, vertexConsumer, packedLight, packedOverlay);
         poseStack.popPose();
     }
