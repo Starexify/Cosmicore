@@ -12,7 +12,7 @@ import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
-import net.nova.cosmicore.client.model.CosmicShieldTopModel;
+import net.nova.cosmicore.client.model.CosmicShieldTierIModel;
 import net.nova.cosmicore.client.model.CrusherPistonModel;
 import net.nova.cosmicore.client.renderer.ISTERProvider;
 import net.nova.cosmicore.client.renderer.block.AdvancedCrusherTileRenderer;
@@ -55,7 +55,7 @@ public class CEventBusClientEvents {
         event.registerLayerDefinition(AchondriteModel.LAYER_LOCATION, AchondriteModel::createLayer);
 
         event.registerLayerDefinition(CrusherPistonModel.LAYER_LOCATION, CrusherPistonModel::createLayer);
-        event.registerLayerDefinition(CosmicShieldTopModel.LAYER_LOCATION, CosmicShieldTopModel::createLayer);
+        event.registerLayerDefinition(CosmicShieldTierIModel.LAYER_LOCATION, CosmicShieldTierIModel::createLayer);
 
         event.registerLayerDefinition(TranslucentHorseArmorLayer.HORSE_ARMOR, () -> LayerDefinition.create(HorseModel.createBodyMesh(new CubeDeformation(0.1F)), 64, 64));
     }
