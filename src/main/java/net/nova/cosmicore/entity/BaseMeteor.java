@@ -12,7 +12,9 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.nova.cosmicore.blockentity.CosmicShieldTile;
 import net.nova.cosmicore.init.CBlocks;
 
 import static net.nova.cosmicore.Cosmicore.rl;
@@ -90,7 +92,10 @@ public class BaseMeteor extends Entity {
                         BlockPos pos = new BlockPos(x, y, z);
                         BlockState state = serverLevel.getBlockState(pos);
                         if (isShieldBlock(state)) {
-                            return true;
+                            BlockEntity blockEntity = serverLevel.getBlockEntity(pos);
+                            if (blockEntity instanceof CosmicShieldTile && !((CosmicShieldTile)blockEntity).isEmpty()) {
+                                return true;
+                            }
                         }
                     }
                 }

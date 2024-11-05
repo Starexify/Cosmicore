@@ -162,7 +162,7 @@ public class Achondrite extends BaseMeteor {
 
         // Calculate the offset to center the structure on the given position
         int offsetX = pos.getX() - (boundingbox.minX() + boundingbox.maxX()) / 2;
-        int targetY = pos.getY() - 37; // Your desired Y position
+        int targetY = pos.getY() - 42; // Your desired Y position
         int offsetY = targetY - boundingbox.minY(); // Offset from current minimum Y to target Y
         int offsetZ = pos.getZ() - (boundingbox.minZ() + boundingbox.maxZ()) / 2;
 
