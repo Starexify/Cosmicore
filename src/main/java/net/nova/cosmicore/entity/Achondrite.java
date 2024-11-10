@@ -4,7 +4,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.SectionPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
-import net.minecraft.server.level.ServerChunkCache;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.AnimationState;
@@ -15,10 +14,14 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.ChunkAccess;
 import net.minecraft.world.level.chunk.ChunkGenerator;
-import net.minecraft.world.level.levelgen.structure.*;
+import net.minecraft.world.level.levelgen.structure.BoundingBox;
+import net.minecraft.world.level.levelgen.structure.Structure;
+import net.minecraft.world.level.levelgen.structure.StructurePiece;
+import net.minecraft.world.level.levelgen.structure.StructureStart;
 import net.minecraft.world.phys.Vec3;
 import net.nova.cosmicore.Cosmicore;
 import net.nova.cosmicore.data.worldgen.CStructures;
+import net.nova.cosmicore.init.CEntities;
 import net.nova.cosmicore.init.CTags;
 
 import java.util.ArrayList;
@@ -30,8 +33,14 @@ public class Achondrite extends BaseMeteor {
     public final AnimationState explodedAnimationState = new AnimationState();
     public boolean isLanded = false;
 
+    public Achondrite(Level level, int x, int z) {
+        super(CEntities.ACHONDRITE.get(), level);
+        this.setPos(x, 250, z);
+    }
+
     public Achondrite(EntityType<?> entityType, Level level) {
         super(entityType, level);
+        this.setPos(getX(), 250, getZ());
     }
 
     @Override
@@ -158,21 +167,12 @@ public class Achondrite extends BaseMeteor {
         }
 
         BoundingBox boundingbox = structurestart.getBoundingBox();
-        int structureHeight = boundingbox.maxY() - boundingbox.minY();
 
-        // Calculate the offset to center the structure on the given position
+
         int offsetX = pos.getX() - (boundingbox.minX() + boundingbox.maxX()) / 2;
-        int targetY = pos.getY() - 42; // Your desired Y position
-        int offsetY = targetY - boundingbox.minY(); // Offset from current minimum Y to target Y
+        int targetY = pos.getY() - 42;
+        int offsetY = targetY - boundingbox.minY();
         int offsetZ = pos.getZ() - (boundingbox.minZ() + boundingbox.maxZ()) / 2;
-
-        if (!level().isClientSide()) {
-            ServerLevel serverLevel = (ServerLevel) level();
-            serverLevel.getServer().getPlayerList().broadcastSystemMessage(Component.literal("Bounding Box maxY: " + boundingbox.maxY()), false);
-            serverLevel.getServer().getPlayerList().broadcastSystemMessage(Component.literal("Bounding Box minY: " + boundingbox.minY()), false);
-            serverLevel.getServer().getPlayerList().broadcastSystemMessage(Component.literal("structureHeight: " + structureHeight), false);
-            serverLevel.getServer().getPlayerList().broadcastSystemMessage(Component.literal("offsetY: " + offsetY), false);
-        }
 
         boundingbox = boundingbox.moved(offsetX, offsetY, offsetZ);
 
