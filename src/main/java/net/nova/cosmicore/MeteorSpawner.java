@@ -1,58 +1,52 @@
 package net.nova.cosmicore;
 
+import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.levelgen.Heightmap;
-import net.minecraft.world.phys.Vec3;
 import net.nova.cosmicore.entity.Achondrite;
-
-import java.util.Random;
+import net.nova.cosmicore.init.CEntities;
 
 public class MeteorSpawner {
-    private final Level level;
+    private final ServerLevel level;
     private int tickCounter;
     private int ticksUntilNextMeteor;
-    private final Random random;
-    private final int minTicksUntilNextMeteor;
-    private final int maxTicksUntilNextMeteor;
+    private final RandomSource random;
 
-    public MeteorSpawner(Level level, int minTicksUntilNextMeteor, int maxTicksUntilNextMeteor) {
+    public MeteorSpawner(ServerLevel level, int minTicksUntilNextMeteor, int maxTicksUntilNextMeteor) {
         this.level = level;
         this.tickCounter = 0;
-        this.random = new Random();
-        this.minTicksUntilNextMeteor = minTicksUntilNextMeteor;
-        this.maxTicksUntilNextMeteor = maxTicksUntilNextMeteor;
-        this.ticksUntilNextMeteor = getNewTickGoal();
+        this.random = level.getRandom();
+        this.ticksUntilNextMeteor = random.nextIntBetweenInclusive(minTicksUntilNextMeteor, maxTicksUntilNextMeteor);
     }
 
     public void onTick() {
-        if (!level.isClientSide()) {
-            tickCounter++;
+        tickCounter++;
 
-            if (tickCounter >= ticksUntilNextMeteor) {
+        if (tickCounter >= ticksUntilNextMeteor) {
+            if (isInWhitelistedDimension()) {
                 spawnMeteor();
-                tickCounter = 0;
-                ticksUntilNextMeteor = getNewTickGoal();
             }
+            tickCounter = 0;
+            // Randomize cooldown between 200 and 600 ticks (10-30 seconds)
+            this.ticksUntilNextMeteor = random.nextIntBetweenInclusive(200, 600);
         }
     }
 
     private void spawnMeteor() {
-        Vec3 spawnPos = getRandomSpawnPosition();
-        level.addFreshEntity(new Achondrite(level, (int) spawnPos.x, (int) spawnPos.z));
+        BlockPos spawnPos = getRandomSpawnPosition();
+        Achondrite meteor = new Achondrite(CEntities.ACHONDRITE.get(), level);
+        meteor.setPos(spawnPos.getX() + 0.5, 320, spawnPos.getZ() + 0.5);
+        level.addFreshEntity(meteor);
     }
 
     private boolean isInWhitelistedDimension() {
         return level.dimension() == Level.OVERWORLD;
     }
 
-    private Vec3 getRandomSpawnPosition() {
-        double x = random.nextInt(1000) - 500;
-        double z = random.nextInt(1000) - 500;
-        double y = level.getHeight(Heightmap.Types.WORLD_SURFACE, (int) x, (int) z);
-        return new Vec3(x, y, z);
-    }
-
-    private int getNewTickGoal() {
-        return random.nextInt(maxTicksUntilNextMeteor - minTicksUntilNextMeteor + 1) + minTicksUntilNextMeteor;
+    private BlockPos getRandomSpawnPosition() {
+        int x = random.nextInt(6000) - 3000;
+        int z = random.nextInt(6000) - 3000;
+        return new BlockPos(x, 320, z);
     }
 }
