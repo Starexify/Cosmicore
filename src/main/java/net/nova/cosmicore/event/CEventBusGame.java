@@ -13,7 +13,7 @@ public class CEventBusGame {
     @SubscribeEvent
     public static void onLevelTick(LevelTickEvent.Post event) {
         if (!event.getLevel().isClientSide() && event.getLevel() instanceof ServerLevel serverLevel) {
-            MeteorSpawner meteorSpawner = new MeteorSpawner(serverLevel, 20, 50); // 3000 and 5000 basic
+            MeteorSpawner meteorSpawner = new MeteorSpawner(serverLevel, 3000, 5000); // 3000 and 5000 basic
             meteorSpawner.onTick();
         }
     }
