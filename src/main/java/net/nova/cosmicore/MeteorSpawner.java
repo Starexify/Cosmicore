@@ -15,38 +15,41 @@ public class MeteorSpawner {
     private int ticksUntilNextMeteor;
     private final RandomSource random;
     private int lastSecondAnnounced = -1;
+    private final int minTicksUntilNextMeteor;
+    private final int maxTicksUntilNextMeteor;
 
     public MeteorSpawner(ServerLevel level, int minTicksUntilNextMeteor, int maxTicksUntilNextMeteor) {
         this.level = level;
-        this.tickCounter = 0;
         this.random = level.getRandom();
+        this.minTicksUntilNextMeteor = minTicksUntilNextMeteor;
+        this.maxTicksUntilNextMeteor = maxTicksUntilNextMeteor;
+        this.tickCounter = 0;
+        this.ticksUntilNextMeteor = random.nextIntBetweenInclusive(minTicksUntilNextMeteor, maxTicksUntilNextMeteor);
+    }
+
+    private void resetAfterSpawn() {
+        this.tickCounter = 0;
+        this.lastSecondAnnounced = -1;
         this.ticksUntilNextMeteor = random.nextIntBetweenInclusive(minTicksUntilNextMeteor, maxTicksUntilNextMeteor);
     }
 
     public void onTick() {
-        if (!level.players().isEmpty()) {
-            tickCounter++;
+        if (level.players().isEmpty()) {
+            return;
+        }
 
-            // Calculate remaining seconds
-            int remainingSeconds = (ticksUntilNextMeteor - tickCounter) / 20;
+        tickCounter++;
 
-            // Announce each second until meteor spawns
-            if (remainingSeconds >= 0 && remainingSeconds != lastSecondAnnounced) {
-                broadcastCountdown(remainingSeconds);
-                lastSecondAnnounced = remainingSeconds;
-            }
+        int remainingSeconds = (ticksUntilNextMeteor - tickCounter) / 20;
 
-            if (tickCounter >= ticksUntilNextMeteor) {
-                if (isInWhitelistedDimension()) {
-                    spawnMeteorNearRandomPlayer();
-                }
-                tickCounter = 0;
-                this.ticksUntilNextMeteor = 36000;
-                lastSecondAnnounced = -1;
-            }
-        } else {
-            tickCounter = 0;
-            lastSecondAnnounced = -1;
+        if (remainingSeconds >= 0 && remainingSeconds != lastSecondAnnounced) {
+            broadcastCountdown(remainingSeconds);
+            lastSecondAnnounced = remainingSeconds;
+        }
+
+        if (tickCounter >= ticksUntilNextMeteor) {
+            spawnMeteorNearRandomPlayer();
+            resetAfterSpawn();
         }
     }
 
@@ -56,10 +59,6 @@ public class MeteorSpawner {
                 player.sendSystemMessage(Component.literal("Meteor spawning in " + seconds + " second" + (seconds != 1 ? "s" : "")));
             }
         }
-    }
-
-    private boolean isInWhitelistedDimension() {
-        return level.dimension() == Level.OVERWORLD;
     }
 
     private void spawnMeteorNearRandomPlayer() {
