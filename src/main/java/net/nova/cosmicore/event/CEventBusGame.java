@@ -16,7 +16,7 @@ public class CEventBusGame {
 
     @SubscribeEvent
     public static void onServerStarting(ServerStartingEvent event) {
-        meteorSpawner = new MeteorSpawner(event.getServer().overworld(), 3000, 5000);
+        meteorSpawner = new MeteorSpawner(event.getServer().overworld(), 3000, 5000); // 150s - 250s
     }
 
     @SubscribeEvent
