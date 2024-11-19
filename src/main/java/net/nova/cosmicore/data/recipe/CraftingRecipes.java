@@ -74,5 +74,16 @@ public class CraftingRecipes extends CRecipeProvider {
                 .save(recipeOutput);
 
         twoByTwoPacker(recipeOutput, RecipeCategory.BUILDING_BLOCKS, CBlocks.INFERNIUM_BLOCK, CItems.INFERNIUM_CRYSTAL);
+
+        // Cosmic Shield
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, CBlocks.COSMIC_SHIELD)
+                .define('#', CBlocks.TITANIUM_BLOCK)
+                .define('X', CItems.TITANIUM_GEAR)
+                .define('I', CItems.TITANIUM_INGOT)
+                .pattern("  I")
+                .pattern("X#X")
+                .pattern("# #")
+                .unlockedBy("has_", has(CBlocks.CRUSHER))
+                .save(recipeOutput);
     }
 }
