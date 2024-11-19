@@ -14,10 +14,12 @@ import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
 import net.nova.cosmicore.client.model.CosmicShieldTierIModel;
 import net.nova.cosmicore.client.model.CrusherPistonModel;
+import net.nova.cosmicore.client.model.MeteoriteModel;
 import net.nova.cosmicore.client.renderer.ISTERProvider;
 import net.nova.cosmicore.client.renderer.block.AdvancedCrusherTileRenderer;
 import net.nova.cosmicore.client.renderer.block.CosmicShieldTileRenderer;
 import net.nova.cosmicore.client.renderer.block.CrusherTileRenderer;
+import net.nova.cosmicore.client.renderer.entity.MeteoriteRenderer;
 import net.nova.cosmicore.client.renderer.entity.TranslucentHorseRenderer;
 import net.nova.cosmicore.client.renderer.entity.layers.TranslucentHorseArmorLayer;
 import net.nova.cosmicore.client.renderer.item.CItemProperties;
@@ -53,6 +55,7 @@ public class CEventBusClientEvents {
     @SubscribeEvent
     public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
         event.registerLayerDefinition(AchondriteModel.LAYER_LOCATION, AchondriteModel::createLayer);
+        event.registerLayerDefinition(MeteoriteModel.LAYER_LOCATION, MeteoriteModel::createLayer);
 
         event.registerLayerDefinition(CrusherPistonModel.LAYER_LOCATION, CrusherPistonModel::createLayer);
         event.registerLayerDefinition(CosmicShieldTierIModel.LAYER_LOCATION, CosmicShieldTierIModel::createLayer);
@@ -65,6 +68,7 @@ public class CEventBusClientEvents {
     @SubscribeEvent
     public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
         event.registerEntityRenderer(CEntities.ACHONDRITE.get(), AchondriteRenderer::new);
+        event.registerEntityRenderer(CEntities.METEORITE.get(), MeteoriteRenderer::new);
 
         event.registerBlockEntityRenderer(CBlockEntities.CRUSHER_TILE.get(), CrusherTileRenderer::new);
         event.registerBlockEntityRenderer(CBlockEntities.ADVANCED_CRUSHER_TILE.get(), AdvancedCrusherTileRenderer::new);

@@ -14,6 +14,11 @@
     "#minecraft:trapdoors",
     "#minecraft:fences",
     "#minecraft:beds",
-    "#c:chests"
+    "#c:chests",
+    "#minecraft:corals",
+    "#minecraft:snow",
+    "#minecraft:flower_pots",
+    "minecraft:seagrass",
+    "minecraft:kelp"
   ]
 }

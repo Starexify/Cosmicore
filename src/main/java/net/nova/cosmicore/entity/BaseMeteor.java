@@ -216,7 +216,6 @@ public class BaseMeteor extends Entity {
 
         BoundingBox boundingbox = structurestart.getBoundingBox();
 
-
         int offsetX = pos.getX() - (boundingbox.minX() + boundingbox.maxX()) / 2;
         int targetY = pos.getY() - 36; // - x means it places it x blocks underground (because structure)
         int offsetY = targetY - boundingbox.minY();
@@ -231,9 +230,10 @@ public class BaseMeteor extends Entity {
         ChunkPos chunkpos = new ChunkPos(SectionPos.blockToSectionCoord(boundingbox.minX()), SectionPos.blockToSectionCoord(boundingbox.minZ()));
         ChunkPos chunkpos1 = new ChunkPos(SectionPos.blockToSectionCoord(boundingbox.maxX()), SectionPos.blockToSectionCoord(boundingbox.maxZ()));
 
-        List<CompletableFuture<ChunkAccess>> chunkLoadFutures = new ArrayList<>();
-
-        CompletableFuture.allOf(chunkLoadFutures.toArray(new CompletableFuture[0])).thenRun(() -> {
+        final BoundingBox finalBoundingBox = boundingbox;
+        serverlevel.getChunkSource().chunkMap.getPlayers(
+                new ChunkPos(pos), false
+        ).forEach(serverPlayer -> {
             for (int x = chunkpos.x; x <= chunkpos1.x; x++) {
                 for (int z = chunkpos.z; z <= chunkpos1.z; z++) {
                     ChunkPos currentChunkPos = new ChunkPos(x, z);
@@ -254,8 +254,20 @@ public class BaseMeteor extends Entity {
                     );
                 }
             }
-            Cosmicore.logger.info("[Cosmicore] Crater placed successfully");
+
+            // Force block updates in the affected area
+            for (int x = finalBoundingBox.minX(); x <= finalBoundingBox.maxX(); x++) {
+                for (int y = finalBoundingBox.minY(); y <= finalBoundingBox.maxY(); y++) {
+                    for (int z = finalBoundingBox.minZ(); z <= finalBoundingBox.maxZ(); z++) {
+                        BlockPos updatePos = new BlockPos(x, y, z);
+                        BlockState state = serverlevel.getBlockState(updatePos);
+                        serverlevel.sendBlockUpdated(updatePos, state, state, 3);
+                    }
+                }
+            }
         });
+
+        Cosmicore.logger.info("[Cosmicore] Crater placed successfully");
     }
 
     // Shield Detection

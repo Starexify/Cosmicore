@@ -95,6 +95,7 @@ public class LangProvider extends LanguageProvider {
 
         // Entities
         add(CEntities.ACHONDRITE.get(), "Achondrite");
+        add(CEntities.METEORITE.get(), "Meteorite");
 
         // Messages
         add(Achondrite.METEOR_FALL_MESSAGE.getString(), "A meteor has entered the atmosphere!");
