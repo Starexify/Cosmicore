@@ -184,7 +184,18 @@
             }
           ],
           "name": "cosmicore:titanium_upgrade_smithing_template",
-          "weight": 3
+          "weight": 7
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": 1.0,
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "cosmicore:lonsdaleite_upgrade_smithing_template"
         }
       ],
       "rolls": 1.0
