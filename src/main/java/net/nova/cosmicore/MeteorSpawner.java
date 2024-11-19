@@ -9,13 +9,13 @@ import net.nova.cosmicore.entity.Achondrite;
 import net.nova.cosmicore.init.CEntities;
 
 public class MeteorSpawner {
-    private final ServerLevel level;
-    private int tickCounter;
-    private int ticksUntilNextMeteor;
-    private final RandomSource random;
-    private int lastSecondAnnounced = -1;
-    private final int minTicksUntilNextMeteor;
-    private final int maxTicksUntilNextMeteor;
+    public final ServerLevel level;
+    public int tickCounter;
+    public int ticksUntilNextMeteor;
+    public final RandomSource random;
+    public int lastSecondAnnounced = -1;
+    public final int minTicksUntilNextMeteor;
+    public final int maxTicksUntilNextMeteor;
 
     public MeteorSpawner(ServerLevel level, int minTicksUntilNextMeteor, int maxTicksUntilNextMeteor) {
         this.level = level;
@@ -26,21 +26,18 @@ public class MeteorSpawner {
         this.ticksUntilNextMeteor = random.nextIntBetweenInclusive(minTicksUntilNextMeteor, maxTicksUntilNextMeteor);
     }
 
-    private void resetAfterSpawn() {
+    public void resetAfterSpawn() {
         this.tickCounter = 0;
         this.lastSecondAnnounced = -1;
         this.ticksUntilNextMeteor = random.nextIntBetweenInclusive(minTicksUntilNextMeteor, maxTicksUntilNextMeteor);
     }
 
     public void onTick() {
-        if (level.players().isEmpty()) {
-            return;
-        }
+        if (level.players().isEmpty()) return;
 
         tickCounter++;
 
         int remainingSeconds = (ticksUntilNextMeteor - tickCounter) / 20;
-
         if (remainingSeconds >= 0 && remainingSeconds != lastSecondAnnounced) {
             broadcastCountdown(remainingSeconds);
             lastSecondAnnounced = remainingSeconds;
@@ -52,7 +49,7 @@ public class MeteorSpawner {
         }
     }
 
-    private void broadcastCountdown(int seconds) {
+    public void broadcastCountdown(int seconds) {
         if (seconds > 0) {
             for (ServerPlayer player : level.players()) {
                 player.sendSystemMessage(Component.literal("Meteor spawning in " + seconds + " second" + (seconds != 1 ? "s" : "")));

@@ -1,4 +1,4 @@
-package net.nova.cosmicore.entity;
+package net.nova.cosmicore.client.renderer.entity;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -8,6 +8,8 @@ import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
+import net.nova.cosmicore.entity.Achondrite;
+import net.nova.cosmicore.client.model.AchondriteModel;
 
 public class AchondriteRenderer extends EntityRenderer<Achondrite> {
     private final AchondriteModel achondriteModel;
