@@ -1,8 +1,10 @@
 package net.nova.cosmicore;
 
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.GameRules;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
+import net.neoforged.neoforge.common.NeoForge;
 import net.nova.cosmicore.data.DataGenerators;
 import net.nova.cosmicore.init.*;
 import org.slf4j.Logger;
@@ -14,6 +16,8 @@ import static net.nova.cosmicore.Cosmicore.MODID;
 public class Cosmicore {
     public static final String MODID = "cosmicore";
     public static final Logger logger = LoggerFactory.getLogger(Cosmicore.class);
+
+    public static final GameRules.Key<GameRules.BooleanValue> ALLOW_METEORS_SPAWNING = GameRules.register("doMeteorSpawning", GameRules.Category.SPAWNING, GameRules.BooleanValue.create(true));
 
     public Cosmicore(IEventBus bus) {
         CArmorMaterials.ARMOR_MATERIALS.register(bus);

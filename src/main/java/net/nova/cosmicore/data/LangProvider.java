@@ -3,14 +3,14 @@ package net.nova.cosmicore.data;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.data.LanguageProvider;
+import net.nova.cosmicore.Cosmicore;
 import net.nova.cosmicore.entity.Achondrite;
 import net.nova.cosmicore.gui.crusher.CrusherScreen;
 import net.nova.cosmicore.init.CBlocks;
-import net.nova.cosmicore.init.CreativeTabs;
 import net.nova.cosmicore.init.CEntities;
 import net.nova.cosmicore.init.CItems;
+import net.nova.cosmicore.init.CreativeTabs;
 import net.nova.cosmicore.item.LonsdaleiteSmithingTemplate;
 import net.nova.cosmicore.item.TitaniumSmithingTemplate;
 
@@ -96,6 +96,9 @@ public class LangProvider extends LanguageProvider {
         // Entities
         add(CEntities.ACHONDRITE.get(), "Achondrite");
         add(CEntities.METEORITE.get(), "Meteorite");
+
+        // Game Rules
+        add(Cosmicore.ALLOW_METEORS_SPAWNING.getDescriptionId(), "Allow Meteors Spawning");
 
         // Messages
         add(Achondrite.METEOR_FALL_MESSAGE.getString(), "A meteor has entered the atmosphere!");

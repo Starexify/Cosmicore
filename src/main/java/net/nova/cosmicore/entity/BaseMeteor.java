@@ -9,7 +9,6 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.AnimationState;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -18,7 +17,6 @@ import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.chunk.ChunkAccess;
 import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.level.levelgen.structure.Structure;
@@ -30,10 +28,6 @@ import net.nova.cosmicore.blockentity.CosmicShieldTile;
 import net.nova.cosmicore.data.worldgen.CStructures;
 import net.nova.cosmicore.init.CBlocks;
 import net.nova.cosmicore.init.CTags;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.CompletableFuture;
 
 import static net.nova.cosmicore.Cosmicore.rl;
 
@@ -189,9 +183,7 @@ public class BaseMeteor extends Entity {
     }
 
     public void craterPlacement() {
-        if (!(level() instanceof ServerLevel serverlevel)) {
-            return;
-        }
+        if (!(level() instanceof ServerLevel serverlevel)) return;
 
         BlockPos pos = this.landingPos != null ? this.landingPos : this.blockPosition();
         Structure structure = getStructure();
@@ -230,10 +222,7 @@ public class BaseMeteor extends Entity {
         ChunkPos chunkpos = new ChunkPos(SectionPos.blockToSectionCoord(boundingbox.minX()), SectionPos.blockToSectionCoord(boundingbox.minZ()));
         ChunkPos chunkpos1 = new ChunkPos(SectionPos.blockToSectionCoord(boundingbox.maxX()), SectionPos.blockToSectionCoord(boundingbox.maxZ()));
 
-        final BoundingBox finalBoundingBox = boundingbox;
-        serverlevel.getChunkSource().chunkMap.getPlayers(
-                new ChunkPos(pos), false
-        ).forEach(serverPlayer -> {
+        serverlevel.getChunkSource().chunkMap.getPlayers(new ChunkPos(pos), false).forEach(serverPlayer -> {
             for (int x = chunkpos.x; x <= chunkpos1.x; x++) {
                 for (int z = chunkpos.z; z <= chunkpos1.z; z++) {
                     ChunkPos currentChunkPos = new ChunkPos(x, z);
@@ -254,18 +243,25 @@ public class BaseMeteor extends Entity {
                     );
                 }
             }
+        });
 
-            // Force block updates in the affected area
-            for (int x = finalBoundingBox.minX(); x <= finalBoundingBox.maxX(); x++) {
-                for (int y = finalBoundingBox.minY(); y <= finalBoundingBox.maxY(); y++) {
-                    for (int z = finalBoundingBox.minZ(); z <= finalBoundingBox.maxZ(); z++) {
-                        BlockPos updatePos = new BlockPos(x, y, z);
-                        BlockState state = serverlevel.getBlockState(updatePos);
-                        serverlevel.sendBlockUpdated(updatePos, state, state, 3);
+        for (int x = boundingbox.minX(); x <= boundingbox.maxX(); x++) {
+            for (int y = boundingbox.minY(); y <= boundingbox.maxY(); y++) {
+                for (int z = boundingbox.minZ(); z <= boundingbox.maxZ(); z++) {
+                    BlockPos updatePos = new BlockPos(x, y, z);
+                    BlockState state = serverlevel.getBlockState(updatePos);
+
+                    // Force update for all block types
+                    serverlevel.setBlock(updatePos, state, 3);
+                    serverlevel.updateNeighborsAt(updatePos, state.getBlock());
+
+                    // Additional check for blocks that need support
+                    if (!state.canSurvive(serverlevel, updatePos)) {
+                        serverlevel.removeBlock(updatePos, false);
                     }
                 }
             }
-        });
+        }
 
         Cosmicore.logger.info("[Cosmicore] Crater placed successfully");
     }
@@ -310,7 +306,7 @@ public class BaseMeteor extends Entity {
                         BlockState state = serverLevel.getBlockState(pos);
                         if (isShieldBlock(state)) {
                             BlockEntity blockEntity = serverLevel.getBlockEntity(pos);
-                            if (blockEntity instanceof CosmicShieldTile && !((CosmicShieldTile)blockEntity).isEmpty()) {
+                            if (blockEntity instanceof CosmicShieldTile && !((CosmicShieldTile) blockEntity).isEmpty()) {
                                 return true;
                             }
                         }

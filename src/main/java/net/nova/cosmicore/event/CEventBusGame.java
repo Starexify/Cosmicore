@@ -6,6 +6,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import net.neoforged.neoforge.event.tick.LevelTickEvent;
+import net.nova.cosmicore.Cosmicore;
 import net.nova.cosmicore.MeteorSpawner;
 
 import static net.nova.cosmicore.Cosmicore.MODID;
@@ -21,7 +22,8 @@ public class CEventBusGame {
 
     @SubscribeEvent
     public static void onLevelTick(LevelTickEvent.Post event) {
-        if (!event.getLevel().isClientSide() && event.getLevel() instanceof ServerLevel serverLevel && serverLevel.dimension() == Level.OVERWORLD) {
+        if (!event.getLevel().isClientSide() && event.getLevel() instanceof ServerLevel serverLevel && serverLevel.dimension() == Level.OVERWORLD
+         && event.getLevel().getGameRules().getBoolean(Cosmicore.ALLOW_METEORS_SPAWNING)) {
             if (meteorSpawner != null) {
                 meteorSpawner.onTick();
             }
