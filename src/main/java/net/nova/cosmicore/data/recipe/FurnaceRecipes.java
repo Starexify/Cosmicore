@@ -11,17 +11,14 @@ import net.nova.cosmicore.init.CItems;
 import java.util.concurrent.CompletableFuture;
 
 public class FurnaceRecipes extends CRecipeProvider {
-    public final RecipeOutput recipeOutput;
-
-    public FurnaceRecipes(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, RecipeOutput recipeOutput) {
-        super(output, lookupProvider);
-        this.recipeOutput = recipeOutput;
+    public FurnaceRecipes(HolderLookup.Provider lookupProvider, RecipeOutput recipeOutput) {
+        super(lookupProvider, recipeOutput);
     }
 
     public void build() {
         // Titanium Stuff
-        oreSmelting(recipeOutput, TITANIUM_SMELTABLES, RecipeCategory.MISC, CItems.TITANIUM_INGOT, 0.7F, 200, "titanium_ingot");
-        oreBlasting(recipeOutput, TITANIUM_SMELTABLES, RecipeCategory.MISC, CItems.TITANIUM_INGOT, 0.7F, 100, "titanium_ingot");
+        oreSmelting(TITANIUM_SMELTABLES, RecipeCategory.MISC, CItems.TITANIUM_INGOT, 0.7F, 200, "titanium_ingot");
+        oreBlasting(TITANIUM_SMELTABLES, RecipeCategory.MISC, CItems.TITANIUM_INGOT, 0.7F, 100, "titanium_ingot");
 
         SimpleCookingRecipeBuilder.smelting(Ingredient.of(
                                 CItems.TITANIUM_PICKAXE,
@@ -48,7 +45,7 @@ public class FurnaceRecipes extends CRecipeProvider {
                 .unlockedBy("has_titanium_chestplate", has(CItems.TITANIUM_CHESTPLATE))
                 .unlockedBy("has_titanium_leggings", has(CItems.TITANIUM_LEGGINGS))
                 .unlockedBy("has_titanium_boots", has(CItems.TITANIUM_BOOTS))
-                .save(recipeOutput, path + getSmeltingRecipeName(CItems.TITANIUM_NUGGET));
+                .save(path + getSmeltingRecipeName(CItems.TITANIUM_NUGGET));
 
         SimpleCookingRecipeBuilder.blasting(Ingredient.of(
                                 CItems.TITANIUM_PICKAXE,
@@ -75,7 +72,7 @@ public class FurnaceRecipes extends CRecipeProvider {
                 .unlockedBy("has_titanium_chestplate", has(CItems.TITANIUM_CHESTPLATE))
                 .unlockedBy("has_titanium_leggings", has(CItems.TITANIUM_LEGGINGS))
                 .unlockedBy("has_titanium_boots", has(CItems.TITANIUM_BOOTS))
-                .save(recipeOutput, path + getBlastingRecipeName(CItems.TITANIUM_NUGGET));
+                .save(path + getBlastingRecipeName(CItems.TITANIUM_NUGGET));
 
     }
 }

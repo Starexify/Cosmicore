@@ -2,8 +2,9 @@ package net.nova.cosmicore.init;
 
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BannerPattern;
@@ -15,6 +16,13 @@ import java.util.Set;
 
 public class CTags {
     private static final Set<ResourceKey<LootTable>> LOCATIONS = new HashSet<>();
+
+    public static class CItemTags {
+        public static final TagKey<Item> REPAIRS_TITANIUM_ARMOR = itemTag("repairs_titanium_armor");
+        public static final TagKey<Item> REPAIRS_LONSDALEITE_ARMOR = itemTag("repairs_lonsdaleite_armor");
+        public static final TagKey<Item> TITANIUM_TOOL_MATERIALS = itemTag("titanium_tool_materials");
+        public static final TagKey<Item> LONSDALEITE_TOOL_MATERIALS = itemTag("lonsdaleite_tool_materials");
+    }
 
     public static class BlockTags {
         public static final TagKey<Block> METEOR_BREAKABLES = createBlockTag("meteor_breakables");
@@ -35,6 +43,10 @@ public class CTags {
     }
 
     // Register Tags
+    public static TagKey<Item> itemTag(String name) {
+        return ItemTags.create(Cosmicore.rl(name));
+    }
+
     public static TagKey<Block> createBlockTag(String name) {
         return TagKey.create(Registries.BLOCK, Cosmicore.rl(name));
     }

@@ -3,12 +3,12 @@ package net.nova.cosmicore.item;
 import net.minecraft.Util;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.flag.FeatureFlag;
+import net.minecraft.world.item.Item;
 import net.nova.cosmicore.Cosmicore;
 
 import static net.nova.cosmicore.Cosmicore.rl;
 
-public class LonsdaleiteSmithingTemplate extends BaseSmithingTemplate{
+public class LonsdaleiteSmithingTemplate extends BaseSmithingTemplate {
     public static final Component LONSDALEITE_UPGRADE = Component.translatable(
             Util.makeDescriptionId("upgrade", rl("lonsdaleite_upgrade"))
     ).withStyle(TITLE_FORMAT);
@@ -31,17 +31,17 @@ public class LonsdaleiteSmithingTemplate extends BaseSmithingTemplate{
         addMaterialSlot(EMPTY_SLOT_LONSDALEITE);
     }
 
-    public LonsdaleiteSmithingTemplate(Component pAppliesTo, Component pIngredients, Component pUpgradeDescription, Component pBaseSlotDescription, Component pAdditionsSlotDescription, FeatureFlag... pRequiredFeatures) {
-        super(pAppliesTo, pIngredients, pUpgradeDescription, pBaseSlotDescription, pAdditionsSlotDescription, pRequiredFeatures);
+    public LonsdaleiteSmithingTemplate(Component appliesTo, Component ingredients, Component baseSlotDescription, Component additionsSlotDescription, Properties properties) {
+        super(appliesTo, ingredients, baseSlotDescription, additionsSlotDescription, properties);
     }
 
-    public static LonsdaleiteSmithingTemplate createLonsdaleiteUpgradeTemplate() {
+    public static LonsdaleiteSmithingTemplate createLonsdaleiteUpgradeTemplate(Item.Properties properties) {
         return new LonsdaleiteSmithingTemplate(
                 LONSDALEITE_UPGRADE_APPLIES_TO,
                 LONSDALEITE_UPGRADE_INGREDIENTS,
-                LONSDALEITE_UPGRADE,
                 LONSDALEITE_UPGRADE_BASE_SLOT_DESCRIPTION,
-                LONSDALEITE_UPGRADE_ADDITIONS_SLOT_DESCRIPTION
+                LONSDALEITE_UPGRADE_ADDITIONS_SLOT_DESCRIPTION,
+                properties
         );
     }
 }

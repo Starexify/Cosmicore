@@ -3,7 +3,8 @@ package net.nova.cosmicore.event;
 import net.minecraft.client.model.HorseModel;
 import net.minecraft.client.model.geom.builders.CubeDeformation;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
-import net.minecraft.world.entity.EntityType;
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -18,17 +19,12 @@ import net.nova.cosmicore.client.renderer.ISTERProvider;
 import net.nova.cosmicore.client.renderer.block.AdvancedCrusherTileRenderer;
 import net.nova.cosmicore.client.renderer.block.CosmicShieldTileRenderer;
 import net.nova.cosmicore.client.renderer.block.CrusherTileRenderer;
-import net.nova.cosmicore.client.renderer.entity.TranslucentHorseRenderer;
 import net.nova.cosmicore.client.renderer.entity.layers.TranslucentHorseArmorLayer;
-import net.nova.cosmicore.client.renderer.item.CItemProperties;
 import net.nova.cosmicore.entity.AchondriteModel;
 import net.nova.cosmicore.entity.AchondriteRenderer;
 import net.nova.cosmicore.gui.crusher.AdvancedCrusherScreen;
 import net.nova.cosmicore.gui.crusher.CrusherScreen;
-import net.nova.cosmicore.init.CBlockEntities;
-import net.nova.cosmicore.init.CEntities;
-import net.nova.cosmicore.init.CItems;
-import net.nova.cosmicore.init.CMenuTypes;
+import net.nova.cosmicore.init.*;
 
 import static net.nova.cosmicore.Cosmicore.MODID;
 
@@ -37,9 +33,9 @@ public class CEventBusClientEvents {
 
     @SubscribeEvent
     public static void setupClient(FMLClientSetupEvent event) {
-        event.enqueueWork(() -> {
-            CItemProperties.addCustomItemProperties();
-        });
+        ItemBlockRenderTypes.setRenderLayer(CBlocks.INFERNIUM_CLUSTER.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(CBlocks.CRUSHER.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(CBlocks.ADVANCED_CRUSHER.get(), RenderType.cutout());
     }
 
     // Connect Screen to Menu

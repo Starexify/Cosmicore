@@ -3,14 +3,13 @@ package net.nova.cosmicore.data;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.data.LanguageProvider;
 import net.nova.cosmicore.entity.Achondrite;
 import net.nova.cosmicore.gui.crusher.CrusherScreen;
 import net.nova.cosmicore.init.CBlocks;
-import net.nova.cosmicore.init.CreativeTabs;
 import net.nova.cosmicore.init.CEntities;
 import net.nova.cosmicore.init.CItems;
+import net.nova.cosmicore.init.CreativeTab;
 import net.nova.cosmicore.item.LonsdaleiteSmithingTemplate;
 import net.nova.cosmicore.item.TitaniumSmithingTemplate;
 
@@ -75,7 +74,7 @@ public class LangProvider extends LanguageProvider {
         addBlock(CBlocks.COSMIC_SHIELD, "Cosmic Shield");
 
         // Creative Tab
-        add(CreativeTabs.COSMICORE_TAB_TITLE, "Cosmicore");
+        add(CreativeTab.COSMICORE_TAB_TITLE, "Cosmicore");
 
         // Trim Material
         addTrim(CItems.TITANIUM_INGOT, "Titanium Material");

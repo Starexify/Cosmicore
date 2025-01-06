@@ -3,7 +3,6 @@ package net.nova.cosmicore.item;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.flag.FeatureFlag;
 import net.minecraft.world.item.SmithingTemplateItem;
 
 import java.util.ArrayList;
@@ -28,12 +27,12 @@ public class BaseSmithingTemplate extends SmithingTemplateItem {
 
     protected static final List<ResourceLocation> MATERIAL_SLOTS = new ArrayList<>(Arrays.asList());
 
-    public BaseSmithingTemplate(Component appliesTo, Component ingredients, Component upgradeDescription, Component baseSlotDescription, Component additionsSlotDescription, List<ResourceLocation> baseSlotEmptyIcons, List<ResourceLocation> additionalSlotEmptyIcons, FeatureFlag... requiredFeatures) {
-        super(appliesTo, ingredients, upgradeDescription, baseSlotDescription, additionsSlotDescription, baseSlotEmptyIcons, additionalSlotEmptyIcons, requiredFeatures);
+    public BaseSmithingTemplate(Component appliesTo, Component ingredients, Component baseSlotDescription, Component additionsSlotDescription, List<ResourceLocation> baseSlotEmptyIcons, List<ResourceLocation> additionalSlotEmptyIcons, Properties properties) {
+        super(appliesTo, ingredients, baseSlotDescription, additionsSlotDescription, baseSlotEmptyIcons, additionalSlotEmptyIcons, properties);
     }
 
-    public BaseSmithingTemplate(Component appliesTo, Component ingredients, Component upgradeDescription, Component baseSlotDescription, Component additionsSlotDescription, FeatureFlag... requiredFeatures) {
-        super(appliesTo, ingredients, upgradeDescription, baseSlotDescription, additionsSlotDescription, createBasicUpgradeIconList(), createBasicUpgradeMaterialList(), requiredFeatures);
+    public BaseSmithingTemplate(Component appliesTo, Component ingredients, Component baseSlotDescription, Component additionsSlotDescription, Properties properties) {
+        super(appliesTo, ingredients, baseSlotDescription, additionsSlotDescription, createBasicUpgradeIconList(), createBasicUpgradeMaterialList(), properties);
     }
 
     protected static List<ResourceLocation> createBasicUpgradeIconList() {

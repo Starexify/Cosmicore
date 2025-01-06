@@ -1,0 +1,11 @@
+{
+  "required": true,
+  "package": "net.nova.cosmicore.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "CrossbowItemMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
