@@ -42,24 +42,26 @@ public class CRecipeProvider extends RecipeProvider {
                 .save(output);
     }
 
-    public static String getAdvancedCrushingRecipeName(ItemLike pItemLike) {
+    public String getAdvancedCrushingRecipeName(ItemLike pItemLike) {
         return path + "advanced_crushing_" + getItemName(pItemLike);
     }
 
-    public static String getCrushingRecipeName(ItemLike pItemLike) {
+    public String getCrushingRecipeName(ItemLike pItemLike) {
         return path + "crushing_" + getItemName(pItemLike);
     }
 
+
 /*
-    public static void nineBlockStorageRecipes(RecipeCategory pUnpackedCategory, ItemLike pUnpacked, RecipeCategory pPackedCategory, ItemLike pPacked) {
+
+public void nineBlockStorageRecipes(RecipeCategory pUnpackedCategory, ItemLike pUnpacked, RecipeCategory pPackedCategory, ItemLike pPacked) {
         nineBlockStorageRecipes(pUnpackedCategory, pUnpacked, pPackedCategory, pPacked, getSimpleRecipeName(pPacked), null, getSimpleRecipeName(pUnpacked), null);
     }
 
-    public static void nineBlockStorageRecipesWithCustomPacking(RecipeCategory pUnpackedCategory, ItemLike pUnpacked, RecipeCategory pPackedCategory, ItemLike pPacked, String pPackedName, String pPackedGroup) {
+    public void nineBlockStorageRecipesWithCustomPacking(RecipeCategory pUnpackedCategory, ItemLike pUnpacked, RecipeCategory pPackedCategory, ItemLike pPacked, String pPackedName, String pPackedGroup) {
         nineBlockStorageRecipes(pUnpackedCategory, pUnpacked, pPackedCategory, pPacked, path + pPackedName, pPackedGroup, getSimpleRecipeName(pUnpacked), null);
     }
 
-    public static void nineBlockStorageRecipesRecipesWithCustomUnpacking(RecipeCategory pUnpackedCategory, ItemLike pUnpacked, RecipeCategory pPackedCategory, ItemLike pPacked, String pUnpackedName, String pUnpackedGroup) {
+    public void nineBlockStorageRecipesRecipesWithCustomUnpacking(RecipeCategory pUnpackedCategory, ItemLike pUnpacked, RecipeCategory pPackedCategory, ItemLike pPacked, String pUnpackedName, String pUnpackedGroup) {
         nineBlockStorageRecipes(pUnpackedCategory, pUnpacked, pPackedCategory, pPacked, getSimpleRecipeName(pPacked), null, path + pUnpackedName, pUnpackedGroup);
     }
 
