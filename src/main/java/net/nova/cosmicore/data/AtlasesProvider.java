@@ -4,7 +4,6 @@ import net.minecraft.client.renderer.texture.atlas.sources.PalettedPermutations;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.common.data.SpriteSourceProvider;
 import net.nova.cosmicore.Cosmicore;
 
@@ -17,12 +16,12 @@ import static net.nova.cosmicore.Cosmicore.MODID;
 public class AtlasesProvider extends SpriteSourceProvider {
     protected static final ResourceLocation ARMOR_TRIMS = ResourceLocation.withDefaultNamespace("armor_trims");
 
-    public AtlasesProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, ExistingFileHelper existingFileHelper) {
-        super(output, lookupProvider, MODID, existingFileHelper);
+    public AtlasesProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider) {
+        super(output, lookupProvider, MODID);
     }
 
     // Add here the palettes
-    private final Map<String, ResourceLocation> permutations = Map.of(
+    public final Map<String, ResourceLocation> permutations = Map.of(
             "titanium", Cosmicore.rl("trims/color_palettes/titanium"),
             "titanium_darker", Cosmicore.rl("trims/color_palettes/titanium_darker"),
             "lonsdaleite", Cosmicore.rl("trims/color_palettes/lonsdaleite"),
@@ -30,14 +29,14 @@ public class AtlasesProvider extends SpriteSourceProvider {
     );
 
     // Just some lists of things idk
-    private final List<ResourceLocation> textures = List.of(
+    public final List<ResourceLocation> textures = List.of(
             ResourceLocation.withDefaultNamespace("trims/items/leggings_trim"),
             ResourceLocation.withDefaultNamespace("trims/items/chestplate_trim"),
             ResourceLocation.withDefaultNamespace("trims/items/helmet_trim"),
             ResourceLocation.withDefaultNamespace("trims/items/boots_trim")
     );
 
-    private final List<ResourceLocation> trimTextures = List.of(
+    public final List<ResourceLocation> trimTextures = List.of(
             ResourceLocation.withDefaultNamespace("trims/models/armor/coast"),
             ResourceLocation.withDefaultNamespace("trims/models/armor/coast_leggings"),
             ResourceLocation.withDefaultNamespace("trims/models/armor/sentry"),

@@ -1,24 +1,21 @@
-package net.nova.cosmicore.entity;
+package net.nova.cosmicore.client.model;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.HierarchicalModel;
-import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
-import net.minecraft.resources.ResourceLocation;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
-import net.nova.cosmicore.Cosmicore;
+import net.nova.cosmicore.entity.BaseMeteor;
+import net.nova.cosmicore.animations.MeteorFallingAnimation;
 
 @OnlyIn(Dist.CLIENT)
-public class AchondriteModel<T extends Achondrite> extends HierarchicalModel<T> {
-    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(Cosmicore.rl("achondrite"), "main");
-    public static final ResourceLocation TEXTURE = Cosmicore.rl("textures/entity/meteors/achondrite.png");
+public class BaseMeteorModel<T extends BaseMeteor> extends HierarchicalModel<T> {
     private final ModelPart root;
 
-    public AchondriteModel(ModelPart root) {
+    public BaseMeteorModel(ModelPart root) {
         this.root = root.getChild("root");
     }
 
@@ -45,7 +42,7 @@ public class AchondriteModel<T extends Achondrite> extends HierarchicalModel<T> 
     }
 
     @Override
-    public void setupAnim(Achondrite entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+    public void setupAnim(BaseMeteor entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
         this.root().getAllParts().forEach(ModelPart::resetPose);
         this.animate(entity.fallingAnimationState, MeteorFallingAnimation.FALLING_ROTATION_ANIMATION, ageInTicks);
         this.animate(entity.explodedAnimationState, MeteorFallingAnimation.DEATH_ANIMATION, ageInTicks);

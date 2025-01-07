@@ -100,7 +100,7 @@ public class CrusherTile extends BaseCrusherTile {
     }
 
     public Optional<RecipeHolder<CrushingRecipe>> getCurrentRecipe(ItemStack itemStack) {
-        return this.level.getRecipeManager().getRecipeFor(CRecipeTypes.CRUSHING_RECIPE_TYPE.get(), new SingleRecipeInput(itemStack), level);
+        return this.level.getServer().getRecipeManager().getRecipeFor(CRecipeTypes.CRUSHING_RECIPE_TYPE.get(), new SingleRecipeInput(itemStack), level);
     }
 
     // GUI title

@@ -7,7 +7,6 @@ import net.minecraft.client.model.geom.ModelLayers;
 import net.minecraft.client.renderer.entity.AbstractHorseRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.layers.HorseMarkingLayer;
-import net.minecraft.client.renderer.entity.state.HorseRenderState;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.animal.horse.Horse;
 import net.minecraft.world.entity.animal.horse.Variant;
@@ -15,7 +14,7 @@ import net.nova.cosmicore.client.renderer.entity.layers.TranslucentHorseArmorLay
 
 import java.util.Map;
 
-public class TranslucentHorseRenderer extends AbstractHorseRenderer<Horse, HorseRenderState, HorseModel> {
+public class TranslucentHorseRenderer extends AbstractHorseRenderer<Horse, HorseModel<Horse>> {
     private static final Map<Variant, ResourceLocation> LOCATION_BY_VARIANT = Util.make(Maps.newEnumMap(Variant.class), p_349902_ -> {
         p_349902_.put(Variant.WHITE, ResourceLocation.withDefaultNamespace("textures/entity/horse/horse_white.png"));
         p_349902_.put(Variant.CREAMY, ResourceLocation.withDefaultNamespace("textures/entity/horse/horse_creamy.png"));
@@ -27,23 +26,12 @@ public class TranslucentHorseRenderer extends AbstractHorseRenderer<Horse, Horse
     });
 
     public TranslucentHorseRenderer(EntityRendererProvider.Context p_174167_) {
-        super(p_174167_, new HorseModel(p_174167_.bakeLayer(ModelLayers.HORSE)), new HorseModel(p_174167_.bakeLayer(ModelLayers.HORSE_BABY)), 1.1F);
+        super(p_174167_, new HorseModel<>(p_174167_.bakeLayer(ModelLayers.HORSE)), 1.1F);
         this.addLayer(new HorseMarkingLayer(this));
-        this.addLayer(new TranslucentHorseArmorLayer(this, p_174167_.getModelSet(), p_174167_.getEquipmentRenderer()));
+        this.addLayer(new TranslucentHorseArmorLayer(this, p_174167_.getModelSet()));
     }
 
-    public ResourceLocation getTextureLocation(HorseRenderState p_365094_) {
-        return LOCATION_BY_VARIANT.get(p_365094_.variant);
-    }
-
-    public HorseRenderState createRenderState() {
-        return new HorseRenderState();
-    }
-
-    public void extractRenderState(Horse p_362522_, HorseRenderState p_363732_, float p_362557_) {
-        super.extractRenderState(p_362522_, p_363732_, p_362557_);
-        p_363732_.variant = p_362522_.getVariant();
-        p_363732_.markings = p_362522_.getMarkings();
-        p_363732_.bodyArmorItem = p_362522_.getBodyArmorItem().copy();
+    public ResourceLocation getTextureLocation(Horse entity) {
+        return LOCATION_BY_VARIANT.get(entity.getVariant());
     }
 }

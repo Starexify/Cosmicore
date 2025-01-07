@@ -1,4 +1,4 @@
-package net.nova.cosmicore.entity;
+package net.nova.cosmicore.animations;
 
 import net.minecraft.client.animation.AnimationChannel;
 import net.minecraft.client.animation.AnimationDefinition;

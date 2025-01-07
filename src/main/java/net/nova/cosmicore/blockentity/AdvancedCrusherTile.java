@@ -114,7 +114,7 @@ public class AdvancedCrusherTile extends BaseCrusherTile {
     }
 
     public Optional<RecipeHolder<AdvancedCrushingRecipe>> getCurrentRecipe(ItemStack itemStack) {
-        return this.level.getRecipeManager().getRecipeFor(CRecipeTypes.ADVANCED_CRUSHING_RECIPE_TYPE.get(), new SingleRecipeInput(itemStack), level);
+        return this.level.getServer().getRecipeManager().getRecipeFor(CRecipeTypes.ADVANCED_CRUSHING_RECIPE_TYPE.get(), new SingleRecipeInput(itemStack), level);
     }
 
     // GUI title

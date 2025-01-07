@@ -3,20 +3,19 @@ package net.nova.cosmicore.data.tags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.data.BlockTagsProvider;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.nova.cosmicore.init.CBlocks;
 import net.nova.cosmicore.init.CTags;
 
-import javax.annotation.Nullable;
 import java.util.concurrent.CompletableFuture;
 
 import static net.nova.cosmicore.Cosmicore.MODID;
 
 public class CBlockTagsProvider extends BlockTagsProvider {
-    public CBlockTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, @Nullable ExistingFileHelper existingFileHelper) {
-        super(output, lookupProvider, MODID, existingFileHelper);
+    public CBlockTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider) {
+        super(output, lookupProvider, MODID);
     }
 
     @Override
@@ -44,11 +43,14 @@ public class CBlockTagsProvider extends BlockTagsProvider {
                 CBlocks.INFERNIUM_CLUSTER.getKey(), CBlocks.INFERNIUM_BLOCK.getKey()
         );
 
-        tag(CTags.BlockTags.METEOR_BREAKABLES).addTags(
-                BlockTags.SWORD_EFFICIENT, BlockTags.MINEABLE_WITH_AXE, BlockTags.MINEABLE_WITH_HOE, BlockTags.PLANKS, BlockTags.BUTTONS, BlockTags.PRESSURE_PLATES, BlockTags.DOORS,
-                BlockTags.STAIRS, BlockTags.SLABS, BlockTags.WALLS, BlockTags.RAILS, BlockTags.TRAPDOORS, BlockTags.FENCES, BlockTags.BEDS,
-                Tags.Blocks.CHESTS
-        );
+        tag(CTags.BlockTags.METEOR_BREAKABLES)
+                .addTags(
+                        BlockTags.SWORD_EFFICIENT, BlockTags.MINEABLE_WITH_AXE, BlockTags.MINEABLE_WITH_HOE, BlockTags.PLANKS, BlockTags.BUTTONS, BlockTags.PRESSURE_PLATES,
+                        BlockTags.DOORS, BlockTags.STAIRS, BlockTags.SLABS, BlockTags.WALLS, BlockTags.RAILS, BlockTags.TRAPDOORS, BlockTags.FENCES, BlockTags.BEDS,
+                        Tags.Blocks.CHESTS, BlockTags.CORALS, BlockTags.SNOW, BlockTags.FLOWER_POTS
+                ).add(
+                        Blocks.SEAGRASS, Blocks.KELP
+                );
 
     }
 }

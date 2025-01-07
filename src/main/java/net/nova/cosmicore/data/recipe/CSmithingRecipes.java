@@ -10,11 +10,8 @@ import net.nova.cosmicore.init.CItems;
 import java.util.concurrent.CompletableFuture;
 
 public class CSmithingRecipes extends CRecipeProvider {
-    public final RecipeOutput recipeOutput;
-
-    public CSmithingRecipes(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, RecipeOutput recipeOutput) {
-        super(output, lookupProvider);
-        this.recipeOutput = recipeOutput;
+    public CSmithingRecipes(HolderLookup.Provider registries, RecipeOutput output) {
+        super(registries, output);
     }
 
     public void build() {

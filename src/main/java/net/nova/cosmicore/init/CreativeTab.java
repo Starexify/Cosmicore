@@ -9,7 +9,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 
 import static net.nova.cosmicore.Cosmicore.MODID;
 
-public class CreativeTabs {
+public class CreativeTab {
     public static DeferredRegister<CreativeModeTab> CREATIVE_TAB = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MODID);
 
     public static String COSMICORE_TAB_TITLE = "cosmicore.creativetab";

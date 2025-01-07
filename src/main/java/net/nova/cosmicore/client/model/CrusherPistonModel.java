@@ -1,7 +1,5 @@
 package net.nova.cosmicore.client.model;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.Model;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
@@ -22,8 +20,8 @@ public class CrusherPistonModel extends Model {
     public final ModelPart neck;
     public final ModelPart head;
 
-    public CrusherPistonModel(Function<ResourceLocation, RenderType> pRenderType, ModelPart root) {
-        super(pRenderType);
+    public CrusherPistonModel(ModelPart root, Function<ResourceLocation, RenderType> renderType) {
+        super(root, renderType);
         this.piston = root.getChild("piston");
         this.neck = piston.getChild("neck");
         this.head = piston.getChild("head");
@@ -38,10 +36,5 @@ public class CrusherPistonModel extends Model {
         PartDefinition head = piston.addOrReplaceChild("head", CubeListBuilder.create().texOffs(0, 0).addBox(-6.0F, -11.9F, -6.0F, 12.0F, 3.0F, 12.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 16.0F, 0.0F));
 
         return LayerDefinition.create(meshdefinition, 48, 48);
-    }
-
-    @Override
-    public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int pPackedLight, int pPackedOverlay, int pColor) {
-        piston.render(poseStack, vertexConsumer, pPackedLight, pPackedOverlay, pColor);
     }
 }

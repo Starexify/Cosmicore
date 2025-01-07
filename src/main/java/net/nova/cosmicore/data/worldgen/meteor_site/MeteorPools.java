@@ -14,15 +14,25 @@ import net.nova.cosmicore.data.worldgen.StructurePools;
 
 public class MeteorPools {
     public static final ResourceKey<StructureTemplatePool> ACHONDRITE_METEOR = StructurePools.createKey("achondrite_meteor");
+    public static final ResourceKey<StructureTemplatePool> METEORITE_METEOR = StructurePools.createKey("meteorite_meteor");
 
     public static void bootstrap(BootstrapContext<StructureTemplatePool> pContext) {
         HolderGetter<StructureTemplatePool> holdergetter = pContext.lookup(Registries.TEMPLATE_POOL);
         Holder<StructureTemplatePool> holder = holdergetter.getOrThrow(Pools.EMPTY);
 
-        // Meteor Crater
+        // Achondrite Crater
         pContext.register(ACHONDRITE_METEOR, new StructureTemplatePool(holder, ImmutableList.of(
                         Pair.of(StructurePoolElement.legacy("cosmicore:achondrite_meteor/crater_1"), 5),
                         Pair.of(StructurePoolElement.legacy("cosmicore:achondrite_meteor/crater_2"), 1)
+                ), StructureTemplatePool.Projection.RIGID)
+        );
+
+        // Meteorite Crater
+        pContext.register(METEORITE_METEOR, new StructureTemplatePool(holder, ImmutableList.of(
+                        Pair.of(StructurePoolElement.legacy("cosmicore:meteorite_meteor/crater_1"), 4),
+                        Pair.of(StructurePoolElement.legacy("cosmicore:meteorite_meteor/crater_2"), 1),
+                        Pair.of(StructurePoolElement.legacy("cosmicore:meteorite_meteor/crater_3"), 5),
+                        Pair.of(StructurePoolElement.legacy("cosmicore:meteorite_meteor/crater_4"), 2)
                 ), StructureTemplatePool.Projection.RIGID)
         );
     }

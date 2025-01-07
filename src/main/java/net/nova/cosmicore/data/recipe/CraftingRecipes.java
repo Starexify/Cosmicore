@@ -13,33 +13,30 @@ import net.nova.cosmicore.init.CItems;
 import java.util.concurrent.CompletableFuture;
 
 public class CraftingRecipes extends CRecipeProvider {
-    public final RecipeOutput recipeOutput;
-
-    public CraftingRecipes(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, RecipeOutput recipeOutput) {
-        super(output, lookupProvider);
-        this.recipeOutput = recipeOutput;
+    public CraftingRecipes(HolderLookup.Provider registries, RecipeOutput output) {
+        super(registries, output);
     }
 
     public void build() {
         // Titanium Stuff
-        nineBlockStorageRecipes(recipeOutput, RecipeCategory.MISC, CItems.RAW_TITANIUM, RecipeCategory.BUILDING_BLOCKS, CBlocks.RAW_TITANIUM_BLOCK);
-        nineBlockStorageRecipesWithCustomPacking(recipeOutput, RecipeCategory.MISC, CItems.TITANIUM_NUGGET, RecipeCategory.MISC, CItems.TITANIUM_INGOT, "titanium_ingot_from_nuggets", "titanium_ingot");
-        nineBlockStorageRecipesRecipesWithCustomUnpacking(recipeOutput, RecipeCategory.MISC, CItems.TITANIUM_INGOT, RecipeCategory.BUILDING_BLOCKS, CBlocks.TITANIUM_BLOCK, "titanium_ingot_from_titanium_block", "titanium_ingot");
-        nineBlockStorageRecipesRecipesWithCustomUnpacking(recipeOutput, RecipeCategory.MISC, CItems.LONSDALEITE, RecipeCategory.BUILDING_BLOCKS, CBlocks.LONSDALEITE_BLOCK, "lonsdaleite_from_lonsdaleite_block", "lonsdaleite");
+        nineBlockStorageRecipes(RecipeCategory.MISC, CItems.RAW_TITANIUM, RecipeCategory.BUILDING_BLOCKS, CBlocks.RAW_TITANIUM_BLOCK);
+        nineBlockStorageRecipesWithCustomPacking(RecipeCategory.MISC, CItems.TITANIUM_NUGGET, RecipeCategory.MISC, CItems.TITANIUM_INGOT, "titanium_ingot_from_nuggets", "titanium_ingot");
+        nineBlockStorageRecipesRecipesWithCustomUnpacking(RecipeCategory.MISC, CItems.TITANIUM_INGOT, RecipeCategory.BUILDING_BLOCKS, CBlocks.TITANIUM_BLOCK, "titanium_ingot_from_titanium_block", "titanium_ingot");
+        nineBlockStorageRecipesRecipesWithCustomUnpacking(RecipeCategory.MISC, CItems.LONSDALEITE, RecipeCategory.BUILDING_BLOCKS, CBlocks.LONSDALEITE_BLOCK, "lonsdaleite_from_lonsdaleite_block", "lonsdaleite");
 
-        copySmithingTemplate(recipeOutput, CItems.TITANIUM_UPGRADE_SMITHING_TEMPLATE, CBlocks.METEORITE, Items.IRON_INGOT);
-        copySmithingTemplate(recipeOutput, CItems.LONSDALEITE_UPGRADE_SMITHING_TEMPLATE, CBlocks.PALLASITE, Items.DIAMOND);
+        copySmithingTemplate(CItems.TITANIUM_UPGRADE_SMITHING_TEMPLATE, CBlocks.METEORITE, Items.IRON_INGOT);
+        copySmithingTemplate(CItems.LONSDALEITE_UPGRADE_SMITHING_TEMPLATE, CBlocks.PALLASITE, Items.DIAMOND);
 
         // Gears Recipes
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, CItems.IRON_GEAR)
+        shaped(RecipeCategory.MISC, CItems.IRON_GEAR)
                 .define('I', Items.IRON_INGOT)
                 .define('N', Items.IRON_NUGGET)
                 .pattern("NIN")
                 .pattern("I I")
                 .pattern("NIN")
                 .unlockedBy("has_iron_ingot", has(Items.IRON_INGOT))
-                .save(recipeOutput);
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, CItems.TITANIUM_GEAR)
+                .save(output);
+        shaped(RecipeCategory.MISC, CItems.TITANIUM_GEAR)
                 .define('G', CItems.IRON_GEAR)
                 .define('I', CItems.TITANIUM_INGOT)
                 .define('N', CItems.TITANIUM_NUGGET)
@@ -47,10 +44,10 @@ public class CraftingRecipes extends CRecipeProvider {
                 .pattern("IGI")
                 .pattern("NIN")
                 .unlockedBy("has_iron_gear", has(CItems.IRON_GEAR))
-                .save(recipeOutput);
+                .save(output);
 
         // Crusher
-        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, CBlocks.CRUSHER)
+        shaped(RecipeCategory.DECORATIONS, CBlocks.CRUSHER)
                 .define('G', CItems.IRON_GEAR)
                 .define('P', Blocks.PISTON)
                 .define('I', Items.IRON_INGOT)
@@ -60,9 +57,9 @@ public class CraftingRecipes extends CRecipeProvider {
                 .pattern("IFI")
                 .pattern("###")
                 .unlockedBy("has_iron_gear", has(CItems.IRON_GEAR))
-                .save(recipeOutput);
+                .save(output);
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, CBlocks.ADVANCED_CRUSHER)
+        shaped(RecipeCategory.DECORATIONS, CBlocks.ADVANCED_CRUSHER)
                 .define('G', CItems.TITANIUM_GEAR)
                 .define('T', CItems.TITANIUM_INGOT)
                 .define('C', CBlocks.CRUSHER)
@@ -71,8 +68,19 @@ public class CraftingRecipes extends CRecipeProvider {
                 .pattern("TCT")
                 .pattern("###")
                 .unlockedBy("has_crusher", has(CBlocks.CRUSHER))
-                .save(recipeOutput);
+                .save(output);
 
-        twoByTwoPacker(recipeOutput, RecipeCategory.BUILDING_BLOCKS, CBlocks.INFERNIUM_BLOCK, CItems.INFERNIUM_CRYSTAL);
+        twoByTwoPacker(RecipeCategory.BUILDING_BLOCKS, CBlocks.INFERNIUM_BLOCK, CItems.INFERNIUM_CRYSTAL);
+
+        // Cosmic Shield
+        shaped(RecipeCategory.DECORATIONS, CBlocks.COSMIC_SHIELD)
+                .define('#', CBlocks.TITANIUM_BLOCK)
+                .define('X', CItems.TITANIUM_GEAR)
+                .define('I', CItems.TITANIUM_INGOT)
+                .pattern("  I")
+                .pattern("X#X")
+                .pattern("# #")
+                .unlockedBy("has_", has(CBlocks.CRUSHER))
+                .save(output);
     }
 }

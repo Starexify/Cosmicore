@@ -1,7 +1,5 @@
 package net.nova.cosmicore.client.model;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.Model;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
@@ -18,8 +16,8 @@ public class CosmicShieldTierIModel extends Model {
     public static final ResourceLocation TEXTURE = Cosmicore.rl("textures/entity/cosmic_shield/cosmic_shield_tier_1.png");
     public final ModelPart modelRoot;
 
-    public CosmicShieldTierIModel(Function<ResourceLocation, RenderType> pRenderType, ModelPart root) {
-        super(pRenderType);
+    public CosmicShieldTierIModel(ModelPart root, Function<ResourceLocation, RenderType> pRenderType) {
+        super(root, pRenderType);
         this.modelRoot = root.getChild("root");
     }
 
@@ -34,10 +32,5 @@ public class CosmicShieldTierIModel extends Model {
                 .texOffs(6, 6).addBox(-1.0F, -17.4F, -1.0F, 2.0F, 1.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 24.0F, 0.0F));
 
         return LayerDefinition.create(meshdefinition, 16, 16);
-    }
-
-    @Override
-    public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int pPackedLight, int pPackedOverlay, int pColor) {
-        modelRoot.render(poseStack, vertexConsumer, pPackedLight, pPackedOverlay, pColor);
     }
 }

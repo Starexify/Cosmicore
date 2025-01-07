@@ -54,7 +54,8 @@ public record ChestLoot(HolderLookup.Provider registries) implements LootTableSu
 
         ).withPool(LootPool.lootPool()
                 .setRolls(ConstantValue.exactly(1.0F))
-                .add(LootItem.lootTableItem(CItems.TITANIUM_UPGRADE_SMITHING_TEMPLATE).setWeight(3).apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F))))
+                .add(LootItem.lootTableItem(CItems.TITANIUM_UPGRADE_SMITHING_TEMPLATE).setWeight(7).apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F))))
+                .add(LootItem.lootTableItem(CItems.LONSDALEITE_UPGRADE_SMITHING_TEMPLATE).setWeight(1).apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F))))
 
         ).withPool(LootPool.lootPool()
                 .setRolls(UniformGenerator.between(2.0F, 3.0f))

@@ -3,7 +3,7 @@ package net.nova.cosmicore.item;
 import net.minecraft.Util;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.flag.FeatureFlag;
+import net.minecraft.world.item.Item;
 
 import static net.nova.cosmicore.Cosmicore.rl;
 
@@ -30,17 +30,17 @@ public class TitaniumSmithingTemplate extends BaseSmithingTemplate {
         addMaterialSlot(EMPTY_SLOT_INGOT);
     }
 
-    public TitaniumSmithingTemplate(Component pAppliesTo, Component pIngredients, Component pUpgradeDescription, Component pBaseSlotDescription, Component pAdditionsSlotDescription, FeatureFlag... pRequiredFeatures) {
-        super(pAppliesTo, pIngredients, pUpgradeDescription, pBaseSlotDescription, pAdditionsSlotDescription, pRequiredFeatures);
+    public TitaniumSmithingTemplate(Component appliesTo, Component ingredients, Component baseSlotDescription, Component additionsSlotDescription, Properties properties) {
+        super(appliesTo, ingredients, baseSlotDescription, additionsSlotDescription, properties);
     }
 
-    public static TitaniumSmithingTemplate createTitaniumUpgradeTemplate() {
+    public static TitaniumSmithingTemplate createTitaniumUpgradeTemplate(Item.Properties properties) {
         return new TitaniumSmithingTemplate(
                 TITANIUM_UPGRADE_APPLIES_TO,
                 TITANIUM_UPGRADE_INGREDIENTS,
-                TITANIUM_UPGRADE,
                 TITANIUM_UPGRADE_BASE_SLOT_DESCRIPTION,
-                TITANIUM_UPGRADE_ADDITIONS_SLOT_DESCRIPTION
+                TITANIUM_UPGRADE_ADDITIONS_SLOT_DESCRIPTION,
+                properties
         );
     }
 }

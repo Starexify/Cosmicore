@@ -24,7 +24,7 @@ public class CosmicShieldTileRenderer implements BlockEntityRenderer<CosmicShiel
 
     public CosmicShieldTileRenderer(BlockEntityRendererProvider.Context context) {
         ModelPart modelPart = context.bakeLayer(shieldTierILayer);
-        this.tierIModel = new CosmicShieldTierIModel(RenderType::entityCutout, modelPart);
+        this.tierIModel = new CosmicShieldTierIModel(modelPart, RenderType::entityCutout);
     }
 
     @Override
