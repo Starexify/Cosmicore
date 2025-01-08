@@ -1,7 +1,12 @@
 package net.nova.cosmicore.client.renderer.entity;
 
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
@@ -19,6 +24,16 @@ public class AchondriteRenderer extends EntityRenderer<Achondrite, MeteoriteRend
     public AchondriteRenderer(EntityRendererProvider.Context context) {
         super(context);
         meteorModel = new BaseMeteorModel(context.bakeLayer(CModelLayers.ACHONDRITE));
+    }
+
+    @Override
+    public void render(MeteoriteRenderState renderState, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight) {
+        poseStack.pushPose();
+        VertexConsumer vertexConsumer = bufferSource.getBuffer(RenderType.entityCutoutNoCull(getTextureLocation(renderState)));
+        meteorModel.setupAnim(renderState);
+        meteorModel.renderToBuffer(poseStack, vertexConsumer, packedLight, OverlayTexture.NO_OVERLAY);
+        poseStack.popPose();
+        super.render(renderState, poseStack, bufferSource, packedLight);
     }
 
     public ResourceLocation getTextureLocation(MeteoriteRenderState renderState) {

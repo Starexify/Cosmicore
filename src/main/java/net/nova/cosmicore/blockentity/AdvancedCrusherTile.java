@@ -3,6 +3,7 @@ package net.nova.cosmicore.blockentity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
@@ -10,7 +11,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.SingleRecipeInput;
-import net.minecraft.world.item.crafting.SmithingRecipeInput;
 import net.minecraft.world.level.block.state.BlockState;
 import net.nova.cosmicore.gui.crusher.AdvancedCrusherMenu;
 import net.nova.cosmicore.init.CBlockEntities;
@@ -20,7 +20,7 @@ import net.nova.cosmicore.recipe.crusher.AdvancedCrushingRecipe;
 import java.util.Optional;
 
 public class AdvancedCrusherTile extends BaseCrusherTile {
-    private static final int ADDITIONAL_SLOT = 1;
+    public static final int ADDITIONAL_SLOT = 1;
     protected final ContainerData dataAccess = new ContainerData() {
         @Override
         public int get(int pIndex) {
@@ -123,7 +123,11 @@ public class AdvancedCrusherTile extends BaseCrusherTile {
     }
 
     public Optional<RecipeHolder<AdvancedCrushingRecipe>> getCurrentRecipe(ItemStack itemStack) {
-        return this.level.getServer().getRecipeManager().getRecipeFor(CRecipeTypes.ADVANCED_CRUSHING_RECIPE_TYPE.get(), new SingleRecipeInput(itemStack), level);
+        if (this.level instanceof ServerLevel serverlevel) {
+            return serverlevel.recipeAccess().getRecipeFor(CRecipeTypes.ADVANCED_CRUSHING_RECIPE_TYPE.get(), new SingleRecipeInput(itemStack), serverlevel);
+        } else {
+            return Optional.empty();
+        }
     }
 
     // GUI title

@@ -9,6 +9,7 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.block.BlockRenderDispatcher;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
+import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.Level;
@@ -29,10 +30,13 @@ public abstract class AbstractCrusherTileRenderer<T extends BlockEntity> impleme
         this.pistonModel = pistonModel;
     }
 
+
     @Override
     public void render(T crusherTile, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, int packedOverlay) {
         poseStack.pushPose();
         renderAnimatedPiston(crusherTile, partialTick, poseStack, bufferSource, packedLight, packedOverlay);
+
+
         poseStack.popPose();
     }
 
@@ -90,12 +94,8 @@ public abstract class AbstractCrusherTileRenderer<T extends BlockEntity> impleme
         return LightTexture.pack(bLight, sLight);
     }
 
-    @Override
-    public int getViewDistance() {
-        return 68;
-    }
-
     // Abstract methods for implementation
     protected abstract int getCrushingProgress(T crusherTile);
+
     protected abstract boolean hasRecipe(T crusherTile);
 }

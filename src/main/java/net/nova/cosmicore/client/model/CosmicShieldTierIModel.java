@@ -6,18 +6,14 @@ import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.resources.ResourceLocation;
 import net.nova.cosmicore.Cosmicore;
-
-import java.util.function.Function;
 
 public class CosmicShieldTierIModel extends Model {
     public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(Cosmicore.rl("cosmic_shield"), "main");
-    public static final ResourceLocation TEXTURE = Cosmicore.rl("textures/entity/cosmic_shield/cosmic_shield_tier_1.png");
     public final ModelPart modelRoot;
 
-    public CosmicShieldTierIModel(ModelPart root, Function<ResourceLocation, RenderType> pRenderType) {
-        super(root, pRenderType);
+    public CosmicShieldTierIModel(ModelPart root) {
+        super(root, RenderType::entityCutout);
         this.modelRoot = root.getChild("root");
     }
 

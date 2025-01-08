@@ -3,6 +3,7 @@ package net.nova.cosmicore.blockentity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
@@ -14,6 +15,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.nova.cosmicore.gui.crusher.CrusherMenu;
 import net.nova.cosmicore.init.CBlockEntities;
 import net.nova.cosmicore.init.CRecipeTypes;
+import net.nova.cosmicore.recipe.crusher.AdvancedCrushingRecipe;
 import net.nova.cosmicore.recipe.crusher.CrushingRecipe;
 
 import java.util.Optional;
@@ -80,7 +82,7 @@ public class CrusherTile extends BaseCrusherTile {
 
     @Override
     public boolean hasRecipe() {
-        Optional<RecipeHolder<CrushingRecipe>> recipe = getCurrentRecipe(this.inventory.getFirst());
+        Optional<RecipeHolder<CrushingRecipe>> recipe = getCurrentRecipe();
         if (recipe.isEmpty()) return false;
 
         ItemStack result = recipe.get().value().assemble(createRecipeInput(), level.registryAccess());
@@ -90,7 +92,7 @@ public class CrusherTile extends BaseCrusherTile {
 
     @Override
     public void craftItem() {
-        Optional<RecipeHolder<CrushingRecipe>> recipe = getCurrentRecipe(this.inventory.getFirst());
+        Optional<RecipeHolder<CrushingRecipe>> recipe = getCurrentRecipe();
         if (recipe.isPresent()) {
             ItemStack result = recipe.get().value().assemble(createRecipeInput(), level.registryAccess());
             this.inventory.getFirst().shrink(1);
@@ -103,9 +105,14 @@ public class CrusherTile extends BaseCrusherTile {
         return new SingleRecipeInput(this.inventory.getFirst());
     }
 
-    public Optional<RecipeHolder<CrushingRecipe>> getCurrentRecipe(ItemStack itemStack) {
-        return this.level.getServer().getRecipeManager().getRecipeFor(CRecipeTypes.CRUSHING_RECIPE_TYPE.get(), new SingleRecipeInput(itemStack), level);
+    public Optional<RecipeHolder<CrushingRecipe>> getCurrentRecipe() {
+        if (this.level instanceof ServerLevel serverlevel) {
+            return serverlevel.recipeAccess().getRecipeFor(CRecipeTypes.CRUSHING_RECIPE_TYPE.get(), new SingleRecipeInput(this.inventory.getFirst()), serverlevel);
+        } else {
+            return Optional.empty();
+        }
     }
+
 
     // GUI title
     @Override

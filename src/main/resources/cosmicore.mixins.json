@@ -3,7 +3,8 @@
   "package": "net.nova.cosmicore.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "CrossbowItemMixin"
+    "CrossbowItemMixin",
+    "EquipmentLayerRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1
