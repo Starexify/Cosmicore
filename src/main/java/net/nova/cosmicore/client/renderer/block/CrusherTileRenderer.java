@@ -18,7 +18,7 @@ import net.nova.cosmicore.client.model.CrusherPistonModel;
 public class CrusherTileRenderer extends AbstractCrusherTileRenderer<CrusherTile> {
     public CrusherTileRenderer(BlockEntityRendererProvider.Context context) {
         super(context, CrusherPistonModel.TEXTURE, CrusherPistonModel.LAYER_LOCATION,
-                new CrusherPistonModel(RenderType::entityCutout, context.bakeLayer(CrusherPistonModel.LAYER_LOCATION)));
+                new CrusherPistonModel(context.bakeLayer(CrusherPistonModel.LAYER_LOCATION), RenderType::entityCutout));
     }
 
     @Override

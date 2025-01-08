@@ -1,25 +1,24 @@
 package net.nova.cosmicore.client.model;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
-import net.minecraft.client.model.HierarchicalModel;
+import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
-import net.nova.cosmicore.entity.BaseMeteor;
 import net.nova.cosmicore.animations.MeteorFallingAnimation;
+import net.nova.cosmicore.client.renderer.entity.state.MeteoriteRenderState;
 
 @OnlyIn(Dist.CLIENT)
-public class BaseMeteorModel<T extends BaseMeteor> extends HierarchicalModel<T> {
+public class BaseMeteorModel extends EntityModel<MeteoriteRenderState> {
     private final ModelPart root;
 
     public BaseMeteorModel(ModelPart root) {
+        super(root);
         this.root = root.getChild("root");
     }
 
-    public static LayerDefinition createLayer() {
+    public static LayerDefinition createBodyLayer() {
         MeshDefinition meshdefinition = new MeshDefinition();
         PartDefinition partdefinition = meshdefinition.getRoot();
 
@@ -42,19 +41,9 @@ public class BaseMeteorModel<T extends BaseMeteor> extends HierarchicalModel<T> 
     }
 
     @Override
-    public void setupAnim(BaseMeteor entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-        this.root().getAllParts().forEach(ModelPart::resetPose);
-        this.animate(entity.fallingAnimationState, MeteorFallingAnimation.FALLING_ROTATION_ANIMATION, ageInTicks);
-        this.animate(entity.explodedAnimationState, MeteorFallingAnimation.DEATH_ANIMATION, ageInTicks);
-    }
-
-    @Override
-    public void renderToBuffer(PoseStack pPoseStack, VertexConsumer pBuffer, int pPackedLight, int pPackedOverlay, int pColor) {
-        root.render(pPoseStack, pBuffer, pPackedLight, pPackedOverlay, pColor);
-    }
-
-    @Override
-    public ModelPart root() {
-        return this.root;
+    public void setupAnim(MeteoriteRenderState renderState) {
+        super.setupAnim(renderState);
+        this.animate(renderState.fallingAnimationState, MeteorFallingAnimation.FALLING_ROTATION_ANIMATION, renderState.ageInTicks, 1.0F);
+        this.animate(renderState.explodedAnimationState, MeteorFallingAnimation.DEATH_ANIMATION, renderState.ageInTicks, 1.0F);
     }
 }

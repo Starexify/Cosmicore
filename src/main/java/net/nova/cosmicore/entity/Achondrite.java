@@ -1,5 +1,6 @@
 package net.nova.cosmicore.entity;
 
+import net.minecraft.core.registries.Registries;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.levelgen.structure.Structure;
@@ -12,6 +13,6 @@ public class Achondrite extends BaseMeteor {
 
     @Override
     public Structure getStructure() {
-        return level().registryAccess().registryOrThrow(CStructures.ACHONDRITE_METEOR.registryKey()).getHolderOrThrow(CStructures.ACHONDRITE_METEOR).value();
+        return level().registryAccess().lookupOrThrow(Registries.STRUCTURE).getValueOrThrow(CStructures.ACHONDRITE_METEOR);
     }
 }

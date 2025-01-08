@@ -3,12 +3,15 @@ package net.nova.cosmicore.entity;
 import net.minecraft.ChatFormatting;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
 import net.minecraft.core.SectionPos;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.AnimationState;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -156,6 +159,11 @@ public class BaseMeteor extends Entity {
         }
     }
 
+    @Override
+    public boolean hurtServer(ServerLevel serverLevel, DamageSource damageSource, float v) {
+        return false;
+    }
+
     // Handlers
     public void updateClientAnimations() {
         if (this.onGround() && !isLanded) {
@@ -179,7 +187,7 @@ public class BaseMeteor extends Entity {
 
     // Structure Placement
     public Structure getStructure() {
-        return level().registryAccess().registryOrThrow(CStructures.ACHONDRITE_METEOR.registryKey()).getHolderOrThrow(CStructures.ACHONDRITE_METEOR).value();
+        return level().registryAccess().lookupOrThrow(Registries.STRUCTURE).getValueOrThrow(CStructures.ACHONDRITE_METEOR);
     }
 
     public void craterPlacement() {
@@ -189,6 +197,8 @@ public class BaseMeteor extends Entity {
         Structure structure = getStructure();
         ChunkGenerator chunkgenerator = serverlevel.getChunkSource().getGenerator();
         StructureStart structurestart = structure.generate(
+                Holder.direct(structure),
+                serverlevel.dimension(),
                 serverlevel.registryAccess(),
                 chunkgenerator,
                 chunkgenerator.getBiomeSource(),
@@ -198,7 +208,7 @@ public class BaseMeteor extends Entity {
                 new ChunkPos(pos),
                 0,
                 serverlevel,
-                p_214580_ -> true
+                biomeHolder -> true
         );
 
         if (!structurestart.isValid()) {
@@ -233,10 +243,10 @@ public class BaseMeteor extends Entity {
                             serverlevel.getRandom(),
                             new BoundingBox(
                                     currentChunkPos.getMinBlockX(),
-                                    serverlevel.getMinBuildHeight(),
+                                    serverlevel.getMinY(),
                                     currentChunkPos.getMinBlockZ(),
                                     currentChunkPos.getMaxBlockX(),
-                                    serverlevel.getMaxBuildHeight(),
+                                    serverlevel.getMaxY(),
                                     currentChunkPos.getMaxBlockZ()
                             ),
                             currentChunkPos
@@ -301,7 +311,7 @@ public class BaseMeteor extends Entity {
             for (int z = minZ; z <= maxZ; z++) {
                 if (Math.abs(x - centerPos.getX()) <= SHIELD_CHECK_RADIUS &&
                         Math.abs(z - centerPos.getZ()) <= SHIELD_CHECK_RADIUS) {
-                    for (int y = serverLevel.getMinBuildHeight(); y < serverLevel.getMaxBuildHeight(); y++) {
+                    for (int y = serverLevel.getMinY(); y < serverLevel.getMaxY(); y++) {
                         BlockPos pos = new BlockPos(x, y, z);
                         BlockState state = serverLevel.getBlockState(pos);
                         if (isShieldBlock(state)) {

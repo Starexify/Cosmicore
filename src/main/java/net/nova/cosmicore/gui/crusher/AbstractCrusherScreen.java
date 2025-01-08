@@ -1,9 +1,8 @@
 package net.nova.cosmicore.gui.crusher;
 
-import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
-import net.minecraft.client.renderer.GameRenderer;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
@@ -35,28 +34,28 @@ public abstract class AbstractCrusherScreen<T extends AbstractContainerMenu> ext
     }
 
     protected abstract boolean isCharged();
+
     protected abstract float getChargedProgress();
+
     protected abstract float getCrushingProgress();
+
     protected abstract int getCurrentIgnis();
+
     protected abstract int getMaxIgnis();
 
     @Override
     protected void renderBg(GuiGraphics guiGraphics, float pPartialTick, int pMouseX, int pMouseY) {
-        RenderSystem.setShader(GameRenderer::getPositionTexShader);
-        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
-        RenderSystem.setShaderTexture(0, texture);
         int i = (this.width - this.imageWidth) / 2;
         int j = (this.height - this.imageHeight) / 2;
-
-        guiGraphics.blit(texture, i, j, 0, 0, this.imageWidth, this.imageHeight);
+        guiGraphics.blit(RenderType::guiTextured, texture, i, j, 0.0F, 0.0F, this.imageWidth, this.imageHeight, 256, 256);
 
         if (this.isCharged()) {
             int l = Mth.ceil(this.getChargedProgress());
-            guiGraphics.blitSprite(IGNIS_SPRITE, IGNIS_WIDTH, IGNIS_TEXTURE_HEIGHT, 0, IGNIS_TEXTURE_HEIGHT - l, i + IGNIS_X, j + IGNIS_Y + IGNIS_TEXTURE_HEIGHT - l, IGNIS_WIDTH, l);
+            guiGraphics.blitSprite(RenderType::guiTextured, IGNIS_SPRITE, IGNIS_WIDTH, IGNIS_TEXTURE_HEIGHT, 0, IGNIS_TEXTURE_HEIGHT - l, i + IGNIS_X, j + IGNIS_Y + IGNIS_TEXTURE_HEIGHT - l, IGNIS_WIDTH, l);
         }
 
         int j1 = Mth.ceil(this.getCrushingProgress());
-        guiGraphics.blitSprite(CRUSHING_PROGRESS_SPRITE, 18, 18, 0, 0, i + 80, j + 34, 18, j1);
+        guiGraphics.blitSprite(RenderType::guiTextured, CRUSHING_PROGRESS_SPRITE, 18, 18, 0, 0, i + 80, j + 34, 18, j1);
     }
 
     @Override
