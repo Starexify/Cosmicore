@@ -6,9 +6,10 @@ import net.nova.cosmicore.init.CRecipeTypes;
 import net.nova.cosmicore.recipe.WeightedResult;
 
 import java.util.List;
+import java.util.Optional;
 
 public class CrushingRecipe extends BaseCrushingRecipe {
-    public CrushingRecipe(Ingredient ingredient, List<WeightedResult> results) {
+    public CrushingRecipe(Optional<Ingredient> ingredient, List<WeightedResult> results) {
         this.ingredient = ingredient;
         this.results = results;
     }

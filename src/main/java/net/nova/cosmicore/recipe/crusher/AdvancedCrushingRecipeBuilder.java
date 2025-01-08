@@ -6,6 +6,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 public class AdvancedCrushingRecipeBuilder extends BaseRecipeBuilder {
     public AdvancedCrushingRecipeBuilder(Ingredient ingredient) {
@@ -19,7 +20,7 @@ public class AdvancedCrushingRecipeBuilder extends BaseRecipeBuilder {
 
     @Override
     public void save(RecipeOutput recipeOutput, ResourceKey<Recipe<?>> resourceKey) {
-        AdvancedCrushingRecipe recipe = new AdvancedCrushingRecipe(this.ingredient, this.results);
+        AdvancedCrushingRecipe recipe = new AdvancedCrushingRecipe(Optional.of(ingredient), results);
         recipeOutput.accept(resourceKey, recipe, null);
     }
 }

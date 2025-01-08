@@ -14,6 +14,7 @@ import net.nova.cosmicore.recipe.WeightedResult;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.Optional;
 
 public class BaseRecipeBuilder implements RecipeBuilder {
     public Ingredient ingredient;

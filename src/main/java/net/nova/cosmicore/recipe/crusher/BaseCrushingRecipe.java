@@ -7,17 +7,15 @@ import net.minecraft.world.level.Level;
 import net.nova.cosmicore.recipe.WeightedResult;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 
 public class BaseCrushingRecipe implements Recipe<SingleRecipeInput> {
-    public Ingredient ingredient;
+    public Optional<Ingredient> ingredient;
     public List<WeightedResult> results;
     public static final Random RANDOM = new Random();
 
-    @Override
-    public boolean matches(SingleRecipeInput pInput, Level pLevel) {
-        return this.ingredient.test(pInput.item());
-    }
+    private PlacementInfo placementInfo;
 
     @Override
     public ItemStack assemble(SingleRecipeInput pInput, HolderLookup.Provider pRegistries) {
@@ -25,8 +23,17 @@ public class BaseCrushingRecipe implements Recipe<SingleRecipeInput> {
     }
 
     @Override
+    public boolean matches(SingleRecipeInput input, Level pLevel) {
+        return Ingredient.testOptionalIngredient(this.ingredient(), input.item());
+    }
+
+    @Override
     public PlacementInfo placementInfo() {
-        return null;
+        if (this.placementInfo == null) {
+            this.placementInfo = PlacementInfo.createFromOptionals(List.of(this.ingredient));
+        }
+
+        return this.placementInfo;
     }
 
     public ItemStack getRandomResult() {
@@ -42,6 +49,10 @@ public class BaseCrushingRecipe implements Recipe<SingleRecipeInput> {
         }
 
         return ItemStack.EMPTY;
+    }
+
+    public Optional<Ingredient> ingredient() {
+        return this.ingredient;
     }
 
     @Override
