@@ -20,7 +20,7 @@ public class CrushingRecipeSerializer implements RecipeSerializer<CrushingRecipe
     ).apply(inst, WeightedResult::new));
 
     public static final MapCodec<CrushingRecipe> CODEC = RecordCodecBuilder.mapCodec(inst -> inst.group(
-            Ingredient.CODEC_NONEMPTY.fieldOf("ingredient").forGetter(recipe -> recipe.ingredient),
+            Ingredient.CODEC.fieldOf("ingredient").forGetter(recipe -> recipe.ingredient),
             Codec.list(WEIGHTED_RESULT_CODEC).fieldOf("results").forGetter(recipe -> recipe.results)
     ).apply(inst, CrushingRecipe::new));
 

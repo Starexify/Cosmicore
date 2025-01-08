@@ -1,0 +1,49 @@
+{
+  "elements": [
+    {
+      "element": {
+        "element_type": "minecraft:legacy_single_pool_element",
+        "location": "cosmicore:meteorite_meteor/crater_1",
+        "processors": {
+          "processors": []
+        },
+        "projection": "rigid"
+      },
+      "weight": 4
+    },
+    {
+      "element": {
+        "element_type": "minecraft:legacy_single_pool_element",
+        "location": "cosmicore:meteorite_meteor/crater_2",
+        "processors": {
+          "processors": []
+        },
+        "projection": "rigid"
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "element_type": "minecraft:legacy_single_pool_element",
+        "location": "cosmicore:meteorite_meteor/crater_3",
+        "processors": {
+          "processors": []
+        },
+        "projection": "rigid"
+      },
+      "weight": 5
+    },
+    {
+      "element": {
+        "element_type": "minecraft:legacy_single_pool_element",
+        "location": "cosmicore:meteorite_meteor/crater_4",
+        "processors": {
+          "processors": []
+        },
+        "projection": "rigid"
+      },
+      "weight": 2
+    }
+  ],
+  "fallback": "minecraft:empty"
+}

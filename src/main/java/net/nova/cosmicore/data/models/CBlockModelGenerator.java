@@ -11,6 +11,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
+import net.nova.cosmicore.Cosmicore;
 import net.nova.cosmicore.init.CBlocks;
 
 import java.util.function.BiConsumer;
@@ -58,7 +59,7 @@ public class CBlockModelGenerator extends BlockModelGenerators {
         this.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block, Variant.variant().with(VariantProperties.MODEL, resourcelocation))
                 .with(createHorizontalFacingDispatch()));
 
-        this.registerSimpleItemModel(block.asItem(), ModelTemplates.FLAT_ITEM.create(ModelLocationUtils.decorateItemModelLocation("template_crusher"), TextureMapping.layer0(block.asItem()), this.modelOutput));
+        //this.registerSimpleItemModel(block.asItem(), ModelTemplates.FLAT_ITEM.create(ModelLocationUtils.decorateItemModelLocation("template_crusher"), TextureMapping.layer0(block.asItem()), this.modelOutput));
     }
 
     public void cosmicShieldModel(Block block) {
@@ -66,7 +67,6 @@ public class CBlockModelGenerator extends BlockModelGenerators {
         this.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block, Variant.variant().with(VariantProperties.MODEL, resourcelocation))
                 .with(createHorizontalFacingDispatch()));
 
-        this.registerSimpleItemModel(block.asItem(), ModelTemplates.FLAT_ITEM.create(ModelLocationUtils.decorateItemModelLocation("template_cosmic_shield"), TextureMapping.layer0(block.asItem()), this.modelOutput));
     }
 
     public void createInferniumCluster(Block block) {

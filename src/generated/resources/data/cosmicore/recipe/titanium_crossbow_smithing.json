@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": "cosmicore:titanium_ingot",
+  "base": "minecraft:crossbow",
+  "result": {
+    "count": 1,
+    "id": "cosmicore:titanium_crossbow"
+  },
+  "template": "cosmicore:titanium_upgrade_smithing_template"
+}

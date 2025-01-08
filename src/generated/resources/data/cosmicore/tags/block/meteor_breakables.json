@@ -1,0 +1,24 @@
+{
+  "values": [
+    "#minecraft:sword_efficient",
+    "#minecraft:mineable/axe",
+    "#minecraft:mineable/hoe",
+    "#minecraft:planks",
+    "#minecraft:buttons",
+    "#minecraft:pressure_plates",
+    "#minecraft:doors",
+    "#minecraft:stairs",
+    "#minecraft:slabs",
+    "#minecraft:walls",
+    "#minecraft:rails",
+    "#minecraft:trapdoors",
+    "#minecraft:fences",
+    "#minecraft:beds",
+    "#c:chests",
+    "#minecraft:corals",
+    "#minecraft:snow",
+    "#minecraft:flower_pots",
+    "minecraft:seagrass",
+    "minecraft:kelp"
+  ]
+}

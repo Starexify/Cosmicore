@@ -14,12 +14,12 @@ public class CrushingRecipe extends BaseCrushingRecipe {
     }
 
     @Override
-    public RecipeSerializer<?> getSerializer() {
+    public RecipeSerializer<? extends Recipe<SingleRecipeInput>> getSerializer() {
         return CRecipeSerializers.CRUSHING_RECIPE_SERIALIZER.get();
     }
 
     @Override
-    public RecipeType<?> getType() {
+    public RecipeType<? extends Recipe<SingleRecipeInput>> getType() {
         return CRecipeTypes.CRUSHING_RECIPE_TYPE.get();
     }
 }

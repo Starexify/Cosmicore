@@ -25,8 +25,8 @@ public class BaseCrushingRecipe implements Recipe<SingleRecipeInput> {
     }
 
     @Override
-    public ItemStack getResultItem(HolderLookup.Provider pRegistries) {
-        return getRandomResult();
+    public PlacementInfo placementInfo() {
+        return null;
     }
 
     public ItemStack getRandomResult() {
@@ -45,17 +45,17 @@ public class BaseCrushingRecipe implements Recipe<SingleRecipeInput> {
     }
 
     @Override
-    public boolean canCraftInDimensions(int pWidth, int pHeight) {
-        return true;
-    }
-
-    @Override
-    public RecipeSerializer<?> getSerializer() {
+    public RecipeSerializer<? extends Recipe<SingleRecipeInput>> getSerializer() {
         return null;
     }
 
     @Override
-    public RecipeType<?> getType() {
+    public RecipeType<? extends Recipe<SingleRecipeInput>> getType() {
+        return null;
+    }
+
+    @Override
+    public RecipeBookCategory recipeBookCategory() {
         return null;
     }
 }

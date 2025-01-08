@@ -1,0 +1,11 @@
+{
+  "asset_name": "titanium",
+  "description": {
+    "color": "#F5FFFF",
+    "translate": "trim_material.cosmicore.titanium"
+  },
+  "ingredient": "cosmicore:titanium_ingot",
+  "override_armor_assets": {
+    "cosmicore:titanium": "titanium_darker"
+  }
+}

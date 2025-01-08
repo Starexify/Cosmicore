@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": "cosmicore:titanium_block",
+    "C": "cosmicore:crusher",
+    "G": "cosmicore:titanium_gear",
+    "T": "cosmicore:titanium_ingot"
+  },
+  "pattern": [
+    "GGG",
+    "TCT",
+    "###"
+  ],
+  "result": {
+    "count": 1,
+    "id": "cosmicore:advanced_crusher"
+  }
+}

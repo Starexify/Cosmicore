@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "cosmicore:item/meteorite_banner_pattern"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "asset_name": "lonsdaleite",
+  "description": {
+    "color": "#CCFFFF",
+    "translate": "trim_material.cosmicore.lonsdaleite"
+  },
+  "ingredient": "cosmicore:lonsdaleite",
+  "override_armor_assets": {
+    "cosmicore:lonsdaleite": "lonsdaleite_darker"
+  }
+}

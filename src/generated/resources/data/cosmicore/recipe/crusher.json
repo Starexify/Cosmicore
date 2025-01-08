@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": "minecraft:iron_block",
+    "F": "minecraft:glass_pane",
+    "G": "cosmicore:iron_gear",
+    "I": "minecraft:iron_ingot",
+    "P": "minecraft:piston"
+  },
+  "pattern": [
+    "GPG",
+    "IFI",
+    "###"
+  ],
+  "result": {
+    "count": 1,
+    "id": "cosmicore:crusher"
+  }
+}

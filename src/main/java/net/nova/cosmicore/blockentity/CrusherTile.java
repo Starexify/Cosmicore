@@ -83,7 +83,7 @@ public class CrusherTile extends BaseCrusherTile {
         Optional<RecipeHolder<CrushingRecipe>> recipe = getCurrentRecipe(this.inventory.getFirst());
         if (recipe.isEmpty()) return false;
 
-        ItemStack result = recipe.get().value().getResultItem(null);
+        ItemStack result = recipe.get().value().assemble(createRecipeInput(), level.registryAccess());
 
         return canInsertAmountIntoOutputSlot(result.getCount()) && canInsertItemInOutputSlot(result.getItem());
     }
@@ -92,11 +92,15 @@ public class CrusherTile extends BaseCrusherTile {
     public void craftItem() {
         Optional<RecipeHolder<CrushingRecipe>> recipe = getCurrentRecipe(this.inventory.getFirst());
         if (recipe.isPresent()) {
-            ItemStack result = recipe.get().value().getResultItem(null);
+            ItemStack result = recipe.get().value().assemble(createRecipeInput(), level.registryAccess());
             this.inventory.getFirst().shrink(1);
 
             insertOrMergeResult(result);
         }
+    }
+
+    public SingleRecipeInput createRecipeInput() {
+        return new SingleRecipeInput(this.inventory.getFirst());
     }
 
     public Optional<RecipeHolder<CrushingRecipe>> getCurrentRecipe(ItemStack itemStack) {

@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "cosmicore:block/advanced_crusher",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "cosmicore:block/advanced_crusher"
+    },
+    "facing=south": {
+      "model": "cosmicore:block/advanced_crusher",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "cosmicore:block/advanced_crusher",
+      "y": 270
+    }
+  }
+}

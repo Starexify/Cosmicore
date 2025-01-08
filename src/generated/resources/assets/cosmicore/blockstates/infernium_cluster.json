@@ -1,0 +1,30 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "cosmicore:block/infernium_cluster",
+      "x": 180
+    },
+    "facing=east": {
+      "model": "cosmicore:block/infernium_cluster",
+      "x": 90,
+      "y": 90
+    },
+    "facing=north": {
+      "model": "cosmicore:block/infernium_cluster",
+      "x": 90
+    },
+    "facing=south": {
+      "model": "cosmicore:block/infernium_cluster",
+      "x": 90,
+      "y": 180
+    },
+    "facing=up": {
+      "model": "cosmicore:block/infernium_cluster"
+    },
+    "facing=west": {
+      "model": "cosmicore:block/infernium_cluster",
+      "x": 90,
+      "y": 270
+    }
+  }
+}

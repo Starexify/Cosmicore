@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": "minecraft:diamond",
+    "C": "cosmicore:pallasite",
+    "S": "cosmicore:lonsdaleite_upgrade_smithing_template"
+  },
+  "pattern": [
+    "#S#",
+    "#C#",
+    "###"
+  ],
+  "result": {
+    "count": 2,
+    "id": "cosmicore:lonsdaleite_upgrade_smithing_template"
+  }
+}

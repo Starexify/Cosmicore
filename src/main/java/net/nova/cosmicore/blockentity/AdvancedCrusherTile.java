@@ -10,6 +10,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.SingleRecipeInput;
+import net.minecraft.world.item.crafting.SmithingRecipeInput;
 import net.minecraft.world.level.block.state.BlockState;
 import net.nova.cosmicore.gui.crusher.AdvancedCrusherMenu;
 import net.nova.cosmicore.init.CBlockEntities;
@@ -89,10 +90,18 @@ public class AdvancedCrusherTile extends BaseCrusherTile {
         Optional<RecipeHolder<AdvancedCrushingRecipe>> additionalRecipe = getCurrentRecipe(this.inventory.get(ADDITIONAL_SLOT));
         if (recipe.isEmpty() && additionalRecipe.isEmpty()) return false;
 
-        ItemStack result = recipe.map(r -> r.value().getResultItem(null))
-                .orElseGet(() -> additionalRecipe.get().value().getResultItem(null));
+        ItemStack result = recipe.map(r -> r.value().assemble(createRecipeInput(), level.registryAccess()))
+                .orElseGet(() -> additionalRecipe.get().value().assemble(createAdditionalRecipeInput(), level.registryAccess()));
 
         return canInsertAmountIntoOutputSlot(result.getCount()) && canInsertItemInOutputSlot(result.getItem());
+    }
+
+    public SingleRecipeInput createRecipeInput() {
+        return new SingleRecipeInput(this.inventory.getFirst());
+    }
+
+    public SingleRecipeInput createAdditionalRecipeInput() {
+        return new SingleRecipeInput(this.inventory.get(1));
     }
 
     @Override
@@ -101,13 +110,13 @@ public class AdvancedCrusherTile extends BaseCrusherTile {
         Optional<RecipeHolder<AdvancedCrushingRecipe>> additionalRecipe = getCurrentRecipe(this.inventory.get(ADDITIONAL_SLOT));
 
         if (recipe.isPresent()) {
-            ItemStack result = recipe.get().value().getResultItem(null);
+            ItemStack result = recipe.get().value().assemble(createRecipeInput(), level.registryAccess());
             this.inventory.getFirst().shrink(1);
             insertOrMergeResult(result);
         }
 
         if (additionalRecipe.isPresent()) {
-            ItemStack additionalResult = additionalRecipe.get().value().getResultItem(null);
+            ItemStack additionalResult = additionalRecipe.get().value().assemble(createAdditionalRecipeInput(), level.registryAccess());
             this.inventory.get(ADDITIONAL_SLOT).shrink(1);
             insertOrMergeResult(additionalResult);
         }

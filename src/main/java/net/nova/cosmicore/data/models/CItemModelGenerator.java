@@ -64,6 +64,7 @@ public class CItemModelGenerator extends ItemModelGenerators {
         generateFlatItem(CItems.TITANIUM_SHOVEL.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
         generateFlatItem(CItems.TITANIUM_HOE.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
 
+        generateCrossbow(CItems.TITANIUM_CROSSBOW.get());
         generateFlatItem(CItems.TITANIUM_HORSE_ARMOR.get(), ModelTemplates.FLAT_ITEM);
 
         generateFlatItem(CItems.RAW_TITANIUM.get(), ModelTemplates.FLAT_ITEM);
@@ -137,8 +138,7 @@ public class CItemModelGenerator extends ItemModelGenerators {
     }
 
     @OnlyIn(Dist.CLIENT)
-    record TrimMaterialData(String name, ResourceKey<TrimMaterial> materialKey,
-                            Map<ResourceKey<EquipmentAsset>, String> overrideArmorMaterials) {
+    record TrimMaterialData(String name, ResourceKey<TrimMaterial> materialKey, Map<ResourceKey<EquipmentAsset>, String> overrideArmorMaterials) {
         public String textureName(ResourceKey<EquipmentAsset> p_387088_) {
             return overrideArmorMaterials.getOrDefault(p_387088_, name);
         }

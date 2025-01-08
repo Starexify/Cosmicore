@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "cosmicore:block/infernium_cluster"
+  }
+}

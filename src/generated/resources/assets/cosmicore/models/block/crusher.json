@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/orientable",
+  "textures": {
+    "front": "cosmicore:block/crusher_front",
+    "side": "cosmicore:block/crusher_side",
+    "top": "cosmicore:block/crusher_top"
+  }
+}
