@@ -4,12 +4,16 @@ import net.minecraft.client.data.models.ItemModelGenerators;
 import net.minecraft.client.data.models.ItemModelOutput;
 import net.minecraft.client.data.models.model.*;
 import net.minecraft.client.renderer.item.ItemModel;
+import net.minecraft.client.renderer.item.RangeSelectItemModel;
 import net.minecraft.client.renderer.item.SelectItemModel;
+import net.minecraft.client.renderer.item.properties.numeric.CrossbowPull;
+import net.minecraft.client.renderer.item.properties.select.Charge;
 import net.minecraft.client.renderer.item.properties.select.TrimMaterialProperty;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.CrossbowItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.equipment.EquipmentAsset;
 import net.minecraft.world.item.equipment.EquipmentAssets;
@@ -122,10 +126,9 @@ public class CItemModelGenerator extends ItemModelGenerators {
             ResourceLocation resourcelocation4 = ResourceLocation.withDefaultNamespace(
                     "trims/items/" + armorType + "_trim_" + trimMaterial.textureName(equipmentAsset)
             );
-            ItemModel.Unbaked itemmodel$unbaked;
 
             generateLayeredItem(resourcelocation3, resourcelocation1, resourcelocation4);
-            itemmodel$unbaked = ItemModelUtils.plainModel(resourcelocation3);
+            ItemModel.Unbaked itemmodel$unbaked = ItemModelUtils.plainModel(resourcelocation3);
 
             list.add(ItemModelUtils.when(trimMaterial.materialKey, itemmodel$unbaked));
         }

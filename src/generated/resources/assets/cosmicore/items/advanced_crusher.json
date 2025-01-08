@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "cosmicore:block/advanced_crusher"
+    "model": "cosmicore:item/advanced_crusher"
   }
 }

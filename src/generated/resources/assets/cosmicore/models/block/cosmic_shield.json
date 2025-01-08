@@ -1,8 +1,7 @@
 {
-  "parent": "minecraft:block/orientable",
+  "parent": "minecraft:block/template_cosmic_shield",
   "textures": {
-    "front": "cosmicore:block/cosmic_shield_front",
-    "side": "cosmicore:block/cosmic_shield_side",
-    "top": "cosmicore:block/cosmic_shield_top"
+    "layer0": "cosmicore:block/cosmic_shield",
+    "particle": "cosmicore:block/cosmic_shield_base"
   }
 }

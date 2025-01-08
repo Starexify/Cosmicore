@@ -1,8 +1,7 @@
 {
-  "parent": "minecraft:block/orientable",
+  "parent": "minecraft:block/template_crusher",
   "textures": {
-    "front": "cosmicore:block/advanced_crusher_front",
-    "side": "cosmicore:block/advanced_crusher_side",
-    "top": "cosmicore:block/advanced_crusher_top"
+    "layer0": "cosmicore:block/advanced_crusher",
+    "particle": "cosmicore:block/advanced_crusher_base"
   }
 }

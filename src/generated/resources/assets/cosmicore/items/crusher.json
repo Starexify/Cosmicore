@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "cosmicore:block/crusher"
+    "model": "cosmicore:item/crusher"
   }
 }

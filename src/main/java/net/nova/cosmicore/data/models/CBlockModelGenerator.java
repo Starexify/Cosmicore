@@ -7,6 +7,7 @@ import net.minecraft.client.data.models.blockstates.MultiVariantGenerator;
 import net.minecraft.client.data.models.blockstates.Variant;
 import net.minecraft.client.data.models.blockstates.VariantProperties;
 import net.minecraft.client.data.models.model.*;
+import net.minecraft.client.renderer.item.ItemModel;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.api.distmarker.Dist;
@@ -55,22 +56,24 @@ public class CBlockModelGenerator extends BlockModelGenerators {
     }
 
     public void crusherModel(Block block) {
-        ResourceLocation resourcelocation = TexturedModel.ORIENTABLE_ONLY_TOP.create(block, this.modelOutput);
-        this.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block, Variant.variant().with(VariantProperties.MODEL, resourcelocation))
+        ResourceLocation resourcelocation = TexturedModel.createDefault(CTextureMappings::templateBlocks, CModelTemplates.TEMPLATE_CRUSHER).create(block, this.modelOutput);
+        blockStateOutput.accept(MultiVariantGenerator.multiVariant(block, Variant.variant().with(VariantProperties.MODEL, resourcelocation))
                 .with(createHorizontalFacingDispatch()));
-
-        //this.registerSimpleItemModel(block.asItem(), ModelTemplates.FLAT_ITEM.create(ModelLocationUtils.decorateItemModelLocation("template_crusher"), TextureMapping.layer0(block.asItem()), this.modelOutput));
+        ResourceLocation itemLocation = CModelTemplates.TEMPLATE_CRUSHER_ITEM.create(ModelLocationUtils.getModelLocation(block.asItem()), TextureMapping.layer0(block), this.modelOutput);
+        registerSimpleItemModel(block.asItem(), itemLocation);
     }
 
     public void cosmicShieldModel(Block block) {
-        ResourceLocation resourcelocation = TexturedModel.ORIENTABLE_ONLY_TOP.create(block, this.modelOutput);
+        ResourceLocation resourcelocation = TexturedModel.createDefault(CTextureMappings::templateBlocks, CModelTemplates.TEMPLATE_COSMIC_SHIELD).create(block, this.modelOutput);
         this.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block, Variant.variant().with(VariantProperties.MODEL, resourcelocation))
                 .with(createHorizontalFacingDispatch()));
-
+        ResourceLocation itemLocation = CModelTemplates.TEMPLATE_COSMIC_SHIELD_ITEM.create(ModelLocationUtils.getModelLocation(block.asItem()), TextureMapping.layer0(block), this.modelOutput);
+        registerSimpleItemModel(block.asItem(), itemLocation);
     }
 
     public void createInferniumCluster(Block block) {
         this.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block, Variant.variant().with(VariantProperties.MODEL, ModelTemplates.CROSS.create(block, TextureMapping.cross(block), this.modelOutput))).with(this.createColumnWithFacing()));
+        this.registerSimpleFlatItemModel(block);
     }
 
 

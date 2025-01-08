@@ -1,0 +1,19 @@
+{
+  "layers": {
+    "horse_body": [
+      {
+        "texture": "cosmicore:lonsdaleite"
+      }
+    ],
+    "humanoid": [
+      {
+        "texture": "cosmicore:lonsdaleite"
+      }
+    ],
+    "humanoid_leggings": [
+      {
+        "texture": "cosmicore:lonsdaleite"
+      }
+    ]
+  }
+}

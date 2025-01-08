@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "cosmicore:block/infernium_cluster"
+    "model": "cosmicore:item/infernium_cluster"
   }
 }

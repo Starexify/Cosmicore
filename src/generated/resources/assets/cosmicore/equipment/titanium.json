@@ -1,0 +1,19 @@
+{
+  "layers": {
+    "horse_body": [
+      {
+        "texture": "cosmicore:titanium"
+      }
+    ],
+    "humanoid": [
+      {
+        "texture": "cosmicore:titanium"
+      }
+    ],
+    "humanoid_leggings": [
+      {
+        "texture": "cosmicore:titanium"
+      }
+    ]
+  }
+}

@@ -1,5 +1,7 @@
 package net.nova.cosmicore.event;
 
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraft.client.renderer.RenderType;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -16,10 +18,7 @@ import net.nova.cosmicore.client.renderer.entity.AchondriteRenderer;
 import net.nova.cosmicore.client.renderer.entity.MeteoriteRenderer;
 import net.nova.cosmicore.gui.crusher.AdvancedCrusherScreen;
 import net.nova.cosmicore.gui.crusher.CrusherScreen;
-import net.nova.cosmicore.init.CBlockEntities;
-import net.nova.cosmicore.init.CEntities;
-import net.nova.cosmicore.init.CMenuTypes;
-import net.nova.cosmicore.init.CModelLayers;
+import net.nova.cosmicore.init.*;
 
 import static net.nova.cosmicore.Cosmicore.MODID;
 
@@ -28,6 +27,9 @@ public class CEventBusClientEvents {
 
     @SubscribeEvent
     public static void setupClient(FMLClientSetupEvent event) {
+        ItemBlockRenderTypes.setRenderLayer(CBlocks.INFERNIUM_CLUSTER.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(CBlocks.CRUSHER.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(CBlocks.ADVANCED_CRUSHER.get(), RenderType.cutout());
     }
 
     // Connect Screen to Menu

@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "cosmicore:block/cosmic_shield"
+    "model": "cosmicore:item/cosmic_shield"
   }
 }

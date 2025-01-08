@@ -6,6 +6,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 import net.nova.cosmicore.data.loot_table.CLootTableProvider;
+import net.nova.cosmicore.data.models.CEquipmentModelProvider;
 import net.nova.cosmicore.data.models.CModelProvider;
 import net.nova.cosmicore.data.recipe.CRecipeProvider;
 import net.nova.cosmicore.data.tags.CBannerPatternsTagsProvider;
@@ -27,6 +28,7 @@ public class DataGenerators {
         event.addProvider(new LangProvider(output));
 
         event.addProvider(new CModelProvider(output));
+        event.addProvider(new CEquipmentModelProvider(output));
 
         CBlockTagsProvider modBlockTagsProvider = new CBlockTagsProvider(output, lookupProvider);
         event.addProvider(modBlockTagsProvider);

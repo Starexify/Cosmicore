@@ -1,6 +1,5 @@
 {
 	"credit": "Made with Blockbench",
-	"render_type": "minecraft:cutout",
 	"texture_size": [70, 45],
 	"textures": {
 		"layer0": "cosmicore:block/crusher",
