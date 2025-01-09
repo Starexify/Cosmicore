@@ -1,6 +1,5 @@
 package net.nova.cosmicore.data.models;
 
-import net.minecraft.client.data.models.model.ModelLocationUtils;
 import net.minecraft.client.data.models.model.ModelTemplate;
 import net.minecraft.client.data.models.model.TextureSlot;
 import net.neoforged.api.distmarker.Dist;
@@ -18,10 +17,10 @@ public class CModelTemplates {
     public static final ModelTemplate TEMPLATE_COSMIC_SHIELD = create("template_cosmic_shield", TextureSlot.LAYER0, TextureSlot.PARTICLE);
 
     public static ModelTemplate createItem(String name, TextureSlot... textureSlots) {
-        return new ModelTemplate(Optional.of(Cosmicore.rl("item/" + name)), Optional.empty(), textureSlots);
+        return new ModelTemplate(Optional.of(Cosmicore.rl(name).withPrefix("item/")), Optional.empty(), textureSlots);
     }
 
     public static ModelTemplate create(String name, TextureSlot... requiredSlots) {
-        return new ModelTemplate(Optional.of(ModelLocationUtils.decorateBlockModelLocation(name)), Optional.empty(), requiredSlots);
+        return new ModelTemplate(Optional.of(Cosmicore.rl(name).withPrefix("block/")), Optional.empty(), requiredSlots);
     }
 }
