@@ -8,13 +8,11 @@ import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.nova.cosmicore.blockentity.BaseCrusherTile;
-import net.nova.cosmicore.init.CItems;
-import org.jetbrains.annotations.Nullable;
 
 public class BaseCrusherMenu extends AbstractContainerMenu {
     public final ContainerData data;
 
-    protected BaseCrusherMenu(@Nullable MenuType<?> pMenuType, int pContainerId, ContainerData data) {
+    protected BaseCrusherMenu(MenuType<?> pMenuType, int pContainerId, ContainerData data) {
         super(pMenuType, pContainerId);
         this.data = data;
     }

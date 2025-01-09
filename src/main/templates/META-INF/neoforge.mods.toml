@@ -15,8 +15,8 @@ logoFile= "../../resources/cosmicore_logo.png"
 authors="${mod_authors}"
 description='''${mod_description}'''
 
-[[accessTransformers]]
-file="META-INF/accesstransformer.cfg"
+#[[accessTransformers]]
+#file="META-INF/accesstransformer.cfg"
 
 [[mixins]]
 config="cosmicore.mixins.json"

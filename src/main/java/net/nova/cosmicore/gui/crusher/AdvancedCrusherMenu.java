@@ -63,7 +63,6 @@ public class AdvancedCrusherMenu extends BaseCrusherMenu {
     public ItemStack quickMoveStack(Player playerIn, int index) {
         ItemStack itemstack = ItemStack.EMPTY;
         Slot slot = this.slots.get(index);
-
         if (slot != null && slot.hasItem()) {
             ItemStack currentStack = slot.getItem();
             itemstack = currentStack.copy();
