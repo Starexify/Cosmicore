@@ -56,7 +56,7 @@ public class CBlockModelGenerator extends BlockModelGenerators {
     }
 
     public void crusherModel(Block block) {
-        ResourceLocation resourcelocation = TexturedModel.createDefault(CTextureMappings::templateBlocks, CModelTemplates.TEMPLATE_CRUSHER).create(block, this.modelOutput);
+        ResourceLocation resourcelocation = TexturedModel.createDefault(CTextureMappings::templateCrusher, CModelTemplates.TEMPLATE_CRUSHER).create(block, this.modelOutput);
         blockStateOutput.accept(MultiVariantGenerator.multiVariant(block, Variant.variant().with(VariantProperties.MODEL, resourcelocation))
                 .with(createHorizontalFacingDispatch()));
         ResourceLocation itemLocation = CModelTemplates.TEMPLATE_CRUSHER_ITEM.create(ModelLocationUtils.getModelLocation(block.asItem()), TextureMapping.layer0(block), this.modelOutput);

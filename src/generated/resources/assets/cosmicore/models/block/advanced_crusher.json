@@ -2,6 +2,6 @@
   "parent": "cosmicore:block/template_crusher",
   "textures": {
     "layer0": "cosmicore:block/advanced_crusher",
-    "particle": "cosmicore:block/advanced_crusher_base"
+    "particle": "cosmicore:block/crusher_base"
   }
 }
