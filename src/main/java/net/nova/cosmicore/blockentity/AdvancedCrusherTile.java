@@ -19,7 +19,7 @@ import net.nova.cosmicore.recipe.crusher.AdvancedCrushingRecipe;
 
 import java.util.Optional;
 
-public class AdvancedCrusherTile extends BaseCrusherTile {
+public class AdvancedCrusherTile extends AbstractCrusherTile {
     public static final int ADDITIONAL_SLOT = 1;
     protected final ContainerData dataAccess = new ContainerData() {
         @Override
@@ -50,7 +50,7 @@ public class AdvancedCrusherTile extends BaseCrusherTile {
     };
 
     public AdvancedCrusherTile(BlockPos pPos, BlockState pBlockState) {
-        super(CBlockEntities.ADVANCED_CRUSHER_TILE.get(), pPos, pBlockState);
+        super(CBlockEntities.ADVANCED_CRUSHER_TILE.get(), pPos, pBlockState, CRecipeTypes.ADVANCED_CRUSHING_RECIPE_TYPE.get());
         this.FUEL_SLOT = 2;
         this.RESULT_SLOT_START = 3;
         this.RESULT_SLOT_END = 10;

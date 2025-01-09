@@ -19,20 +19,20 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.nova.cosmicore.blockentity.BaseCrusherTile;
+import net.nova.cosmicore.blockentity.AbstractCrusherTile;
 import org.jetbrains.annotations.Nullable;
 
-public abstract class AbstractCrusher extends BaseModel  {
+public abstract class AbstractCrusher extends BaseModel {
     public AbstractCrusher(Properties properties) {
         super(properties);
     }
 
     // Abstract methods for block entity handling
     protected abstract Class<? extends BlockEntity> getTileEntityClass();
+
     protected abstract BlockEntityType<?> getBlockEntityType();
 
     @Override
-    @Nullable
     public abstract BlockEntity newBlockEntity(BlockPos pPos, BlockState pState);
 
     @Override
@@ -71,13 +71,10 @@ public abstract class AbstractCrusher extends BaseModel  {
 
     @Nullable
     @Override
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
-        if (pLevel.isClientSide()) {
-            return null;
-        }
-
-        return createTickerHelper(pBlockEntityType, getBlockEntityType(),
-                (pLevel1, pPos, pState1, pBlockEntity) -> ((BaseCrusherTile) pBlockEntity).serverTick(pLevel1, pPos, pState1));
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState pState, BlockEntityType<T> pBlockEntityType) {
+        return level instanceof ServerLevel serverlevel
+                ? createTickerHelper(pBlockEntityType, getBlockEntityType(), (pLevel1, pPos, pState1, pBlockEntity) -> ((AbstractCrusherTile) pBlockEntity).serverTick(serverlevel, pPos, pState1))
+                : null;
     }
 
     // Block Shape

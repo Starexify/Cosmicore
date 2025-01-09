@@ -3,7 +3,6 @@ package net.nova.cosmicore.client.renderer.block;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
@@ -11,6 +10,7 @@ import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
+import net.nova.cosmicore.Cosmicore;
 import net.nova.cosmicore.blockentity.CrusherTile;
 import net.nova.cosmicore.client.model.CrusherPistonModel;
 
@@ -18,17 +18,17 @@ import net.nova.cosmicore.client.model.CrusherPistonModel;
 public class CrusherTileRenderer extends AbstractCrusherTileRenderer<CrusherTile> {
     public CrusherTileRenderer(BlockEntityRendererProvider.Context context) {
         super(context, CrusherPistonModel.TEXTURE, CrusherPistonModel.LAYER_LOCATION,
-                new CrusherPistonModel(context.bakeLayer(CrusherPistonModel.LAYER_LOCATION), RenderType::entityCutout));
+                new CrusherPistonModel(context.bakeLayer(CrusherPistonModel.LAYER_LOCATION)));
     }
 
     @Override
     public void render(CrusherTile crusherTile, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, int packedOverlay) {
+        super.render(crusherTile, partialTick, poseStack, bufferSource, packedLight, packedOverlay);
+        Cosmicore.logger.info("Has Recipe: {} ", hasRecipe(crusherTile));
         // Render the item in crusher
         poseStack.pushPose();
         renderCrushedItem(crusherTile, poseStack, bufferSource);
         poseStack.popPose();
-
-        super.render(crusherTile, partialTick, poseStack, bufferSource, packedLight, packedOverlay);
     }
 
     public void renderCrushedItem(CrusherTile crusherTile, PoseStack poseStack, MultiBufferSource bufferSource) {
@@ -52,6 +52,6 @@ public class CrusherTileRenderer extends AbstractCrusherTileRenderer<CrusherTile
 
     @Override
     protected boolean hasRecipe(CrusherTile crusherTile) {
-        return crusherTile.hasRecipe();
+        return crusherTile.hasRecipe;
     }
 }

@@ -9,8 +9,6 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
 import net.nova.cosmicore.Cosmicore;
 
-import java.util.function.Function;
-
 public class CrusherPistonModel extends Model {
     public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(Cosmicore.rl("crusher_piston"), "main");
     public static final ResourceLocation TEXTURE = Cosmicore.rl("textures/entity/crusher_piston/crusher_piston.png");
@@ -20,8 +18,8 @@ public class CrusherPistonModel extends Model {
     public final ModelPart neck;
     public final ModelPart head;
 
-    public CrusherPistonModel(ModelPart root, Function<ResourceLocation, RenderType> renderType) {
-        super(root, renderType);
+    public CrusherPistonModel(ModelPart root) {
+        super(root, RenderType::entityCutout);
         this.piston = root.getChild("piston");
         this.neck = piston.getChild("neck");
         this.head = piston.getChild("head");

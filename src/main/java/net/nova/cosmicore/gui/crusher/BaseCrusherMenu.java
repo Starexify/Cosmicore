@@ -7,7 +7,7 @@ import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
-import net.nova.cosmicore.blockentity.BaseCrusherTile;
+import net.nova.cosmicore.blockentity.AbstractCrusherTile;
 
 public class BaseCrusherMenu extends AbstractContainerMenu {
     public final ContainerData data;
@@ -18,7 +18,7 @@ public class BaseCrusherMenu extends AbstractContainerMenu {
     }
 
     public boolean isCrystal(ItemStack pStack) {
-        return BaseCrusherTile.FUEL_MAP.containsKey(pStack.getItem());
+        return AbstractCrusherTile.FUEL_MAP.containsKey(pStack.getItem());
     }
 
     public void addPlayerSlots(Inventory playerInventory) {

@@ -9,8 +9,8 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.block.BlockRenderDispatcher;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
-import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LightLayer;
@@ -21,9 +21,9 @@ import net.nova.cosmicore.client.model.CrusherPistonModel;
 
 @OnlyIn(Dist.CLIENT)
 public abstract class AbstractCrusherTileRenderer<T extends BlockEntity> implements BlockEntityRenderer<T> {
+    public final BlockRenderDispatcher blockRenderer;
     public final ResourceLocation pistonTexture;
     public final ModelLayerLocation pistonLayer;
-    public final BlockRenderDispatcher blockRenderer;
     public final CrusherPistonModel pistonModel;
 
     protected AbstractCrusherTileRenderer(BlockEntityRendererProvider.Context context, ResourceLocation pistonTexture, ModelLayerLocation pistonLayer, CrusherPistonModel pistonModel) {
@@ -33,14 +33,9 @@ public abstract class AbstractCrusherTileRenderer<T extends BlockEntity> impleme
         this.pistonModel = pistonModel;
     }
 
-
     @Override
     public void render(T crusherTile, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, int packedOverlay) {
-        poseStack.pushPose();
         renderAnimatedPiston(crusherTile, partialTick, poseStack, bufferSource, packedLight, packedOverlay);
-
-
-        poseStack.popPose();
     }
 
     protected void renderAnimatedPiston(T crusherTile, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, int packedOverlay) {
@@ -71,8 +66,8 @@ public abstract class AbstractCrusherTileRenderer<T extends BlockEntity> impleme
 
         float progress = (crushingProgress + partialTick) / maxCrushingProgress;
 
-        float neckOffset = 0;
-        float headOffset = 0;
+        float neckOffset;
+        float headOffset;
 
         if (progress < 0.95f) { // First 95%: Move down
             neckOffset = -0.125f * Math.min(progress / 0.5f, 1); // Reaches max at 95 ticks 0.2375f

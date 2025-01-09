@@ -9,18 +9,17 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.RecipeHolder;
-import net.minecraft.world.item.crafting.SingleRecipeInput;
+import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.nova.cosmicore.gui.crusher.CrusherMenu;
 import net.nova.cosmicore.init.CBlockEntities;
 import net.nova.cosmicore.init.CRecipeTypes;
-import net.nova.cosmicore.recipe.crusher.AdvancedCrushingRecipe;
+import net.nova.cosmicore.recipe.crusher.BaseCrushingRecipe;
 import net.nova.cosmicore.recipe.crusher.CrushingRecipe;
 
 import java.util.Optional;
 
-public class CrusherTile extends BaseCrusherTile {
+public class CrusherTile extends AbstractCrusherTile {
     protected final ContainerData dataAccess = new ContainerData() {
         @Override
         public int get(int pIndex) {
@@ -50,7 +49,7 @@ public class CrusherTile extends BaseCrusherTile {
     };
 
     public CrusherTile(BlockPos pPos, BlockState pBlockState) {
-        super(CBlockEntities.CRUSHER_TILE.get(), pPos, pBlockState);
+        super(CBlockEntities.CRUSHER_TILE.get(), pPos, pBlockState, CRecipeTypes.CRUSHING_RECIPE_TYPE.get());
         this.FUEL_SLOT = 1;
         this.RESULT_SLOT_START = 2;
         this.RESULT_SLOT_END = 7;
@@ -84,7 +83,6 @@ public class CrusherTile extends BaseCrusherTile {
     public boolean hasRecipe() {
         Optional<RecipeHolder<CrushingRecipe>> recipe = getCurrentRecipe();
         if (recipe.isEmpty()) return false;
-
         ItemStack result = recipe.get().value().assemble(createRecipeInput(), level.registryAccess());
 
         return canInsertAmountIntoOutputSlot(result.getCount()) && canInsertItemInOutputSlot(result.getItem());
@@ -106,8 +104,8 @@ public class CrusherTile extends BaseCrusherTile {
     }
 
     public Optional<RecipeHolder<CrushingRecipe>> getCurrentRecipe() {
-        if (this.level instanceof ServerLevel serverlevel) {
-            return serverlevel.recipeAccess().getRecipeFor(CRecipeTypes.CRUSHING_RECIPE_TYPE.get(), new SingleRecipeInput(this.inventory.getFirst()), serverlevel);
+        if (level instanceof ServerLevel serverlevel) {
+            return serverlevel.recipeAccess().getRecipeFor(CRecipeTypes.CRUSHING_RECIPE_TYPE.get(), createRecipeInput(), serverlevel);
         } else {
             return Optional.empty();
         }

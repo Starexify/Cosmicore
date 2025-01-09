@@ -3,7 +3,6 @@ package net.nova.cosmicore.client.renderer.block;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
@@ -18,17 +17,16 @@ import net.nova.cosmicore.client.model.CrusherPistonModel;
 public class AdvancedCrusherTileRenderer extends AbstractCrusherTileRenderer<AdvancedCrusherTile> {
     public AdvancedCrusherTileRenderer(BlockEntityRendererProvider.Context context) {
         super(context, CrusherPistonModel.ADVANCED_TEXTURE, CrusherPistonModel.LAYER_LOCATION,
-                new CrusherPistonModel(context.bakeLayer(CrusherPistonModel.LAYER_LOCATION), RenderType::entityCutout));
+                new CrusherPistonModel(context.bakeLayer(CrusherPistonModel.LAYER_LOCATION)));
     }
 
     @Override
     public void render(AdvancedCrusherTile advancedCrusherTile, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, int packedOverlay) {
+        super.render(advancedCrusherTile, partialTick, poseStack, bufferSource, packedLight, packedOverlay);
         // Render the item in crusher
         poseStack.pushPose();
         renderCrushedItems(advancedCrusherTile, poseStack, bufferSource);
         poseStack.popPose();
-
-        super.render(advancedCrusherTile, partialTick, poseStack, bufferSource, packedLight, packedOverlay);
     }
 
     private void renderCrushedItems(AdvancedCrusherTile advancedCrusherTile, PoseStack poseStack, MultiBufferSource bufferSource) {
@@ -70,6 +68,6 @@ public class AdvancedCrusherTileRenderer extends AbstractCrusherTileRenderer<Adv
 
     @Override
     protected boolean hasRecipe(AdvancedCrusherTile advancedCrusherTile) {
-        return advancedCrusherTile.hasRecipe();
+        return advancedCrusherTile.hasRecipe;
     }
 }
