@@ -1,26 +1,34 @@
 package net.nova.cosmicore.blockentity;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.NonNullList;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.Container;
+import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
+import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.*;
+import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.world.item.crafting.SingleRecipeInput;
 import net.minecraft.world.level.block.state.BlockState;
+import net.nova.cosmicore.gui.CrusherItemStackHandler;
 import net.nova.cosmicore.gui.crusher.CrusherMenu;
 import net.nova.cosmicore.init.CBlockEntities;
+import net.nova.cosmicore.init.CBlocks;
 import net.nova.cosmicore.init.CRecipeTypes;
-import net.nova.cosmicore.recipe.crusher.BaseCrushingRecipe;
 import net.nova.cosmicore.recipe.crusher.CrushingRecipe;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 
 public class CrusherTile extends AbstractCrusherTile {
-    protected final ContainerData dataAccess = new ContainerData() {
+    public final ContainerData dataAccess = new ContainerData() {
         @Override
         public int get(int pIndex) {
             return switch (pIndex) {
@@ -54,7 +62,8 @@ public class CrusherTile extends AbstractCrusherTile {
         this.RESULT_SLOT_START = 2;
         this.RESULT_SLOT_END = 7;
 
-        this.inventory = NonNullList.withSize(8, ItemStack.EMPTY);
+        this.inventory = new CrusherItemStackHandler(this);
+        inventory.setSize(8);
     }
 
     // Render Item
@@ -69,13 +78,12 @@ public class CrusherTile extends AbstractCrusherTile {
     // Crafting stuff
     @Override
     public void hasIgnis() {
-        Item fuelItem = this.inventory.get(FUEL_SLOT).getItem().getDefaultInstance().getItem();
-        boolean hasFuel = isFuel(this.inventory.get(FUEL_SLOT).getItem().getDefaultInstance());
+        Item fuelItem = inventory.getStackInSlot(FUEL_SLOT).getItem().getDefaultInstance().getItem();
+        boolean hasFuel = isFuel(inventory.getStackInSlot(FUEL_SLOT).getItem().getDefaultInstance());
         int fuel = FUEL_MAP.getOrDefault(fuelItem, 0);
-
-        if (hasFuel && this.ignisCharge <= this.ignisPower - fuel) {
-            this.ignisCharge += fuel;
-            this.inventory.get(FUEL_SLOT).setCount(this.inventory.get(FUEL_SLOT).getCount() - 1);
+        if (hasFuel && ignisCharge <= ignisPower - fuel) {
+            ignisCharge += fuel;
+            inventory.removeStackFromSlot(FUEL_SLOT);
         }
     }
 
@@ -93,8 +101,7 @@ public class CrusherTile extends AbstractCrusherTile {
         Optional<RecipeHolder<CrushingRecipe>> recipe = getCurrentRecipe();
         if (recipe.isPresent()) {
             ItemStack result = recipe.get().value().assemble(createRecipeInput(), level.registryAccess());
-            this.inventory.getFirst().shrink(1);
-
+            inventory.getFirst().shrink(1);
             insertOrMergeResult(result);
         }
     }
@@ -111,16 +118,58 @@ public class CrusherTile extends AbstractCrusherTile {
         }
     }
 
-
     // GUI title
     @Override
-    protected Component getDefaultName() {
+    public Component getDisplayName() {
         return Component.translatable("block.cosmicore.crusher");
     }
 
     // Menu
     @Override
-    protected AbstractContainerMenu createMenu(int pContainerId, Inventory pInventory) {
-        return new CrusherMenu(pContainerId, pInventory, this, this.dataAccess);
+    public @Nullable AbstractContainerMenu createMenu(int containerId, Inventory playerInventory, Player player) {
+        return new CrusherMenu(containerId, playerInventory, this, this.dataAccess);
+    }
+
+    @Override
+    public boolean isEmpty() {
+        for (ItemStack itemstack : this.inventory.getItems()) {
+            if (!itemstack.isEmpty()) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    @Override
+    public ItemStack getItem(int slot) {
+        return inventory.getStackInSlot(slot);
+    }
+
+    @Override
+    public ItemStack removeItem(int slot, int amount) {
+        ItemStack itemstack = ContainerHelper.removeItem(inventory.getItems(), slot, amount);
+        if (!itemstack.isEmpty()) {
+            this.setChanged();
+        }
+
+        return itemstack;
+    }
+
+    @Override
+    public ItemStack removeItemNoUpdate(int slot) {
+        return ContainerHelper.takeItem(inventory.getItems(), slot);
+    }
+
+    @Override
+    public void setItem(int slot, ItemStack stack) {
+        inventory.setStackInSlot(slot, stack);
+        stack.limitSize(getMaxStackSize(stack));
+        this.setChanged();
+    }
+
+    @Override
+    public boolean stillValid(Player player) {
+        return Container.stillValidBlockEntity(this, player);
     }
 }

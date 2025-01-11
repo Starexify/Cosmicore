@@ -4,7 +4,9 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.Item;
@@ -16,6 +18,7 @@ import net.nova.cosmicore.gui.crusher.AdvancedCrusherMenu;
 import net.nova.cosmicore.init.CBlockEntities;
 import net.nova.cosmicore.init.CRecipeTypes;
 import net.nova.cosmicore.recipe.crusher.AdvancedCrushingRecipe;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 
@@ -55,7 +58,7 @@ public class AdvancedCrusherTile extends AbstractCrusherTile {
         this.RESULT_SLOT_START = 3;
         this.RESULT_SLOT_END = 10;
 
-        this.inventory = NonNullList.withSize(11, ItemStack.EMPTY);
+        //this.inventory = NonNullList.withSize(11, ItemStack.EMPTY);
     }
 
     // Render Item
@@ -64,7 +67,7 @@ public class AdvancedCrusherTile extends AbstractCrusherTile {
     }
 
     public ItemStack getRenderedAddition() {
-        return inventory.get(ADDITIONAL_SLOT);
+        return inventory.getStackInSlot(ADDITIONAL_SLOT);
     }
 
     public int getCrushingProgress() {
@@ -74,20 +77,20 @@ public class AdvancedCrusherTile extends AbstractCrusherTile {
     // Crafting stuff
     @Override
     public void hasIgnis() {
-        Item fuelItem = this.inventory.get(FUEL_SLOT).getItem().getDefaultInstance().getItem();
-        boolean hasFuel = isFuel(this.inventory.get(FUEL_SLOT).getItem().getDefaultInstance());
+        Item fuelItem = this.inventory.getStackInSlot(FUEL_SLOT).getItem().getDefaultInstance().getItem();
+        boolean hasFuel = isFuel(this.inventory.getStackInSlot(FUEL_SLOT).getItem().getDefaultInstance());
         int fuel = FUEL_MAP.getOrDefault(fuelItem, 0);
 
         if (hasFuel && this.ignisCharge <= this.ignisPower - fuel) {
             this.ignisCharge += fuel;
-            this.inventory.get(FUEL_SLOT).setCount(this.inventory.get(FUEL_SLOT).getCount() - 1);
+            this.inventory.getStackInSlot(FUEL_SLOT).setCount(this.inventory.getStackInSlot(FUEL_SLOT).getCount() - 1);
         }
     }
 
     @Override
     public boolean hasRecipe() {
         Optional<RecipeHolder<AdvancedCrushingRecipe>> recipe = getCurrentRecipe(this.inventory.getFirst());
-        Optional<RecipeHolder<AdvancedCrushingRecipe>> additionalRecipe = getCurrentRecipe(this.inventory.get(ADDITIONAL_SLOT));
+        Optional<RecipeHolder<AdvancedCrushingRecipe>> additionalRecipe = getCurrentRecipe(this.inventory.getStackInSlot(ADDITIONAL_SLOT));
         if (recipe.isEmpty() && additionalRecipe.isEmpty()) return false;
 
         ItemStack result = recipe.map(r -> r.value().assemble(createRecipeInput(), level.registryAccess()))
@@ -101,23 +104,23 @@ public class AdvancedCrusherTile extends AbstractCrusherTile {
     }
 
     public SingleRecipeInput createAdditionalRecipeInput() {
-        return new SingleRecipeInput(this.inventory.get(1));
+        return new SingleRecipeInput(this.inventory.getStackInSlot(ADDITIONAL_SLOT));
     }
 
     @Override
     public void craftItem() {
-        Optional<RecipeHolder<AdvancedCrushingRecipe>> recipe = getCurrentRecipe(this.inventory.getFirst());
-        Optional<RecipeHolder<AdvancedCrushingRecipe>> additionalRecipe = getCurrentRecipe(this.inventory.get(ADDITIONAL_SLOT));
+        Optional<RecipeHolder<AdvancedCrushingRecipe>> recipe = getCurrentRecipe(inventory.getFirst());
+        Optional<RecipeHolder<AdvancedCrushingRecipe>> additionalRecipe = getCurrentRecipe(inventory.getStackInSlot(ADDITIONAL_SLOT));
 
         if (recipe.isPresent()) {
             ItemStack result = recipe.get().value().assemble(createRecipeInput(), level.registryAccess());
-            this.inventory.getFirst().shrink(1);
+            inventory.getFirst().shrink(1);
             insertOrMergeResult(result);
         }
 
         if (additionalRecipe.isPresent()) {
             ItemStack additionalResult = additionalRecipe.get().value().assemble(createAdditionalRecipeInput(), level.registryAccess());
-            this.inventory.get(ADDITIONAL_SLOT).shrink(1);
+            inventory.getStackInSlot(ADDITIONAL_SLOT).shrink(1);
             insertOrMergeResult(additionalResult);
         }
     }
@@ -132,13 +135,49 @@ public class AdvancedCrusherTile extends AbstractCrusherTile {
 
     // GUI title
     @Override
-    protected Component getDefaultName() {
+    public Component getDisplayName() {
         return Component.translatable("block.cosmicore.advanced_crusher");
     }
 
     // Menu
     @Override
-    protected AbstractContainerMenu createMenu(int pContainerId, Inventory pInventory) {
-        return new AdvancedCrusherMenu(pContainerId, pInventory, this, this.dataAccess);
+    public @Nullable AbstractContainerMenu createMenu(int containerId, Inventory playerInventory, Player player) {
+            return new AdvancedCrusherMenu(containerId, playerInventory, this, this.dataAccess);
+    }
+
+    @Override
+    public boolean isEmpty() {
+        for (ItemStack itemstack : this.inventory.getItems()) {
+            if (!itemstack.isEmpty()) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    @Override
+    public ItemStack getItem(int slot) {
+        return null;
+    }
+
+    @Override
+    public ItemStack removeItem(int slot, int amount) {
+        return null;
+    }
+
+    @Override
+    public ItemStack removeItemNoUpdate(int slot) {
+        return null;
+    }
+
+    @Override
+    public void setItem(int slot, ItemStack stack) {
+
+    }
+
+    @Override
+    public boolean stillValid(Player player) {
+        return Container.stillValidBlockEntity(this, player);
     }
 }

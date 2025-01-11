@@ -1,7 +1,6 @@
 package net.nova.cosmicore.gui.crusher;
 
 import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.inventory.MenuType;
@@ -9,7 +8,7 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.nova.cosmicore.blockentity.AbstractCrusherTile;
 
-public class BaseCrusherMenu extends AbstractContainerMenu {
+public abstract class BaseCrusherMenu extends AbstractContainerMenu {
     public final ContainerData data;
 
     protected BaseCrusherMenu(MenuType<?> pMenuType, int pContainerId, ContainerData data) {
@@ -39,31 +38,16 @@ public class BaseCrusherMenu extends AbstractContainerMenu {
 
     // Crash maybe?
     public int getChargedProgress() {
-        int currentIgnis = this.data.get(0);
-        int maxIgnis = this.data.get(1);
         int ignisChargeSize = AbstractCrusherScreen.IGNIS_TEXTURE_HEIGHT;
-
-        if (maxIgnis == 0) {
+        if (data.get(1) == 0) {
             return 0;
         }
-        return currentIgnis * ignisChargeSize / maxIgnis;
+        return data.get(0) * ignisChargeSize / data.get(1);
     }
 
     public int getCrushingProgress() {
-        int progress = this.data.get(2);
-        int maxProgress = this.data.get(3);  // Max Progress
         int progressArrowSize = 18;
 
-        return maxProgress != 0 && progress != 0 ? progress * progressArrowSize / maxProgress : 0;
-    }
-
-    @Override
-    public ItemStack quickMoveStack(Player pPlayer, int pIndex) {
-        return null;
-    }
-
-    @Override
-    public boolean stillValid(Player pPlayer) {
-        return false;
+        return data.get(3) != 0 && data.get(2) != 0 ? data.get(2) * progressArrowSize / data.get(3) : 0;
     }
 }

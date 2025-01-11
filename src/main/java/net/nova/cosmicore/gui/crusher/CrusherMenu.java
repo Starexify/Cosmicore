@@ -1,16 +1,21 @@
 package net.nova.cosmicore.gui.crusher;
 
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.MenuProvider;
+import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.*;
+import net.minecraft.world.inventory.ContainerData;
+import net.minecraft.world.inventory.ContainerLevelAccess;
+import net.minecraft.world.inventory.SimpleContainerData;
+import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.SlotItemHandler;
-import net.neoforged.neoforge.items.wrapper.InvWrapper;
 import net.nova.cosmicore.blockentity.CrusherTile;
+import net.nova.cosmicore.gui.CrusherItemStackHandler;
 import net.nova.cosmicore.gui.slots.CrusherCrystalSlot;
 import net.nova.cosmicore.gui.slots.CrusherResultSlot;
 import net.nova.cosmicore.init.CBlocks;
@@ -19,7 +24,7 @@ import net.nova.cosmicore.init.CMenuTypes;
 public class CrusherMenu extends BaseCrusherMenu {
     public final CrusherTile blockEntity;
     public final Level level;
-    public IItemHandler internal;
+    public CrusherItemStackHandler internal;
 
     public CrusherMenu(int pContainerId, Inventory inventory, FriendlyByteBuf extraData) {
         this(pContainerId, inventory, inventory.player.level().getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(8));
@@ -30,8 +35,7 @@ public class CrusherMenu extends BaseCrusherMenu {
         checkContainerSize(inventory, 8);
         blockEntity = ((CrusherTile) entity);
         this.level = inventory.player.level();
-
-        this.internal = new InvWrapper(blockEntity);
+        this.internal = blockEntity.inventory;
 
         addSlot(new SlotItemHandler(internal, 0, 80, 16));
         addSlot(new CrusherCrystalSlot(internal, 1, 152, 67, this));
@@ -42,7 +46,7 @@ public class CrusherMenu extends BaseCrusherMenu {
         addSlot(new CrusherResultSlot(internal, 6, 80, 72));
         addSlot(new CrusherResultSlot(internal, 7, 98, 72));
 
-        addPlayerSlots(inventory);
+        addStandardInventorySlots(inventory, 8, 102);
 
         addDataSlots(data);
     }

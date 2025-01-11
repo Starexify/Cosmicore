@@ -59,7 +59,7 @@ public class LangProvider extends LanguageProvider {
         addItem(CItems.TITANIUM_GEAR, "Titanium Gear");
 
         // Banner Patterns
-        addBannerPattern(CItems.METEORITE_BANNER_PATTERN, "Meteorite");
+        addItem(CItems.METEORITE_BANNER_PATTERN, "Meteorite Banner Pattern");
 
         // Blocks
         addBlock(CBlocks.RAW_TITANIUM_BLOCK, "Raw Titanium Block");
@@ -106,11 +106,6 @@ public class LangProvider extends LanguageProvider {
 
         // Crusher Tooltips
         add(CrusherScreen.IGNIS_TOOLTIP, "%s/%s Ignis");
-    }
-
-    public void addBannerPattern(Supplier<? extends Item> item, String pattern) {
-        addItem(item, "Banner Pattern");
-        add(item.get().getDescriptionId() + ".desc", pattern);
     }
 
     public void addTrim(Supplier<? extends Item> item, String trim) {

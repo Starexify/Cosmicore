@@ -3,27 +3,28 @@ package net.nova.cosmicore.blockentity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
+import net.minecraft.core.component.DataComponentMap;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
-import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.Container;
 import net.minecraft.world.ContainerHelper;
-import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.MenuProvider;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.ItemContainerContents;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.item.crafting.SingleRecipeInput;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.nova.cosmicore.gui.CrusherItemStackHandler;
 import net.nova.cosmicore.init.CBlocks;
 import net.nova.cosmicore.init.CItems;
 import net.nova.cosmicore.recipe.crusher.BaseCrushingRecipe;
@@ -31,8 +32,9 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
 
-public abstract class AbstractCrusherTile extends BaseContainerBlockEntity {
-    public NonNullList<ItemStack> inventory;
+public abstract class AbstractCrusherTile extends BlockEntity implements Container, MenuProvider {
+    public CrusherItemStackHandler inventory;
+    //   private final IItemHandler[] handlers = new IItemHandler[6];
 
     public int FUEL_SLOT;
     public int RESULT_SLOT_START;
@@ -62,6 +64,17 @@ public abstract class AbstractCrusherTile extends BaseContainerBlockEntity {
         this.recipeType = recipeType;
     }
 
+    // Block Entity Stuff
+    @Override
+    public void clearContent() {
+        inventory.clear();
+    }
+
+    @Override
+    public int getContainerSize() {
+        return inventory.getSlots();
+    }
+
     // Crafting Stuff
 
     // Logic for GUI
@@ -70,13 +83,13 @@ public abstract class AbstractCrusherTile extends BaseContainerBlockEntity {
 
         hasIgnis();
         if (isCharged() && hasRecipe()) {
-            this.crushingProgress++;
+            crushingProgress++;
             changed = true;
 
             if (hasProgressFinished()) {
                 craftItem();
                 resetProgress();
-                this.ignisCharge--;
+                ignisCharge--;
                 changed = true;
             }
         } else {
@@ -99,9 +112,9 @@ public abstract class AbstractCrusherTile extends BaseContainerBlockEntity {
 
     public void insertOrMergeResult(ItemStack result) {
         for (int i = RESULT_SLOT_START; i <= RESULT_SLOT_END; i++) {
-            ItemStack slotStack = this.inventory.get(i);
+            ItemStack slotStack = inventory.getStackInSlot(i);
             if (slotStack.isEmpty()) {
-                this.inventory.set(i, result.copy());
+                inventory.setStackInSlot(i, result.copy());
                 break;
             } else if (ItemStack.isSameItem(slotStack, result) && slotStack.getCount() + result.getCount() <= slotStack.getMaxStackSize()) {
                 slotStack.grow(result.getCount());
@@ -122,7 +135,7 @@ public abstract class AbstractCrusherTile extends BaseContainerBlockEntity {
     // Checking for recipes
     public boolean canInsertItemInOutputSlot(Item item) {
         for (int i = RESULT_SLOT_START; i <= RESULT_SLOT_END; i++) {
-            ItemStack slotStack = this.inventory.get(i);
+            ItemStack slotStack = inventory.getStackInSlot(i);
             if (slotStack.isEmpty() || (slotStack.is(item) && slotStack.getCount() < slotStack.getMaxStackSize())) {
                 return true;
             }
@@ -133,7 +146,7 @@ public abstract class AbstractCrusherTile extends BaseContainerBlockEntity {
     public boolean canInsertAmountIntoOutputSlot(int count) {
         int availableSpace = 0;
         for (int i = RESULT_SLOT_START; i <= RESULT_SLOT_END; i++) {
-            ItemStack slotStack = this.inventory.get(i);
+            ItemStack slotStack = inventory.getStackInSlot(i);
             if (slotStack.isEmpty()) {
                 availableSpace += slotStack.getMaxStackSize();
             } else {
@@ -165,79 +178,63 @@ public abstract class AbstractCrusherTile extends BaseContainerBlockEntity {
         return false;
     }
 
-    @Override
-    protected Component getDefaultName() {
-        return null;
-    }
-
-    @Override
-    protected AbstractContainerMenu createMenu(int pContainerId, Inventory pInventory) {
-        return null;
-    }
-
-    // Stuff idk
-    @Override
-    public int getContainerSize() {
-        return this.inventory.size();
-    }
-
-    @Override
-    protected NonNullList<ItemStack> getItems() {
-        return this.inventory;
-    }
-
-    @Override
-    protected void setItems(NonNullList<ItemStack> items) {
-        this.inventory = items;
-    }
-
     // Block nbt data
     @Override
     protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
         super.loadAdditional(tag, registries);
-        this.inventory = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
-        ContainerHelper.loadAllItems(tag, inventory, registries);
+        inventory.deserializeNBT(registries, tag.getCompound("Inventory"));
         ignisCharge = tag.getInt("IgnisCharge");
         ignisPower = tag.getInt("IgnisPower");
         crushingProgress = tag.getInt("CrushingProgress");
     }
 
     @Override
-    protected void saveAdditional(CompoundTag tag, HolderLookup.Provider pRegistries) {
-        super.saveAdditional(tag, pRegistries);
+    protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
+        super.saveAdditional(tag, registries);
+        tag.put("Inventory", inventory.serializeNBT(registries));
         tag.putInt("IgnisCharge", ignisCharge);
         tag.putInt("IgnisPower", ignisPower);
         tag.putInt("CrushingProgress", crushingProgress);
-        ContainerHelper.saveAllItems(tag, inventory, pRegistries);
     }
 
     // Updates for Rendering
     @Override
-    public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt, HolderLookup.Provider lookupProvider) {
+    public void onDataPacket(Connection connection, ClientboundBlockEntityDataPacket packet, HolderLookup.Provider registries) {
+        super.onDataPacket(connection, packet, registries);
         if (level != null && level.isClientSide) {
-            CompoundTag tag = pkt.getTag();
+            CompoundTag tag = packet.getTag();
             handleUpdateTag(tag, level.registryAccess());
         }
     }
 
     @Override
-    public void handleUpdateTag(CompoundTag tag, HolderLookup.Provider lookupProvider) {
-        ContainerHelper.loadAllItems(tag, inventory, lookupProvider);
+    public void handleUpdateTag(CompoundTag tag, HolderLookup.Provider registries) {
+        super.handleUpdateTag(tag, registries);
+        inventory.deserializeNBT(registries, tag.getCompound("Inventory"));
         crushingProgress = tag.getInt("CrushingProgress");
-        hasRecipe = tag.getBoolean("HasRecipe");
     }
 
     @Override
-    public CompoundTag getUpdateTag(HolderLookup.Provider pRegistries) {
-        CompoundTag tag = super.getUpdateTag(pRegistries);
-        ContainerHelper.saveAllItems(tag, inventory, pRegistries);
+    public CompoundTag getUpdateTag(HolderLookup.Provider registries) {
+        CompoundTag tag = super.getUpdateTag(registries);
         tag.putInt("CrushingProgress", crushingProgress);
-        tag.putBoolean("HasRecipe", hasRecipe());
         return tag;
     }
 
     @Override
     public @Nullable Packet<ClientGamePacketListener> getUpdatePacket() {
         return ClientboundBlockEntityDataPacket.create(this);
+    }
+
+    @Override
+    protected void applyImplicitComponents(DataComponentInput componentInput) {
+        super.applyImplicitComponents(componentInput);
+        componentInput.getOrDefault(DataComponents.CONTAINER, ItemContainerContents.EMPTY).copyInto(inventory.getItems());
+    }
+
+    @Override
+    protected void collectImplicitComponents(DataComponentMap.Builder components) {
+        super.collectImplicitComponents(components);
+        components.set(DataComponents.CONTAINER, ItemContainerContents.fromItems(inventory.getItems()));
     }
 }

@@ -24,7 +24,6 @@ public class CrusherTileRenderer extends AbstractCrusherTileRenderer<CrusherTile
     @Override
     public void render(CrusherTile crusherTile, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, int packedOverlay) {
         super.render(crusherTile, partialTick, poseStack, bufferSource, packedLight, packedOverlay);
-        Cosmicore.logger.info("Has Recipe: {} ", hasRecipe(crusherTile));
         // Render the item in crusher
         poseStack.pushPose();
         renderCrushedItem(crusherTile, poseStack, bufferSource);

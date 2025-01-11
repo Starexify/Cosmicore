@@ -12,8 +12,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.SlotItemHandler;
-import net.neoforged.neoforge.items.wrapper.InvWrapper;
 import net.nova.cosmicore.blockentity.AdvancedCrusherTile;
+import net.nova.cosmicore.gui.CrusherItemStackHandler;
 import net.nova.cosmicore.gui.slots.AdvancedCrusherCrystalSlot;
 import net.nova.cosmicore.gui.slots.CrusherResultSlot;
 import net.nova.cosmicore.init.CBlocks;
@@ -34,7 +34,7 @@ public class AdvancedCrusherMenu extends BaseCrusherMenu {
         blockEntity = ((AdvancedCrusherTile) entity);
         this.level = inventory.player.level();
 
-        this.internal = new InvWrapper(blockEntity);
+        //this.internal = new CrusherItemStackHandler(blockEntity, 11);
 
         addSlot(new SlotItemHandler(internal, 0, 71, 16));
         addSlot(new SlotItemHandler(internal, 1, 89, 16));
@@ -49,7 +49,6 @@ public class AdvancedCrusherMenu extends BaseCrusherMenu {
         addSlot(new CrusherResultSlot(internal, 10, 107, 72));
 
         addPlayerSlots(inventory);
-
         addDataSlots(data);
     }
 

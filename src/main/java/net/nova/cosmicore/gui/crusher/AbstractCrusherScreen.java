@@ -34,13 +34,9 @@ public abstract class AbstractCrusherScreen<T extends AbstractContainerMenu> ext
     }
 
     protected abstract boolean isCharged();
-
     protected abstract float getChargedProgress();
-
     protected abstract float getCrushingProgress();
-
     protected abstract int getCurrentIgnis();
-
     protected abstract int getMaxIgnis();
 
     @Override

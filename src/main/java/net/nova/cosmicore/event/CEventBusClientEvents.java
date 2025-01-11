@@ -28,6 +28,7 @@ public class CEventBusClientEvents {
     @SubscribeEvent
     public static void setupClient(FMLClientSetupEvent event) {
         ItemBlockRenderTypes.setRenderLayer(CBlocks.INFERNIUM_CLUSTER.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(CBlocks.LONSDALEITE_BLOCK.get(), RenderType.translucent());
         ItemBlockRenderTypes.setRenderLayer(CBlocks.CRUSHER.get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(CBlocks.ADVANCED_CRUSHER.get(), RenderType.cutout());
     }
