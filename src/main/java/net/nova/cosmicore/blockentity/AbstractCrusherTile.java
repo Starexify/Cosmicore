@@ -1,8 +1,8 @@
 package net.nova.cosmicore.blockentity;
 
+import net.minecraft.client.multiplayer.ClientPacketListener;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.core.NonNullList;
 import net.minecraft.core.component.DataComponentMap;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
@@ -12,7 +12,6 @@ import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.Container;
-import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -34,11 +33,11 @@ import java.util.Map;
 
 public abstract class AbstractCrusherTile extends BlockEntity implements Container, MenuProvider {
     public CrusherItemStackHandler inventory;
-    //   private final IItemHandler[] handlers = new IItemHandler[6];
 
     public int FUEL_SLOT;
     public int RESULT_SLOT_START;
     public int RESULT_SLOT_END;
+
 
     protected int ignisCharge;
     protected int ignisPower = 44;
@@ -132,7 +131,7 @@ public abstract class AbstractCrusherTile extends BlockEntity implements Contain
         crushingProgress = 0;
     }
 
-    // Checking for recipes
+    // Methods for checking Insertion
     public boolean canInsertItemInOutputSlot(Item item) {
         for (int i = RESULT_SLOT_START; i <= RESULT_SLOT_END; i++) {
             ItemStack slotStack = inventory.getStackInSlot(i);

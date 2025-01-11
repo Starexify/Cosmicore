@@ -1,9 +1,6 @@
 package net.nova.cosmicore.gui.crusher;
 
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.network.chat.Component;
-import net.minecraft.world.MenuProvider;
-import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ContainerData;
@@ -27,7 +24,7 @@ public class CrusherMenu extends BaseCrusherMenu {
     public CrusherItemStackHandler internal;
 
     public CrusherMenu(int pContainerId, Inventory inventory, FriendlyByteBuf extraData) {
-        this(pContainerId, inventory, inventory.player.level().getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(8));
+        this(pContainerId, inventory, inventory.player.level().getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(4));
     }
 
     public CrusherMenu(int pContainerId, Inventory inventory, BlockEntity entity, ContainerData data) {
@@ -87,6 +84,11 @@ public class CrusherMenu extends BaseCrusherMenu {
         }
 
         return itemstack;
+    }
+
+    @Override
+    public void broadcastChanges() {
+        super.broadcastChanges();
     }
 
     // Other stuff

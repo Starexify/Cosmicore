@@ -1,8 +1,7 @@
 package net.nova.cosmicore.blockentity;
 
+import net.minecraft.client.multiplayer.ClientPacketListener;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.HolderLookup;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.Container;
@@ -11,7 +10,6 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
-import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
@@ -20,7 +18,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.nova.cosmicore.gui.CrusherItemStackHandler;
 import net.nova.cosmicore.gui.crusher.CrusherMenu;
 import net.nova.cosmicore.init.CBlockEntities;
-import net.nova.cosmicore.init.CBlocks;
 import net.nova.cosmicore.init.CRecipeTypes;
 import net.nova.cosmicore.recipe.crusher.CrushingRecipe;
 import org.jetbrains.annotations.Nullable;
@@ -62,7 +59,7 @@ public class CrusherTile extends AbstractCrusherTile {
         this.RESULT_SLOT_START = 2;
         this.RESULT_SLOT_END = 7;
 
-        this.inventory = new CrusherItemStackHandler(this);
+        this.inventory = new CrusherItemStackHandler(CrusherTile.this);
         inventory.setSize(8);
     }
 
@@ -78,8 +75,9 @@ public class CrusherTile extends AbstractCrusherTile {
     // Crafting stuff
     @Override
     public void hasIgnis() {
-        Item fuelItem = inventory.getStackInSlot(FUEL_SLOT).getItem().getDefaultInstance().getItem();
+        Item fuelItem = inventory.getStackInSlot(FUEL_SLOT).getItem();
         boolean hasFuel = isFuel(inventory.getStackInSlot(FUEL_SLOT).getItem().getDefaultInstance());
+
         int fuel = FUEL_MAP.getOrDefault(fuelItem, 0);
         if (hasFuel && ignisCharge <= ignisPower - fuel) {
             ignisCharge += fuel;
