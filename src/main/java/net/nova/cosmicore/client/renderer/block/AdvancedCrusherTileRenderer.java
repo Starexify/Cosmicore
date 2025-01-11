@@ -68,6 +68,6 @@ public class AdvancedCrusherTileRenderer extends AbstractCrusherTileRenderer<Adv
 
     @Override
     protected boolean hasRecipe(AdvancedCrusherTile advancedCrusherTile) {
-        return advancedCrusherTile.hasRecipe;
+        return advancedCrusherTile.hasRecipe();
     }
 }

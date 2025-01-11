@@ -30,7 +30,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
 
-public abstract class AbstractCrusherTile extends BlockEntity implements Container, MenuProvider {
+public abstract class AbstractCrusherTile extends BlockEntity implements MenuProvider {
     public CrusherItemStackHandler inventory;
 
     public int FUEL_SLOT;
@@ -41,7 +41,6 @@ public abstract class AbstractCrusherTile extends BlockEntity implements Contain
     protected int ignisPower = 44;
     protected int crushingProgress;
     protected int maxCrushingProgress = 400;
-    public boolean hasRecipe;
 
     public static final Map<Item, Integer> FUEL_MAP = Map.of(
             CItems.INFERNIUM_CRYSTAL.asItem(), 11,
@@ -61,41 +60,25 @@ public abstract class AbstractCrusherTile extends BlockEntity implements Contain
         this.recipeType = recipeType;
     }
 
-    // Block Entity Stuff
-    @Override
-    public void clearContent() {
-        inventory.clear();
-    }
-
-    @Override
-    public int getContainerSize() {
-        return inventory.getSlots();
-    }
-
     // Crafting Stuff
 
     // Logic for GUI
-    public void serverTick(ServerLevel level, BlockPos pos, BlockState state) {
-        boolean changed = false;
-
+    public void serverTick(ServerLevel serverLevel, BlockPos pos, BlockState state) {
         hasIgnis();
         if (isCharged() && hasRecipe()) {
             crushingProgress++;
-            changed = true;
+            setChanged(serverLevel, pos, state);
+            serverLevel.sendBlockUpdated(pos, state, state, Block.UPDATE_ALL);
 
             if (hasProgressFinished()) {
                 craftItem();
                 resetProgress();
                 ignisCharge--;
-                changed = true;
+                setChanged(serverLevel, pos, state);
+                serverLevel.sendBlockUpdated(pos, state, state, Block.UPDATE_ALL);
             }
         } else {
             resetProgress();
-        }
-
-        if (changed) {
-            setChanged(level, pos, state);
-            level.sendBlockUpdated(pos, state, state, Block.UPDATE_ALL);
         }
     }
 
@@ -156,25 +139,6 @@ public abstract class AbstractCrusherTile extends BlockEntity implements Contain
         return false;
     }
 
-    // Place or take item out from slots (Hoppers or other mods ig)
-    @Override
-    public boolean canPlaceItem(int slot, ItemStack item) {
-        if (slot >= RESULT_SLOT_START && slot <= RESULT_SLOT_END) {
-            return false;
-        } else if (slot == FUEL_SLOT) {
-            return isFuel(item);
-        }
-        return !isFuel(item);
-    }
-
-    @Override
-    public boolean canTakeItem(Container pTarget, int pSlot, ItemStack pStack) {
-        if (pSlot >= RESULT_SLOT_START && pSlot <= RESULT_SLOT_END) {
-            return true;
-        }
-        return false;
-    }
-
     // Block nbt data
     @Override
     protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
@@ -214,6 +178,7 @@ public abstract class AbstractCrusherTile extends BlockEntity implements Contain
     @Override
     public CompoundTag getUpdateTag(HolderLookup.Provider registries) {
         CompoundTag tag = super.getUpdateTag(registries);
+        tag.put("Inventory", inventory.serializeNBT(registries));
         tag.putInt("CrushingProgress", crushingProgress);
         return tag;
     }

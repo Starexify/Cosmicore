@@ -6,6 +6,7 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.api.distmarker.Dist;
@@ -32,6 +33,7 @@ public class CrusherTileRenderer extends AbstractCrusherTileRenderer<CrusherTile
 
     public void renderCrushedItem(CrusherTile crusherTile, PoseStack poseStack, MultiBufferSource bufferSource) {
         ItemStack itemStack = crusherTile.getRenderedStack();
+        Cosmicore.logger.info("Has Recipe: {}", hasRecipe(crusherTile));
 
         if (!itemStack.isEmpty()) {
             ItemRenderer itemRenderer = Minecraft.getInstance().getItemRenderer();
@@ -51,6 +53,6 @@ public class CrusherTileRenderer extends AbstractCrusherTileRenderer<CrusherTile
 
     @Override
     protected boolean hasRecipe(CrusherTile crusherTile) {
-        return crusherTile.hasRecipe;
+        return crusherTile.hasRecipe();
     }
 }

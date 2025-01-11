@@ -144,40 +144,4 @@ public class AdvancedCrusherTile extends AbstractCrusherTile {
     public @Nullable AbstractContainerMenu createMenu(int containerId, Inventory playerInventory, Player player) {
             return new AdvancedCrusherMenu(containerId, playerInventory, this, this.dataAccess);
     }
-
-    @Override
-    public boolean isEmpty() {
-        for (ItemStack itemstack : this.inventory.getItems()) {
-            if (!itemstack.isEmpty()) {
-                return false;
-            }
-        }
-
-        return true;
-    }
-
-    @Override
-    public ItemStack getItem(int slot) {
-        return null;
-    }
-
-    @Override
-    public ItemStack removeItem(int slot, int amount) {
-        return null;
-    }
-
-    @Override
-    public ItemStack removeItemNoUpdate(int slot) {
-        return null;
-    }
-
-    @Override
-    public void setItem(int slot, ItemStack stack) {
-
-    }
-
-    @Override
-    public boolean stillValid(Player player) {
-        return Container.stillValidBlockEntity(this, player);
-    }
 }

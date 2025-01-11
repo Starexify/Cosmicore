@@ -39,22 +39,6 @@ public abstract class AbstractCrusher extends BaseModel {
     protected abstract MapCodec<? extends BaseEntityBlock> codec();
 
     // Block Entity Operations
-    @Override
-    protected void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pMovedByPiston) {
-        if (!pState.is(pNewState.getBlock())) {
-            BlockEntity blockEntity = pLevel.getBlockEntity(pPos);
-            if (getTileEntityClass().isInstance(blockEntity)) {
-                if (pLevel instanceof ServerLevel) {
-                    Containers.dropContents(pLevel, pPos, (Container) blockEntity);
-                }
-
-                super.onRemove(pState, pLevel, pPos, pNewState, pMovedByPiston);
-                pLevel.updateNeighbourForOutputSignal(pPos, this);
-            } else {
-                super.onRemove(pState, pLevel, pPos, pNewState, pMovedByPiston);
-            }
-        }
-    }
 
     @Override
     protected InteractionResult useWithoutItem(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, BlockHitResult pHitResult) {

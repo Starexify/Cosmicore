@@ -25,7 +25,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Optional;
 
 public class CrusherTile extends AbstractCrusherTile {
-    public final ContainerData dataAccess = new ContainerData() {
+    protected final ContainerData dataAccess = new ContainerData() {
         @Override
         public int get(int pIndex) {
             return switch (pIndex) {
@@ -76,7 +76,7 @@ public class CrusherTile extends AbstractCrusherTile {
     @Override
     public void hasIgnis() {
         Item fuelItem = inventory.getStackInSlot(FUEL_SLOT).getItem();
-        boolean hasFuel = isFuel(inventory.getStackInSlot(FUEL_SLOT).getItem().getDefaultInstance());
+        boolean hasFuel = isFuel(inventory.getStackInSlot(FUEL_SLOT));
 
         int fuel = FUEL_MAP.getOrDefault(fuelItem, 0);
         if (hasFuel && ignisCharge <= ignisPower - fuel) {
@@ -125,49 +125,6 @@ public class CrusherTile extends AbstractCrusherTile {
     // Menu
     @Override
     public @Nullable AbstractContainerMenu createMenu(int containerId, Inventory playerInventory, Player player) {
-        return new CrusherMenu(containerId, playerInventory, this, this.dataAccess);
-    }
-
-    @Override
-    public boolean isEmpty() {
-        for (ItemStack itemstack : this.inventory.getItems()) {
-            if (!itemstack.isEmpty()) {
-                return false;
-            }
-        }
-
-        return true;
-    }
-
-    @Override
-    public ItemStack getItem(int slot) {
-        return inventory.getStackInSlot(slot);
-    }
-
-    @Override
-    public ItemStack removeItem(int slot, int amount) {
-        ItemStack itemstack = ContainerHelper.removeItem(inventory.getItems(), slot, amount);
-        if (!itemstack.isEmpty()) {
-            this.setChanged();
-        }
-
-        return itemstack;
-    }
-
-    @Override
-    public ItemStack removeItemNoUpdate(int slot) {
-        return ContainerHelper.takeItem(inventory.getItems(), slot);
-    }
-
-    @Override
-    public void setItem(int slot, ItemStack stack) {
-        inventory.setStackInSlot(slot, stack);
-        stack.limitSize(getMaxStackSize(stack));
-        this.setChanged();
-    }
-
-    @Override
-    public boolean stillValid(Player player) {
-        return Container.stillValidBlockEntity(this, player);
+        return new CrusherMenu(containerId, playerInventory, this, dataAccess, inventory);
     }
 }

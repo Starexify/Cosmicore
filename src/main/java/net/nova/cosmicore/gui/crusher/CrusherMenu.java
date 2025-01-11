@@ -10,9 +10,9 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.neoforged.neoforge.items.ItemStackHandler;
 import net.neoforged.neoforge.items.SlotItemHandler;
 import net.nova.cosmicore.blockentity.CrusherTile;
-import net.nova.cosmicore.gui.CrusherItemStackHandler;
 import net.nova.cosmicore.gui.slots.CrusherCrystalSlot;
 import net.nova.cosmicore.gui.slots.CrusherResultSlot;
 import net.nova.cosmicore.init.CBlocks;
@@ -21,18 +21,16 @@ import net.nova.cosmicore.init.CMenuTypes;
 public class CrusherMenu extends BaseCrusherMenu {
     public final CrusherTile blockEntity;
     public final Level level;
-    public CrusherItemStackHandler internal;
 
     public CrusherMenu(int pContainerId, Inventory inventory, FriendlyByteBuf extraData) {
-        this(pContainerId, inventory, inventory.player.level().getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(4));
+        this(pContainerId, inventory, inventory.player.level().getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(4), new ItemStackHandler(8));
     }
 
-    public CrusherMenu(int pContainerId, Inventory inventory, BlockEntity entity, ContainerData data) {
+    public CrusherMenu(int pContainerId, Inventory inventory, BlockEntity entity, ContainerData data, ItemStackHandler internal) {
         super(CMenuTypes.CRUSHER_MENU.get(), pContainerId, data);
         checkContainerSize(inventory, 8);
         blockEntity = ((CrusherTile) entity);
         this.level = inventory.player.level();
-        this.internal = blockEntity.inventory;
 
         addSlot(new SlotItemHandler(internal, 0, 80, 16));
         addSlot(new CrusherCrystalSlot(internal, 1, 152, 67, this));
@@ -84,11 +82,6 @@ public class CrusherMenu extends BaseCrusherMenu {
         }
 
         return itemstack;
-    }
-
-    @Override
-    public void broadcastChanges() {
-        super.broadcastChanges();
     }
 
     // Other stuff
