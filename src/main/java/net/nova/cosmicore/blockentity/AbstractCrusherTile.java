@@ -1,6 +1,5 @@
 package net.nova.cosmicore.blockentity;
 
-import net.minecraft.client.multiplayer.ClientPacketListener;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponentMap;
@@ -37,7 +36,6 @@ public abstract class AbstractCrusherTile extends BlockEntity implements Contain
     public int FUEL_SLOT;
     public int RESULT_SLOT_START;
     public int RESULT_SLOT_END;
-
 
     protected int ignisCharge;
     protected int ignisPower = 44;

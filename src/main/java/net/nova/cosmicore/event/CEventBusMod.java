@@ -12,6 +12,6 @@ import static net.nova.cosmicore.Cosmicore.MODID;
 public class CEventBusMod {
     @SubscribeEvent
     public static void registerCapabilities(RegisterCapabilitiesEvent event) {
-        //event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, CBlockEntities.CRUSHER_TILE.get(), (tile, side) -> tile.getItemHandler(side));
+        //event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, CBlockEntities.CRUSHER_TILE.get(), (crusher, side) -> crusher.inventory);
     }
 }
