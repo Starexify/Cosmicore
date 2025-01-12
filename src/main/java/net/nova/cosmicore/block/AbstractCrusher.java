@@ -4,8 +4,6 @@ import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.Container;
-import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Player;
@@ -32,6 +30,8 @@ public abstract class AbstractCrusher extends BaseModel {
 
     protected abstract BlockEntityType<?> getBlockEntityType();
 
+    protected abstract void dropContents(Level level, BlockPos pos, BlockEntity blockEntity);
+
     @Override
     public abstract BlockEntity newBlockEntity(BlockPos pPos, BlockState pState);
 
@@ -39,6 +39,22 @@ public abstract class AbstractCrusher extends BaseModel {
     protected abstract MapCodec<? extends BaseEntityBlock> codec();
 
     // Block Entity Operations
+    @Override
+    protected void onRemove(BlockState pState, Level level, BlockPos pos, BlockState pNewState, boolean pMovedByPiston) {
+        if (!pState.is(pNewState.getBlock())) {
+            BlockEntity blockEntity = level.getBlockEntity(pos);
+            if (getTileEntityClass().isInstance(blockEntity)) {
+                if (level instanceof ServerLevel) {
+                    dropContents(level, pos, blockEntity);
+                }
+
+                super.onRemove(pState, level, pos, pNewState, pMovedByPiston);
+                level.updateNeighbourForOutputSignal(pos, this);
+            } else {
+                super.onRemove(pState, level, pos, pNewState, pMovedByPiston);
+            }
+        }
+    }
 
     @Override
     protected InteractionResult useWithoutItem(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, BlockHitResult pHitResult) {
@@ -63,7 +79,7 @@ public abstract class AbstractCrusher extends BaseModel {
 
     // Block Shape
     @Override
-    protected VoxelShape makeShape() {
+    public VoxelShape makeShape() {
         VoxelShape shape = Shapes.empty();
         shape = Shapes.join(shape, Shapes.box(0, 0.875, 0, 1, 1, 1), BooleanOp.OR);
         shape = Shapes.join(shape, Shapes.box(0, 0, 0, 1, 0.25, 1), BooleanOp.OR);

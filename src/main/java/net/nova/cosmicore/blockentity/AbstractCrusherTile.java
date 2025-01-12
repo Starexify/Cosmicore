@@ -2,8 +2,6 @@ package net.nova.cosmicore.blockentity;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.core.component.DataComponentMap;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.Packet;
@@ -13,7 +11,6 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.component.ItemContainerContents;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.item.crafting.SingleRecipeInput;
@@ -21,6 +18,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.neoforged.neoforge.items.IItemHandler;
 import net.nova.cosmicore.gui.CrusherItemStackHandler;
 import net.nova.cosmicore.init.CBlocks;
 import net.nova.cosmicore.init.CItems;
@@ -31,6 +29,9 @@ import java.util.Map;
 
 public abstract class AbstractCrusherTile extends BlockEntity implements MenuProvider {
     public CrusherItemStackHandler inventory;
+    public IItemHandler top;
+    public IItemHandler sides;
+    public IItemHandler down;
 
     public int FUEL_SLOT;
     public int RESULT_SLOT_START;
@@ -52,6 +53,7 @@ public abstract class AbstractCrusherTile extends BlockEntity implements MenuPro
     public final RecipeManager.CachedCheck<SingleRecipeInput, ? extends BaseCrushingRecipe> quickCheck;
 
     public abstract boolean hasRecipe();
+
     public abstract void craftItem();
 
     protected AbstractCrusherTile(BlockEntityType<?> pType, BlockPos pPos, BlockState pBlockState, RecipeType<? extends BaseCrushingRecipe> recipeType) {
@@ -163,21 +165,21 @@ public abstract class AbstractCrusherTile extends BlockEntity implements MenuPro
 
     // Stores NBT Data
     @Override
-    protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
-        super.loadAdditional(tag, registries);
-        inventory.deserializeNBT(registries, tag.getCompound("Inventory"));
-        ignisCharge = tag.getInt("IgnisCharge");
-        ignisPower = tag.getInt("IgnisPower");
-        crushingProgress = tag.getInt("CrushingProgress");
-    }
-
-    @Override
     protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
         super.saveAdditional(tag, registries);
         tag.put("Inventory", inventory.serializeNBT(registries));
         tag.putInt("IgnisCharge", ignisCharge);
         tag.putInt("IgnisPower", ignisPower);
         tag.putInt("CrushingProgress", crushingProgress);
+    }
+
+    @Override
+    protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
+        super.loadAdditional(tag, registries);
+        inventory.deserializeNBT(registries, tag.getCompound("Inventory"));
+        ignisCharge = tag.getInt("IgnisCharge");
+        ignisPower = tag.getInt("IgnisPower");
+        crushingProgress = tag.getInt("CrushingProgress");
     }
 
     // Updates the BE between Client-Server
@@ -210,18 +212,5 @@ public abstract class AbstractCrusherTile extends BlockEntity implements MenuPro
     @Override
     public @Nullable Packet<ClientGamePacketListener> getUpdatePacket() {
         return ClientboundBlockEntityDataPacket.create(this);
-    }
-
-    // Stuff
-    @Override
-    protected void applyImplicitComponents(DataComponentInput componentInput) {
-        super.applyImplicitComponents(componentInput);
-        componentInput.getOrDefault(DataComponents.CONTAINER, ItemContainerContents.EMPTY).copyInto(inventory.getItems());
-    }
-
-    @Override
-    protected void collectImplicitComponents(DataComponentMap.Builder components) {
-        super.collectImplicitComponents(components);
-        components.set(DataComponents.CONTAINER, ItemContainerContents.fromItems(inventory.getItems()));
     }
 }

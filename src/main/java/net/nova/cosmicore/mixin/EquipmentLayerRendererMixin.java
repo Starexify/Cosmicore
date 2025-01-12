@@ -12,7 +12,6 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 
 @Mixin(EquipmentLayerRenderer.class)
 public class EquipmentLayerRendererMixin {
-
     @Redirect(method = "renderLayers(Lnet/minecraft/client/resources/model/EquipmentClientInfo$LayerType;Lnet/minecraft/resources/ResourceKey;Lnet/minecraft/client/model/Model;Lnet/minecraft/world/item/ItemStack;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;ILnet/minecraft/resources/ResourceLocation;)V",
             at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/RenderType;armorCutoutNoCull(Lnet/minecraft/resources/ResourceLocation;)Lnet/minecraft/client/renderer/RenderType;"))
     private RenderType redirectArmorRenderType(ResourceLocation location, @Local(argsOnly = true) ItemStack item) {

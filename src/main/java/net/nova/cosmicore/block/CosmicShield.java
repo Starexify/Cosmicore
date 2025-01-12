@@ -1,5 +1,6 @@
 package net.nova.cosmicore.block;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -7,9 +8,9 @@ import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
@@ -28,36 +29,35 @@ public class CosmicShield extends BaseModel {
     // Block Entity Stuff
     // Drops item content
     @Override
-    protected void onRemove(BlockState state, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pMovedByPiston) {
+    protected void onRemove(BlockState state, Level level, BlockPos pos, BlockState pNewState, boolean pMovedByPiston) {
         if (!state.is(pNewState.getBlock())) {
-            if (pLevel.getBlockEntity(pPos) instanceof CosmicShieldTile cosmicShieldTierITile) {
-                Containers.dropContents(pLevel, pPos, cosmicShieldTierITile);
-                pLevel.updateNeighbourForOutputSignal(pPos, this);
+            if (level.getBlockEntity(pos) instanceof CosmicShieldTile cosmicShieldTierITile) {
+                Containers.dropContents(level, pos, cosmicShieldTierITile.inventory.getItems());
+                level.updateNeighbourForOutputSignal(pos, this);
             }
-            super.onRemove(state, pLevel, pPos, pNewState, pMovedByPiston);
+            super.onRemove(state, level, pos, pNewState, pMovedByPiston);
         }
     }
 
     // Interaction
     @Override
     protected InteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
-        Item INFERNIUM_CRYSTAL = CItems.INFERNIUM_CRYSTAL.get();
         BlockEntity blockEntity = level.getBlockEntity(pos);
         if (blockEntity instanceof CosmicShieldTile cosmicShieldTile) {
-            if (cosmicShieldTile.isEmpty() && stack.getItem() == INFERNIUM_CRYSTAL) {
-                cosmicShieldTile.setItem(0, stack);
+            if (cosmicShieldTile.inventory.getStackInSlot(0).isEmpty() && stack.getItem() == CItems.INFERNIUM_CRYSTAL.get()) {
+                cosmicShieldTile.inventory.setStackInSlot(0, new ItemStack(stack.getItem(), 1));
                 stack.consume(1, player);
                 level.playSound(player, pos, SoundEvents.ITEM_PICKUP, SoundSource.BLOCKS, 1f, 2f);
-            } else if (!cosmicShieldTile.isEmpty()) {
-                ItemStack tileStack = cosmicShieldTile.getItem(0);
+            } else if (!cosmicShieldTile.inventory.getStackInSlot(0).isEmpty()) {
+                ItemStack tileStack = cosmicShieldTile.inventory.getStackInSlot(0);
                 if (player.getItemInHand(InteractionHand.MAIN_HAND).isEmpty()) {
                     player.setItemInHand(InteractionHand.MAIN_HAND, tileStack);
                 } else {
                     player.getInventory().placeItemBackInInventory(tileStack, true);
                 }
-                cosmicShieldTile.setItem(0, ItemStack.EMPTY);
-                cosmicShieldTile.setChanged();
+                cosmicShieldTile.inventory.setStackInSlot(0, ItemStack.EMPTY);
                 level.playSound(player, pos, SoundEvents.ITEM_FRAME_REMOVE_ITEM, SoundSource.BLOCKS, 1f, 2f);
+                cosmicShieldTile.setChanged();
                 level.sendBlockUpdated(pos, state, state, 3);
             }
             return InteractionResult.SUCCESS;
@@ -72,7 +72,7 @@ public class CosmicShield extends BaseModel {
     }
 
     @Override
-    protected VoxelShape makeShape() {
+    public VoxelShape makeShape() {
         VoxelShape shape = Shapes.empty();
         shape = Shapes.join(shape, Shapes.box(0.125, 0.5625, 0.125, 0.875, 0.625, 0.875), BooleanOp.OR);
         shape = Shapes.join(shape, Shapes.box(0.125, 0.5625, 0.125, 0.5, 0.625, 0.875), BooleanOp.OR);
@@ -98,5 +98,10 @@ public class CosmicShield extends BaseModel {
         shape = Shapes.join(shape, Shapes.box(0.7218749999999999, 0, 0.7218750000000002, 0.8468750000000002, 0.0625, 0.8468750000000004), BooleanOp.OR);
 
         return shape;
+    }
+
+    @Override
+    protected MapCodec<? extends BaseEntityBlock> codec() {
+        return simpleCodec(CosmicShield::new);
     }
 }

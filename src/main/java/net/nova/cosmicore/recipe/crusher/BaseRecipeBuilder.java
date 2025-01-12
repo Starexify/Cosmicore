@@ -2,21 +2,17 @@ package net.nova.cosmicore.recipe.crusher;
 
 import net.minecraft.advancements.Criterion;
 import net.minecraft.data.recipes.RecipeBuilder;
-import net.minecraft.data.recipes.RecipeOutput;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.ItemLike;
 import net.nova.cosmicore.recipe.WeightedResult;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
-import java.util.Optional;
 
-public class BaseRecipeBuilder implements RecipeBuilder {
+public abstract class BaseRecipeBuilder implements RecipeBuilder {
     public Ingredient ingredient;
     public List<WeightedResult> results;
 
@@ -32,10 +28,6 @@ public class BaseRecipeBuilder implements RecipeBuilder {
     @Override
     public Item getResult() {
         return this.results.isEmpty() ? Items.AIR : this.results.get(0).item.getItem();
-    }
-
-    @Override
-    public void save(RecipeOutput recipeOutput, ResourceKey<Recipe<?>> resourceKey) {
     }
 
     public RecipeBuilder unlockedBy(String pName, Criterion<?> pCriterion) {

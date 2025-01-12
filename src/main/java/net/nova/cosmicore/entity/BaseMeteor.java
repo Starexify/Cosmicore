@@ -316,7 +316,7 @@ public class BaseMeteor extends Entity {
                         BlockState state = serverLevel.getBlockState(pos);
                         if (isShieldBlock(state)) {
                             BlockEntity blockEntity = serverLevel.getBlockEntity(pos);
-                            if (blockEntity instanceof CosmicShieldTile && !((CosmicShieldTile) blockEntity).isEmpty()) {
+                            if (blockEntity instanceof CosmicShieldTile && ((CosmicShieldTile) blockEntity).inventory.getSlots() != 0) {
                                 return true;
                             }
                         }

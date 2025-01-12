@@ -11,6 +11,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.SingleRecipeInput;
 import net.minecraft.world.level.block.state.BlockState;
+import net.neoforged.neoforge.items.wrapper.RangedWrapper;
 import net.nova.cosmicore.gui.CrusherItemStackHandler;
 import net.nova.cosmicore.gui.crusher.AdvancedCrusherMenu;
 import net.nova.cosmicore.init.CBlockEntities;
@@ -57,6 +58,9 @@ public class AdvancedCrusherTile extends AbstractCrusherTile {
         this.RESULT_SLOT_END = 10;
 
         this.inventory = new CrusherItemStackHandler(AdvancedCrusherTile.this, 11);
+        this.top = new RangedWrapper(inventory, 0, FUEL_SLOT);
+        this.sides = new RangedWrapper(inventory, FUEL_SLOT, RESULT_SLOT_START);
+        this.down = new RangedWrapper(inventory, RESULT_SLOT_START, RESULT_SLOT_END + 1);
     }
 
     // Render Item
@@ -120,6 +124,6 @@ public class AdvancedCrusherTile extends AbstractCrusherTile {
     // Menu
     @Override
     public @Nullable AbstractContainerMenu createMenu(int containerId, Inventory playerInventory, Player player) {
-            return new AdvancedCrusherMenu(containerId, playerInventory, this, dataAccess, inventory);
+        return new AdvancedCrusherMenu(containerId, playerInventory, this, dataAccess, inventory);
     }
 }

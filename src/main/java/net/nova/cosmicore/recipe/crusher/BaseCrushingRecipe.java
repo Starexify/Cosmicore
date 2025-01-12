@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 
-public class BaseCrushingRecipe implements Recipe<SingleRecipeInput> {
+public abstract class BaseCrushingRecipe implements Recipe<SingleRecipeInput> {
     public Optional<Ingredient> ingredient;
     public List<WeightedResult> results;
     public static final Random RANDOM = new Random();
@@ -53,16 +53,6 @@ public class BaseCrushingRecipe implements Recipe<SingleRecipeInput> {
 
     public Optional<Ingredient> ingredient() {
         return this.ingredient;
-    }
-
-    @Override
-    public RecipeSerializer<? extends Recipe<SingleRecipeInput>> getSerializer() {
-        return null;
-    }
-
-    @Override
-    public RecipeType<? extends Recipe<SingleRecipeInput>> getType() {
-        return null;
     }
 
     @Override

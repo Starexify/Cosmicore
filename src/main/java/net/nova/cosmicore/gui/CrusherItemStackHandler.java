@@ -2,11 +2,12 @@ package net.nova.cosmicore.gui;
 
 import net.minecraft.core.NonNullList;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import net.nova.cosmicore.blockentity.AbstractCrusherTile;
 
 public class CrusherItemStackHandler extends ItemStackHandler {
-    public final AbstractCrusherTile  crusherTile;
+    public final AbstractCrusherTile crusherTile;
 
     public CrusherItemStackHandler(AbstractCrusherTile crusherTile, int size) {
         super(size);
@@ -17,7 +18,8 @@ public class CrusherItemStackHandler extends ItemStackHandler {
     protected void onContentsChanged(int slot) {
         super.onContentsChanged(slot);
         if (crusherTile != null && (crusherTile.getLevel() == null || !crusherTile.getLevel().isClientSide)) {
-            crusherTile.setChanged();
+                crusherTile.setChanged();
+            crusherTile.getLevel().sendBlockUpdated(crusherTile.getBlockPos(), crusherTile.getBlockState(), crusherTile.getBlockState(), Block.UPDATE_ALL);
         }
     }
 

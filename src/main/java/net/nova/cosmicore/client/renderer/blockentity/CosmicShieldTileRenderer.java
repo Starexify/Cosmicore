@@ -32,7 +32,7 @@ public class CosmicShieldTileRenderer implements BlockEntityRenderer<CosmicShiel
     public void render(CosmicShieldTile cosmicShieldTile, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, int packedOverlay) {
         VertexConsumer vertexConsumer = bufferSource.getBuffer(RenderType.entityCutout(SHIELD_TIER_I_LOCATION));
         // Render the crystal
-        if (!cosmicShieldTile.isEmpty())
+        if (!cosmicShieldTile.inventory.getStackInSlot(0).isEmpty())
             renderCrystal(partialTick, poseStack, vertexConsumer, packedLight, packedOverlay);
     }
 
