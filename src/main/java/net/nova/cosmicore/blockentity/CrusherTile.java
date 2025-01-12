@@ -3,18 +3,13 @@ package net.nova.cosmicore.blockentity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.Container;
-import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
-import net.minecraft.world.item.crafting.SingleRecipeInput;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.items.ItemStackHandler;
 import net.nova.cosmicore.gui.CrusherItemStackHandler;
 import net.nova.cosmicore.gui.crusher.CrusherMenu;
 import net.nova.cosmicore.init.CBlockEntities;
@@ -59,13 +54,7 @@ public class CrusherTile extends AbstractCrusherTile {
         this.RESULT_SLOT_START = 2;
         this.RESULT_SLOT_END = 7;
 
-        this.inventory = new CrusherItemStackHandler(CrusherTile.this);
-        inventory.setSize(8);
-    }
-
-    // Render Item
-    public ItemStack getRenderedStack() {
-        return inventory.getFirst();
+        this.inventory = new CrusherItemStackHandler(CrusherTile.this, 8);
     }
 
     public int getCrushingProgress() {
@@ -73,18 +62,6 @@ public class CrusherTile extends AbstractCrusherTile {
     }
 
     // Crafting stuff
-    @Override
-    public void hasIgnis() {
-        Item fuelItem = inventory.getStackInSlot(FUEL_SLOT).getItem();
-        boolean hasFuel = isFuel(inventory.getStackInSlot(FUEL_SLOT));
-
-        int fuel = FUEL_MAP.getOrDefault(fuelItem, 0);
-        if (hasFuel && ignisCharge <= ignisPower - fuel) {
-            ignisCharge += fuel;
-            inventory.removeStackFromSlot(FUEL_SLOT);
-        }
-    }
-
     @Override
     public boolean hasRecipe() {
         Optional<RecipeHolder<CrushingRecipe>> recipe = getCurrentRecipe();
@@ -102,10 +79,6 @@ public class CrusherTile extends AbstractCrusherTile {
             inventory.getFirst().shrink(1);
             insertOrMergeResult(result);
         }
-    }
-
-    public SingleRecipeInput createRecipeInput() {
-        return new SingleRecipeInput(this.inventory.getFirst());
     }
 
     public Optional<RecipeHolder<CrushingRecipe>> getCurrentRecipe() {

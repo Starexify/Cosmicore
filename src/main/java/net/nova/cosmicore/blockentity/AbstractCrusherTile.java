@@ -10,7 +10,6 @@ import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.Container;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -42,6 +41,8 @@ public abstract class AbstractCrusherTile extends BlockEntity implements MenuPro
     protected int crushingProgress;
     protected int maxCrushingProgress = 400;
 
+    public boolean hasRecipe;
+
     public static final Map<Item, Integer> FUEL_MAP = Map.of(
             CItems.INFERNIUM_CRYSTAL.asItem(), 11,
             CBlocks.INFERNIUM_BLOCK.asItem(), 44
@@ -50,7 +51,6 @@ public abstract class AbstractCrusherTile extends BlockEntity implements MenuPro
     public final RecipeType<? extends BaseCrushingRecipe> recipeType;
     public final RecipeManager.CachedCheck<SingleRecipeInput, ? extends BaseCrushingRecipe> quickCheck;
 
-    public abstract void hasIgnis();
     public abstract boolean hasRecipe();
     public abstract void craftItem();
 
@@ -60,12 +60,18 @@ public abstract class AbstractCrusherTile extends BlockEntity implements MenuPro
         this.recipeType = recipeType;
     }
 
+    // Render Item
+    public ItemStack getRenderedStack() {
+        return inventory.getFirst();
+    }
+
     // Crafting Stuff
 
     // Logic for GUI
     public void serverTick(ServerLevel serverLevel, BlockPos pos, BlockState state) {
         hasIgnis();
         if (isCharged() && hasRecipe()) {
+            hasRecipe = true;
             crushingProgress++;
             setChanged(serverLevel, pos, state);
             serverLevel.sendBlockUpdated(pos, state, state, Block.UPDATE_ALL);
@@ -78,6 +84,7 @@ public abstract class AbstractCrusherTile extends BlockEntity implements MenuPro
                 serverLevel.sendBlockUpdated(pos, state, state, Block.UPDATE_ALL);
             }
         } else {
+            hasRecipe = false;
             resetProgress();
         }
     }
@@ -86,10 +93,31 @@ public abstract class AbstractCrusherTile extends BlockEntity implements MenuPro
         return this.ignisCharge > 0;
     }
 
+    public void hasIgnis() {
+        Item fuelItem = inventory.getStackInSlot(FUEL_SLOT).getItem();
+        boolean hasFuel = isFuel(inventory.getStackInSlot(FUEL_SLOT));
+
+        int fuel = FUEL_MAP.getOrDefault(fuelItem, 0);
+        if (hasFuel && ignisCharge <= ignisPower - fuel) {
+            ignisCharge += fuel;
+            inventory.removeStackFromSlot(FUEL_SLOT);
+        }
+    }
+
     public boolean isFuel(ItemStack item) {
         return FUEL_MAP.containsKey(item.getItem());
     }
 
+    // Recipe progress Stuff
+    public boolean hasProgressFinished() {
+        return crushingProgress >= maxCrushingProgress;
+    }
+
+    public void resetProgress() {
+        crushingProgress = 0;
+    }
+
+    // Methods for checking Insertion
     public void insertOrMergeResult(ItemStack result) {
         for (int i = RESULT_SLOT_START; i <= RESULT_SLOT_END; i++) {
             ItemStack slotStack = inventory.getStackInSlot(i);
@@ -103,16 +131,6 @@ public abstract class AbstractCrusherTile extends BlockEntity implements MenuPro
         }
     }
 
-    // Recipe progress Stuff
-    public boolean hasProgressFinished() {
-        return crushingProgress >= maxCrushingProgress;
-    }
-
-    public void resetProgress() {
-        crushingProgress = 0;
-    }
-
-    // Methods for checking Insertion
     public boolean canInsertItemInOutputSlot(Item item) {
         for (int i = RESULT_SLOT_START; i <= RESULT_SLOT_END; i++) {
             ItemStack slotStack = inventory.getStackInSlot(i);
@@ -139,7 +157,11 @@ public abstract class AbstractCrusherTile extends BlockEntity implements MenuPro
         return false;
     }
 
-    // Block nbt data
+    public SingleRecipeInput createRecipeInput() {
+        return new SingleRecipeInput(this.inventory.getFirst());
+    }
+
+    // Stores NBT Data
     @Override
     protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
         super.loadAdditional(tag, registries);
@@ -158,7 +180,7 @@ public abstract class AbstractCrusherTile extends BlockEntity implements MenuPro
         tag.putInt("CrushingProgress", crushingProgress);
     }
 
-    // Updates for Rendering
+    // Updates the BE between Client-Server
     @Override
     public void onDataPacket(Connection connection, ClientboundBlockEntityDataPacket packet, HolderLookup.Provider registries) {
         super.onDataPacket(connection, packet, registries);
@@ -173,6 +195,7 @@ public abstract class AbstractCrusherTile extends BlockEntity implements MenuPro
         super.handleUpdateTag(tag, registries);
         inventory.deserializeNBT(registries, tag.getCompound("Inventory"));
         crushingProgress = tag.getInt("CrushingProgress");
+        hasRecipe = tag.getBoolean("HasRecipe");
     }
 
     @Override
@@ -180,6 +203,7 @@ public abstract class AbstractCrusherTile extends BlockEntity implements MenuPro
         CompoundTag tag = super.getUpdateTag(registries);
         tag.put("Inventory", inventory.serializeNBT(registries));
         tag.putInt("CrushingProgress", crushingProgress);
+        tag.putBoolean("HasRecipe", hasRecipe());
         return tag;
     }
 
@@ -188,6 +212,7 @@ public abstract class AbstractCrusherTile extends BlockEntity implements MenuPro
         return ClientboundBlockEntityDataPacket.create(this);
     }
 
+    // Stuff
     @Override
     protected void applyImplicitComponents(DataComponentInput componentInput) {
         super.applyImplicitComponents(componentInput);

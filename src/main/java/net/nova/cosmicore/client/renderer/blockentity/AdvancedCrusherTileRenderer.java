@@ -1,4 +1,4 @@
-package net.nova.cosmicore.client.renderer.block;
+package net.nova.cosmicore.client.renderer.blockentity;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
@@ -23,13 +23,11 @@ public class AdvancedCrusherTileRenderer extends AbstractCrusherTileRenderer<Adv
     @Override
     public void render(AdvancedCrusherTile advancedCrusherTile, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, int packedOverlay) {
         super.render(advancedCrusherTile, partialTick, poseStack, bufferSource, packedLight, packedOverlay);
-        // Render the item in crusher
-        poseStack.pushPose();
         renderCrushedItems(advancedCrusherTile, poseStack, bufferSource);
-        poseStack.popPose();
     }
 
-    private void renderCrushedItems(AdvancedCrusherTile advancedCrusherTile, PoseStack poseStack, MultiBufferSource bufferSource) {
+    // Render the item in crusher
+    public void renderCrushedItems(AdvancedCrusherTile advancedCrusherTile, PoseStack poseStack, MultiBufferSource bufferSource) {
         ItemRenderer itemRenderer = Minecraft.getInstance().getItemRenderer();
         ItemStack mainStack = advancedCrusherTile.getRenderedStack();
         ItemStack additionalStack = advancedCrusherTile.getRenderedAddition();
@@ -68,6 +66,6 @@ public class AdvancedCrusherTileRenderer extends AbstractCrusherTileRenderer<Adv
 
     @Override
     protected boolean hasRecipe(AdvancedCrusherTile advancedCrusherTile) {
-        return advancedCrusherTile.hasRecipe();
+        return advancedCrusherTile.hasRecipe;
     }
 }

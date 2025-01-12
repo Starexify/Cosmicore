@@ -6,8 +6,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.inventory.SimpleContainerData;
-import net.minecraft.world.inventory.Slot;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.neoforged.neoforge.items.ItemStackHandler;
@@ -29,8 +27,12 @@ public class CrusherMenu extends BaseCrusherMenu {
     public CrusherMenu(int pContainerId, Inventory inventory, BlockEntity entity, ContainerData data, ItemStackHandler internal) {
         super(CMenuTypes.CRUSHER_MENU.get(), pContainerId, data);
         checkContainerSize(inventory, 8);
-        blockEntity = ((CrusherTile) entity);
+        blockEntity = (CrusherTile) entity;
         this.level = inventory.player.level();
+
+        this.FUEL_SLOT = 1;
+        this.RECIPE_SLOT = 2;
+        this.SLOTS = 8;
 
         addSlot(new SlotItemHandler(internal, 0, 80, 16));
         addSlot(new CrusherCrystalSlot(internal, 1, 152, 67, this));
@@ -44,44 +46,6 @@ public class CrusherMenu extends BaseCrusherMenu {
         addStandardInventorySlots(inventory, 8, 102);
 
         addDataSlots(data);
-    }
-
-    // Function for moving items through slots with Ctrl+Click changed to not take the recipe slot if it has the last slot index (in this case index 3)
-    // and also takes the fuel slot in consideration
-    public static int FUEL_SLOT = 1;
-    public static int RECIPE_SLOT = 2;
-    public static int SLOTS = 8;
-
-    @Override
-    public ItemStack quickMoveStack(Player playerIn, int index) {
-        ItemStack itemstack = ItemStack.EMPTY;
-        Slot slot = this.slots.get(index);
-
-        if (slot != null && slot.hasItem()) {
-            ItemStack currentStack = slot.getItem();
-            itemstack = currentStack.copy();
-
-            if (index < SLOTS) {
-                if (!this.moveItemStackTo(currentStack, SLOTS, this.slots.size(), false)) {
-                    return ItemStack.EMPTY;
-                }
-                // Remove if no Fuel Slot exists
-            } else if (this.isCrystal(itemstack)) {
-                if (!this.moveItemStackTo(currentStack, FUEL_SLOT, FUEL_SLOT + 1, false)) {
-                    return ItemStack.EMPTY;
-                }
-            } else if (!this.moveItemStackTo(currentStack, 0, RECIPE_SLOT, false)) {
-                return ItemStack.EMPTY;
-            }
-
-            if (currentStack.isEmpty()) {
-                slot.set(ItemStack.EMPTY);
-            } else {
-                slot.setChanged();
-            }
-        }
-
-        return itemstack;
     }
 
     // Other stuff

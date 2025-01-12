@@ -3,13 +3,13 @@ package net.nova.cosmicore.gui;
 import net.minecraft.core.NonNullList;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.items.ItemStackHandler;
-import net.nova.cosmicore.blockentity.CrusherTile;
+import net.nova.cosmicore.blockentity.AbstractCrusherTile;
 
 public class CrusherItemStackHandler extends ItemStackHandler {
-    public final CrusherTile crusherTile;
+    public final AbstractCrusherTile  crusherTile;
 
-    public CrusherItemStackHandler(CrusherTile crusherTile) {
-        super(8);
+    public CrusherItemStackHandler(AbstractCrusherTile crusherTile, int size) {
+        super(size);
         this.crusherTile = crusherTile;
     }
 
@@ -19,7 +19,6 @@ public class CrusherItemStackHandler extends ItemStackHandler {
         if (crusherTile != null && (crusherTile.getLevel() == null || !crusherTile.getLevel().isClientSide)) {
             crusherTile.setChanged();
         }
-        //this.crusherTile.markInputInventoryChanged();
     }
 
     public void removeStackFromSlot(int slot, int amount) {
@@ -38,9 +37,5 @@ public class CrusherItemStackHandler extends ItemStackHandler {
     public ItemStack getFirst() {
         validateSlotIndex(0);
         return getStackInSlot(0);
-    }
-
-    public void clear() {
-        stacks.clear();
     }
 }

@@ -1,19 +1,17 @@
 package net.nova.cosmicore.blockentity;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.NonNullList;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.SingleRecipeInput;
 import net.minecraft.world.level.block.state.BlockState;
+import net.nova.cosmicore.gui.CrusherItemStackHandler;
 import net.nova.cosmicore.gui.crusher.AdvancedCrusherMenu;
 import net.nova.cosmicore.init.CBlockEntities;
 import net.nova.cosmicore.init.CRecipeTypes;
@@ -58,14 +56,10 @@ public class AdvancedCrusherTile extends AbstractCrusherTile {
         this.RESULT_SLOT_START = 3;
         this.RESULT_SLOT_END = 10;
 
-        //this.inventory = NonNullList.withSize(11, ItemStack.EMPTY);
+        this.inventory = new CrusherItemStackHandler(AdvancedCrusherTile.this, 11);
     }
 
     // Render Item
-    public ItemStack getRenderedStack() {
-        return inventory.getFirst();
-    }
-
     public ItemStack getRenderedAddition() {
         return inventory.getStackInSlot(ADDITIONAL_SLOT);
     }
@@ -76,18 +70,6 @@ public class AdvancedCrusherTile extends AbstractCrusherTile {
 
     // Crafting stuff
     @Override
-    public void hasIgnis() {
-        Item fuelItem = this.inventory.getStackInSlot(FUEL_SLOT).getItem().getDefaultInstance().getItem();
-        boolean hasFuel = isFuel(this.inventory.getStackInSlot(FUEL_SLOT).getItem().getDefaultInstance());
-        int fuel = FUEL_MAP.getOrDefault(fuelItem, 0);
-
-        if (hasFuel && this.ignisCharge <= this.ignisPower - fuel) {
-            this.ignisCharge += fuel;
-            this.inventory.getStackInSlot(FUEL_SLOT).setCount(this.inventory.getStackInSlot(FUEL_SLOT).getCount() - 1);
-        }
-    }
-
-    @Override
     public boolean hasRecipe() {
         Optional<RecipeHolder<AdvancedCrushingRecipe>> recipe = getCurrentRecipe(this.inventory.getFirst());
         Optional<RecipeHolder<AdvancedCrushingRecipe>> additionalRecipe = getCurrentRecipe(this.inventory.getStackInSlot(ADDITIONAL_SLOT));
@@ -97,10 +79,6 @@ public class AdvancedCrusherTile extends AbstractCrusherTile {
                 .orElseGet(() -> additionalRecipe.get().value().assemble(createAdditionalRecipeInput(), level.registryAccess()));
 
         return canInsertAmountIntoOutputSlot(result.getCount()) && canInsertItemInOutputSlot(result.getItem());
-    }
-
-    public SingleRecipeInput createRecipeInput() {
-        return new SingleRecipeInput(this.inventory.getFirst());
     }
 
     public SingleRecipeInput createAdditionalRecipeInput() {
@@ -142,6 +120,6 @@ public class AdvancedCrusherTile extends AbstractCrusherTile {
     // Menu
     @Override
     public @Nullable AbstractContainerMenu createMenu(int containerId, Inventory playerInventory, Player player) {
-            return new AdvancedCrusherMenu(containerId, playerInventory, this, this.dataAccess);
+            return new AdvancedCrusherMenu(containerId, playerInventory, this, dataAccess, inventory);
     }
 }

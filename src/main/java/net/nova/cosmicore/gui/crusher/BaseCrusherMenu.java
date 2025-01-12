@@ -1,6 +1,6 @@
 package net.nova.cosmicore.gui.crusher;
 
-import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.inventory.MenuType;
@@ -16,20 +16,45 @@ public abstract class BaseCrusherMenu extends AbstractContainerMenu {
         this.data = data;
     }
 
-    public boolean isCrystal(ItemStack pStack) {
-        return AbstractCrusherTile.FUEL_MAP.containsKey(pStack.getItem());
-    }
+    // Function for moving items through slots with Ctrl+Click changed to not take the recipe slot if it has the last slot index
+    // and also takes the fuel slot in consideration
+    public int FUEL_SLOT;
+    public int RECIPE_SLOT;
+    public int SLOTS;
 
-    public void addPlayerSlots(Inventory playerInventory) {
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 9; j++) {
-                this.addSlot(new Slot(playerInventory, j + i * 9 + 9, 8 + j * 18, 102 + i * 18));
+    @Override
+    public ItemStack quickMoveStack(Player playerIn, int index) {
+        ItemStack itemstack = ItemStack.EMPTY;
+        Slot slot = this.slots.get(index);
+        if (slot != null && slot.hasItem()) {
+            ItemStack currentStack = slot.getItem();
+            itemstack = currentStack.copy();
+
+            if (index < SLOTS) {
+                if (!this.moveItemStackTo(currentStack, SLOTS, this.slots.size(), false)) {
+                    return ItemStack.EMPTY;
+                }
+                // Remove if no Fuel Slot exists
+            } else if (this.isCrystal(itemstack)) {
+                if (!this.moveItemStackTo(currentStack, FUEL_SLOT, FUEL_SLOT + 1, false)) {
+                    return ItemStack.EMPTY;
+                }
+            } else if (!this.moveItemStackTo(currentStack, 0, RECIPE_SLOT, false)) {
+                return ItemStack.EMPTY;
+            }
+
+            if (currentStack.isEmpty()) {
+                slot.set(ItemStack.EMPTY);
+            } else {
+                slot.setChanged();
             }
         }
 
-        for (int k = 0; k < 9; k++) {
-            this.addSlot(new Slot(playerInventory, k, 8 + k * 18, 160));
-        }
+        return itemstack;
+    }
+
+    public boolean isCrystal(ItemStack stack) {
+        return AbstractCrusherTile.FUEL_MAP.containsKey(stack.getItem());
     }
 
     public boolean isCharged() {
