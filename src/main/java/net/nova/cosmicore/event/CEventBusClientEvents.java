@@ -50,7 +50,6 @@ public class CEventBusClientEvents {
         event.registerLayerDefinition(CosmicShieldTierIModel.LAYER_LOCATION, CosmicShieldTierIModel::createLayer);
     }
 
-
     // Entity Renderers
     @SubscribeEvent
     public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
