@@ -2,6 +2,7 @@ package net.nova.cosmicore.blockentity;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -89,8 +90,8 @@ public class AdvancedCrusherTile extends BaseCrusherTile {
         Optional<RecipeHolder<AdvancedCrushingRecipe>> additionalRecipe = getCurrentRecipe(this.inventory.get(ADDITIONAL_SLOT));
         if (recipe.isEmpty() && additionalRecipe.isEmpty()) return false;
 
-        ItemStack result = recipe.map(r -> r.value().getResultItem(null))
-                .orElseGet(() -> additionalRecipe.get().value().getResultItem(null));
+        ItemStack result = recipe.map(r -> r.value().getResultItem(RegistryAccess.EMPTY))
+                .orElseGet(() -> additionalRecipe.get().value().getResultItem(RegistryAccess.EMPTY));
 
         return canInsertAmountIntoOutputSlot(result.getCount()) && canInsertItemInOutputSlot(result.getItem());
     }

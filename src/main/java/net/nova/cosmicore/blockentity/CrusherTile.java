@@ -2,6 +2,7 @@ package net.nova.cosmicore.blockentity;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -83,7 +84,7 @@ public class CrusherTile extends BaseCrusherTile {
         Optional<RecipeHolder<CrushingRecipe>> recipe = getCurrentRecipe(this.inventory.getFirst());
         if (recipe.isEmpty()) return false;
 
-        ItemStack result = recipe.get().value().getResultItem(null);
+        ItemStack result = recipe.get().value().getResultItem(RegistryAccess.EMPTY);
 
         return canInsertAmountIntoOutputSlot(result.getCount()) && canInsertItemInOutputSlot(result.getItem());
     }
