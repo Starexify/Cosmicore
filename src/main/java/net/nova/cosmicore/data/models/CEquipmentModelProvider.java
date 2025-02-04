@@ -11,18 +11,13 @@ import net.nova.cosmicore.equipment.CEquipmentAssets;
 import java.util.function.BiConsumer;
 
 public class CEquipmentModelProvider extends EquipmentAssetProvider {
-
     public CEquipmentModelProvider(PackOutput output) {
         super(output);
     }
 
     @Override
     protected void registerModels(BiConsumer<ResourceKey<EquipmentAsset>, EquipmentClientInfo> output) {
-        output.accept(CEquipmentAssets.TITANIUM, humanoidAndHorse("titanium"));
-        output.accept(CEquipmentAssets.LONSDALEITE, humanoidAndHorse("lonsdaleite"));
-    }
-
-    public static EquipmentClientInfo humanoidAndHorse(String name) {
-        return EquipmentClientInfo.builder().addHumanoidLayers(Cosmicore.rl(name)).addLayers(EquipmentClientInfo.LayerType.HORSE_BODY, new EquipmentClientInfo.Layer[]{EquipmentClientInfo.Layer.leatherDyeable(Cosmicore.rl(name), false)}).build();
+        output.accept(CEquipmentAssets.TITANIUM, humanoidAndHorse("cosmicore:titanium"));
+        output.accept(CEquipmentAssets.LONSDALEITE, humanoidAndHorse("cosmicore:lonsdaleite"));
     }
 }

@@ -8,12 +8,9 @@ import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import net.nova.cosmicore.blockentity.AdvancedCrusherTile;
 import net.nova.cosmicore.client.model.CrusherPistonModel;
 
-@OnlyIn(Dist.CLIENT)
 public class AdvancedCrusherTileRenderer extends AbstractCrusherTileRenderer<AdvancedCrusherTile> {
     public AdvancedCrusherTileRenderer(BlockEntityRendererProvider.Context context) {
         super(context, CrusherPistonModel.ADVANCED_TEXTURE, CrusherPistonModel.LAYER_LOCATION,

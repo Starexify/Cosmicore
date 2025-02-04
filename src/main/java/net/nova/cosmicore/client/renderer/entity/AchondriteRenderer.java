@@ -8,15 +8,12 @@ import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import net.nova.cosmicore.Cosmicore;
 import net.nova.cosmicore.client.model.BaseMeteorModel;
 import net.nova.cosmicore.client.renderer.entity.state.MeteoriteRenderState;
 import net.nova.cosmicore.entity.Achondrite;
 import net.nova.cosmicore.init.CModelLayers;
 
-@OnlyIn(Dist.CLIENT)
 public class AchondriteRenderer extends EntityRenderer<Achondrite, MeteoriteRenderState> {
     private final BaseMeteorModel meteorModel;
     public static final ResourceLocation ACHONDRITE_LOCATION = Cosmicore.rl("textures/entity/meteors/achondrite.png");

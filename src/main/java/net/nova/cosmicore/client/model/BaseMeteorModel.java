@@ -4,12 +4,9 @@ import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import net.nova.cosmicore.animations.MeteorFallingAnimation;
 import net.nova.cosmicore.client.renderer.entity.state.MeteoriteRenderState;
 
-@OnlyIn(Dist.CLIENT)
 public class BaseMeteorModel extends EntityModel<MeteoriteRenderState> {
     private final ModelPart root;
 

@@ -10,13 +10,10 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import net.nova.cosmicore.Cosmicore;
 import net.nova.cosmicore.blockentity.CosmicShieldTile;
 import net.nova.cosmicore.client.model.CosmicShieldTierIModel;
 
-@OnlyIn(Dist.CLIENT)
 public class CosmicShieldTileRenderer implements BlockEntityRenderer<CosmicShieldTile> {
     public static ResourceLocation SHIELD_TIER_I_LOCATION = Cosmicore.rl("textures/entity/cosmic_shield/cosmic_shield_tier_1.png");
     public final CosmicShieldTierIModel tierIModel;

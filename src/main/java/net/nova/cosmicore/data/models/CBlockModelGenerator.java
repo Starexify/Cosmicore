@@ -7,18 +7,13 @@ import net.minecraft.client.data.models.blockstates.MultiVariantGenerator;
 import net.minecraft.client.data.models.blockstates.Variant;
 import net.minecraft.client.data.models.blockstates.VariantProperties;
 import net.minecraft.client.data.models.model.*;
-import net.minecraft.client.renderer.item.ItemModel;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
-import net.nova.cosmicore.Cosmicore;
 import net.nova.cosmicore.init.CBlocks;
 
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
-@OnlyIn(Dist.CLIENT)
 public class CBlockModelGenerator extends BlockModelGenerators {
     public CBlockModelGenerator(Consumer<BlockStateGenerator> blockStateOutput, ItemModelOutput itemModelOutput, BiConsumer<ResourceLocation, ModelInstance> modelOutput) {
         super(blockStateOutput, itemModelOutput, modelOutput);

@@ -14,11 +14,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LightLayer;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import net.nova.cosmicore.client.model.CrusherPistonModel;
 
-@OnlyIn(Dist.CLIENT)
 public abstract class AbstractCrusherTileRenderer<T extends BlockEntity> implements BlockEntityRenderer<T> {
     public final BlockRenderDispatcher blockRenderer;
     public final ResourceLocation pistonTexture;

@@ -11,7 +11,7 @@ import net.nova.cosmicore.MeteorSpawner;
 
 import static net.nova.cosmicore.Cosmicore.MODID;
 
-@EventBusSubscriber(modid = MODID, bus = EventBusSubscriber.Bus.GAME)
+@EventBusSubscriber(modid = MODID)
 public class CEventBusGame {
     private static MeteorSpawner meteorSpawner;
 

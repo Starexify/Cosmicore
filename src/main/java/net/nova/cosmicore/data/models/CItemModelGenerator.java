@@ -16,8 +16,6 @@ import net.minecraft.world.item.equipment.EquipmentAssets;
 import net.minecraft.world.item.equipment.Equippable;
 import net.minecraft.world.item.equipment.trim.TrimMaterial;
 import net.minecraft.world.item.equipment.trim.TrimMaterials;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import net.nova.cosmicore.data.CTrimMaterials;
 import net.nova.cosmicore.equipment.CEquipmentAssets;
 import net.nova.cosmicore.init.CItems;
@@ -27,7 +25,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.BiConsumer;
 
-@OnlyIn(Dist.CLIENT)
 public class CItemModelGenerator extends ItemModelGenerators {
     public static final List<TrimMaterialData> TRIM_MATERIAL_MODELS = List.of(
             new TrimMaterialData("quartz", TrimMaterials.QUARTZ, Map.of()),
@@ -136,7 +133,6 @@ public class CItemModelGenerator extends ItemModelGenerators {
         itemModelOutput.accept(item, ItemModelUtils.select(new TrimMaterialProperty(), basicModel, list));
     }
 
-    @OnlyIn(Dist.CLIENT)
     record TrimMaterialData(String name, ResourceKey<TrimMaterial> materialKey, Map<ResourceKey<EquipmentAsset>, String> overrideArmorMaterials) {
         public String textureName(ResourceKey<EquipmentAsset> p_387088_) {
             return overrideArmorMaterials.getOrDefault(p_387088_, name);
