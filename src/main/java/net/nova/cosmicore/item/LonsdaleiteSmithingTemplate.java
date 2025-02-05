@@ -22,7 +22,7 @@ public class LonsdaleiteSmithingTemplate extends BaseSmithingTemplate{
             Util.makeDescriptionId("item", rl("smithing_template.lonsdaleite_upgrade.additions_slot_description"))
     );
 
-    public static final ResourceLocation EMPTY_SLOT_LONSDALEITE = Cosmicore.rl("item/empty_slot_lonsdaleite");
+    public static final ResourceLocation EMPTY_SLOT_LONSDALEITE = Cosmicore.rl("container/slot/lonsdaleite");
 
     static {
         addMaterialSlot(EMPTY_SLOT_LONSDALEITE);

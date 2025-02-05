@@ -3,7 +3,6 @@ package net.nova.cosmicore.item;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.flag.FeatureFlag;
 import net.minecraft.world.item.SmithingTemplateItem;
 
 import java.util.ArrayList;
@@ -11,19 +10,18 @@ import java.util.Arrays;
 import java.util.List;
 
 public class BaseSmithingTemplate extends SmithingTemplateItem {
-    public static final ChatFormatting TITLE_FORMAT = ChatFormatting.GRAY;
     public static final ChatFormatting DESCRIPTION_FORMAT = ChatFormatting.BLUE;
 
     protected static final List<ResourceLocation> EMPTY_SLOTS = new ArrayList<>(Arrays.asList(
-            ResourceLocation.withDefaultNamespace("item/empty_armor_slot_helmet"),
-            ResourceLocation.withDefaultNamespace("item/empty_armor_slot_chestplate"),
-            ResourceLocation.withDefaultNamespace("item/empty_armor_slot_leggings"),
-            ResourceLocation.withDefaultNamespace("item/empty_armor_slot_boots"),
-            ResourceLocation.withDefaultNamespace("item/empty_slot_hoe"),
-            ResourceLocation.withDefaultNamespace("item/empty_slot_axe"),
-            ResourceLocation.withDefaultNamespace("item/empty_slot_sword"),
-            ResourceLocation.withDefaultNamespace("item/empty_slot_shovel"),
-            ResourceLocation.withDefaultNamespace("item/empty_slot_pickaxe")
+            ResourceLocation.withDefaultNamespace("container/slot/helmet"),
+            ResourceLocation.withDefaultNamespace("container/slot/chestplate"),
+            ResourceLocation.withDefaultNamespace("container/slot/leggings"),
+            ResourceLocation.withDefaultNamespace("container/slot/boots"),
+            ResourceLocation.withDefaultNamespace("container/slot/hoe"),
+            ResourceLocation.withDefaultNamespace("container/slot/axe"),
+            ResourceLocation.withDefaultNamespace("container/slot/sword"),
+            ResourceLocation.withDefaultNamespace("container/slot/shovel"),
+            ResourceLocation.withDefaultNamespace("container/slot/pickaxe")
     ));
 
     protected static final List<ResourceLocation> MATERIAL_SLOTS = new ArrayList<>(Arrays.asList());

@@ -34,7 +34,7 @@ public class CItems {
     public static final DeferredItem<Item> TITANIUM_NUGGET = ITEMS.registerItem("titanium_nugget", Item::new);
     public static final DeferredItem<Item> TITANIUM_INGOT = ITEMS.registerItem("titanium_ingot", Item::new);
 
-    public static final DeferredItem<Item> TITANIUM_UPGRADE_SMITHING_TEMPLATE = ITEMS.registerItem("titanium_upgrade_smithing_template", TitaniumSmithingTemplate::createTitaniumUpgradeTemplate);
+    public static final DeferredItem<Item> TITANIUM_UPGRADE_SMITHING_TEMPLATE = ITEMS.registerItem("titanium_upgrade_smithing_template", properties -> TitaniumSmithingTemplate.createTitaniumUpgradeTemplate(properties.rarity(Rarity.UNCOMMON)));
 
     // Lonsdaleite Items
     public static final DeferredItem<Item> LONSDALEITE_HELMET = ITEMS.registerItem("lonsdaleite_helmet", properties -> new ArmorItem(CArmorMaterials.LONSDALEITE, ArmorType.HELMET, properties));
@@ -51,7 +51,7 @@ public class CItems {
 
     public static final DeferredItem<Item> LONSDALEITE = ITEMS.registerItem("lonsdaleite", Item::new);
 
-    public static final DeferredItem<Item> LONSDALEITE_UPGRADE_SMITHING_TEMPLATE = ITEMS.registerItem("lonsdaleite_upgrade_smithing_template", LonsdaleiteSmithingTemplate::createLonsdaleiteUpgradeTemplate);
+    public static final DeferredItem<Item> LONSDALEITE_UPGRADE_SMITHING_TEMPLATE = ITEMS.registerItem("lonsdaleite_upgrade_smithing_template", properties -> LonsdaleiteSmithingTemplate.createLonsdaleiteUpgradeTemplate(properties.rarity(Rarity.RARE)));
 
     // Infernium
     public static final DeferredItem<Item> INFERNIUM_CRYSTAL = ITEMS.registerItem("infernium_crystal", Item::new);

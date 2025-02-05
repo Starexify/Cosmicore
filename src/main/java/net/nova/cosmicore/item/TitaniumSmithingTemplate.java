@@ -21,7 +21,7 @@ public class TitaniumSmithingTemplate extends BaseSmithingTemplate {
             Util.makeDescriptionId("item", rl("smithing_template.titanium_upgrade.additions_slot_description"))
     );
 
-    public static final ResourceLocation EMPTY_SLOT_INGOT = ResourceLocation.withDefaultNamespace("item/empty_slot_ingot");
+    public static final ResourceLocation EMPTY_SLOT_INGOT = ResourceLocation.withDefaultNamespace("container/slot/ingot");
 
     static {
         addMaterialSlot(EMPTY_SLOT_INGOT);

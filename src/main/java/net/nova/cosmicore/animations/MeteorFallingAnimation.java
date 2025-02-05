@@ -4,10 +4,7 @@ import net.minecraft.client.animation.AnimationChannel;
 import net.minecraft.client.animation.AnimationDefinition;
 import net.minecraft.client.animation.Keyframe;
 import net.minecraft.client.animation.KeyframeAnimations;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 
-@OnlyIn(Dist.CLIENT)
 public final class MeteorFallingAnimation {
     public static final AnimationDefinition FALLING_ROTATION_ANIMATION = AnimationDefinition.Builder.withLength(4f).looping()
             .addAnimation("root",
