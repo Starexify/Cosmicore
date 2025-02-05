@@ -28,7 +28,7 @@
   "item.cosmicore.lonsdaleite_pickaxe": "Lonsdaleite Pickaxe",
   "item.cosmicore.lonsdaleite_shovel": "Lonsdaleite Shovel",
   "item.cosmicore.lonsdaleite_sword": "Lonsdaleite Sword",
-  "item.cosmicore.lonsdaleite_upgrade_smithing_template": "Smithing Template",
+  "item.cosmicore.lonsdaleite_upgrade_smithing_template": "Lonsdaleite Upgrade",
   "item.cosmicore.meteorite_banner_pattern": "Meteorite Banner Pattern",
   "item.cosmicore.raw_titanium": "Raw Titanium",
   "item.cosmicore.smithing_template.lonsdaleite_upgrade.additions_slot_description": "Add Lonsdaleite",
@@ -53,11 +53,9 @@
   "item.cosmicore.titanium_pickaxe": "Titanium Pickaxe",
   "item.cosmicore.titanium_shovel": "Titanium Shovel",
   "item.cosmicore.titanium_sword": "Titanium Sword",
-  "item.cosmicore.titanium_upgrade_smithing_template": "Smithing Template",
+  "item.cosmicore.titanium_upgrade_smithing_template": "Titanium Upgrade",
   "message.cosmicore.meteor_fall": "A meteor has entered the atmosphere!",
   "message.cosmicore.meteor_shielded": "The meteor has been blocked by a meteor shield.",
   "trim_material.cosmicore.lonsdaleite": "Lonsdaleite Material",
-  "trim_material.cosmicore.titanium_ingot": "Titanium Material",
-  "upgrade.cosmicore.lonsdaleite_upgrade": "Lonsdaleite Upgrade",
-  "upgrade.cosmicore.titanium_upgrade": "Titanium Upgrade"
+  "trim_material.cosmicore.titanium_ingot": "Titanium Material"
 }

@@ -9,9 +9,6 @@ import net.nova.cosmicore.Cosmicore;
 import static net.nova.cosmicore.Cosmicore.rl;
 
 public class LonsdaleiteSmithingTemplate extends BaseSmithingTemplate{
-    public static final Component LONSDALEITE_UPGRADE = Component.translatable(
-            Util.makeDescriptionId("upgrade", rl("lonsdaleite_upgrade"))
-    ).withStyle(TITLE_FORMAT);
     public static final Component LONSDALEITE_UPGRADE_APPLIES_TO = Component.translatable(
             Util.makeDescriptionId("item", rl("smithing_template.lonsdaleite_upgrade.applies_to"))
     ).withStyle(DESCRIPTION_FORMAT);

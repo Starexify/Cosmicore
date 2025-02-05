@@ -8,9 +8,6 @@ import net.minecraft.world.item.Item;
 import static net.nova.cosmicore.Cosmicore.rl;
 
 public class TitaniumSmithingTemplate extends BaseSmithingTemplate {
-    public static final Component TITANIUM_UPGRADE = Component.translatable(
-            Util.makeDescriptionId("upgrade", rl("titanium_upgrade"))
-    ).withStyle(TITLE_FORMAT);
     public static final Component TITANIUM_UPGRADE_APPLIES_TO = Component.translatable(
             Util.makeDescriptionId("item", rl("smithing_template.titanium_upgrade.applies_to"))
     ).withStyle(DESCRIPTION_FORMAT);

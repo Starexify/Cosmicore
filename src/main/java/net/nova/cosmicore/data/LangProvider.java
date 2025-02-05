@@ -40,7 +40,7 @@ public class LangProvider extends LanguageProvider {
         addItem(CItems.RAW_TITANIUM, "Raw Titanium");
         addItem(CItems.TITANIUM_NUGGET, "Titanium Nugget");
         addItem(CItems.TITANIUM_INGOT, "Titanium Ingot");
-        addItem(CItems.TITANIUM_UPGRADE_SMITHING_TEMPLATE, "Smithing Template");
+        addItem(CItems.TITANIUM_UPGRADE_SMITHING_TEMPLATE, "Titanium Upgrade");
         addItem(CItems.LONSDALEITE_HELMET, "Lonsdaleite Helmet");
         addItem(CItems.LONSDALEITE_CHESTPLATE, "Lonsdaleite Chestplate");
         addItem(CItems.LONSDALEITE_LEGGINGS, "Lonsdaleite Leggings");
@@ -52,7 +52,7 @@ public class LangProvider extends LanguageProvider {
         addItem(CItems.LONSDALEITE_HOE, "Lonsdaleite Hoe");
         addItem(CItems.LONSDALEITE_HORSE_ARMOR, "Lonsdaleite Horse Armor");
         addItem(CItems.LONSDALEITE,"Lonsdaleite");
-        addItem(CItems.LONSDALEITE_UPGRADE_SMITHING_TEMPLATE,"Smithing Template");
+        addItem(CItems.LONSDALEITE_UPGRADE_SMITHING_TEMPLATE,"Lonsdaleite Upgrade");
 
         addItem(CItems.INFERNIUM_CRYSTAL, "Infernium Crystal");
         addItem(CItems.IRON_GEAR, "Iron Gear");
@@ -86,12 +86,10 @@ public class LangProvider extends LanguageProvider {
         add(TitaniumSmithingTemplate.TITANIUM_UPGRADE_APPLIES_TO.getString(), "Iron Equipment");
         add(TitaniumSmithingTemplate.TITANIUM_UPGRADE_BASE_SLOT_DESCRIPTION.getString(), "Add iron armor, weapon, or tool");
         add(TitaniumSmithingTemplate.TITANIUM_UPGRADE_INGREDIENTS.getString(), "Titanium Ingot");
-        add(TitaniumSmithingTemplate.TITANIUM_UPGRADE.getString(), "Titanium Upgrade");
         add(LonsdaleiteSmithingTemplate.LONSDALEITE_UPGRADE_ADDITIONS_SLOT_DESCRIPTION.getString(), "Add Lonsdaleite");
         add(LonsdaleiteSmithingTemplate.LONSDALEITE_UPGRADE_APPLIES_TO.getString(), "Diamond Equipment");
         add(LonsdaleiteSmithingTemplate.LONSDALEITE_UPGRADE_BASE_SLOT_DESCRIPTION.getString(), "Add diamond armor, weapon, or tool");
         add(LonsdaleiteSmithingTemplate.LONSDALEITE_UPGRADE_INGREDIENTS.getString(), "Lonsdaleite");
-        add(LonsdaleiteSmithingTemplate.LONSDALEITE_UPGRADE.getString(), "Lonsdaleite Upgrade");
 
         // Entities
         add(CEntities.ACHONDRITE.get(), "Achondrite");
