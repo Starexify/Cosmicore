@@ -16,7 +16,6 @@ public class CreativeTab {
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> COSMICORE_TAB = CREATIVE_TAB.register("cosmicore_tab", () -> {
         CreativeModeTab.Builder builder = CreativeModeTab.builder();
-
         builder.displayItems((itemDisplay, output) -> {
             // Armors & Tools Stuff
             output.accept(CItems.TITANIUM_HELMET);
@@ -43,6 +42,7 @@ public class CreativeTab {
             output.accept(CItems.TITANIUM_HORSE_ARMOR);
             output.accept(CItems.LONSDALEITE_HORSE_ARMOR);
 
+            output.accept(CItems.MAGNETITE);
             output.accept(CItems.RAW_TITANIUM);
             output.accept(CItems.TITANIUM_NUGGET);
             output.accept(CItems.TITANIUM_INGOT);
@@ -74,7 +74,7 @@ public class CreativeTab {
             output.accept(CBlocks.CRUSHER);
             output.accept(CBlocks.ADVANCED_CRUSHER);
 
-            // Sgield
+            // Shield
             output.accept(CBlocks.COSMIC_SHIELD);
         });
 

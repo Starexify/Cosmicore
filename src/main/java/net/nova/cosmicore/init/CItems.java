@@ -8,6 +8,7 @@ import net.minecraft.world.item.equipment.ArmorType;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.nova.cosmicore.item.LonsdaleiteSmithingTemplate;
+import net.nova.cosmicore.item.Magnetite;
 import net.nova.cosmicore.item.TitaniumCrossbow;
 import net.nova.cosmicore.item.TitaniumSmithingTemplate;
 
@@ -52,6 +53,9 @@ public class CItems {
     public static final DeferredItem<Item> LONSDALEITE = ITEMS.registerItem("lonsdaleite", Item::new);
 
     public static final DeferredItem<Item> LONSDALEITE_UPGRADE_SMITHING_TEMPLATE = ITEMS.registerItem("lonsdaleite_upgrade_smithing_template", properties -> LonsdaleiteSmithingTemplate.createLonsdaleiteUpgradeTemplate(properties.rarity(Rarity.RARE)));
+
+    // Magnetite
+    public static final DeferredItem<Item> MAGNETITE = ITEMS.registerItem("magnetite", Magnetite::new);
 
     // Infernium
     public static final DeferredItem<Item> INFERNIUM_CRYSTAL = ITEMS.registerItem("infernium_crystal", Item::new);
