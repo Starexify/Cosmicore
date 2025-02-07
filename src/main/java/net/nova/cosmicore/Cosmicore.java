@@ -18,14 +18,15 @@ public class Cosmicore {
     public static final GameRules.Key<GameRules.BooleanValue> ALLOW_METEORS_SPAWNING = GameRules.register("doMeteorSpawning", GameRules.Category.SPAWNING, GameRules.BooleanValue.create(true));
 
     public Cosmicore(IEventBus bus) {
-        CreativeTab.CREATIVE_TAB.register(bus);
-        CItems.ITEMS.register(bus);
-        CBlocks.BLOCKS.register(bus);
-        CRecipeTypes.RECIPE_TYPES.register(bus);
-        CRecipeSerializers.RECIPE_SERIALIZERS.register(bus);
-        CBlockEntities.BLOCK_ENTITIES.register(bus);
-        CEntities.ENTITY_TYPES.register(bus);
         CMenuTypes.MENUS.register(bus);
+        CEnchantmentEffects.ENTITY_EFFECT.register(bus);
+        CRecipeSerializers.RECIPE_SERIALIZERS.register(bus);
+        CRecipeTypes.RECIPE_TYPES.register(bus);
+        CEntities.ENTITY_TYPES.register(bus);
+        CBlocks.BLOCKS.register(bus);
+        CBlockEntities.BLOCK_ENTITIES.register(bus);
+        CItems.ITEMS.register(bus);
+        CreativeTab.CREATIVE_TAB.register(bus);
     }
 
     public static ResourceLocation rl(String path) {
