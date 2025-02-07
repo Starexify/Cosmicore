@@ -26,12 +26,16 @@ public record MagnetismEffect(LevelBasedValue range) implements EnchantmentEntit
             List<ItemEntity> nearbyItems = level.getEntitiesOfClass(
                     ItemEntity.class,
                     player.getBoundingBox().inflate(magnetRange),
-                    itemEntity -> itemEntity.isAlive() && !itemEntity.isRemoved()
+                    itemEntity -> isEligibleItem(player, itemEntity)
             );
 
-            player.displayClientMessage(Component.literal("range: " + range), false);
+            player.displayClientMessage(Component.literal("range: " + magnetRange), false);
             if (!nearbyItems.isEmpty()) for (ItemEntity itemEntity : nearbyItems) dragItems(itemEntity, player);
         }
+    }
+
+    public boolean isEligibleItem(Player player, ItemEntity itemEntity) {
+        return itemEntity.isAlive() && !itemEntity.isRemoved() && (itemEntity.getOwner() == null || !itemEntity.getOwner().equals(player) || itemEntity.getAge() > 100);
     }
 
     public static void dragItems(ItemEntity itemEntity, Player player) {

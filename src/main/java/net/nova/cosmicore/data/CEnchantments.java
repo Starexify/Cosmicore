@@ -34,7 +34,7 @@ public class CEnchantments {
                 .withCustomName(component -> Component.literal("Magnetism"))
                 .withEffect(
                         EnchantmentEffectComponents.TICK,
-                        new MagnetismEffect(new AddValue(LevelBasedValue.perLevel(2.0F, 1.25F)).value())
+                        new MagnetismEffect(new AddValue(LevelBasedValue.perLevel(3.0F, 1.0F)).value())
                 )
         );
     }

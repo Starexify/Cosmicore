@@ -31,8 +31,7 @@ public class MeteorSpawner {
     private void announceNextMeteor() {
         // Convert ticks to seconds (20 ticks = 1 second)
         int seconds = (ticksUntilNextMeteor - tickCounter) / 20;
-        Component message = Component.literal("Next meteor will spawn in " + seconds + " seconds")
-                .withStyle(ChatFormatting.GOLD);
+        Component message = Component.literal("Next meteor will spawn in " + seconds + " seconds").withStyle(ChatFormatting.GOLD);
 
         // Broadcast to all players
         for (ServerPlayer player : level.players()) {
@@ -63,7 +62,7 @@ public class MeteorSpawner {
         ServerPlayer randomPlayer = level.players().get(random.nextInt(level.players().size()));
         BlockPos playerPos = randomPlayer.blockPosition();
 
-        int distance = random.nextIntBetweenInclusive(1000, 3000);
+        int distance = random.nextIntBetweenInclusive(900, 2400);
         int angle = random.nextInt(360);
 
         double radians = Math.toRadians(angle);
