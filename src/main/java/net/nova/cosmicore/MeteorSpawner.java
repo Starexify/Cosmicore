@@ -18,6 +18,7 @@ public class MeteorSpawner {
     public final RandomSource random;
     public final int minTicksUntilNextMeteor;
     public final int maxTicksUntilNextMeteor;
+    private BlockPos lastMeteorSpawnPos;
 
     public MeteorSpawner(ServerLevel level, int minTicksUntilNextMeteor, int maxTicksUntilNextMeteor) {
         this.level = level;
@@ -26,6 +27,11 @@ public class MeteorSpawner {
         this.maxTicksUntilNextMeteor = maxTicksUntilNextMeteor;
         this.tickCounter = 0;
         this.ticksUntilNextMeteor = random.nextIntBetweenInclusive(minTicksUntilNextMeteor, maxTicksUntilNextMeteor);
+        this.lastMeteorSpawnPos = null;
+    }
+
+    public BlockPos getLastMeteorSpawnPos() {
+        return lastMeteorSpawnPos;
     }
 
     private void announceNextMeteor() {
@@ -48,7 +54,6 @@ public class MeteorSpawner {
         if (level.players().isEmpty()) return;
 
         announceNextMeteor();
-
         tickCounter++;
 
         if (tickCounter >= ticksUntilNextMeteor) {
@@ -63,7 +68,7 @@ public class MeteorSpawner {
         ServerPlayer randomPlayer = level.players().get(random.nextInt(level.players().size()));
         BlockPos playerPos = randomPlayer.blockPosition();
 
-        int distance = random.nextIntBetweenInclusive(900, 2400);
+        int distance = random.nextIntBetweenInclusive(900, 2800);
         int angle = random.nextInt(360);
 
         double radians = Math.toRadians(angle);
@@ -71,6 +76,7 @@ public class MeteorSpawner {
         int z = playerPos.getZ() + (int) (distance * Math.sin(radians));
 
         BlockPos spawnPos = new BlockPos(x, 320, z);
+        this.lastMeteorSpawnPos = spawnPos;
 
         // 70% chance for Achondrite, 30% chance for Meteorite
         BaseMeteor meteor = random.nextFloat() < 0.7

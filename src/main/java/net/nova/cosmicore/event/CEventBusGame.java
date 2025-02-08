@@ -24,7 +24,7 @@ import static net.nova.cosmicore.Cosmicore.MODID;
 @EventBusSubscriber(modid = MODID)
 public class CEventBusGame {
     // Meteor Spawning Event
-    private static MeteorSpawner meteorSpawner;
+    public static MeteorSpawner meteorSpawner;
 
     @SubscribeEvent
     public static void onServerStarting(ServerStartingEvent event) {

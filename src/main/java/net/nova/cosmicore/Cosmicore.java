@@ -18,6 +18,7 @@ public class Cosmicore {
     public static final GameRules.Key<GameRules.BooleanValue> ALLOW_METEORS_SPAWNING = GameRules.register("doMeteorSpawning", GameRules.Category.SPAWNING, GameRules.BooleanValue.create(true));
 
     public Cosmicore(IEventBus bus) {
+        CDataComponents.COMPONENTS.register(bus);
         CMenuTypes.MENUS.register(bus);
         CEnchantmentEffects.ENTITY_EFFECT.register(bus);
         CRecipeSerializers.RECIPE_SERIALIZERS.register(bus);

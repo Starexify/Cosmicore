@@ -70,6 +70,7 @@ public class BaseMeteor extends Entity {
     public void tick() {
         super.tick();
 
+        // Shield Checker
         if (++shieldCheckCounter >= SHIELD_CHECK_INTERVAL) {
             shieldCheckCounter = 0;
             if (isShieldNearby()) {
