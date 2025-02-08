@@ -1,0 +1,27 @@
+{
+  "criteria": {
+    "player_join": {
+      "trigger": "minecraft:tick"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "background": "cosmicore:textures/gui/advancements/backgrounds/cosmicore.png",
+    "description": {
+      "translate": "advancements.cosmicore.root.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "cosmicore:meteorite"
+    },
+    "title": {
+      "translate": "advancements.cosmicore.root.title"
+    }
+  },
+  "requirements": [
+    [
+      "player_join"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

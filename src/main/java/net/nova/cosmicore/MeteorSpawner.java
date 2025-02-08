@@ -1,8 +1,6 @@
 package net.nova.cosmicore;
 
-import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
-import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.RandomSource;
@@ -34,17 +32,6 @@ public class MeteorSpawner {
         return lastMeteorSpawnPos;
     }
 
-    private void announceNextMeteor() {
-        // Convert ticks to seconds (20 ticks = 1 second)
-        int seconds = (ticksUntilNextMeteor - tickCounter) / 20;
-        Component message = Component.literal("Next meteor will spawn in " + seconds + " seconds").withStyle(ChatFormatting.GOLD);
-
-        // Broadcast to all players
-        for (ServerPlayer player : level.players()) {
-            player.sendSystemMessage(message);
-        }
-    }
-
     public void resetAfterSpawn() {
         this.tickCounter = 0;
         this.ticksUntilNextMeteor = random.nextIntBetweenInclusive(minTicksUntilNextMeteor, maxTicksUntilNextMeteor);
@@ -53,7 +40,6 @@ public class MeteorSpawner {
     public void onTick() {
         if (level.players().isEmpty()) return;
 
-        announceNextMeteor();
         tickCounter++;
 
         if (tickCounter >= ticksUntilNextMeteor) {

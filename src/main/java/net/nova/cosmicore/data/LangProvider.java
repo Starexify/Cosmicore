@@ -104,8 +104,17 @@ public class LangProvider extends LanguageProvider {
         add(Achondrite.METEOR_FALL_MESSAGE.getString(), "A meteor has entered the atmosphere!");
         add(Achondrite.METEOR_SHIELDED_MESSAGE.getString(), "The meteor has been blocked by a meteor shield.");
 
+        // Advancements
+        addAdvancement("root", "The core of Cosmicore", "");
+
         // Crusher Tooltips
         add(CrusherScreen.IGNIS_TOOLTIP, "%s/%s Ignis");
+    }
+
+    // Helper Methods
+    public void addAdvancement(String advancementName, String title, String description) {
+        add("advancements." + MODID + "." + advancementName + ".title", title);
+        add("advancements." + MODID + "." + advancementName + ".description", description);
     }
 
     public void addTrim(Supplier<? extends Item> item, String trim) {

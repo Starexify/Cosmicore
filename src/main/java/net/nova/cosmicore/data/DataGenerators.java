@@ -2,9 +2,11 @@ package net.nova.cosmicore.data;
 
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
+import net.minecraft.data.advancements.AdvancementProvider;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
+import net.nova.cosmicore.data.advancements.CosmicoreAdvancements;
 import net.nova.cosmicore.data.loot_table.CLootTableProvider;
 import net.nova.cosmicore.data.models.CEquipmentModelProvider;
 import net.nova.cosmicore.data.models.CModelProvider;
@@ -14,6 +16,7 @@ import net.nova.cosmicore.data.tags.CBiomeTagsProvider;
 import net.nova.cosmicore.data.tags.CBlockTagsProvider;
 import net.nova.cosmicore.data.tags.CItemTagsProvider;
 
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 import static net.nova.cosmicore.Cosmicore.MODID;
@@ -41,6 +44,10 @@ public class DataGenerators {
         event.addProvider(new CLootTableProvider(output, lookupProvider));
 
         event.addProvider(new CRecipeProvider.Runner(output, lookupProvider));
+
+        event.addProvider(new AdvancementProvider(output, lookupProvider, List.of(
+                new CosmicoreAdvancements()
+        )));
 
         event.addProvider(new DatapackProvider(output, lookupProvider));
     }

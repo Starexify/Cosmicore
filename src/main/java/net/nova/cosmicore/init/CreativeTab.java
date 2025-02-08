@@ -81,7 +81,7 @@ public class CreativeTab {
             output.accept(CItems.FALLEN_METEOR_LOCATOR);
         });
 
-        builder.icon(() -> new ItemStack(CBlocks.RAW_TITANIUM_BLOCK));
+        builder.icon(() -> new ItemStack(CBlocks.METEORITE));
         builder.title(Component.translatable(COSMICORE_TAB_TITLE));
 
         return builder.build();
