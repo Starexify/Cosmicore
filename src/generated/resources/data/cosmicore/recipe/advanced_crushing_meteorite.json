@@ -31,6 +31,20 @@
       }
     },
     {
+      "chance": 0.1,
+      "item": {
+        "count": 3,
+        "id": "cosmicore:magnetite"
+      }
+    },
+    {
+      "chance": 0.19,
+      "item": {
+        "count": 1,
+        "id": "cosmicore:magnetite"
+      }
+    },
+    {
       "chance": 0.21,
       "item": {
         "count": 3,
@@ -66,7 +80,7 @@
       }
     },
     {
-      "chance": 0.2,
+      "chance": 0.06,
       "item": {
         "count": 1,
         "id": "minecraft:cobblestone"

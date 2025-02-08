@@ -76,6 +76,9 @@ public class CreativeTab {
 
             // Shield
             output.accept(CBlocks.COSMIC_SHIELD);
+
+            // Extra
+            output.accept(CItems.FALLEN_METEOR_LOCATOR);
         });
 
         builder.icon(() -> new ItemStack(CBlocks.RAW_TITANIUM_BLOCK));

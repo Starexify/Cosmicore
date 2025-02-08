@@ -3,6 +3,13 @@
   "ingredient": "cosmicore:achondrite",
   "results": [
     {
+      "chance": 0.01,
+      "item": {
+        "count": 1,
+        "id": "cosmicore:magnetite"
+      }
+    },
+    {
       "chance": 0.05,
       "item": {
         "count": 2,

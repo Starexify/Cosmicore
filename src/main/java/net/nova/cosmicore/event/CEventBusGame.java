@@ -1,18 +1,29 @@
 package net.nova.cosmicore.event;
 
+import net.minecraft.core.Holder;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.item.enchantment.EnchantmentInstance;
 import net.minecraft.world.level.Level;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.AnvilUpdateEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import net.neoforged.neoforge.event.tick.LevelTickEvent;
 import net.nova.cosmicore.Cosmicore;
 import net.nova.cosmicore.MeteorSpawner;
+import net.nova.cosmicore.data.CEnchantments;
+import net.nova.cosmicore.init.CItems;
 
 import static net.nova.cosmicore.Cosmicore.MODID;
 
 @EventBusSubscriber(modid = MODID)
 public class CEventBusGame {
+    // Meteor Spawning Event
     private static MeteorSpawner meteorSpawner;
 
     @SubscribeEvent
@@ -22,11 +33,32 @@ public class CEventBusGame {
 
     @SubscribeEvent
     public static void onLevelTick(LevelTickEvent.Post event) {
-        if (!event.getLevel().isClientSide() && event.getLevel() instanceof ServerLevel serverLevel && serverLevel.dimension() == Level.OVERWORLD
-         && event.getLevel().getServer().getGameRules().getBoolean(Cosmicore.ALLOW_METEORS_SPAWNING)) {
-            if (meteorSpawner != null) {
-                meteorSpawner.onTick();
+        if (event.getLevel() instanceof ServerLevel serverLevel && serverLevel.dimension() == Level.OVERWORLD && serverLevel.getGameRules().getBoolean(Cosmicore.ALLOW_METEORS_SPAWNING)) {
+            if (meteorSpawner != null) meteorSpawner.onTick();
+        }
+    }
+
+    // Magnetism
+    @SubscribeEvent
+    public static void onAnvilUpdate(AnvilUpdateEvent event) {
+        ItemStack left = event.getLeft();
+        ItemStack right = event.getRight();
+        if (left.isEnchantable() && right.is(CItems.MAGNETITE)) {
+            Holder<Enchantment> magnetism = event.getPlayer().level().registryAccess().lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(CEnchantments.MAGNETISM);
+            int stackSize = right.getCount();
+            int enchantLevel = Math.min(stackSize, 3);
+            event.setMaterialCost(enchantLevel);
+
+            ItemStack result;
+            if (left.is(Items.BOOK)) {
+                result = EnchantmentHelper.createBook(new EnchantmentInstance(magnetism, enchantLevel));
+            } else {
+                result = left.copy();
+                result.enchant(magnetism, enchantLevel);
             }
+
+            event.setCost(enchantLevel * 3L);
+            event.setOutput(result);
         }
     }
 }

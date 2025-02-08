@@ -7,10 +7,7 @@ import net.minecraft.world.item.component.ChargedProjectiles;
 import net.minecraft.world.item.equipment.ArmorType;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
-import net.nova.cosmicore.item.LonsdaleiteSmithingTemplate;
-import net.nova.cosmicore.item.Magnetite;
-import net.nova.cosmicore.item.TitaniumCrossbow;
-import net.nova.cosmicore.item.TitaniumSmithingTemplate;
+import net.nova.cosmicore.item.*;
 
 import static net.nova.cosmicore.Cosmicore.MODID;
 
@@ -56,6 +53,7 @@ public class CItems {
 
     // Magnetite
     public static final DeferredItem<Item> MAGNETITE = ITEMS.registerItem("magnetite", Magnetite::new);
+    public static final DeferredItem<Item> FALLEN_METEOR_LOCATOR = ITEMS.registerItem("fallen_meteor_locator", properties -> new FallenMeteorLocator(properties.stacksTo(1)));
 
     // Infernium
     public static final DeferredItem<Item> INFERNIUM_CRYSTAL = ITEMS.registerItem("infernium_crystal", Item::new);

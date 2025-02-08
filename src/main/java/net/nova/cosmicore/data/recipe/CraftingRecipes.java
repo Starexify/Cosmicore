@@ -1,16 +1,12 @@
 package net.nova.cosmicore.data.recipe;
 
 import net.minecraft.core.HolderLookup;
-import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
-import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
 import net.nova.cosmicore.init.CBlocks;
 import net.nova.cosmicore.init.CItems;
-
-import java.util.concurrent.CompletableFuture;
 
 public class CraftingRecipes extends CRecipeProvider {
     public CraftingRecipes(HolderLookup.Provider registries, RecipeOutput output) {
@@ -34,7 +30,7 @@ public class CraftingRecipes extends CRecipeProvider {
                 .pattern("NIN")
                 .pattern("I I")
                 .pattern("NIN")
-                .unlockedBy("has_iron_ingot", has(Items.IRON_INGOT))
+                .unlockedBy(getHasName(Items.IRON_INGOT), has(Items.IRON_INGOT))
                 .save(output);
         shaped(RecipeCategory.MISC, CItems.TITANIUM_GEAR)
                 .define('G', CItems.IRON_GEAR)
@@ -43,7 +39,7 @@ public class CraftingRecipes extends CRecipeProvider {
                 .pattern("NIN")
                 .pattern("IGI")
                 .pattern("NIN")
-                .unlockedBy("has_iron_gear", has(CItems.IRON_GEAR))
+                .unlockedBy(getHasName(CItems.IRON_GEAR), has(CItems.IRON_GEAR))
                 .save(output);
 
         // Crusher
@@ -56,7 +52,7 @@ public class CraftingRecipes extends CRecipeProvider {
                 .pattern("GPG")
                 .pattern("IFI")
                 .pattern("###")
-                .unlockedBy("has_iron_gear", has(CItems.IRON_GEAR))
+                .unlockedBy(getHasName(CItems.IRON_GEAR), has(CItems.IRON_GEAR))
                 .save(output);
 
         shaped(RecipeCategory.DECORATIONS, CBlocks.ADVANCED_CRUSHER)
@@ -67,7 +63,7 @@ public class CraftingRecipes extends CRecipeProvider {
                 .pattern("GGG")
                 .pattern("TCT")
                 .pattern("###")
-                .unlockedBy("has_crusher", has(CBlocks.CRUSHER))
+                .unlockedBy(getHasName(CBlocks.CRUSHER), has(CBlocks.CRUSHER))
                 .save(output);
 
         twoByTwoPacker(RecipeCategory.BUILDING_BLOCKS, CBlocks.INFERNIUM_BLOCK, CItems.INFERNIUM_CRYSTAL);
@@ -80,7 +76,18 @@ public class CraftingRecipes extends CRecipeProvider {
                 .pattern("  I")
                 .pattern("X#X")
                 .pattern("# #")
-                .unlockedBy("has_", has(CBlocks.CRUSHER))
+                .unlockedBy(getHasName(CItems.TITANIUM_GEAR), has(CItems.TITANIUM_GEAR))
+                .save(output);
+
+        // Extra
+        shaped(RecipeCategory.DECORATIONS, CItems.FALLEN_METEOR_LOCATOR)
+                .define('M', CItems.MAGNETITE)
+                .define('R', Items.REDSTONE)
+                .define('I', Items.IRON_INGOT)
+                .pattern("R R")
+                .pattern("MIM")
+                .pattern(" I ")
+                .unlockedBy(getHasName(CItems.MAGNETITE), has(CItems.MAGNETITE))
                 .save(output);
     }
 }

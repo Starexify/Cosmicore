@@ -47,13 +47,14 @@ public class MeteorSpawner {
     public void onTick() {
         if (level.players().isEmpty()) return;
 
+        announceNextMeteor();
+
         tickCounter++;
 
         if (tickCounter >= ticksUntilNextMeteor) {
             spawnMeteorNearRandomPlayer();
             resetAfterSpawn();
         }
-        //announceNextMeteor();
     }
 
     public void spawnMeteorNearRandomPlayer() {

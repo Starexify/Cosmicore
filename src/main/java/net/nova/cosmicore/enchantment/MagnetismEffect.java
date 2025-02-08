@@ -29,7 +29,6 @@ public record MagnetismEffect(LevelBasedValue range) implements EnchantmentEntit
                     itemEntity -> isEligibleItem(player, itemEntity)
             );
 
-            player.displayClientMessage(Component.literal("range: " + magnetRange), false);
             if (!nearbyItems.isEmpty()) for (ItemEntity itemEntity : nearbyItems) dragItems(itemEntity, player);
         }
     }

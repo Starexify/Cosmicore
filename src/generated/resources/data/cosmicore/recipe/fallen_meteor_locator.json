@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "I": "minecraft:iron_ingot",
+    "M": "cosmicore:magnetite",
+    "R": "minecraft:redstone"
+  },
+  "pattern": [
+    "R R",
+    "MIM",
+    " I "
+  ],
+  "result": {
+    "count": 1,
+    "id": "cosmicore:fallen_meteor_locator"
+  }
+}

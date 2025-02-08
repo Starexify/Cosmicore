@@ -90,6 +90,7 @@ public class CItemModelGenerator extends ItemModelGenerators {
 
         // Magnetite
         generateFlatItem(CItems.MAGNETITE.get(), ModelTemplates.FLAT_ITEM);
+        generateFlatItem(CItems.FALLEN_METEOR_LOCATOR.get(), ModelTemplates.FLAT_ITEM);
 
         // Infernium Model
         generateFlatItem(CItems.INFERNIUM_CRYSTAL.get(), ModelTemplates.FLAT_ITEM);
