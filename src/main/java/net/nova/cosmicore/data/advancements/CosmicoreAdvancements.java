@@ -3,6 +3,7 @@ package net.nova.cosmicore.data.advancements;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.advancements.AdvancementType;
+import net.minecraft.advancements.critereon.LocationPredicate;
 import net.minecraft.advancements.critereon.PlayerTrigger;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderLookup;
@@ -11,7 +12,9 @@ import net.minecraft.data.advancements.AdvancementSubProvider;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.levelgen.structure.BuiltinStructures;
 import net.nova.cosmicore.Cosmicore;
+import net.nova.cosmicore.data.worldgen.CStructures;
 import net.nova.cosmicore.init.CBlocks;
 
 import java.util.function.Consumer;
@@ -34,7 +37,12 @@ public class CosmicoreAdvancements implements AdvancementSubProvider {
                         false,
                         false
                 )
-                .addCriterion("player_join", PlayerTrigger.TriggerInstance.tick())
+                .addCriterion(
+                        "found_meteor",
+                        PlayerTrigger.TriggerInstance.located(
+                                LocationPredicate.Builder.inStructure(registries.lookupOrThrow(Registries.STRUCTURE).getOrThrow(CStructures.METEOR_SITE))
+                        )
+                )
                 .save(save, MODID + ":root");
     }
 }

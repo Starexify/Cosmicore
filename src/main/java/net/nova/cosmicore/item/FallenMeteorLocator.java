@@ -47,7 +47,8 @@ public class FallenMeteorLocator extends Item {
                 int zDistance = Math.abs(displayPos.getZ() - playerPos.getZ());
                 double horizontalDistance = Math.sqrt(xDistance * xDistance + zDistance * zDistance);
 
-                int magnetismLevel = Cosmicore.getItemEnchantmentLevel(stack, CEnchantments.MAGNETISM);
+                Holder<Enchantment> magnetism = player.level().registryAccess().lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(CEnchantments.MAGNETISM);
+                int magnetismLevel = stack.getEnchantmentLevel(magnetism);
                 int detectionRange = 750 + (magnetismLevel * 350);
 
                 if (horizontalDistance > detectionRange) {

@@ -60,6 +60,6 @@ public class CItemTagsProvider extends ItemTagsProvider {
 
         tag(ItemTags.CROSSBOW_ENCHANTABLE).add(CItems.TITANIUM_CROSSBOW.get());
 
-        tag(CTags.CItemTags.MAGNETIC_ENCHANTABLE).add(CItems.FALLEN_METEOR_LOCATOR.get());
+        tag(CTags.CItemTags.MAGNETIC_ENCHANTABLE).addTags(ItemTags.DURABILITY_ENCHANTABLE);
     }
 }

@@ -44,11 +44,12 @@ public class CEventBusGame {
     public static void onAnvilUpdate(AnvilUpdateEvent event) {
         ItemStack left = event.getLeft();
         ItemStack right = event.getRight();
-        if (left.isEnchantable() || left.is(CTags.CItemTags.MAGNETIC_ENCHANTABLE) && right.is(CItems.MAGNETITE)) {
-            Holder<Enchantment> magnetism = event.getPlayer().level().registryAccess().lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(CEnchantments.MAGNETISM);
+        Holder<Enchantment> magnetism = event.getPlayer().level().registryAccess().lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(CEnchantments.MAGNETISM);
+
+        if ((left.isEnchantable() || left.is(CTags.CItemTags.MAGNETIC_ENCHANTABLE)) && right.is(CItems.MAGNETITE) && left.getEnchantmentLevel(magnetism) == 0) {
             int stackSize = right.getCount();
             int enchantLevel = Math.min(stackSize, 3);
-            event.setMaterialCost(enchantLevel);
+            event.setMaterialCost((int) Math.pow(2, enchantLevel - 1));
 
             ItemStack result;
             if (left.is(Items.BOOK)) {

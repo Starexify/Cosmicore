@@ -25,7 +25,12 @@ public class CItems {
     public static final DeferredItem<Item> TITANIUM_SHOVEL = ITEMS.registerItem("titanium_shovel", properties -> new ShovelItem(CToolMaterial.TITANIUM, 1.5F, -3.0F, properties));
     public static final DeferredItem<Item> TITANIUM_HOE = ITEMS.registerItem("titanium_hoe", properties -> new HoeItem(CToolMaterial.TITANIUM, -3.5F, 0.0F, properties));
 
-    public static final DeferredItem<Item> TITANIUM_CROSSBOW = ITEMS.registerItem("titanium_crossbow", properties -> new TitaniumCrossbow(properties.stacksTo(1).durability(465).component(DataComponents.CHARGED_PROJECTILES, ChargedProjectiles.EMPTY).enchantable(CToolMaterial.TITANIUM.enchantmentValue())));
+    public static final DeferredItem<Item> TITANIUM_CROSSBOW = ITEMS.registerItem("titanium_crossbow", properties -> new CrossbowItem(properties.stacksTo(1).durability(700).component(DataComponents.CHARGED_PROJECTILES, ChargedProjectiles.EMPTY).enchantable(CToolMaterial.TITANIUM.enchantmentValue())) {
+        @Override
+        public int getDefaultProjectileRange() {
+            return 10;
+        }
+    });
     public static final DeferredItem<Item> TITANIUM_HORSE_ARMOR = ITEMS.registerItem("titanium_horse_armor", properties -> new AnimalArmorItem(CArmorMaterials.TITANIUM, AnimalArmorItem.BodyType.EQUESTRIAN, SoundEvents.HORSE_ARMOR, false, properties.stacksTo(1)));
 
     public static final DeferredItem<Item> RAW_TITANIUM = ITEMS.registerItem("raw_titanium", Item::new);

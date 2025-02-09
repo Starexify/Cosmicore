@@ -27,6 +27,6 @@
   "slots": [
     "any"
   ],
-  "supported_items": "#cosmicore:enchantable/magnetic",
+  "supported_items": "#minecraft:enchantable/durability",
   "weight": 2
 }
