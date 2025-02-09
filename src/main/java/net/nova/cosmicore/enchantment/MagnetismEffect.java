@@ -10,6 +10,7 @@ import net.minecraft.world.item.enchantment.EnchantedItemInUse;
 import net.minecraft.world.item.enchantment.LevelBasedValue;
 import net.minecraft.world.item.enchantment.effects.EnchantmentEntityEffect;
 import net.minecraft.world.phys.Vec3;
+import net.nova.cosmicore.item.FallenMeteorLocator;
 
 import java.util.List;
 
@@ -20,7 +21,7 @@ public record MagnetismEffect(LevelBasedValue range) implements EnchantmentEntit
 
     @Override
     public void apply(ServerLevel level, int enchantmentLevel, EnchantedItemInUse item, Entity entity, Vec3 origin) {
-        if (entity instanceof Player player) {
+        if (entity instanceof Player player && !(item.itemStack().getItem() instanceof FallenMeteorLocator)) {
             double magnetRange = range.calculate(enchantmentLevel);
 
             List<ItemEntity> nearbyItems = level.getEntitiesOfClass(

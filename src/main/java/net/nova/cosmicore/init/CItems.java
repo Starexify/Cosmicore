@@ -7,7 +7,9 @@ import net.minecraft.world.item.component.ChargedProjectiles;
 import net.minecraft.world.item.equipment.ArmorType;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
-import net.nova.cosmicore.item.*;
+import net.nova.cosmicore.item.FallenMeteorLocator;
+import net.nova.cosmicore.item.LonsdaleiteSmithingTemplate;
+import net.nova.cosmicore.item.TitaniumSmithingTemplate;
 
 import static net.nova.cosmicore.Cosmicore.MODID;
 
@@ -33,9 +35,9 @@ public class CItems {
     });
     public static final DeferredItem<Item> TITANIUM_HORSE_ARMOR = ITEMS.registerItem("titanium_horse_armor", properties -> new AnimalArmorItem(CArmorMaterials.TITANIUM, AnimalArmorItem.BodyType.EQUESTRIAN, SoundEvents.HORSE_ARMOR, false, properties.stacksTo(1)));
 
-    public static final DeferredItem<Item> RAW_TITANIUM = ITEMS.registerItem("raw_titanium", Item::new);
-    public static final DeferredItem<Item> TITANIUM_NUGGET = ITEMS.registerItem("titanium_nugget", Item::new);
-    public static final DeferredItem<Item> TITANIUM_INGOT = ITEMS.registerItem("titanium_ingot", Item::new);
+    public static final DeferredItem<Item> RAW_TITANIUM = ITEMS.registerSimpleItem("raw_titanium");
+    public static final DeferredItem<Item> TITANIUM_NUGGET = ITEMS.registerSimpleItem("titanium_nugget");
+    public static final DeferredItem<Item> TITANIUM_INGOT = ITEMS.registerSimpleItem("titanium_ingot");
 
     public static final DeferredItem<Item> TITANIUM_UPGRADE_SMITHING_TEMPLATE = ITEMS.registerItem("titanium_upgrade_smithing_template", properties -> TitaniumSmithingTemplate.createTitaniumUpgradeTemplate(properties.rarity(Rarity.UNCOMMON)));
 
@@ -52,20 +54,20 @@ public class CItems {
 
     public static final DeferredItem<Item> LONSDALEITE_HORSE_ARMOR = ITEMS.registerItem("lonsdaleite_horse_armor", properties -> new AnimalArmorItem(CArmorMaterials.LONSDALEITE, AnimalArmorItem.BodyType.EQUESTRIAN, SoundEvents.HORSE_ARMOR, false, properties.stacksTo(1)));
 
-    public static final DeferredItem<Item> LONSDALEITE = ITEMS.registerItem("lonsdaleite", Item::new);
+    public static final DeferredItem<Item> LONSDALEITE = ITEMS.registerSimpleItem("lonsdaleite");
 
     public static final DeferredItem<Item> LONSDALEITE_UPGRADE_SMITHING_TEMPLATE = ITEMS.registerItem("lonsdaleite_upgrade_smithing_template", properties -> LonsdaleiteSmithingTemplate.createLonsdaleiteUpgradeTemplate(properties.rarity(Rarity.RARE)));
 
     // Magnetite
-    public static final DeferredItem<Item> MAGNETITE = ITEMS.registerItem("magnetite", Magnetite::new);
+    public static final DeferredItem<Item> MAGNETITE = ITEMS.registerSimpleItem("magnetite");
     public static final DeferredItem<Item> FALLEN_METEOR_LOCATOR = ITEMS.registerItem("fallen_meteor_locator", properties -> new FallenMeteorLocator(properties.stacksTo(1)));
 
     // Infernium
-    public static final DeferredItem<Item> INFERNIUM_CRYSTAL = ITEMS.registerItem("infernium_crystal", Item::new);
+    public static final DeferredItem<Item> INFERNIUM_CRYSTAL = ITEMS.registerSimpleItem("infernium_crystal");
 
     // Gears
-    public static final DeferredItem<Item> IRON_GEAR = ITEMS.registerItem("iron_gear", Item::new);
-    public static final DeferredItem<Item> TITANIUM_GEAR = ITEMS.registerItem("titanium_gear", Item::new);
+    public static final DeferredItem<Item> IRON_GEAR = ITEMS.registerSimpleItem("iron_gear");
+    public static final DeferredItem<Item> TITANIUM_GEAR = ITEMS.registerSimpleItem("titanium_gear");
 
     // Banner Pattern
     public static final DeferredItem<BannerPatternItem> METEORITE_BANNER_PATTERN = ITEMS.registerItem("meteorite_banner_pattern", properties -> new BannerPatternItem(CTags.BannerPatternTags.PATTERN_ITEM_METEORITE, properties.stacksTo(1).rarity(Rarity.RARE)));
