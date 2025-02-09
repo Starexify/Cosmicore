@@ -24,6 +24,49 @@ public record ChestLoot(HolderLookup.Provider registries) implements LootTableSu
     @Override
     public void generate(BiConsumer<ResourceKey<LootTable>, LootTable.Builder> pOutput) {
         pOutput.accept(CTags.ChestLootTags.METEOR_SITE_1, this.meteorSite1LootTable());
+        pOutput.accept(CTags.ChestLootTags.PALLASITE_SITE_1, this.pallasiteSite1LootTable());
+    }
+
+    public LootTable.Builder pallasiteSite1LootTable() {
+        return LootTable.lootTable().withPool(LootPool.lootPool()
+                .setRolls(UniformGenerator.between(0.0F, 1.0F))
+                .add(LootItem.lootTableItem(Items.CROSSBOW))
+
+        ).withPool(LootPool.lootPool()
+                .setRolls(UniformGenerator.between(1.0F, 2.0F))
+                .add(LootItem.lootTableItem(Items.WHEAT).setWeight(5).apply(SetItemCountFunction.setCount(UniformGenerator.between(3.0F, 5.0F))))
+                .add(LootItem.lootTableItem(Items.POTATO).setWeight(3).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 5.0F))))
+                .add(LootItem.lootTableItem(Items.CARROT).setWeight(3).apply(SetItemCountFunction.setCount(UniformGenerator.between(3.0F, 5.0F))))
+
+        ).withPool(LootPool.lootPool()
+                .setRolls(ConstantValue.exactly(1.0F))
+                .add(LootItem.lootTableItem(Blocks.DARK_OAK_LOG).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F))))
+
+        ).withPool(LootPool.lootPool()
+                .setRolls(UniformGenerator.between(1.0F, 2.0F))
+                .add(LootItem.lootTableItem(Items.EXPERIENCE_BOTTLE).setWeight(6))
+                .add(LootItem.lootTableItem(Items.ARROW).setWeight(3).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 7.0F))))
+                .add(LootItem.lootTableItem(CItems.TITANIUM_INGOT).setWeight(5).apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F))))
+                .add(LootItem.lootTableItem(Items.BOOK).setWeight(1).apply(EnchantRandomlyFunction.randomApplicableEnchantment(registries)))
+
+        ).withPool(LootPool.lootPool()
+                .setRolls(UniformGenerator.between(0.0F, 1.0F))
+                .add(LootItem.lootTableItem(Items.GOAT_HORN)).apply(SetInstrumentFunction.setInstrumentOptions(InstrumentTags.REGULAR_GOAT_HORNS))
+
+        ).withPool(LootPool.lootPool()
+                .setRolls(ConstantValue.exactly(1.0F))
+                .add(LootItem.lootTableItem(CItems.LONSDALEITE_UPGRADE_SMITHING_TEMPLATE).setWeight(7).apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F))))
+                .add(LootItem.lootTableItem(CItems.TITANIUM_UPGRADE_SMITHING_TEMPLATE).setWeight(1).apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F))))
+
+        ).withPool(LootPool.lootPool()
+                .setRolls(UniformGenerator.between(2.0F, 3.0f))
+                .add(LootItem.lootTableItem(CItems.INFERNIUM_CRYSTAL).setWeight(6).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 4.0F))))
+
+        ).withPool(LootPool.lootPool()
+                .setRolls(ConstantValue.exactly(1.0F))
+                .add(EmptyLootItem.emptyItem().setWeight(10))
+                .add(LootItem.lootTableItem(CItems.METEORITE_BANNER_PATTERN).setWeight(6).apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F))))
+        );
     }
 
     public LootTable.Builder meteorSite1LootTable() {
@@ -55,7 +98,7 @@ public record ChestLoot(HolderLookup.Provider registries) implements LootTableSu
         ).withPool(LootPool.lootPool()
                 .setRolls(ConstantValue.exactly(1.0F))
                 .add(LootItem.lootTableItem(CItems.TITANIUM_UPGRADE_SMITHING_TEMPLATE).setWeight(7).apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F))))
-                .add(LootItem.lootTableItem(CItems.LONSDALEITE_UPGRADE_SMITHING_TEMPLATE).setWeight(1).apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F))))
+                .add(EmptyLootItem.emptyItem().setWeight(2))
 
         ).withPool(LootPool.lootPool()
                 .setRolls(UniformGenerator.between(2.0F, 3.0f))

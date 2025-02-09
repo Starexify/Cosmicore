@@ -37,6 +37,7 @@ public class CTags {
 
     public static class ChestLootTags {
         public static final ResourceKey<LootTable> METEOR_SITE_1 = register("chests/meteor_site_1");
+        public static final ResourceKey<LootTable> PALLASITE_SITE_1 = register("chests/pallasite_site_1");
     }
 
     public static class BannerPatternTags {

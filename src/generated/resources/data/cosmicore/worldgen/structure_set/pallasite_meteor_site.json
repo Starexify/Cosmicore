@@ -5,15 +5,15 @@
       "chunk_count": 10,
       "other_set": "minecraft:villages"
     },
-    "frequency": 0.2,
+    "frequency": 0.15,
     "frequency_reduction_method": "legacy_type_1",
-    "salt": 165745298,
+    "salt": 165745300,
     "separation": 8,
     "spacing": 32
   },
   "structures": [
     {
-      "structure": "cosmicore:desert_meteor_site",
+      "structure": "cosmicore:pallasite_meteor_site",
       "weight": 1
     }
   ]

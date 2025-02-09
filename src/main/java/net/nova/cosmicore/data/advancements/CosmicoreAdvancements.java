@@ -14,7 +14,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.levelgen.structure.BuiltinStructures;
 import net.nova.cosmicore.Cosmicore;
-import net.nova.cosmicore.data.worldgen.CStructures;
 import net.nova.cosmicore.init.CBlocks;
 
 import java.util.function.Consumer;
@@ -40,7 +39,7 @@ public class CosmicoreAdvancements implements AdvancementSubProvider {
                 .addCriterion(
                         "found_meteor",
                         PlayerTrigger.TriggerInstance.located(
-                                LocationPredicate.Builder.inStructure(registries.lookupOrThrow(Registries.STRUCTURE).getOrThrow(CStructures.METEOR_SITE))
+                                LocationPredicate.Builder.inStructure(registries.lookupOrThrow(Registries.STRUCTURE).getOrThrow(BuiltinStructures.STRONGHOLD))
                         )
                 )
                 .save(save, MODID + ":root");

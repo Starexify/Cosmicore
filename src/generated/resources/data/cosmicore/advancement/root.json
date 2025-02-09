@@ -1,7 +1,20 @@
 {
   "criteria": {
-    "player_join": {
-      "trigger": "minecraft:tick"
+    "found_meteor": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "location": {
+                "structures": "minecraft:stronghold"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:location"
     }
   },
   "display": {
@@ -20,7 +33,7 @@
   },
   "requirements": [
     [
-      "player_join"
+      "found_meteor"
     ]
   ],
   "sends_telemetry_event": true

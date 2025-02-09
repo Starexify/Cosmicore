@@ -49,7 +49,7 @@ public class CEventBusGame {
         if ((left.isEnchantable() || left.is(CTags.CItemTags.MAGNETIC_ENCHANTABLE)) && right.is(CItems.MAGNETITE) && left.getEnchantmentLevel(magnetism) == 0) {
             int stackSize = right.getCount();
             int enchantLevel = Math.min(stackSize, 3);
-            event.setMaterialCost((int) Math.pow(2, enchantLevel - 1));
+            event.setMaterialCost(enchantLevel);
 
             ItemStack result;
             if (left.is(Items.BOOK)) {
