@@ -11,6 +11,7 @@ import net.nova.cosmicore.init.CBlocks;
 import net.nova.cosmicore.init.CEntities;
 import net.nova.cosmicore.init.CItems;
 import net.nova.cosmicore.init.CreativeTab;
+import net.nova.cosmicore.item.FallenMeteorLocator;
 import net.nova.cosmicore.item.LonsdaleiteSmithingTemplate;
 import net.nova.cosmicore.item.TitaniumSmithingTemplate;
 
@@ -103,6 +104,9 @@ public class LangProvider extends LanguageProvider {
         // Messages
         add(Achondrite.METEOR_FALL_MESSAGE.getString(), "A meteor has entered the atmosphere!");
         add(Achondrite.METEOR_SHIELDED_MESSAGE.getString(), "The meteor has been blocked by a meteor shield.");
+
+        add(FallenMeteorLocator.OUT_OF_RANGE.getString(), "No meteors found");
+        add(FallenMeteorLocator.METEOR_LOCATION_STR, "Meteor found %d blocks away");
 
         // Advancements
         addAdvancement("root", "The core of Cosmicore", "");

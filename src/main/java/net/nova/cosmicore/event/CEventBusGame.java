@@ -18,6 +18,7 @@ import net.nova.cosmicore.Cosmicore;
 import net.nova.cosmicore.MeteorSpawner;
 import net.nova.cosmicore.data.CEnchantments;
 import net.nova.cosmicore.init.CItems;
+import net.nova.cosmicore.init.CTags;
 
 import static net.nova.cosmicore.Cosmicore.MODID;
 
@@ -38,12 +39,12 @@ public class CEventBusGame {
         }
     }
 
-    // Magnetism
+    // Magnetism from Anvil
     @SubscribeEvent
     public static void onAnvilUpdate(AnvilUpdateEvent event) {
         ItemStack left = event.getLeft();
         ItemStack right = event.getRight();
-        if (left.isEnchantable() && right.is(CItems.MAGNETITE)) {
+        if (left.isEnchantable() || left.is(CTags.CItemTags.MAGNETIC_ENCHANTABLE) && right.is(CItems.MAGNETITE)) {
             Holder<Enchantment> magnetism = event.getPlayer().level().registryAccess().lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(CEnchantments.MAGNETISM);
             int stackSize = right.getCount();
             int enchantLevel = Math.min(stackSize, 3);
@@ -57,7 +58,7 @@ public class CEventBusGame {
                 result.enchant(magnetism, enchantLevel);
             }
 
-            event.setCost(enchantLevel * 3L);
+            event.setCost((long) magnetism.value().getAnvilCost() * enchantLevel);
             event.setOutput(result);
         }
     }

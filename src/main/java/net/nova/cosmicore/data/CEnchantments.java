@@ -5,7 +5,6 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.enchantment.Enchantment;
@@ -14,6 +13,7 @@ import net.minecraft.world.item.enchantment.LevelBasedValue;
 import net.minecraft.world.item.enchantment.effects.AddValue;
 import net.nova.cosmicore.Cosmicore;
 import net.nova.cosmicore.enchantment.MagnetismEffect;
+import net.nova.cosmicore.init.CTags;
 
 public class CEnchantments {
     public static final ResourceKey<Enchantment> MAGNETISM = key("magnetism");
@@ -23,11 +23,11 @@ public class CEnchantments {
 
         register(context, MAGNETISM, Enchantment.enchantment(
                         Enchantment.definition(
-                                itemGetter.getOrThrow(ItemTags.DURABILITY_ENCHANTABLE),
+                                itemGetter.getOrThrow(CTags.CItemTags.MAGNETIC_ENCHANTABLE),
                                 2,
                                 3,
-                                Enchantment.dynamicCost(17, 8),
-                                Enchantment.dynamicCost(36, 8),
+                                Enchantment.dynamicCost(12, 4),
+                                Enchantment.dynamicCost(23, 5),
                                 3,
                                 EquipmentSlotGroup.ANY
                         ))

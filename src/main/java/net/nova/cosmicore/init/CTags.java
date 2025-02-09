@@ -22,6 +22,7 @@ public class CTags {
         public static final TagKey<Item> REPAIRS_LONSDALEITE_ARMOR = itemTag("repairs_lonsdaleite_armor");
         public static final TagKey<Item> TITANIUM_TOOL_MATERIALS = itemTag("titanium_tool_materials");
         public static final TagKey<Item> LONSDALEITE_TOOL_MATERIALS = itemTag("lonsdaleite_tool_materials");
+        public static final TagKey<Item> MAGNETIC_ENCHANTABLE = itemTag("enchantable/magnetic");
     }
 
     public static class BlockTags {

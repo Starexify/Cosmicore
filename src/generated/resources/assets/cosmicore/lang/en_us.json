@@ -33,6 +33,8 @@
   "item.cosmicore.lonsdaleite_sword": "Lonsdaleite Sword",
   "item.cosmicore.lonsdaleite_upgrade_smithing_template": "Lonsdaleite Upgrade",
   "item.cosmicore.magnetite": "Magnetite",
+  "item.cosmicore.meteor_locator.distance": "Meteor found %d blocks away",
+  "item.cosmicore.meteor_locator.out_of_range": "No meteors found",
   "item.cosmicore.meteorite_banner_pattern": "Meteorite Banner Pattern",
   "item.cosmicore.raw_titanium": "Raw Titanium",
   "item.cosmicore.smithing_template.lonsdaleite_upgrade.additions_slot_description": "Add Lonsdaleite",

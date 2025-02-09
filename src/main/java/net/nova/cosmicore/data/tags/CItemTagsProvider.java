@@ -5,6 +5,7 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.tags.ItemTags;
 import net.nova.cosmicore.init.CItems;
+import net.nova.cosmicore.init.CTags;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -58,5 +59,7 @@ public class CItemTagsProvider extends ItemTagsProvider {
         );
 
         tag(ItemTags.CROSSBOW_ENCHANTABLE).add(CItems.TITANIUM_CROSSBOW.get());
+
+        tag(CTags.CItemTags.MAGNETIC_ENCHANTABLE).add(CItems.FALLEN_METEOR_LOCATOR.get());
     }
 }

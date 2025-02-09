@@ -1,6 +1,11 @@
 package net.nova.cosmicore;
 
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.ItemEnchantments;
 import net.minecraft.world.level.GameRules;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
@@ -32,5 +37,14 @@ public class Cosmicore {
 
     public static ResourceLocation rl(String path) {
         return ResourceLocation.fromNamespaceAndPath(MODID, path);
+    }
+
+    public static int getItemEnchantmentLevel(ItemStack item, ResourceKey<Enchantment> enchantment) {
+        return item.getOrDefault(DataComponents.ENCHANTMENTS, ItemEnchantments.EMPTY)
+                .entrySet().stream()
+                .filter(entry -> entry.getKey().equals(enchantment))
+                .findAny()
+                .map(entry -> entry.getIntValue())
+                .orElse(0);
     }
 }

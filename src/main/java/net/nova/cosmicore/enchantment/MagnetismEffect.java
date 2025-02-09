@@ -2,7 +2,6 @@ package net.nova.cosmicore.enchantment;
 
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -23,6 +22,7 @@ public record MagnetismEffect(LevelBasedValue range) implements EnchantmentEntit
     public void apply(ServerLevel level, int enchantmentLevel, EnchantedItemInUse item, Entity entity, Vec3 origin) {
         if (entity instanceof Player player) {
             double magnetRange = range.calculate(enchantmentLevel);
+
             List<ItemEntity> nearbyItems = level.getEntitiesOfClass(
                     ItemEntity.class,
                     player.getBoundingBox().inflate(magnetRange),
@@ -65,11 +65,6 @@ public record MagnetismEffect(LevelBasedValue range) implements EnchantmentEntit
                 itemEntity.setPickUpDelay(2);
             }
         }
-    }
-
-    @Override
-    public LevelBasedValue range() {
-        return this.range;
     }
 
     @Override
