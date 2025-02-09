@@ -88,7 +88,7 @@ public class CStructureSets {
                         0.15F,
                         165745300,
                         Optional.of(new StructurePlacement.ExclusionZone(reference, 10)),
-                        32,
+                        64,
                         8,
                         RandomSpreadType.LINEAR
                 )
@@ -101,7 +101,7 @@ public class CStructureSets {
                         0.15F,
                         165745301,
                         Optional.of(new StructurePlacement.ExclusionZone(reference, 10)),
-                        32,
+                        64,
                         8,
                         RandomSpreadType.LINEAR
                 )
@@ -114,7 +114,7 @@ public class CStructureSets {
                         0.15F,
                         165745302,
                         Optional.of(new StructurePlacement.ExclusionZone(reference, 10)),
-                        32,
+                        64,
                         8,
                         RandomSpreadType.LINEAR
                 )
