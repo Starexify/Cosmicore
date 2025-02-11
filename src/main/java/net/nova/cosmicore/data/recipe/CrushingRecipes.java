@@ -17,7 +17,7 @@ public class CrushingRecipes extends CRecipeProvider {
     public void build() {
         // Crusher Recipes
         CrushingRecipeBuilder.crushing(Ingredient.of(CBlocks.ACHONDRITE))
-                .addResult(CItems.MAGNETITE, 1, 0.01f)
+                .addResult(CItems.MAGNETITE, 1, 0.02f)
                 .addResult(Items.RAW_IRON, 2, 0.05f)
                 .addResult(Items.RAW_IRON, 1, 0.1f)
                 .addResult(Items.RAW_COPPER, 5, 0.1f)

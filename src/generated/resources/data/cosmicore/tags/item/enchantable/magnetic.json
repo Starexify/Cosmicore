@@ -1,5 +1,6 @@
 {
   "values": [
-    "#minecraft:enchantable/durability"
+    "#minecraft:enchantable/durability",
+    "cosmicore:fallen_meteor_locator"
   ]
 }
