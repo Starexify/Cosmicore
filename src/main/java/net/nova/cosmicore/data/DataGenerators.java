@@ -45,9 +45,9 @@ public class DataGenerators {
 
         event.addProvider(new CRecipeProvider.Runner(output, lookupProvider));
 
-        event.addProvider(new AdvancementProvider(output, lookupProvider, List.of(
+/*        event.addProvider(new AdvancementProvider(output, lookupProvider, List.of(
                 new CosmicoreAdvancements()
-        )));
+        )));*/
 
         event.addProvider(new DatapackProvider(output, lookupProvider));
     }

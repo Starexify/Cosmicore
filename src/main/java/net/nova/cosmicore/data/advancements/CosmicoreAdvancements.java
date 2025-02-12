@@ -26,7 +26,7 @@ public class CosmicoreAdvancements implements AdvancementSubProvider {
         HolderGetter<Block> blockGetter = registries.lookupOrThrow(Registries.BLOCK);
         HolderGetter<Item> itemGetter = registries.lookupOrThrow(Registries.ITEM);
 
-        AdvancementHolder root = Advancement.Builder.advancement().display(
+/*        AdvancementHolder root = Advancement.Builder.advancement().display(
                         CBlocks.METEORITE,
                         Component.translatable("advancements." + MODID + ".root.title"),
                         Component.translatable("advancements." + MODID + ".root.description"),
@@ -42,6 +42,6 @@ public class CosmicoreAdvancements implements AdvancementSubProvider {
                                 LocationPredicate.Builder.inStructure(registries.lookupOrThrow(Registries.STRUCTURE).getOrThrow(BuiltinStructures.STRONGHOLD))
                         )
                 )
-                .save(save, MODID + ":root");
+                .save(save, MODID + ":root");*/
     }
 }

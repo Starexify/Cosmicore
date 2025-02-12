@@ -109,7 +109,7 @@ public class LangProvider extends LanguageProvider {
         add(FallenMeteorLocator.METEOR_LOCATION_STR, "Meteor found %d blocks away");
 
         // Advancements
-        addAdvancement("root", "The core of Cosmicore", "");
+        //addAdvancement("root", "The core of Cosmicore", "");
 
         // Crusher Tooltips
         add(CrusherScreen.IGNIS_TOOLTIP, "%s/%s Ignis");
