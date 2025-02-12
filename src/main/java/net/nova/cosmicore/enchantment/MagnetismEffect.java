@@ -24,13 +24,9 @@ public record MagnetismEffect(LevelBasedValue range) implements EnchantmentEntit
         if (entity instanceof Player player && !(item.itemStack().getItem() instanceof FallenMeteorLocator)) {
             double magnetRange = range.calculate(enchantmentLevel);
 
-            List<ItemEntity> nearbyItems = level.getEntitiesOfClass(
-                    ItemEntity.class,
-                    player.getBoundingBox().inflate(magnetRange),
-                    itemEntity -> isEligibleItem(player, itemEntity)
-            );
+            List<ItemEntity> nearbyItems = level.getEntitiesOfClass(ItemEntity.class, player.getBoundingBox().inflate(magnetRange), itemEntity -> isEligibleItem(player, itemEntity));
 
-            if (!nearbyItems.isEmpty()) for (ItemEntity itemEntity : nearbyItems) dragItems(itemEntity, player);
+            if (!nearbyItems.isEmpty()) for (ItemEntity itemEntity : nearbyItems) attractItems(itemEntity, player);
         }
     }
 
@@ -38,36 +34,37 @@ public record MagnetismEffect(LevelBasedValue range) implements EnchantmentEntit
         return itemEntity.isAlive() && !itemEntity.isRemoved() && (itemEntity.getOwner() == null || !itemEntity.getOwner().equals(player) || itemEntity.getAge() > 100);
     }
 
-    public static void dragItems(ItemEntity itemEntity, Player player) {
-        Vec3 playerPos = player.position().add(0, 0.5, 0);
+    public static void attractItems(ItemEntity itemEntity, Player player) {
+        boolean hasSpace = player.getInventory().getFreeSlot() != -1;
         Vec3 itemPos = itemEntity.position();
-        Vec3 direction = playerPos.subtract(itemPos);
+        Vec3 targetPos;
+        double speed;
 
-        if (player.getInventory().getFreeSlot() == -1) {
-            // Rotate around player
-            double angle = player.tickCount * 0.2;
-            Vec3 rotationCenter = playerPos.add(0, 0.5F, 0);
-            Vec3 rotatedPos = rotationCenter.add(
-                    Math.cos(angle) * 1.5,
-                    Math.sin(angle * 0.5) * 0.3,
-                    Math.sin(angle) * 1.5
+        if (!hasSpace) {
+            double orbitRadius = 0.5;
+            int itemOffset = Math.abs(itemEntity.getUUID().hashCode()) % 360;
+            double angle = Math.toRadians(itemOffset + (player.level().getGameTime() * 2));
+
+            targetPos = new Vec3(
+                    player.getX() + Math.cos(angle) * orbitRadius,
+                    player.getY() + 0.7,
+                    player.getZ() + Math.sin(angle) * orbitRadius
             );
 
-            Vec3 movement = rotatedPos.subtract(itemPos).normalize().scale(0.15);
-            itemEntity.setDeltaMovement(movement);
+            double distance = itemPos.distanceTo(targetPos);
+            speed = Math.min(0.5, distance * 0.4);
         } else {
-            // Move towards player with dynamic speed
-            double speedFactor = 0.25;  // Increased base speed
-            double minSpeed = 0.1;      // Increased minimum speed
-            double maxSpeed = 0.3;      // Increased maximum speed
-
-            double distance = direction.length();
-            double speed = Math.min(maxSpeed, Math.max(minSpeed, distance * speedFactor));
-            Vec3 movement = direction.normalize().scale(speed);
-
-            itemEntity.setDeltaMovement(movement);
-            itemEntity.setNoPickUpDelay(); // Removes pickup delay completely
+            targetPos = player.position().add(0, 0.5, 0);
+            double distance = itemPos.distanceTo(targetPos);
+            speed = Math.min(1.0, distance * 0.4);
         }
+
+        Vec3 currentVelocity = itemEntity.getDeltaMovement();
+        Vec3 targetMotion = targetPos.subtract(itemPos).normalize().scale(speed);
+        Vec3 newMotion = currentVelocity.add(targetMotion).scale(0.8);
+
+        itemEntity.setDeltaMovement(newMotion);
+        itemEntity.hasImpulse = true;
     }
 
     @Override
