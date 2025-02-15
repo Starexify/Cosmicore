@@ -4,6 +4,9 @@ import net.minecraft.Util;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
+import net.nova.cosmicore.Cosmicore;
+
+import java.util.List;
 
 import static net.nova.cosmicore.Cosmicore.rl;
 
@@ -22,13 +25,10 @@ public class TitaniumSmithingTemplate extends BaseSmithingTemplate {
     );
 
     public static final ResourceLocation EMPTY_SLOT_INGOT = ResourceLocation.withDefaultNamespace("container/slot/ingot");
-
-    static {
-        addMaterialSlot(EMPTY_SLOT_INGOT);
-    }
+    public static final ResourceLocation EMPTY_SLOT_CROSSBOW = Cosmicore.rl("container/slot/crossbow");
 
     public TitaniumSmithingTemplate(Component appliesTo, Component ingredients, Component baseSlotDescription, Component additionsSlotDescription, Properties properties) {
-        super(appliesTo, ingredients, baseSlotDescription, additionsSlotDescription, properties);
+        super(appliesTo, ingredients, baseSlotDescription, additionsSlotDescription, createBasicUpgradeIconList(List.of(EMPTY_SLOT_CROSSBOW)), createBasicUpgradeMaterialList(List.of(EMPTY_SLOT_INGOT)), properties);
     }
 
     public static TitaniumSmithingTemplate createTitaniumUpgradeTemplate(Item.Properties properties) {
