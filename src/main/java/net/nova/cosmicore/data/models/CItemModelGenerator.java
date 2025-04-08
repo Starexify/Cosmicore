@@ -12,36 +12,34 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.equipment.EquipmentAsset;
-import net.minecraft.world.item.equipment.EquipmentAssets;
-import net.minecraft.world.item.equipment.Equippable;
+import net.minecraft.world.item.equipment.trim.MaterialAssetGroup;
 import net.minecraft.world.item.equipment.trim.TrimMaterial;
 import net.minecraft.world.item.equipment.trim.TrimMaterials;
 import net.nova.cosmicore.data.CTrimMaterials;
 import net.nova.cosmicore.equipment.CEquipmentAssets;
+import net.nova.cosmicore.equipment.CMaterialAssetGroup;
 import net.nova.cosmicore.init.CItems;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.function.BiConsumer;
 
 public class CItemModelGenerator extends ItemModelGenerators {
-    public static final List<TrimMaterialData> TRIM_MATERIAL_MODELS = List.of(
-            new TrimMaterialData("quartz", TrimMaterials.QUARTZ, Map.of()),
-            new TrimMaterialData("iron", TrimMaterials.IRON, Map.of(EquipmentAssets.IRON, "iron_darker")),
-            new TrimMaterialData("netherite", TrimMaterials.NETHERITE, Map.of(EquipmentAssets.NETHERITE, "netherite_darker")),
-            new TrimMaterialData("redstone", TrimMaterials.REDSTONE, Map.of()),
-            new TrimMaterialData("copper", TrimMaterials.COPPER, Map.of()),
-            new TrimMaterialData("gold", TrimMaterials.GOLD, Map.of(EquipmentAssets.GOLD, "gold_darker")),
-            new TrimMaterialData("emerald", TrimMaterials.EMERALD, Map.of()),
-            new TrimMaterialData("diamond", TrimMaterials.DIAMOND, Map.of(EquipmentAssets.DIAMOND, "diamond_darker")),
-            new TrimMaterialData("lapis", TrimMaterials.LAPIS, Map.of()),
-            new TrimMaterialData("amethyst", TrimMaterials.AMETHYST, Map.of()),
-            new TrimMaterialData("resin", TrimMaterials.RESIN, Map.of()),
-            new TrimMaterialData("livingmetal", CTrimMaterials.TITANIUM, Map.of(CEquipmentAssets.TITANIUM, "titanium_darker")),
-            new TrimMaterialData("lonsdaleite", CTrimMaterials.LONSDALEITE, Map.of(CEquipmentAssets.LONSDALEITE, "lonsdaleite_darker"))
+    public static final List<ItemModelGenerators.TrimMaterialData> TRIM_MATERIAL_MODELS = List.of(
+            new ItemModelGenerators.TrimMaterialData(MaterialAssetGroup.QUARTZ, TrimMaterials.QUARTZ),
+            new ItemModelGenerators.TrimMaterialData(MaterialAssetGroup.IRON, TrimMaterials.IRON),
+            new ItemModelGenerators.TrimMaterialData(MaterialAssetGroup.NETHERITE, TrimMaterials.NETHERITE),
+            new ItemModelGenerators.TrimMaterialData(MaterialAssetGroup.REDSTONE, TrimMaterials.REDSTONE),
+            new ItemModelGenerators.TrimMaterialData(MaterialAssetGroup.COPPER, TrimMaterials.COPPER),
+            new ItemModelGenerators.TrimMaterialData(MaterialAssetGroup.GOLD, TrimMaterials.GOLD),
+            new ItemModelGenerators.TrimMaterialData(MaterialAssetGroup.EMERALD, TrimMaterials.EMERALD),
+            new ItemModelGenerators.TrimMaterialData(MaterialAssetGroup.DIAMOND, TrimMaterials.DIAMOND),
+            new ItemModelGenerators.TrimMaterialData(MaterialAssetGroup.LAPIS, TrimMaterials.LAPIS),
+            new ItemModelGenerators.TrimMaterialData(MaterialAssetGroup.AMETHYST, TrimMaterials.AMETHYST),
+            new ItemModelGenerators.TrimMaterialData(MaterialAssetGroup.RESIN, TrimMaterials.RESIN),
+            new ItemModelGenerators.TrimMaterialData(CMaterialAssetGroup.TITANIUM, CTrimMaterials.TITANIUM),
+            new ItemModelGenerators.TrimMaterialData(CMaterialAssetGroup.LONSDALEITE, CTrimMaterials.LONSDALEITE)
     );
-
 
     public CItemModelGenerator(ItemModelOutput itemModelOutput, BiConsumer<ResourceLocation, ModelInstance> modelOutput) {
         super(itemModelOutput, modelOutput);
@@ -105,11 +103,10 @@ public class CItemModelGenerator extends ItemModelGenerators {
 
     // Methods
     public void generateTrimmableItem(Item item, ResourceKey<EquipmentAsset> equipmentAsset) {
-        ResourceLocation resourcelocation = ModelLocationUtils.getModelLocation(item);
-        ResourceLocation resourcelocation1 = TextureMapping.getItemTexture(item);
+        ResourceLocation modelLocation = ModelLocationUtils.getModelLocation(item);
+        ResourceLocation textureLocation = TextureMapping.getItemTexture(item);
         List<SelectItemModel.SwitchCase<ResourceKey<TrimMaterial>>> list = new ArrayList<>(TRIM_MATERIAL_MODELS.size());
-        Equippable equippable = item.getDefaultInstance().get(DataComponents.EQUIPPABLE);
-        EquipmentSlot slot = equippable.slot();
+        EquipmentSlot slot = item.getDefaultInstance().get(DataComponents.EQUIPPABLE).slot();
         String armorType = switch (slot) {
             case HEAD -> "helmet";
             case CHEST -> "chestplate";
@@ -118,28 +115,16 @@ public class CItemModelGenerator extends ItemModelGenerators {
             default -> "";
         };
 
-        for (TrimMaterialData trimMaterial : TRIM_MATERIAL_MODELS) {
-            ResourceLocation resourcelocation3 = resourcelocation.withSuffix("_" + trimMaterial.name() + "_trim");
-            ResourceLocation resourcelocation4 = ResourceLocation.withDefaultNamespace(
-                    "trims/items/" + armorType + "_trim_" + trimMaterial.textureName(equipmentAsset)
-            );
+        for (TrimMaterialData trimMaterialData : TRIM_MATERIAL_MODELS) {
+            ResourceLocation trimModelName = modelLocation.withSuffix("_" + trimMaterialData.assets().base().suffix() + "_trim");
+            ResourceLocation layer1Location = ResourceLocation.withDefaultNamespace("trims/items/" + armorType + "_trim_" + trimMaterialData.assets().assetId(equipmentAsset).suffix());
 
-            generateLayeredItem(resourcelocation3, resourcelocation1, resourcelocation4);
-            ItemModel.Unbaked itemmodel$unbaked = ItemModelUtils.plainModel(resourcelocation3);
-
-            list.add(ItemModelUtils.when(trimMaterial.materialKey, itemmodel$unbaked));
+            generateLayeredItem(trimModelName, textureLocation, layer1Location);
+            list.add(ItemModelUtils.when(trimMaterialData.materialKey(), ItemModelUtils.plainModel(trimModelName)));
         }
 
-        ItemModel.Unbaked basicModel;
-        ModelTemplates.FLAT_ITEM.create(resourcelocation, TextureMapping.layer0(resourcelocation1), modelOutput);
-        basicModel = ItemModelUtils.plainModel(resourcelocation);
-
-        itemModelOutput.accept(item, ItemModelUtils.select(new TrimMaterialProperty(), basicModel, list));
-    }
-
-    record TrimMaterialData(String name, ResourceKey<TrimMaterial> materialKey, Map<ResourceKey<EquipmentAsset>, String> overrideArmorMaterials) {
-        public String textureName(ResourceKey<EquipmentAsset> p_387088_) {
-            return overrideArmorMaterials.getOrDefault(p_387088_, name);
-        }
+        ItemModel.Unbaked basicItem = ItemModelUtils.plainModel(modelLocation);
+        ModelTemplates.FLAT_ITEM.create(modelLocation, TextureMapping.layer0(textureLocation), modelOutput);
+        itemModelOutput.accept(item, ItemModelUtils.select(new TrimMaterialProperty(), basicItem, list));
     }
 }

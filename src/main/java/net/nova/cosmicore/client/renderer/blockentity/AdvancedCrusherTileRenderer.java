@@ -8,6 +8,7 @@ import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.phys.Vec3;
 import net.nova.cosmicore.blockentity.AdvancedCrusherTile;
 import net.nova.cosmicore.client.model.CrusherPistonModel;
 
@@ -18,8 +19,8 @@ public class AdvancedCrusherTileRenderer extends AbstractCrusherTileRenderer<Adv
     }
 
     @Override
-    public void render(AdvancedCrusherTile advancedCrusherTile, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, int packedOverlay) {
-        super.render(advancedCrusherTile, partialTick, poseStack, bufferSource, packedLight, packedOverlay);
+    public void render(AdvancedCrusherTile advancedCrusherTile, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, int packedOverlay, Vec3 vec3) {
+        super.render(advancedCrusherTile, partialTick, poseStack, bufferSource, packedLight, packedOverlay, vec3);
         renderCrushedItems(advancedCrusherTile, poseStack, bufferSource);
     }
 

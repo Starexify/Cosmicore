@@ -3,7 +3,6 @@
   "addition": "cosmicore:titanium_ingot",
   "base": "minecraft:iron_sword",
   "result": {
-    "count": 1,
     "id": "cosmicore:titanium_sword"
   },
   "template": "cosmicore:titanium_upgrade_smithing_template"

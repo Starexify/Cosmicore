@@ -82,7 +82,7 @@
       {
         "model": {
           "type": "minecraft:model",
-          "model": "cosmicore:item/titanium_leggings_livingmetal_trim"
+          "model": "cosmicore:item/titanium_leggings_titanium_trim"
         },
         "when": "cosmicore:titanium"
       },

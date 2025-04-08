@@ -4,7 +4,7 @@ import net.minecraft.client.renderer.texture.atlas.sources.PalettedPermutations;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
-import net.neoforged.neoforge.common.data.SpriteSourceProvider;
+import net.neoforged.neoforge.client.data.SpriteSourceProvider;
 import net.nova.cosmicore.Cosmicore;
 
 import java.util.List;
@@ -77,16 +77,7 @@ public class AtlasesProvider extends SpriteSourceProvider {
 
     @Override
     protected void gather() {
-        atlas(SpriteSourceProvider.BLOCKS_ATLAS).addSource(new PalettedPermutations(
-                textures,
-                ResourceLocation.withDefaultNamespace("trims/color_palettes/trim_palette"),
-                permutations
-        ));
-
-        atlas(ARMOR_TRIMS).addSource(new PalettedPermutations(
-                trimTextures,
-                ResourceLocation.withDefaultNamespace("trims/color_palettes/trim_palette"),
-                permutations
-        ));
+        atlas(SpriteSourceProvider.BLOCKS_ATLAS).addSource(new PalettedPermutations(textures, ResourceLocation.withDefaultNamespace("trims/color_palettes/trim_palette"), permutations));
+        atlas(ARMOR_TRIMS).addSource(new PalettedPermutations(trimTextures, ResourceLocation.withDefaultNamespace("trims/color_palettes/trim_palette"), permutations));
     }
 }

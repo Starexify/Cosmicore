@@ -100,9 +100,7 @@ public class BaseMeteor extends Entity {
         }
 
         // Destroy blocks around and update death animations
-        if (this.level().isClientSide()) {
-            updateClientAnimations();
-        }
+        if (this.level().isClientSide()) updateClientAnimations();
 
         double currentY = this.getY();
         double fallSpeed = -0.05;
@@ -119,17 +117,12 @@ public class BaseMeteor extends Entity {
         double motionXPart = deltaMovement.x;
         double motionZPart = deltaMovement.z;
 
-        if (this.onGround() && !isLanded) {
-            handleLanding();
-        }
+        if (this.onGround() && !isLanded) handleLanding();
 
         // Handle Falling
         if (!this.onGround()) {
-            if (this.level().isClientSide()) {
-                this.fallingAnimationState.startIfStopped(this.tickCount);
-            } else {
-                destroyNearbyBlocks();
-            }
+            if (this.level().isClientSide()) this.fallingAnimationState.startIfStopped(this.tickCount);
+            else destroyNearbyBlocks();
 
             for (int i = 0; i < 4; i++) {
                 double xOffset = (this.random.nextDouble() - 0.5) * 0.2;
@@ -226,9 +219,7 @@ public class BaseMeteor extends Entity {
 
         boundingbox = boundingbox.moved(offsetX, offsetY, offsetZ);
 
-        for (StructurePiece piece : structurestart.getPieces()) {
-            piece.move(offsetX, offsetY, offsetZ);
-        }
+        for (StructurePiece piece : structurestart.getPieces()) piece.move(offsetX, offsetY, offsetZ);
 
         ChunkPos chunkpos = new ChunkPos(SectionPos.blockToSectionCoord(boundingbox.minX()), SectionPos.blockToSectionCoord(boundingbox.minZ()));
         ChunkPos chunkpos1 = new ChunkPos(SectionPos.blockToSectionCoord(boundingbox.maxX()), SectionPos.blockToSectionCoord(boundingbox.maxZ()));
@@ -267,9 +258,7 @@ public class BaseMeteor extends Entity {
                     serverlevel.updateNeighborsAt(updatePos, state.getBlock());
 
                     // Additional check for blocks that need support
-                    if (!state.canSurvive(serverlevel, updatePos)) {
-                        serverlevel.removeBlock(updatePos, false);
-                    }
+                    if (!state.canSurvive(serverlevel, updatePos)) serverlevel.removeBlock(updatePos, false);
                 }
             }
         }
@@ -292,9 +281,7 @@ public class BaseMeteor extends Entity {
 
                     // Only check loaded chunks to avoid lag
                     if (serverLevel.isLoaded(chunkPos.getWorldPosition())) {
-                        if (checkChunkForShield(serverLevel, chunkPos, centerPos)) {
-                            return true;
-                        }
+                        if (checkChunkForShield(serverLevel, chunkPos, centerPos)) return true;
                     }
                 }
             }
@@ -310,16 +297,14 @@ public class BaseMeteor extends Entity {
 
         for (int x = minX; x <= maxX; x++) {
             for (int z = minZ; z <= maxZ; z++) {
-                if (Math.abs(x - centerPos.getX()) <= SHIELD_CHECK_RADIUS &&
-                        Math.abs(z - centerPos.getZ()) <= SHIELD_CHECK_RADIUS) {
+                if (Math.abs(x - centerPos.getX()) <= SHIELD_CHECK_RADIUS && Math.abs(z - centerPos.getZ()) <= SHIELD_CHECK_RADIUS) {
                     for (int y = serverLevel.getMinY(); y < serverLevel.getMaxY(); y++) {
                         BlockPos pos = new BlockPos(x, y, z);
                         BlockState state = serverLevel.getBlockState(pos);
                         if (isShieldBlock(state)) {
                             BlockEntity blockEntity = serverLevel.getBlockEntity(pos);
-                            if (blockEntity instanceof CosmicShieldTile && ((CosmicShieldTile) blockEntity).inventory.getSlots() != 0) {
+                            if (blockEntity instanceof CosmicShieldTile && ((CosmicShieldTile) blockEntity).inventory.getSlots() != 0)
                                 return true;
-                            }
                         }
                     }
                 }
@@ -341,9 +326,7 @@ public class BaseMeteor extends Entity {
                 centerPos.offset(-DESTRUCTION_RADIUS, -DESTRUCTION_RADIUS, -DESTRUCTION_RADIUS),
                 centerPos.offset(DESTRUCTION_RADIUS, DESTRUCTION_RADIUS, DESTRUCTION_RADIUS))) {
             BlockState state = serverLevel.getBlockState(pos);
-            if (shouldDestroyBlock(state)) {
-                serverLevel.removeBlock(pos, false);
-            }
+            if (shouldDestroyBlock(state)) serverLevel.removeBlock(pos, false);
         }
     }
 
@@ -364,17 +347,14 @@ public class BaseMeteor extends Entity {
     @Override
     protected void readAdditionalSaveData(CompoundTag pCompound) {
         if (pCompound.contains("LandingPos")) {
-            int[] pos = pCompound.getIntArray("LandingPos");
-            if (pos.length == 3) {
-                this.landingPos = new BlockPos(pos[0], pos[1], pos[2]);
-            }
+            int[] pos = pCompound.getIntArray("LandingPos").get();
+            if (pos.length == 3) this.landingPos = new BlockPos(pos[0], pos[1], pos[2]);
         }
     }
 
     @Override
     protected void addAdditionalSaveData(CompoundTag pCompound) {
-        if (landingPos != null) {
+        if (landingPos != null)
             pCompound.putIntArray("LandingPos", new int[]{landingPos.getX(), landingPos.getY(), landingPos.getZ()});
-        }
     }
 }

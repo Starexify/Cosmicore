@@ -14,6 +14,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LightLayer;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.phys.Vec3;
 import net.nova.cosmicore.client.model.CrusherPistonModel;
 
 public abstract class AbstractCrusherTileRenderer<T extends BlockEntity> implements BlockEntityRenderer<T> {
@@ -30,7 +31,7 @@ public abstract class AbstractCrusherTileRenderer<T extends BlockEntity> impleme
     }
 
     @Override
-    public void render(T crusherTile, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, int packedOverlay) {
+    public void render(T crusherTile, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, int packedOverlay, Vec3 vec3) {
         renderAnimatedPiston(crusherTile, partialTick, poseStack, bufferSource, packedLight, packedOverlay);
     }
 

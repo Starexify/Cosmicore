@@ -3,7 +3,6 @@
   "addition": "cosmicore:titanium_ingot",
   "base": "minecraft:iron_helmet",
   "result": {
-    "count": 1,
     "id": "cosmicore:titanium_helmet"
   },
   "template": "cosmicore:titanium_upgrade_smithing_template"

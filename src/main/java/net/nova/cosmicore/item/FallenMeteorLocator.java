@@ -5,13 +5,13 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
-import net.minecraft.world.level.Level;
-import net.nova.cosmicore.Cosmicore;
 import net.nova.cosmicore.data.CEnchantments;
 import net.nova.cosmicore.event.CEventBusGame;
 import net.nova.cosmicore.init.CDataComponents;
@@ -26,19 +26,17 @@ public class FallenMeteorLocator extends Item {
     }
 
     @Override
-    public void inventoryTick(ItemStack stack, Level level, Entity entity, int slotId, boolean isSelected) {
-        super.inventoryTick(stack, level, entity, slotId, isSelected);
+    public void inventoryTick(ItemStack stack, ServerLevel serverLevel, Entity entity, @Nullable EquipmentSlot equipmentSlot) {
+        super.inventoryTick(stack, serverLevel, entity, equipmentSlot);
 
-        if (!level.isClientSide && entity instanceof Player player) {
-            boolean isHoldingItem = isSelected || player.getOffhandItem() == stack;
+        if (!serverLevel.isClientSide && entity instanceof Player player) {
+            boolean isHoldingItem = player.getOffhandItem() == stack;
             if (!isHoldingItem) return;
 
             BlockPos currentPos = stack.get(CDataComponents.LAST_LOCATION);
             BlockPos newPos = getBlockPos(currentPos);
 
-            if (newPos != null && !newPos.equals(currentPos)) {
-                stack.set(CDataComponents.LAST_LOCATION, newPos);
-            }
+            if (newPos != null && !newPos.equals(currentPos)) stack.set(CDataComponents.LAST_LOCATION, newPos);
 
             BlockPos displayPos = stack.get(CDataComponents.LAST_LOCATION);
             if (displayPos != null) {
@@ -66,9 +64,7 @@ public class FallenMeteorLocator extends Item {
     public static @Nullable BlockPos getBlockPos(@Nullable BlockPos currentPos) {
         if (CEventBusGame.meteorSpawner != null) {
             BlockPos lastSpawnPos = CEventBusGame.meteorSpawner.getLastMeteorSpawnPos();
-            if (lastSpawnPos != null) {
-                return lastSpawnPos;
-            }
+            if (lastSpawnPos != null) return lastSpawnPos;
         }
         return currentPos;
     }

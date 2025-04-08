@@ -5,8 +5,8 @@ import net.minecraft.client.animation.AnimationDefinition;
 import net.minecraft.client.animation.Keyframe;
 import net.minecraft.client.animation.KeyframeAnimations;
 
-public final class MeteorFallingAnimation {
-    public static final AnimationDefinition FALLING_ROTATION_ANIMATION = AnimationDefinition.Builder.withLength(4f).looping()
+public interface MeteorFallingAnimation {
+    AnimationDefinition FALLING_ROTATION_ANIMATION = AnimationDefinition.Builder.withLength(4f).looping()
             .addAnimation("root",
                     new AnimationChannel(AnimationChannel.Targets.ROTATION,
                             new Keyframe(0f, KeyframeAnimations.degreeVec(0f, 0f, 0f),
@@ -16,7 +16,7 @@ public final class MeteorFallingAnimation {
                             new Keyframe(4f, KeyframeAnimations.degreeVec(-360f, 0f, 0f),
                                     AnimationChannel.Interpolations.LINEAR))).build();
 
-    public static final AnimationDefinition DEATH_ANIMATION = AnimationDefinition.Builder.withLength(1f)
+    AnimationDefinition DEATH_ANIMATION = AnimationDefinition.Builder.withLength(1f)
             .addAnimation("root",
                     new AnimationChannel(AnimationChannel.Targets.POSITION,
                             new Keyframe(0f, KeyframeAnimations.posVec(0f, 0f, 0f),
@@ -167,8 +167,4 @@ public final class MeteorFallingAnimation {
                                     AnimationChannel.Interpolations.LINEAR),
                             new Keyframe(1f, KeyframeAnimations.scaleVec(0f, 0f, 0f),
                                     AnimationChannel.Interpolations.LINEAR))).build();
-
-    private MeteorFallingAnimation() {
-        throw new IllegalStateException("Utility class");
-    }
 }

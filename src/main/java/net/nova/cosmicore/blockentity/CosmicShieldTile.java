@@ -31,7 +31,7 @@ public class CosmicShieldTile extends BlockEntity {
     @Override
     protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
         super.loadAdditional(tag, registries);
-        inventory.deserializeNBT(registries, tag.getCompound("Inventory"));
+        inventory.deserializeNBT(registries, tag.getCompound("Inventory").get());
     }
 
     // Updates the BE between Client-Server
@@ -45,7 +45,7 @@ public class CosmicShieldTile extends BlockEntity {
     @Override
     public void handleUpdateTag(CompoundTag tag, HolderLookup.Provider registries) {
         super.handleUpdateTag(tag, registries);
-        inventory.deserializeNBT(registries, tag.getCompound("Inventory"));
+        inventory.deserializeNBT(registries, tag.getCompound("Inventory").get());
     }
 
     @Override

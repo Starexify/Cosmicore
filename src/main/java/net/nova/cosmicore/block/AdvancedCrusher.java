@@ -2,8 +2,6 @@ package net.nova.cosmicore.block;
 
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.Containers;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -29,13 +27,6 @@ public class AdvancedCrusher extends AbstractCrusher {
     @Override
     public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
         return new AdvancedCrusherTile(pPos, pState);
-    }
-
-    @Override
-    protected void dropContents(Level level, BlockPos pos, BlockEntity blockEntity) {
-        if (blockEntity instanceof AdvancedCrusherTile crusherTile) {
-            Containers.dropContents(level, pos, crusherTile.inventory.getItems());
-        }
     }
 
     @Override

@@ -3,7 +3,6 @@
   "addition": "cosmicore:lonsdaleite",
   "base": "minecraft:diamond_horse_armor",
   "result": {
-    "count": 1,
     "id": "cosmicore:lonsdaleite_horse_armor"
   },
   "template": "cosmicore:lonsdaleite_upgrade_smithing_template"

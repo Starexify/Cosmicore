@@ -3,7 +3,6 @@
   "addition": "cosmicore:titanium_ingot",
   "base": "minecraft:iron_hoe",
   "result": {
-    "count": 1,
     "id": "cosmicore:titanium_hoe"
   },
   "template": "cosmicore:titanium_upgrade_smithing_template"

@@ -3,7 +3,6 @@
   "addition": "cosmicore:lonsdaleite",
   "base": "minecraft:diamond_leggings",
   "result": {
-    "count": 1,
     "id": "cosmicore:lonsdaleite_leggings"
   },
   "template": "cosmicore:lonsdaleite_upgrade_smithing_template"

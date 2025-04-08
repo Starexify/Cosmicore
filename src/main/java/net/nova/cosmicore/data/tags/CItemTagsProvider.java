@@ -4,6 +4,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.world.level.block.Block;
 import net.nova.cosmicore.init.CItems;
 import net.nova.cosmicore.init.CTags;
 
@@ -12,8 +13,8 @@ import java.util.concurrent.CompletableFuture;
 import static net.nova.cosmicore.Cosmicore.MODID;
 
 public class CItemTagsProvider extends ItemTagsProvider {
-    public CItemTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, CBlockTagsProvider provider) {
-        super(output, lookupProvider, provider.contentsGetter(), MODID);
+    public CItemTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, CompletableFuture<TagLookup<Block>> blockTags) {
+        super(output, lookupProvider, blockTags, MODID);
     }
 
     @Override

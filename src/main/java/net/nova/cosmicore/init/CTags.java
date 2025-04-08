@@ -17,31 +17,31 @@ import java.util.Set;
 public class CTags {
     private static final Set<ResourceKey<LootTable>> LOCATIONS = new HashSet<>();
 
-    public static class CItemTags {
-        public static final TagKey<Item> REPAIRS_TITANIUM_ARMOR = itemTag("repairs_titanium_armor");
-        public static final TagKey<Item> REPAIRS_LONSDALEITE_ARMOR = itemTag("repairs_lonsdaleite_armor");
-        public static final TagKey<Item> TITANIUM_TOOL_MATERIALS = itemTag("titanium_tool_materials");
-        public static final TagKey<Item> LONSDALEITE_TOOL_MATERIALS = itemTag("lonsdaleite_tool_materials");
-        public static final TagKey<Item> MAGNETIC_ENCHANTABLE = itemTag("enchantable/magnetic");
+    public interface CItemTags {
+        TagKey<Item> REPAIRS_TITANIUM_ARMOR = itemTag("repairs_titanium_armor");
+        TagKey<Item> REPAIRS_LONSDALEITE_ARMOR = itemTag("repairs_lonsdaleite_armor");
+        TagKey<Item> TITANIUM_TOOL_MATERIALS = itemTag("titanium_tool_materials");
+        TagKey<Item> LONSDALEITE_TOOL_MATERIALS = itemTag("lonsdaleite_tool_materials");
+        TagKey<Item> MAGNETIC_ENCHANTABLE = itemTag("enchantable/magnetic");
     }
 
-    public static class BlockTags {
-        public static final TagKey<Block> METEOR_BREAKABLES = createBlockTag("meteor_breakables");
+    public interface BlockTags {
+        TagKey<Block> METEOR_BREAKABLES = createBlockTag("meteor_breakables");
     }
 
-    public static class BiomeTags {
-        public static final TagKey<Biome> HAS_METEOR_SITE = create("has_structure/meteor_site");
-        public static final TagKey<Biome> HAS_DESERT_METEOR_SITE = create("has_structure/desert_meteor_site");
-        public static final TagKey<Biome> HAS_BADLANDS_METEOR_SITE = create("has_structure/badlands_meteor_site");
+    public interface BiomeTags {
+        TagKey<Biome> HAS_METEOR_SITE = create("has_structure/meteor_site");
+        TagKey<Biome> HAS_DESERT_METEOR_SITE = create("has_structure/desert_meteor_site");
+        TagKey<Biome> HAS_BADLANDS_METEOR_SITE = create("has_structure/badlands_meteor_site");
     }
 
-    public static class ChestLootTags {
-        public static final ResourceKey<LootTable> METEOR_SITE_1 = register("chests/meteor_site_1");
-        public static final ResourceKey<LootTable> PALLASITE_SITE_1 = register("chests/pallasite_site_1");
+    public interface ChestLootTags {
+        ResourceKey<LootTable> METEOR_SITE_1 = register("chests/meteor_site_1");
+        ResourceKey<LootTable> PALLASITE_SITE_1 = register("chests/pallasite_site_1");
     }
 
-    public static class BannerPatternTags {
-        public static final TagKey<BannerPattern> PATTERN_ITEM_METEORITE = createBanner("pattern_item/meteorite");
+    public interface BannerPatternTags {
+        TagKey<BannerPattern> PATTERN_ITEM_METEORITE = createBanner("pattern_item/meteorite");
     }
 
     // Register Tags
@@ -62,11 +62,8 @@ public class CTags {
     }
 
     public static ResourceKey<LootTable> register(ResourceKey<LootTable> pName) {
-        if (LOCATIONS.add(pName)) {
-            return pName;
-        } else {
-            throw new IllegalArgumentException(pName.location() + " is already a registered built-in loot table");
-        }
+        if (LOCATIONS.add(pName)) return pName;
+        else throw new IllegalArgumentException(pName.location() + " is already a registered built-in loot table");
     }
 
     public static TagKey<BannerPattern> createBanner(String name) {

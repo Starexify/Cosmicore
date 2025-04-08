@@ -33,15 +33,15 @@ public class FurnaceRecipes extends CRecipeProvider {
                         0.1F,
                         200
                 )
-                .unlockedBy("has_titanium_pickaxe", has(CItems.TITANIUM_PICKAXE))
-                .unlockedBy("has_titanium_shovel", has(CItems.TITANIUM_SHOVEL))
-                .unlockedBy("has_titanium_axe", has(CItems.TITANIUM_AXE))
-                .unlockedBy("has_titanium_hoe", has(CItems.TITANIUM_HOE))
-                .unlockedBy("has_titanium_sword", has(CItems.TITANIUM_SWORD))
-                .unlockedBy("has_titanium_helmet", has(CItems.TITANIUM_HELMET))
-                .unlockedBy("has_titanium_chestplate", has(CItems.TITANIUM_CHESTPLATE))
-                .unlockedBy("has_titanium_leggings", has(CItems.TITANIUM_LEGGINGS))
-                .unlockedBy("has_titanium_boots", has(CItems.TITANIUM_BOOTS))
+                .unlockedBy(getHasName(CItems.TITANIUM_PICKAXE), has(CItems.TITANIUM_PICKAXE))
+                .unlockedBy(getHasName(CItems.TITANIUM_SHOVEL), has(CItems.TITANIUM_SHOVEL))
+                .unlockedBy(getHasName(CItems.TITANIUM_AXE), has(CItems.TITANIUM_AXE))
+                .unlockedBy(getHasName(CItems.TITANIUM_HOE), has(CItems.TITANIUM_HOE))
+                .unlockedBy(getHasName(CItems.TITANIUM_SWORD), has(CItems.TITANIUM_SWORD))
+                .unlockedBy(getHasName(CItems.TITANIUM_HELMET), has(CItems.TITANIUM_HELMET))
+                .unlockedBy(getHasName(CItems.TITANIUM_CHESTPLATE), has(CItems.TITANIUM_CHESTPLATE))
+                .unlockedBy(getHasName(CItems.TITANIUM_LEGGINGS), has(CItems.TITANIUM_LEGGINGS))
+                .unlockedBy(getHasName(CItems.TITANIUM_BOOTS), has(CItems.TITANIUM_BOOTS))
                 .save(output, path + getSmeltingRecipeName(CItems.TITANIUM_NUGGET));
 
         SimpleCookingRecipeBuilder.blasting(Ingredient.of(
@@ -60,15 +60,15 @@ public class FurnaceRecipes extends CRecipeProvider {
                         0.1F,
                         100
                 )
-                .unlockedBy("has_titanium_pickaxe", has(CItems.TITANIUM_PICKAXE))
-                .unlockedBy("has_titanium_shovel", has(CItems.TITANIUM_SHOVEL))
-                .unlockedBy("has_titanium_axe", has(CItems.TITANIUM_AXE))
-                .unlockedBy("has_titanium_hoe", has(CItems.TITANIUM_HOE))
-                .unlockedBy("has_titanium_sword", has(CItems.TITANIUM_SWORD))
-                .unlockedBy("has_titanium_helmet", has(CItems.TITANIUM_HELMET))
-                .unlockedBy("has_titanium_chestplate", has(CItems.TITANIUM_CHESTPLATE))
-                .unlockedBy("has_titanium_leggings", has(CItems.TITANIUM_LEGGINGS))
-                .unlockedBy("has_titanium_boots", has(CItems.TITANIUM_BOOTS))
+                .unlockedBy(getHasName(CItems.TITANIUM_PICKAXE), has(CItems.TITANIUM_PICKAXE))
+                .unlockedBy(getHasName(CItems.TITANIUM_SHOVEL), has(CItems.TITANIUM_SHOVEL))
+                .unlockedBy(getHasName(CItems.TITANIUM_AXE), has(CItems.TITANIUM_AXE))
+                .unlockedBy(getHasName(CItems.TITANIUM_HOE), has(CItems.TITANIUM_HOE))
+                .unlockedBy(getHasName(CItems.TITANIUM_SWORD), has(CItems.TITANIUM_SWORD))
+                .unlockedBy(getHasName(CItems.TITANIUM_HELMET), has(CItems.TITANIUM_HELMET))
+                .unlockedBy(getHasName(CItems.TITANIUM_CHESTPLATE), has(CItems.TITANIUM_CHESTPLATE))
+                .unlockedBy(getHasName(CItems.TITANIUM_LEGGINGS), has(CItems.TITANIUM_LEGGINGS))
+                .unlockedBy(getHasName(CItems.TITANIUM_BOOTS), has(CItems.TITANIUM_BOOTS))
                 .save(output, path + getBlastingRecipeName(CItems.TITANIUM_NUGGET));
 
     }

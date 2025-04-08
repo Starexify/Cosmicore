@@ -4,7 +4,6 @@ import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -27,18 +26,6 @@ public class CosmicShield extends BaseModel {
     }
 
     // Block Entity Stuff
-    // Drops item content
-    @Override
-    protected void onRemove(BlockState state, Level level, BlockPos pos, BlockState pNewState, boolean pMovedByPiston) {
-        if (!state.is(pNewState.getBlock())) {
-            if (level.getBlockEntity(pos) instanceof CosmicShieldTile cosmicShieldTierITile) {
-                Containers.dropContents(level, pos, cosmicShieldTierITile.inventory.getItems());
-                level.updateNeighbourForOutputSignal(pos, this);
-            }
-            super.onRemove(state, level, pos, pNewState, pMovedByPiston);
-        }
-    }
-
     // Interaction
     @Override
     protected InteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {

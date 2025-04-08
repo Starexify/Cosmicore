@@ -3,7 +3,6 @@
   "addition": "cosmicore:lonsdaleite",
   "base": "minecraft:diamond_sword",
   "result": {
-    "count": 1,
     "id": "cosmicore:lonsdaleite_sword"
   },
   "template": "cosmicore:lonsdaleite_upgrade_smithing_template"

@@ -1,12 +1,10 @@
 package net.nova.cosmicore.data;
 
-import net.minecraft.core.HolderLookup;
-import net.minecraft.data.PackOutput;
-import net.minecraft.data.advancements.AdvancementProvider;
+import net.minecraft.core.RegistrySetBuilder;
+import net.minecraft.core.registries.Registries;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
-import net.nova.cosmicore.data.advancements.CosmicoreAdvancements;
 import net.nova.cosmicore.data.loot_table.CLootTableProvider;
 import net.nova.cosmicore.data.models.CEquipmentModelProvider;
 import net.nova.cosmicore.data.models.CModelProvider;
@@ -15,9 +13,11 @@ import net.nova.cosmicore.data.tags.CBannerPatternsTagsProvider;
 import net.nova.cosmicore.data.tags.CBiomeTagsProvider;
 import net.nova.cosmicore.data.tags.CBlockTagsProvider;
 import net.nova.cosmicore.data.tags.CItemTagsProvider;
+import net.nova.cosmicore.data.worldgen.CStructureSets;
+import net.nova.cosmicore.data.worldgen.CStructures;
+import net.nova.cosmicore.data.worldgen.StructurePools;
 
-import java.util.List;
-import java.util.concurrent.CompletableFuture;
+import java.util.Set;
 
 import static net.nova.cosmicore.Cosmicore.MODID;
 
@@ -25,30 +25,25 @@ import static net.nova.cosmicore.Cosmicore.MODID;
 public class DataGenerators {
     @SubscribeEvent
     public static void gatherData(GatherDataEvent.Client event) {
-        PackOutput output = event.getGenerator().getPackOutput();
-        CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
-
-        event.addProvider(new LangProvider(output));
-
-        event.addProvider(new CModelProvider(output));
-        event.addProvider(new CEquipmentModelProvider(output));
-
-        CBlockTagsProvider modBlockTagsProvider = new CBlockTagsProvider(output, lookupProvider);
-        event.addProvider(modBlockTagsProvider);
-        event.addProvider(new CItemTagsProvider(output, lookupProvider, modBlockTagsProvider));
-        event.addProvider(new CBiomeTagsProvider(output, lookupProvider));
-        event.addProvider(new CBannerPatternsTagsProvider(output, lookupProvider));
-
-        event.addProvider(new AtlasesProvider(output, lookupProvider));
-
-        event.addProvider(new CLootTableProvider(output, lookupProvider));
-
-        event.addProvider(new CRecipeProvider.Runner(output, lookupProvider));
-
+        event.createProvider(LangProvider::new);
+        event.createProvider(CModelProvider::new);
+        event.createProvider(CEquipmentModelProvider::new);
+        event.createBlockAndItemTags(CBlockTagsProvider::new, CItemTagsProvider::new);
+        event.createProvider(CBiomeTagsProvider::new);
+        event.createProvider(CBannerPatternsTagsProvider::new);
+        event.createProvider(AtlasesProvider::new);
+        event.createProvider(CLootTableProvider::new);
+        event.createProvider(CRecipeProvider.Runner::new);
 /*        event.addProvider(new AdvancementProvider(output, lookupProvider, List.of(
                 new CosmicoreAdvancements()
         )));*/
-
-        event.addProvider(new DatapackProvider(output, lookupProvider));
+        event.createDatapackRegistryObjects(new RegistrySetBuilder()
+                        .add(Registries.STRUCTURE, CStructures::bootstrap)
+                        .add(Registries.TEMPLATE_POOL, StructurePools::bootstrap)
+                        .add(Registries.STRUCTURE_SET, CStructureSets::bootstrap)
+                        .add(Registries.TRIM_MATERIAL, CTrimMaterials::bootstrap)
+                        .add(Registries.BANNER_PATTERN, CBannerPatterns::bootstrap)
+                        .add(Registries.ENCHANTMENT, CEnchantments::bootstrap),
+                Set.of(MODID));
     }
 }

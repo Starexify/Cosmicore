@@ -8,8 +8,8 @@ import net.nova.cosmicore.equipment.CEquipmentAssets;
 
 import java.util.EnumMap;
 
-public class CArmorMaterials {
-    public static ArmorMaterial TITANIUM = new ArmorMaterial(29, Util.make(new EnumMap<>(ArmorType.class), map -> {
+public interface CArmorMaterials {
+    ArmorMaterial TITANIUM = new ArmorMaterial(29, Util.make(new EnumMap<>(ArmorType.class), map -> {
         map.put(ArmorType.BOOTS, 3);
         map.put(ArmorType.LEGGINGS, 6);
         map.put(ArmorType.CHESTPLATE, 8);
@@ -17,7 +17,7 @@ public class CArmorMaterials {
         map.put(ArmorType.BODY, 7);
     }), 17, SoundEvents.ARMOR_EQUIP_IRON, 2.5F, 0.09F, CTags.CItemTags.REPAIRS_TITANIUM_ARMOR, CEquipmentAssets.TITANIUM);
 
-    public static ArmorMaterial LONSDALEITE = new ArmorMaterial(29, Util.make(new EnumMap<>(ArmorType.class), map -> {
+    ArmorMaterial LONSDALEITE = new ArmorMaterial(29, Util.make(new EnumMap<>(ArmorType.class), map -> {
         map.put(ArmorType.BOOTS, 3);
         map.put(ArmorType.LEGGINGS, 6);
         map.put(ArmorType.CHESTPLATE, 8);

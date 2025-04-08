@@ -3,7 +3,6 @@
   "addition": "cosmicore:titanium_ingot",
   "base": "minecraft:iron_horse_armor",
   "result": {
-    "count": 1,
     "id": "cosmicore:titanium_horse_armor"
   },
   "template": "cosmicore:titanium_upgrade_smithing_template"

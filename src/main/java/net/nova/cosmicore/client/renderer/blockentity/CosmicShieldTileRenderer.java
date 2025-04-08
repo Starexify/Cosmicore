@@ -10,6 +10,7 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.phys.Vec3;
 import net.nova.cosmicore.Cosmicore;
 import net.nova.cosmicore.blockentity.CosmicShieldTile;
 import net.nova.cosmicore.client.model.CosmicShieldTierIModel;
@@ -26,7 +27,7 @@ public class CosmicShieldTileRenderer implements BlockEntityRenderer<CosmicShiel
         this.tierIModel = new CosmicShieldTierIModel(modelSet.bakeLayer(CosmicShieldTierIModel.LAYER_LOCATION));
     }
 
-    public void render(CosmicShieldTile cosmicShieldTile, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, int packedOverlay) {
+    public void render(CosmicShieldTile cosmicShieldTile, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, int packedOverlay, Vec3 vec3) {
         VertexConsumer vertexConsumer = bufferSource.getBuffer(RenderType.entityCutout(SHIELD_TIER_I_LOCATION));
         // Render the crystal
         if (!cosmicShieldTile.inventory.getStackInSlot(0).isEmpty())

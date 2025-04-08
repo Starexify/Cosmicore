@@ -3,7 +3,6 @@
   "addition": "cosmicore:titanium_ingot",
   "base": "minecraft:iron_chestplate",
   "result": {
-    "count": 1,
     "id": "cosmicore:titanium_chestplate"
   },
   "template": "cosmicore:titanium_upgrade_smithing_template"

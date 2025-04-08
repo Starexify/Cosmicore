@@ -8,6 +8,8 @@ import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.Container;
+import net.minecraft.world.Containers;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -45,7 +47,7 @@ public abstract class AbstractCrusherTile extends BlockEntity implements MenuPro
     public boolean hasRecipe;
 
     public static final Map<Item, Integer> FUEL_MAP = Map.of(
-            CItems.INFERNIUM_CRYSTAL.asItem(), 11,
+            CItems.INFERNIUM_CRYSTAL.get(), 11,
             CBlocks.INFERNIUM_BLOCK.asItem(), 44
     );
 
@@ -163,6 +165,12 @@ public abstract class AbstractCrusherTile extends BlockEntity implements MenuPro
         return new SingleRecipeInput(this.inventory.getFirst());
     }
 
+    // Drop Inventory
+    @Override
+    public void preRemoveSideEffects(BlockPos pos, BlockState state) {
+        if (level != null) Containers.dropContents(level, pos, inventory.getItems());
+    }
+
     // Stores NBT Data
     @Override
     protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
@@ -176,10 +184,10 @@ public abstract class AbstractCrusherTile extends BlockEntity implements MenuPro
     @Override
     protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
         super.loadAdditional(tag, registries);
-        inventory.deserializeNBT(registries, tag.getCompound("Inventory"));
-        ignisCharge = tag.getInt("IgnisCharge");
-        ignisPower = tag.getInt("IgnisPower");
-        crushingProgress = tag.getInt("CrushingProgress");
+        inventory.deserializeNBT(registries, tag.getCompoundOrEmpty("Inventory"));
+        ignisCharge = tag.getIntOr("IgnisCharge", 0);
+        ignisPower = tag.getIntOr("IgnisPower", 0);
+        crushingProgress = tag.getIntOr("CrushingProgress", 0);
     }
 
     // Updates the BE between Client-Server
@@ -195,9 +203,9 @@ public abstract class AbstractCrusherTile extends BlockEntity implements MenuPro
     @Override
     public void handleUpdateTag(CompoundTag tag, HolderLookup.Provider registries) {
         super.handleUpdateTag(tag, registries);
-        inventory.deserializeNBT(registries, tag.getCompound("Inventory"));
-        crushingProgress = tag.getInt("CrushingProgress");
-        hasRecipe = tag.getBoolean("HasRecipe");
+        inventory.deserializeNBT(registries, tag.getCompoundOrEmpty("Inventory"));
+        crushingProgress = tag.getIntOr("CrushingProgress", 0);
+        hasRecipe = tag.getBooleanOr("HasRecipe", false);
     }
 
     @Override
