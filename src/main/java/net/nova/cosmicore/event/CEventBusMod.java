@@ -4,7 +4,10 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
+import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
+import net.nova.cosmicore.entity.TitaniumGolem;
 import net.nova.cosmicore.init.CBlockEntities;
+import net.nova.cosmicore.init.CEntities;
 
 import static net.nova.cosmicore.Cosmicore.MODID;
 
@@ -28,5 +31,10 @@ public class CEventBusMod {
                 default -> be.sides;
             };
         });
+    }
+
+    @SubscribeEvent
+    public static void registerEntityAttributes(EntityAttributeCreationEvent event) {
+        event.put(CEntities.TITANIUM_GOLEM.get(), TitaniumGolem.createAttributes().build());
     }
 }

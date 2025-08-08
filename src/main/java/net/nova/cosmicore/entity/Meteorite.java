@@ -7,7 +7,7 @@ import net.minecraft.world.level.levelgen.structure.Structure;
 import net.nova.cosmicore.data.worldgen.CStructures;
 
 public class Meteorite extends BaseMeteor {
-    public Meteorite(EntityType<?> entityType, Level level) {
+    public Meteorite(EntityType<? extends BaseMeteor> entityType, Level level) {
         super(entityType, level);
     }
 

@@ -61,10 +61,11 @@ public class CreativeTab {
             output.accept(CBlocks.METEORITE);
             output.accept(CBlocks.PALLASITE);
 
-            // Infernium
+            // Fuels
             output.accept(CBlocks.INFERNIUM_CLUSTER);
             output.accept(CItems.INFERNIUM_CRYSTAL);
             output.accept(CBlocks.INFERNIUM_BLOCK);
+            output.accept(CItems.OLIVINE);
 
             // Gears
             output.accept(CItems.IRON_GEAR);
@@ -79,6 +80,9 @@ public class CreativeTab {
 
             // Extra
             output.accept(CItems.FALLEN_METEOR_LOCATOR);
+
+            // Spawn Eggs
+            output.accept(CItems.TITANIUM_GOLEM_SPAWN_EGG);
         });
 
         builder.icon(() -> new ItemStack(CBlocks.METEORITE));

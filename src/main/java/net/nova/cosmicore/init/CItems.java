@@ -61,8 +61,9 @@ public class CItems {
     public static final DeferredItem<Item> MAGNETITE = ITEMS.registerSimpleItem("magnetite");
     public static final DeferredItem<Item> FALLEN_METEOR_LOCATOR = ITEMS.registerItem("fallen_meteor_locator", properties -> new FallenMeteorLocator(properties.stacksTo(1)));
 
-    // Infernium
+    // Fuels
     public static final DeferredItem<Item> INFERNIUM_CRYSTAL = ITEMS.registerSimpleItem("infernium_crystal");
+    public static final DeferredItem<Item> OLIVINE = ITEMS.registerSimpleItem("olivine");
 
     // Gears
     public static final DeferredItem<Item> IRON_GEAR = ITEMS.registerSimpleItem("iron_gear");
@@ -70,4 +71,7 @@ public class CItems {
 
     // Banner Pattern
     public static final DeferredItem<Item> METEORITE_BANNER_PATTERN = ITEMS.registerItem("meteorite_banner_pattern", properties -> new Item(properties.stacksTo(1).rarity(Rarity.RARE).component(DataComponents.PROVIDES_BANNER_PATTERNS, CTags.BannerPatternTags.PATTERN_ITEM_METEORITE)));
+
+    // Spawn Eggs
+    public static final DeferredItem<SpawnEggItem> TITANIUM_GOLEM_SPAWN_EGG = ITEMS.registerItem("titanium_golem_spawn_egg", properties -> new SpawnEggItem(CEntities.TITANIUM_GOLEM.get(), properties));
 }

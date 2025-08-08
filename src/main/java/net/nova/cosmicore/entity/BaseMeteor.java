@@ -57,7 +57,7 @@ public class BaseMeteor extends Entity {
             Util.makeDescriptionId("message", rl("meteor_shielded"))
     ).withStyle(ChatFormatting.BLUE, ChatFormatting.BOLD);
 
-    public BaseMeteor(EntityType<?> entityType, Level level) {
+    public BaseMeteor(EntityType<? extends BaseMeteor> entityType, Level level) {
         super(entityType, level);
 
         if (!level.isClientSide()) {

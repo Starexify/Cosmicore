@@ -54,12 +54,13 @@ public class LangProvider extends LanguageProvider {
         addItem(CItems.LONSDALEITE_HORSE_ARMOR, "Lonsdaleite Horse Armor");
         addItem(CItems.LONSDALEITE,"Lonsdaleite");
         addItem(CItems.LONSDALEITE_UPGRADE_SMITHING_TEMPLATE,"Lonsdaleite Upgrade");
-
         addItem(CItems.MAGNETITE, "Magnetite");
         addItem(CItems.FALLEN_METEOR_LOCATOR, "Fallen Meteor Locator");
         addItem(CItems.INFERNIUM_CRYSTAL, "Infernium Crystal");
+        addItem(CItems.OLIVINE, "Olivine");
         addItem(CItems.IRON_GEAR, "Iron Gear");
         addItem(CItems.TITANIUM_GEAR, "Titanium Gear");
+        addItem(CItems.TITANIUM_GOLEM_SPAWN_EGG, "Titanium Golem Spawn Egg");
 
         // Banner Patterns
         addItem(CItems.METEORITE_BANNER_PATTERN, "Meteorite Banner Pattern");

@@ -47,16 +47,9 @@
   </tr>
 </table>
 
-<p align="center">
-    <strong>
-        ⚠️Please note that this is just a beta version, so expect that features may be buggy or not fully implemented yet.
-        We would appreciate your feedback and ideas as we work on this project!
-    </strong>
-</p>
-
 ## 🗞️ Cosmicore News
 
-Version 1.1.0 - 1.21.4 WIP!
+Version 1.0.0 - 1.21.5 !
 
 ## ℹ️ About
 
@@ -72,7 +65,7 @@ Cosmicore is a brand-new meteors mod for minecraft, inspired by the nostalgia of
     </tr>
     <tr>
       <td style="padding: 10px; text-align: left; border: none;"><strong>🪨 New Materials</strong></td>
-      <td style="padding: 10px; text-align: left; border: none;"><strong>Titanium</strong>, <strong>Infernium</strong> and <strong>Magnetite</strong> are two new materials.</td>
+      <td style="padding: 10px; text-align: left; border: none;"><strong>Titanium</strong>, <strong>Infernium</strong> and <strong>Magnetite</strong> are the new materials.</td>
     </tr>
     <tr>
       <td style="padding: 10px; text-align: left; border: none;"><strong>⚙️ Machines</strong></td>

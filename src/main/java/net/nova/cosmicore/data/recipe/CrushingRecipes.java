@@ -77,6 +77,8 @@ public class CrushingRecipes extends CRecipeProvider {
                 .addResult(CItems.LONSDALEITE, 1, 0.02f)
                 .addResult(Items.DIAMOND, 2, 0.02f)
                 .addResult(Items.DIAMOND, 1, 0.06f)
+                .addResult(CItems.OLIVINE, 3, 0.045f)
+                .addResult(CItems.OLIVINE, 1, 0.1f)
                 .addResult(CItems.RAW_TITANIUM, 3, 0.15f)
                 .addResult(CItems.RAW_TITANIUM, 2, 0.23f)
                 .addResult(CItems.RAW_TITANIUM, 1, 0.4f)

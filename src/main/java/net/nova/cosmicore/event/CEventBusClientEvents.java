@@ -11,11 +11,13 @@ import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.nova.cosmicore.client.model.BaseMeteorModel;
 import net.nova.cosmicore.client.model.CosmicShieldTierIModel;
 import net.nova.cosmicore.client.model.CrusherPistonModel;
+import net.nova.cosmicore.client.model.TitaniumGolemModel;
 import net.nova.cosmicore.client.renderer.blockentity.AdvancedCrusherTileRenderer;
 import net.nova.cosmicore.client.renderer.blockentity.CosmicShieldTileRenderer;
 import net.nova.cosmicore.client.renderer.blockentity.CrusherTileRenderer;
 import net.nova.cosmicore.client.renderer.entity.AchondriteRenderer;
 import net.nova.cosmicore.client.renderer.entity.MeteoriteRenderer;
+import net.nova.cosmicore.client.renderer.entity.TitaniumGolemRenderer;
 import net.nova.cosmicore.gui.crusher.AdvancedCrusherScreen;
 import net.nova.cosmicore.gui.crusher.CrusherScreen;
 import net.nova.cosmicore.init.*;
@@ -45,6 +47,7 @@ public class CEventBusClientEvents {
     public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
         event.registerLayerDefinition(CModelLayers.ACHONDRITE, BaseMeteorModel::createBodyLayer);
         event.registerLayerDefinition(CModelLayers.METEORITE, BaseMeteorModel::createBodyLayer);
+        event.registerLayerDefinition(CModelLayers.TITANIUM_GOLEM, TitaniumGolemModel::createBodyLayer);
 
         event.registerLayerDefinition(CrusherPistonModel.LAYER_LOCATION, CrusherPistonModel::createLayer);
         event.registerLayerDefinition(CosmicShieldTierIModel.LAYER_LOCATION, CosmicShieldTierIModel::createLayer);
@@ -55,6 +58,7 @@ public class CEventBusClientEvents {
     public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
         event.registerEntityRenderer(CEntities.ACHONDRITE.get(), AchondriteRenderer::new);
         event.registerEntityRenderer(CEntities.METEORITE.get(), MeteoriteRenderer::new);
+        event.registerEntityRenderer(CEntities.TITANIUM_GOLEM.get(), TitaniumGolemRenderer::new);
 
         event.registerBlockEntityRenderer(CBlockEntities.CRUSHER_TILE.get(), CrusherTileRenderer::new);
         event.registerBlockEntityRenderer(CBlockEntities.ADVANCED_CRUSHER_TILE.get(), AdvancedCrusherTileRenderer::new);
