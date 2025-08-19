@@ -1,4 +1,4 @@
-![Cosmicore Logo](https://raw.githubusercontent.com/Starexify/Cosmicore/1.21/src/main/resources/cosmicore_logo.png?token=GHSAT0AAAAAACTBPAKN3YXSWJCRIDHMQOYSZVHL2QA)
+![Cosmicore Logo]([https://raw.githubusercontent.com/Starexify/Cosmicore/1.21/src/main/resources/cosmicore_logo.png?token=GHSAT0AAAAAACTBPAKN3YXSWJCRIDHMQOYSZVHL2QA](https://raw.githubusercontent.com/Starexify/Cosmicore/refs/heads/1.21-neo/src/main/resources/cosmicore_logo.png))
 
 <p align="center">
   <a href="https://www.curseforge.com/minecraft/mc-mods/cosmicore"><img alt="curseforge" height="56" src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/available/curseforge_vector.svg"></a>
