@@ -1,4 +1,4 @@
-![Cosmicore Logo]([https://raw.githubusercontent.com/Starexify/Cosmicore/1.21/src/main/resources/cosmicore_logo.png?token=GHSAT0AAAAAACTBPAKN3YXSWJCRIDHMQOYSZVHL2QA](https://raw.githubusercontent.com/Starexify/Cosmicore/refs/heads/1.21-neo/src/main/resources/cosmicore_logo.png))
+![Cosmicore Logo](https://github.com/Starexify/Cosmicore/blob/1.21.4-neo/src/main/resources/cosmicore_logo.png?raw=true)
 
 <p align="center">
   <a href="https://www.curseforge.com/minecraft/mc-mods/cosmicore"><img alt="curseforge" height="56" src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/available/curseforge_vector.svg"></a>
@@ -16,40 +16,9 @@
   <a href="https://github.com/Starexify/Cosmicore/blob/1.21/LICENSE"><img alt="GitHub License" src="https://img.shields.io/github/license/Starexify/Cosmicore?style=for-the-badge&color=1B3193"></a>
 </p>
 
-
-<table align="center" style="border-collapse: collapse; margin: 20px auto; width: 80%;">
-  <tr>
-    <td align="center" style="border: none; padding: 10px;">
-      <a href="#%EF%B8%8F-cosmicore-news" style="text-decoration: none; color: #808080; font-size: 1.2em; font-weight: bold; transition: color 0.3s ease;">
-        🗞️ News
-      </a>
-    </td>
-    <td align="center" style="border: none; padding: 10px;">
-      <a href="#%E2%84%B9%EF%B8%8F-about" style="text-decoration: none; color: #00A7E1; font-size: 1.2em; font-weight: bold; transition: color 0.3s ease;">
-        ℹ️ About 
-      </a>
-    </td>
-    <td align="center" style="border: none; padding: 10px;">
-      <a href="#-features" style="text-decoration: none; color: #FF4F58; font-size: 1.2em; font-weight: bold; transition: color 0.3s ease;">
-        ✨ Features
-      </a>
-    </td>
-    <td align="center" style="border: none; padding: 10px;">
-      <a href="##%EF%B8%8F-planned-updates" style="text-decoration: none; color: #FF9900; font-size: 1.2em; font-weight: bold; transition: color 0.3s ease;">
-        🗓️ Planned Updates
-      </a>
-    </td>
-    <td align="center" style="border: none; padding: 10px;">
-      <a href="#-license" style="text-decoration: none; color: #00CC44; font-size: 1.2em; font-weight: bold; transition: color 0.3s ease;">
-        📜 License
-      </a>
-    </td>
-  </tr>
-</table>
-
 ## 🗞️ Cosmicore News
 
-Version 1.0.0 RELEASED!
+Version 1.21.4 - 1.1.0 RELEASED!
 
 ## ℹ️ About
 
