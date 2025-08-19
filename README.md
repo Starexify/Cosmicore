@@ -16,37 +16,6 @@
   <a href="https://github.com/Starexify/Cosmicore/blob/1.21/LICENSE"><img alt="GitHub License" src="https://img.shields.io/github/license/Starexify/Cosmicore?style=for-the-badge&color=1B3193"></a>
 </p>
 
-
-<table align="center" style="border-collapse: collapse; margin: 20px auto; width: 80%;">
-  <tr>
-    <td align="center" style="border: none; padding: 10px;">
-      <a href="#%EF%B8%8F-cosmicore-news" style="text-decoration: none; color: #808080; font-size: 1.2em; font-weight: bold; transition: color 0.3s ease;">
-        🗞️ News
-      </a>
-    </td>
-    <td align="center" style="border: none; padding: 10px;">
-      <a href="#%E2%84%B9%EF%B8%8F-about" style="text-decoration: none; color: #00A7E1; font-size: 1.2em; font-weight: bold; transition: color 0.3s ease;">
-        ℹ️ About 
-      </a>
-    </td>
-    <td align="center" style="border: none; padding: 10px;">
-      <a href="#-features" style="text-decoration: none; color: #FF4F58; font-size: 1.2em; font-weight: bold; transition: color 0.3s ease;">
-        ✨ Features
-      </a>
-    </td>
-    <td align="center" style="border: none; padding: 10px;">
-      <a href="##%EF%B8%8F-planned-updates" style="text-decoration: none; color: #FF9900; font-size: 1.2em; font-weight: bold; transition: color 0.3s ease;">
-        🗓️ Planned Updates
-      </a>
-    </td>
-    <td align="center" style="border: none; padding: 10px;">
-      <a href="#-license" style="text-decoration: none; color: #00CC44; font-size: 1.2em; font-weight: bold; transition: color 0.3s ease;">
-        📜 License
-      </a>
-    </td>
-  </tr>
-</table>
-
 <p align="center">
     <strong>
         ⚠️Please note that this is just a beta version, so expect that features may be buggy or not fully implemented yet.
@@ -56,7 +25,7 @@
 
 ## 🗞️ Cosmicore News
 
-Version 1.1.0 - 1.21.4 WIP!
+Version 1.21.4 - 1.1.0 RELEASED!
 
 ## ℹ️ About
 
