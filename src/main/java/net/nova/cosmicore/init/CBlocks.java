@@ -16,91 +16,91 @@ import java.util.function.Function;
 import static net.nova.cosmicore.Cosmicore.MODID;
 
 public class CBlocks {
-    public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(MODID);
+  public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(MODID);
 
-    // Titanium Stuff
-    public static final DeferredBlock<Block> RAW_TITANIUM_BLOCK = registerBlockWithItem("raw_titanium_block", Block::new, BlockBehaviour.Properties.of()
-            .mapColor(MapColor.COLOR_LIGHT_BLUE)
-            .instrument(NoteBlockInstrument.BASEDRUM)
-            .requiresCorrectToolForDrops()
-            .strength(5.0F, 6.0F));
+  // Titanium Stuff
+  public static final DeferredBlock<Block> RAW_TITANIUM_BLOCK = registerBlockWithItem("raw_titanium_block", Block::new, BlockBehaviour.Properties.of()
+      .mapColor(MapColor.COLOR_LIGHT_BLUE)
+      .instrument(NoteBlockInstrument.BASEDRUM)
+      .requiresCorrectToolForDrops()
+      .strength(5.0F, 6.0F));
 
-    public static final DeferredBlock<Block> TITANIUM_BLOCK = registerBlockWithItem("titanium_block", Block::new, BlockBehaviour.Properties.of()
-            .mapColor(MapColor.METAL)
-            .instrument(NoteBlockInstrument.PLING)
-            .requiresCorrectToolForDrops()
-            .strength(5.0F, 6.0F)
-            .sound(SoundType.METAL));
+  public static final DeferredBlock<Block> TITANIUM_BLOCK = registerBlockWithItem("titanium_block", Block::new, BlockBehaviour.Properties.of()
+      .mapColor(MapColor.METAL)
+      .instrument(NoteBlockInstrument.PLING)
+      .requiresCorrectToolForDrops()
+      .strength(5.0F, 6.0F)
+      .sound(SoundType.METAL));
 
-    // Lonsdaleite Stuff
-    public static final DeferredBlock<Block> LONSDALEITE_BLOCK = registerBlockWithItem("lonsdaleite_block", HalfTransparentBlock::new, BlockBehaviour.Properties.of()
-            .requiresCorrectToolForDrops()
-            .strength(5.0F, 6.0F)
-            .sound(SoundType.GLASS)
-            .noOcclusion());
+  // Lonsdaleite Stuff
+  public static final DeferredBlock<Block> LONSDALEITE_BLOCK = registerBlockWithItem("lonsdaleite_block", HalfTransparentBlock::new, BlockBehaviour.Properties.of()
+      .requiresCorrectToolForDrops()
+      .strength(5.0F, 6.0F)
+      .sound(SoundType.GLASS)
+      .noOcclusion());
 
-    // Meteorites
-    public static final DeferredBlock<Block> ACHONDRITE = registerBlockWithItem("achondrite", Block::new, BlockBehaviour.Properties.of()
-            .mapColor(MapColor.COLOR_LIGHT_GRAY)
-            .instrument(NoteBlockInstrument.BASEDRUM)
-            .requiresCorrectToolForDrops()
-            .strength(10.0F, 6.0F)
-            .sound(SoundType.DEEPSLATE));
-    public static final DeferredBlock<Block> METEORITE = registerBlockWithItem("meteorite", Block::new, BlockBehaviour.Properties.of()
-            .mapColor(MapColor.COLOR_BROWN)
-            .instrument(NoteBlockInstrument.BASEDRUM)
-            .requiresCorrectToolForDrops()
-            .strength(20.0F, 1200.0F)
-            .sound(SoundType.DEEPSLATE));
-    public static final DeferredBlock<Block> PALLASITE = registerBlockWithItem("pallasite", Block::new, BlockBehaviour.Properties.of()
-            .mapColor(MapColor.COLOR_ORANGE)
-            .instrument(NoteBlockInstrument.HAT)
-            .requiresCorrectToolForDrops()
-            .strength(35.0F, 600.0F)
-            .sound(SoundType.AMETHYST)
-            .lightLevel(light -> 9));
+  // Meteorites
+  public static final DeferredBlock<Block> ACHONDRITE = registerBlockWithItem("achondrite", Block::new, BlockBehaviour.Properties.of()
+      .mapColor(MapColor.COLOR_LIGHT_GRAY)
+      .instrument(NoteBlockInstrument.BASEDRUM)
+      .requiresCorrectToolForDrops()
+      .strength(10.0F, 6.0F)
+      .sound(SoundType.DEEPSLATE));
+  public static final DeferredBlock<Block> METEORITE = registerBlockWithItem("meteorite", Block::new, BlockBehaviour.Properties.of()
+      .mapColor(MapColor.COLOR_BROWN)
+      .instrument(NoteBlockInstrument.BASEDRUM)
+      .requiresCorrectToolForDrops()
+      .strength(20.0F, 1200.0F)
+      .sound(SoundType.DEEPSLATE));
+  public static final DeferredBlock<Block> PALLASITE = registerBlockWithItem("pallasite", Block::new, BlockBehaviour.Properties.of()
+      .mapColor(MapColor.COLOR_ORANGE)
+      .instrument(NoteBlockInstrument.HAT)
+      .requiresCorrectToolForDrops()
+      .strength(35.0F, 600.0F)
+      .sound(SoundType.AMETHYST)
+      .lightLevel(light -> 9));
 
-    // Crusher
-    public static final DeferredBlock<Block> CRUSHER = registerBlockWithItem("crusher", Crusher::new, BlockBehaviour.Properties.of()
-            .mapColor(MapColor.METAL)
-            .instrument(NoteBlockInstrument.BASEDRUM)
-            .requiresCorrectToolForDrops()
-            .strength(6F)
-            .sound(SoundType.NETHERITE_BLOCK));
+  // Crusher
+  public static final DeferredBlock<Block> CRUSHER = registerBlockWithItem("crusher", Crusher::new, BlockBehaviour.Properties.of()
+      .mapColor(MapColor.METAL)
+      .instrument(NoteBlockInstrument.BASEDRUM)
+      .requiresCorrectToolForDrops()
+      .strength(6F)
+      .sound(SoundType.NETHERITE_BLOCK));
 
-    public static final DeferredBlock<Block> ADVANCED_CRUSHER = registerBlockWithItem("advanced_crusher", AdvancedCrusher::new, BlockBehaviour.Properties.of()
-            .mapColor(MapColor.METAL)
-            .instrument(NoteBlockInstrument.BASEDRUM)
-            .requiresCorrectToolForDrops()
-            .strength(6F)
-            .sound(SoundType.NETHERITE_BLOCK));
+  public static final DeferredBlock<Block> ADVANCED_CRUSHER = registerBlockWithItem("advanced_crusher", AdvancedCrusher::new, BlockBehaviour.Properties.of()
+      .mapColor(MapColor.METAL)
+      .instrument(NoteBlockInstrument.BASEDRUM)
+      .requiresCorrectToolForDrops()
+      .strength(6F)
+      .sound(SoundType.NETHERITE_BLOCK));
 
-    // Cosmic Shield
-    public static final DeferredBlock<Block> COSMIC_SHIELD = registerBlockWithItem("cosmic_shield", CosmicShield::new,
-            BlockBehaviour.Properties.of()
-                    .mapColor(MapColor.METAL)
-                    .requiresCorrectToolForDrops()
-                    .strength(6F)
-                    .sound(SoundType.NETHERITE_BLOCK));
+  // Cosmic Shield
+  public static final DeferredBlock<Block> COSMIC_SHIELD = registerBlockWithItem("cosmic_shield", CosmicShield::new,
+      BlockBehaviour.Properties.of()
+          .mapColor(MapColor.METAL)
+          .requiresCorrectToolForDrops()
+          .strength(6F)
+          .sound(SoundType.NETHERITE_BLOCK));
 
-    // Infernium
-    public static final DeferredBlock<Block> INFERNIUM_CLUSTER = registerBlockWithItem("infernium_cluster", properties -> new AmethystClusterBlock(7.0F, 3.0F, properties),
-            BlockBehaviour.Properties.of()
-                    .mapColor(MapColor.COLOR_RED)
-                    .forceSolidOn()
-                    .noOcclusion()
-                    .sound(SoundType.AMETHYST_CLUSTER)
-                    .strength(1.5F)
-                    .lightLevel(light -> 9)
-                    .pushReaction(PushReaction.DESTROY)
-                    .requiresCorrectToolForDrops());
+  // Infernium
+  public static final DeferredBlock<Block> INFERNIUM_CLUSTER = registerBlockWithItem("infernium_cluster", properties -> new AmethystClusterBlock(7.0F, 3.0F, properties),
+      BlockBehaviour.Properties.of()
+          .mapColor(MapColor.COLOR_RED)
+          .forceSolidOn()
+          .noOcclusion()
+          .sound(SoundType.AMETHYST_CLUSTER)
+          .strength(1.5F)
+          .lightLevel(light -> 9)
+          .pushReaction(PushReaction.DESTROY)
+          .requiresCorrectToolForDrops());
 
-    public static final DeferredBlock<Block> INFERNIUM_BLOCK = registerBlockWithItem("infernium_block", AmethystBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.AMETHYST_BLOCK));
+  public static final DeferredBlock<Block> INFERNIUM_BLOCK = registerBlockWithItem("infernium_block", AmethystBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.AMETHYST_BLOCK));
 
-    // Register
-    public static <T extends Block> DeferredBlock<T> registerBlockWithItem(String name, Function<BlockBehaviour.Properties, T> blockCreator, BlockBehaviour.Properties properties) {
-        DeferredBlock<T> block = BLOCKS.registerBlock(name, blockCreator, properties);
-        CItems.ITEMS.registerSimpleBlockItem(name, block);
-        return block;
-    }
+  // Register
+  public static <T extends Block> DeferredBlock<T> registerBlockWithItem(String name, Function<BlockBehaviour.Properties, T> blockCreator, BlockBehaviour.Properties properties) {
+    DeferredBlock<T> block = BLOCKS.registerBlock(name, blockCreator, () -> properties);
+    CItems.ITEMS.registerSimpleBlockItem(name, block);
+    return block;
+  }
 }

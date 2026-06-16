@@ -12,7 +12,6 @@
     {
       "chance": 0.02,
       "item": {
-        "count": 1,
         "id": "cosmicore:lonsdaleite"
       }
     },
@@ -26,7 +25,6 @@
     {
       "chance": 0.06,
       "item": {
-        "count": 1,
         "id": "minecraft:diamond"
       }
     },
@@ -40,7 +38,6 @@
     {
       "chance": 0.1,
       "item": {
-        "count": 1,
         "id": "cosmicore:olivine"
       }
     },
@@ -61,7 +58,6 @@
     {
       "chance": 0.4,
       "item": {
-        "count": 1,
         "id": "cosmicore:raw_titanium"
       }
     },

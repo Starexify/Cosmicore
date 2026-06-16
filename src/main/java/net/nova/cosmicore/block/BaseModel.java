@@ -14,42 +14,42 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import javax.annotation.Nullable;
 
 public abstract class BaseModel extends BaseEntityBlock {
-    public static final Property<Direction> FACING = HorizontalDirectionalBlock.FACING;
-    private final VoxelShape SHAPE;
+  public static final Property<Direction> FACING = HorizontalDirectionalBlock.FACING;
+  private final VoxelShape SHAPE;
 
-    public BaseModel(Properties properties) {
-        super(properties);
-        this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH));
-        this.SHAPE = makeShape();
-    }
+  public BaseModel(Properties properties) {
+    super(properties);
+    this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH));
+    this.SHAPE = makeShape();
+  }
 
-    // Blockstate Faces
-    @Nullable
-    @Override
-    public BlockState getStateForPlacement(BlockPlaceContext pContext) {
-        return this.defaultBlockState().setValue(FACING, pContext.getHorizontalDirection().getOpposite());
-    }
+  // Blockstate Faces
+  @Nullable
+  @Override
+  public BlockState getStateForPlacement(BlockPlaceContext pContext) {
+    return this.defaultBlockState().setValue(FACING, pContext.getHorizontalDirection().getOpposite());
+  }
 
-    @Override
-    protected BlockState rotate(BlockState pState, Rotation pRotation) {
-        return pState.setValue(FACING, pRotation.rotate(pState.getValue(FACING)));
-    }
+  @Override
+  protected BlockState rotate(BlockState pState, Rotation pRotation) {
+    return pState.setValue(FACING, pRotation.rotate(pState.getValue(FACING)));
+  }
 
-    @Override
-    protected BlockState mirror(BlockState pState, Mirror pMirror) {
-        return pState.rotate(pMirror.getRotation(pState.getValue(FACING)));
-    }
+  @Override
+  protected BlockState mirror(BlockState pState, Mirror pMirror) {
+    return pState.rotate(pMirror.getRotation(pState.getValue(FACING)));
+  }
 
-    @Override
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
-        pBuilder.add(FACING);
-    }
+  @Override
+  protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
+    pBuilder.add(FACING);
+  }
 
-    // Block Shape
-    public abstract VoxelShape makeShape();
+  // Block Shape
+  public abstract VoxelShape makeShape();
 
-    @Override
-    protected VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
-        return SHAPE;
-    }
+  @Override
+  protected VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
+    return SHAPE;
+  }
 }

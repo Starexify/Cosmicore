@@ -6,21 +6,20 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
 
 import java.util.ArrayList;
-import java.util.Optional;
 
 public class AdvancedCrushingRecipeBuilder extends BaseRecipeBuilder {
-    public AdvancedCrushingRecipeBuilder(Ingredient ingredient) {
-        this.ingredient = ingredient;
-        this.results = new ArrayList<>();
-    }
+  public AdvancedCrushingRecipeBuilder(Ingredient ingredient) {
+    this.ingredient = ingredient;
+    this.results = new ArrayList<>();
+  }
 
-    public static AdvancedCrushingRecipeBuilder crushing(Ingredient ingredient) {
-        return new AdvancedCrushingRecipeBuilder(ingredient);
-    }
+  public static AdvancedCrushingRecipeBuilder crushing(Ingredient ingredient) {
+    return new AdvancedCrushingRecipeBuilder(ingredient);
+  }
 
-    @Override
-    public void save(RecipeOutput recipeOutput, ResourceKey<Recipe<?>> resourceKey) {
-        AdvancedCrushingRecipe recipe = new AdvancedCrushingRecipe(Optional.of(ingredient), results);
-        recipeOutput.accept(resourceKey, recipe, null);
-    }
+  @Override
+  public void save(RecipeOutput recipeOutput, ResourceKey<Recipe<?>> resourceKey) {
+    AdvancedCrushingRecipe recipe = new AdvancedCrushingRecipe(ingredient, results);
+    recipeOutput.accept(resourceKey, recipe, null);
+  }
 }

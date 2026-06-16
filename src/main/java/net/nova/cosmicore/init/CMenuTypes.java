@@ -12,8 +12,8 @@ import java.util.function.Supplier;
 import static net.nova.cosmicore.Cosmicore.MODID;
 
 public class CMenuTypes {
-    public static final DeferredRegister<MenuType<?>> MENUS = DeferredRegister.create(Registries.MENU, MODID);
+  public static final DeferredRegister<MenuType<?>> MENUS = DeferredRegister.create(Registries.MENU, MODID);
 
-    public static Supplier<MenuType<CrusherMenu>> CRUSHER_MENU = MENUS.register("crusher_menu", () -> IMenuTypeExtension.create(CrusherMenu::new));
-    public static Supplier<MenuType<AdvancedCrusherMenu>> ADVANCED_CRUSHER_MENU = MENUS.register("advanced_crusher_menu", () -> IMenuTypeExtension.create(AdvancedCrusherMenu::new));
+  public static Supplier<MenuType<CrusherMenu>> CRUSHER_MENU = MENUS.register("crusher_menu", () -> IMenuTypeExtension.create(CrusherMenu::new));
+  public static Supplier<MenuType<AdvancedCrusherMenu>> ADVANCED_CRUSHER_MENU = MENUS.register("advanced_crusher_menu", () -> IMenuTypeExtension.create(AdvancedCrusherMenu::new));
 }

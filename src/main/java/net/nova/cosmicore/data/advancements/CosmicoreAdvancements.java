@@ -1,30 +1,20 @@
 package net.nova.cosmicore.data.advancements;
 
-import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementHolder;
-import net.minecraft.advancements.AdvancementType;
-import net.minecraft.advancements.critereon.LocationPredicate;
-import net.minecraft.advancements.critereon.PlayerTrigger;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.advancements.AdvancementSubProvider;
-import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.levelgen.structure.BuiltinStructures;
-import net.nova.cosmicore.Cosmicore;
-import net.nova.cosmicore.init.CBlocks;
 
 import java.util.function.Consumer;
 
-import static net.nova.cosmicore.Cosmicore.MODID;
-
 public class CosmicoreAdvancements implements AdvancementSubProvider {
-    @Override
-    public void generate(HolderLookup.Provider registries, Consumer<AdvancementHolder> save) {
-        HolderGetter<Block> blockGetter = registries.lookupOrThrow(Registries.BLOCK);
-        HolderGetter<Item> itemGetter = registries.lookupOrThrow(Registries.ITEM);
+  @Override
+  public void generate(HolderLookup.Provider registries, Consumer<AdvancementHolder> save) {
+    HolderGetter<Block> blockGetter = registries.lookupOrThrow(Registries.BLOCK);
+    HolderGetter<Item> itemGetter = registries.lookupOrThrow(Registries.ITEM);
 
 /*        AdvancementHolder root = Advancement.Builder.advancement().display(
                         CBlocks.METEORITE,
@@ -43,5 +33,5 @@ public class CosmicoreAdvancements implements AdvancementSubProvider {
                         )
                 )
                 .save(save, MODID + ":root");*/
-    }
+  }
 }

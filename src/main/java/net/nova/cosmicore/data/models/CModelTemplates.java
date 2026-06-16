@@ -7,17 +7,17 @@ import net.nova.cosmicore.Cosmicore;
 import java.util.Optional;
 
 public class CModelTemplates {
-    public static final ModelTemplate GEAR_ITEM = createItem("template_gear", TextureSlot.LAYER0);
-    public static final ModelTemplate TEMPLATE_CRUSHER_ITEM = createItem("template_crusher", TextureSlot.LAYER0);
-    public static final ModelTemplate TEMPLATE_COSMIC_SHIELD_ITEM = createItem("template_cosmic_shield", TextureSlot.LAYER0);
-    public static final ModelTemplate TEMPLATE_CRUSHER = create("template_crusher", TextureSlot.LAYER0, TextureSlot.PARTICLE);
-    public static final ModelTemplate TEMPLATE_COSMIC_SHIELD = create("template_cosmic_shield", TextureSlot.LAYER0, TextureSlot.PARTICLE);
+  public static final ModelTemplate GEAR_ITEM = createItem("template_gear", TextureSlot.LAYER0);
+  public static final ModelTemplate TEMPLATE_CRUSHER_ITEM = createItem("template_crusher", TextureSlot.LAYER0);
+  public static final ModelTemplate TEMPLATE_COSMIC_SHIELD_ITEM = createItem("template_cosmic_shield", TextureSlot.LAYER0);
+  public static final ModelTemplate TEMPLATE_CRUSHER = create("template_crusher", TextureSlot.LAYER0, TextureSlot.PARTICLE);
+  public static final ModelTemplate TEMPLATE_COSMIC_SHIELD = create("template_cosmic_shield", TextureSlot.LAYER0, TextureSlot.PARTICLE);
 
-    public static ModelTemplate createItem(String name, TextureSlot... textureSlots) {
-        return new ModelTemplate(Optional.of(Cosmicore.rl(name).withPrefix("item/")), Optional.empty(), textureSlots);
-    }
+  public static ModelTemplate createItem(String name, TextureSlot... textureSlots) {
+    return new ModelTemplate(Optional.of(Cosmicore.rl(name).withPrefix("item/")), Optional.empty(), textureSlots);
+  }
 
-    public static ModelTemplate create(String name, TextureSlot... requiredSlots) {
-        return new ModelTemplate(Optional.of(Cosmicore.rl(name).withPrefix("block/")), Optional.empty(), requiredSlots);
-    }
+  public static ModelTemplate create(String name, TextureSlot... requiredSlots) {
+    return new ModelTemplate(Optional.of(Cosmicore.rl(name).withPrefix("block/")), Optional.empty(), requiredSlots);
+  }
 }

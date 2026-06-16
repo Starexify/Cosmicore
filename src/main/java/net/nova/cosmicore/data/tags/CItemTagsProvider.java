@@ -2,9 +2,9 @@ package net.nova.cosmicore.data.tags;
 
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.level.block.Block;
+import net.neoforged.neoforge.common.data.BlockTagCopyingItemTagProvider;
 import net.nova.cosmicore.init.CItems;
 import net.nova.cosmicore.init.CTags;
 
@@ -12,55 +12,55 @@ import java.util.concurrent.CompletableFuture;
 
 import static net.nova.cosmicore.Cosmicore.MODID;
 
-public class CItemTagsProvider extends ItemTagsProvider {
-    public CItemTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, CompletableFuture<TagLookup<Block>> blockTags) {
-        super(output, lookupProvider, blockTags, MODID);
-    }
+public class CItemTagsProvider extends BlockTagCopyingItemTagProvider {
+  public CItemTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, CompletableFuture<TagLookup<Block>> blockTags) {
+    super(output, lookupProvider, blockTags, MODID);
+  }
 
-    @Override
-    protected void addTags(HolderLookup.Provider pProvider) {
-        tag(ItemTags.SWORDS).add(
-                CItems.TITANIUM_SWORD.get(), CItems.LONSDALEITE_SWORD.get()
-        );
+  @Override
+  protected void addTags(HolderLookup.Provider pProvider) {
+    tag(ItemTags.SWORDS).add(
+        CItems.TITANIUM_SWORD.getKey(), CItems.LONSDALEITE_SWORD.getKey()
+    );
 
-        tag(ItemTags.PICKAXES).add(
-                CItems.TITANIUM_PICKAXE.get(), CItems.LONSDALEITE_PICKAXE.get()
-        );
+    tag(ItemTags.PICKAXES).add(
+        CItems.TITANIUM_PICKAXE.getKey(), CItems.LONSDALEITE_PICKAXE.getKey()
+    );
 
-        tag(ItemTags.AXES).add(
-                CItems.TITANIUM_AXE.get(), CItems.LONSDALEITE_AXE.get()
-        );
+    tag(ItemTags.AXES).add(
+        CItems.TITANIUM_AXE.getKey(), CItems.LONSDALEITE_AXE.getKey()
+    );
 
-        tag(ItemTags.SHOVELS).add(
-                CItems.TITANIUM_SHOVEL.get(), CItems.LONSDALEITE_SHOVEL.get()
-        );
+    tag(ItemTags.SHOVELS).add(
+        CItems.TITANIUM_SHOVEL.getKey(), CItems.LONSDALEITE_SHOVEL.getKey()
+    );
 
-        tag(ItemTags.HOES).add(
-                CItems.TITANIUM_HOE.get(), CItems.LONSDALEITE_HOE.get()
-        );
+    tag(ItemTags.HOES).add(
+        CItems.TITANIUM_HOE.getKey(), CItems.LONSDALEITE_HOE.getKey()
+    );
 
-        tag(ItemTags.HEAD_ARMOR).add(
-                CItems.TITANIUM_HELMET.get(), CItems.LONSDALEITE_HELMET.get()
-        );
+    tag(ItemTags.HEAD_ARMOR).add(
+        CItems.TITANIUM_HELMET.getKey(), CItems.LONSDALEITE_HELMET.getKey()
+    );
 
-        tag(ItemTags.CHEST_ARMOR).add(
-                CItems.TITANIUM_CHESTPLATE.get(), CItems.LONSDALEITE_CHESTPLATE.get()
-        );
+    tag(ItemTags.CHEST_ARMOR).add(
+        CItems.TITANIUM_CHESTPLATE.getKey(), CItems.LONSDALEITE_CHESTPLATE.getKey()
+    );
 
-        tag(ItemTags.LEG_ARMOR).add(
-                CItems.TITANIUM_LEGGINGS.get(), CItems.LONSDALEITE_LEGGINGS.get()
-        );
+    tag(ItemTags.LEG_ARMOR).add(
+        CItems.TITANIUM_LEGGINGS.getKey(), CItems.LONSDALEITE_LEGGINGS.getKey()
+    );
 
-        tag(ItemTags.FOOT_ARMOR).add(
-                CItems.TITANIUM_BOOTS.get(), CItems.LONSDALEITE_BOOTS.get()
-        );
+    tag(ItemTags.FOOT_ARMOR).add(
+        CItems.TITANIUM_BOOTS.getKey(), CItems.LONSDALEITE_BOOTS.getKey()
+    );
 
-        tag(ItemTags.TRIM_MATERIALS).add(
-                CItems.TITANIUM_INGOT.get(), CItems.LONSDALEITE.get()
-        );
+    tag(ItemTags.TRIM_MATERIALS).add(
+        CItems.TITANIUM_INGOT.getKey(), CItems.LONSDALEITE.getKey()
+    );
 
-        tag(ItemTags.CROSSBOW_ENCHANTABLE).add(CItems.TITANIUM_CROSSBOW.get());
+    tag(ItemTags.CROSSBOW_ENCHANTABLE).add(CItems.TITANIUM_CROSSBOW.getKey());
 
-        tag(CTags.CItemTags.MAGNETIC_ENCHANTABLE).addTags(ItemTags.DURABILITY_ENCHANTABLE).add(CItems.FALLEN_METEOR_LOCATOR.get());
-    }
+    tag(CTags.CItemTags.MAGNETIC_ENCHANTABLE).addTags(ItemTags.DURABILITY_ENCHANTABLE).add(CItems.FALLEN_METEOR_LOCATOR.getKey());
+  }
 }

@@ -1,96 +1,89 @@
 package net.nova.cosmicore.client.renderer.blockentity;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.geom.ModelLayerLocation;
-import net.minecraft.client.renderer.LightTexture;
-import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.block.BlockRenderDispatcher;
+import net.minecraft.client.renderer.SubmitNodeCollector;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
-import net.minecraft.core.BlockPos;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LightLayer;
+import net.minecraft.client.renderer.feature.ModelFeatureRenderer;
+import net.minecraft.client.renderer.state.level.CameraRenderState;
+import net.minecraft.client.renderer.texture.OverlayTexture;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.phys.Vec3;
 import net.nova.cosmicore.client.model.CrusherPistonModel;
+import net.nova.cosmicore.client.renderer.blockentity.state.CrusherRenderState;
+import org.jspecify.annotations.Nullable;
 
-public abstract class AbstractCrusherTileRenderer<T extends BlockEntity> implements BlockEntityRenderer<T> {
-    public final BlockRenderDispatcher blockRenderer;
-    public final ResourceLocation pistonTexture;
-    public final ModelLayerLocation pistonLayer;
-    public final CrusherPistonModel pistonModel;
+public abstract class AbstractCrusherTileRenderer<T extends BlockEntity, S extends CrusherRenderState> implements BlockEntityRenderer<T, S> {
+  public final BlockEntityRenderDispatcher blockRenderer;
+  public final Identifier pistonTexture;
+  public final ModelLayerLocation pistonLayer;
+  public final CrusherPistonModel pistonModel;
 
-    protected AbstractCrusherTileRenderer(BlockEntityRendererProvider.Context context, ResourceLocation pistonTexture, ModelLayerLocation pistonLayer, CrusherPistonModel pistonModel) {
-        this.blockRenderer = context.getBlockRenderDispatcher();
-        this.pistonTexture = pistonTexture;
-        this.pistonLayer = pistonLayer;
-        this.pistonModel = pistonModel;
+  protected AbstractCrusherTileRenderer(BlockEntityRendererProvider.Context context, Identifier pistonTexture, ModelLayerLocation pistonLayer, CrusherPistonModel pistonModel) {
+    this.blockRenderer = context.blockEntityRenderDispatcher();
+    this.pistonTexture = pistonTexture;
+    this.pistonLayer = pistonLayer;
+    this.pistonModel = pistonModel;
+  }
+
+  @Override
+  public void extractRenderState(T blockEntity, S state, float partialTicks, Vec3 cameraPosition, ModelFeatureRenderer.@Nullable CrumblingOverlay breakProgress) {
+    BlockEntityRenderer.super.extractRenderState(blockEntity, state, partialTicks, cameraPosition, breakProgress);
+
+    float[] offsets = this.calculateVerticalOffsets(blockEntity, partialTicks);
+    state.neckOffset = offsets[0];
+    state.headOffset = offsets[1];
+  }
+
+  @Override
+  public void submit(S state, PoseStack poseStack, SubmitNodeCollector submitNodeCollector, CameraRenderState cameraRenderState) {
+    poseStack.pushPose();
+    poseStack.translate(0.5, 1.5, 0.5);
+    poseStack.scale(1.0F, -1.0F, -1.0F);
+    submitNodeCollector.submitModel(
+        this.pistonModel,
+        state,
+        poseStack,
+        this.pistonTexture,
+        15728880, OverlayTexture.NO_OVERLAY,
+        0,
+        null
+    );
+    poseStack.popPose();
+  }
+
+  protected float[] calculateVerticalOffsets(T crusherTile, float partialTick) {
+    int crushingProgress = getCrushingProgress(crusherTile);
+    int maxCrushingProgress = 400;
+
+    float progress = (crushingProgress + partialTick) / maxCrushingProgress;
+
+    float neckOffset;
+    float headOffset;
+
+    if (progress < 0.95f) { // First 95%: Move down
+      neckOffset = -0.125f * Math.min(progress / 0.5f, 1); // Reaches max at 95 ticks 0.2375f
+      headOffset = -0.3f * Math.min(progress / 0.95f, 1);  // Reaches max at 380 ticks
+    }
+    else { // Last 5%: Move up quickly
+      float returnProgress = (progress - 0.95f) / 0.05f;
+      neckOffset = -0.125f * (1 - returnProgress);
+      headOffset = -0.3f * (1 - returnProgress);
     }
 
-    @Override
-    public void render(T crusherTile, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, int packedOverlay, Vec3 vec3) {
-        renderAnimatedPiston(crusherTile, partialTick, poseStack, bufferSource, packedLight, packedOverlay);
+    if (!hasRecipe(crusherTile)) {
+      neckOffset = 0;
+      headOffset = 0;
     }
 
-    protected void renderAnimatedPiston(T crusherTile, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, int packedOverlay) {
-        float[] offsets = calculateVerticalOffsets(crusherTile, partialTick);
-        float neckOffset = offsets[0];
-        float headOffset = offsets[1];
+    return new float[]{neckOffset, headOffset};
+  }
 
-        VertexConsumer vertexConsumer = bufferSource.getBuffer(RenderType.entityCutout(pistonTexture));
+  // Abstract methods for implementation
+  protected abstract int getCrushingProgress(T crusherTile);
 
-        // Render neck
-        poseStack.pushPose();
-        poseStack.translate(0.5, 1 + neckOffset, 0.5);
-        poseStack.scale(1, -1, -1);
-        pistonModel.neck.render(poseStack, vertexConsumer, packedLight, packedOverlay);
-        poseStack.popPose();
-
-        // Render head
-        poseStack.pushPose();
-        poseStack.translate(0.5, 1 + headOffset, 0.5);
-        poseStack.scale(1, -1, -1);
-        pistonModel.head.render(poseStack, vertexConsumer, packedLight, packedOverlay);
-        poseStack.popPose();
-    }
-
-    protected float[] calculateVerticalOffsets(T crusherTile, float partialTick) {
-        int crushingProgress = getCrushingProgress(crusherTile);
-        int maxCrushingProgress = 400;
-
-        float progress = (crushingProgress + partialTick) / maxCrushingProgress;
-
-        float neckOffset;
-        float headOffset;
-
-        if (progress < 0.95f) { // First 95%: Move down
-            neckOffset = -0.125f * Math.min(progress / 0.5f, 1); // Reaches max at 95 ticks 0.2375f
-            headOffset = -0.3f * Math.min(progress / 0.95f, 1);  // Reaches max at 380 ticks
-        } else { // Last 5%: Move up quickly
-            float returnProgress = (progress - 0.95f) / 0.05f;
-            neckOffset = -0.125f * (1 - returnProgress);
-            headOffset = -0.3f * (1 - returnProgress);
-        }
-
-        if (!hasRecipe(crusherTile)) {
-            neckOffset = 0;
-            headOffset = 0;
-        }
-
-        return new float[]{neckOffset, headOffset};
-    }
-
-    public int getLightLevel(Level level, BlockPos pos) {
-        int bLight = level.getBrightness(LightLayer.BLOCK, pos);
-        int sLight = level.getBrightness(LightLayer.SKY, pos);
-        return LightTexture.pack(bLight, sLight);
-    }
-
-    // Abstract methods for implementation
-    protected abstract int getCrushingProgress(T crusherTile);
-
-    protected abstract boolean hasRecipe(T crusherTile);
+  protected abstract boolean hasRecipe(T crusherTile);
 }

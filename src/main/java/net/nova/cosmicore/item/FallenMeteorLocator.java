@@ -18,54 +18,55 @@ import net.nova.cosmicore.init.CDataComponents;
 import org.jetbrains.annotations.Nullable;
 
 public class FallenMeteorLocator extends Item {
-    public static Component OUT_OF_RANGE = Component.translatable("item.cosmicore.meteor_locator.out_of_range").withStyle(ChatFormatting.RED);
-    public static String METEOR_LOCATION_STR = "item.cosmicore.meteor_locator.distance";
+  public static Component OUT_OF_RANGE = Component.translatable("item.cosmicore.meteor_locator.out_of_range").withStyle(ChatFormatting.RED);
+  public static String METEOR_LOCATION_STR = "item.cosmicore.meteor_locator.distance";
 
-    public FallenMeteorLocator(Properties properties) {
-        super(properties);
-    }
+  public FallenMeteorLocator(Properties properties) {
+    super(properties);
+  }
 
-    @Override
-    public void inventoryTick(ItemStack stack, ServerLevel serverLevel, Entity entity, @Nullable EquipmentSlot equipmentSlot) {
-        super.inventoryTick(stack, serverLevel, entity, equipmentSlot);
+  @Override
+  public void inventoryTick(ItemStack stack, ServerLevel serverLevel, Entity entity, @Nullable EquipmentSlot equipmentSlot) {
+    super.inventoryTick(stack, serverLevel, entity, equipmentSlot);
 
-        if (!serverLevel.isClientSide && entity instanceof Player player) {
-            boolean isHoldingItem = player.getOffhandItem() == stack;
-            if (!isHoldingItem) return;
+    if (!serverLevel.isClientSide() && entity instanceof Player player) {
+      boolean isHoldingItem = player.getOffhandItem() == stack;
+      if (!isHoldingItem) return;
 
-            BlockPos currentPos = stack.get(CDataComponents.LAST_LOCATION);
-            BlockPos newPos = getBlockPos(currentPos);
+      BlockPos currentPos = stack.get(CDataComponents.LAST_LOCATION);
+      BlockPos newPos = getBlockPos(currentPos);
 
-            if (newPos != null && !newPos.equals(currentPos)) stack.set(CDataComponents.LAST_LOCATION, newPos);
+      if (newPos != null && !newPos.equals(currentPos)) stack.set(CDataComponents.LAST_LOCATION, newPos);
 
-            BlockPos displayPos = stack.get(CDataComponents.LAST_LOCATION);
-            if (displayPos != null) {
-                BlockPos playerPos = player.blockPosition();
-                int xDistance = Math.abs(displayPos.getX() - playerPos.getX());
-                int zDistance = Math.abs(displayPos.getZ() - playerPos.getZ());
-                double horizontalDistance = Math.sqrt(xDistance * xDistance + zDistance * zDistance);
+      BlockPos displayPos = stack.get(CDataComponents.LAST_LOCATION);
+      if (displayPos != null) {
+        BlockPos playerPos = player.blockPosition();
+        int xDistance = Math.abs(displayPos.getX() - playerPos.getX());
+        int zDistance = Math.abs(displayPos.getZ() - playerPos.getZ());
+        double horizontalDistance = Math.sqrt(xDistance * xDistance + zDistance * zDistance);
 
-                Holder<Enchantment> magnetism = player.level().registryAccess().lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(CEnchantments.MAGNETISM);
-                int magnetismLevel = stack.getEnchantmentLevel(magnetism);
-                int detectionRange = 750 + (magnetismLevel * 350);
+        Holder<Enchantment> magnetism = player.level().registryAccess().lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(CEnchantments.MAGNETISM);
+        int magnetismLevel = stack.getEnchantmentLevel(magnetism);
+        int detectionRange = 750 + (magnetismLevel * 350);
 
-                if (horizontalDistance > detectionRange) {
-                    player.displayClientMessage(OUT_OF_RANGE, true);
-                } else {
-                    Component METEOR_LOCATION = Component.translatable(METEOR_LOCATION_STR,
-                                    (int) horizontalDistance, displayPos.getX(), displayPos.getZ())
-                            .withStyle(ChatFormatting.GOLD);
-                    player.displayClientMessage(METEOR_LOCATION, true);
-                }
-            }
+        if (horizontalDistance > detectionRange) {
+          player.sendOverlayMessage(OUT_OF_RANGE);
         }
-    }
-
-    public static @Nullable BlockPos getBlockPos(@Nullable BlockPos currentPos) {
-        if (CEventBusGame.meteorSpawner != null) {
-            BlockPos lastSpawnPos = CEventBusGame.meteorSpawner.getLastMeteorSpawnPos();
-            if (lastSpawnPos != null) return lastSpawnPos;
+        else {
+          Component METEOR_LOCATION = Component.translatable(METEOR_LOCATION_STR,
+                  (int) horizontalDistance, displayPos.getX(), displayPos.getZ())
+              .withStyle(ChatFormatting.GOLD);
+          player.sendOverlayMessage(METEOR_LOCATION);
         }
-        return currentPos;
+      }
     }
+  }
+
+  public static @Nullable BlockPos getBlockPos(@Nullable BlockPos currentPos) {
+    if (CEventBusGame.meteorSpawner != null) {
+      BlockPos lastSpawnPos = CEventBusGame.meteorSpawner.getLastMeteorSpawnPos();
+      if (lastSpawnPos != null) return lastSpawnPos;
+    }
+    return currentPos;
+  }
 }

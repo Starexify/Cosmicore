@@ -1,13 +1,13 @@
 package net.nova.cosmicore.recipe;
 
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemStackTemplate;
 
 public class WeightedResult {
-    public final ItemStack item;
-    public final float chance;
+  public final ItemStackTemplate item;
+  public final float chance;
 
-    public WeightedResult(ItemStack item, float chance) {
-        this.item = item;
-        this.chance = chance;
-    }
+  public WeightedResult(ItemStackTemplate item, float chance) {
+    this.item = item;
+    this.chance = chance;
+  }
 }

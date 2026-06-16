@@ -11,13 +11,13 @@ import net.nova.cosmicore.equipment.CEquipmentAssets;
 import java.util.function.BiConsumer;
 
 public class CEquipmentModelProvider extends EquipmentAssetProvider {
-    public CEquipmentModelProvider(PackOutput output) {
-        super(output);
-    }
+  public CEquipmentModelProvider(PackOutput output) {
+    super(output);
+  }
 
-    @Override
-    protected void registerModels(BiConsumer<ResourceKey<EquipmentAsset>, EquipmentClientInfo> output) {
-        output.accept(CEquipmentAssets.TITANIUM, humanoidAndHorse("cosmicore:titanium"));
-        output.accept(CEquipmentAssets.LONSDALEITE, humanoidAndHorse("cosmicore:lonsdaleite"));
-    }
+  @Override
+  protected void registerModels(BiConsumer<ResourceKey<EquipmentAsset>, EquipmentClientInfo> output) {
+    output.accept(CEquipmentAssets.TITANIUM, humanoidAndMountArmor("cosmicore:titanium"));
+    output.accept(CEquipmentAssets.LONSDALEITE, humanoidAndMountArmor("cosmicore:lonsdaleite"));
+  }
 }

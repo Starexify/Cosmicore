@@ -1,39 +1,39 @@
 package net.nova.cosmicore.gui.crusher;
 
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Inventory;
 import net.nova.cosmicore.Cosmicore;
 
 public class CrusherScreen extends AbstractCrusherScreen<CrusherMenu> {
-    protected static final ResourceLocation TEXTURE = Cosmicore.rl("textures/gui/container/crusher.png");
+  protected static final Identifier TEXTURE = Cosmicore.rl("textures/gui/container/crusher.png");
 
-    public CrusherScreen(CrusherMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
-        super(pMenu, pPlayerInventory, pTitle, TEXTURE);
-    }
+  public CrusherScreen(CrusherMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
+    super(pMenu, pPlayerInventory, pTitle, TEXTURE);
+  }
 
-    @Override
-    protected boolean isCharged() {
-        return this.getMenu().isCharged();
-    }
+  @Override
+  protected boolean isCharged() {
+    return this.getMenu().isCharged();
+  }
 
-    @Override
-    protected float getChargedProgress() {
-        return this.getMenu().getChargedProgress();
-    }
+  @Override
+  protected float getChargedProgress() {
+    return this.getMenu().getChargedProgress();
+  }
 
-    @Override
-    protected float getCrushingProgress() {
-        return this.getMenu().getCrushingProgress();
-    }
+  @Override
+  protected float getCrushingProgress() {
+    return this.getMenu().getCrushingProgress();
+  }
 
-    @Override
-    protected int getCurrentIgnis() {
-        return this.getMenu().data.get(0);
-    }
+  @Override
+  protected int getCurrentIgnis() {
+    return this.getMenu().data.get(0);
+  }
 
-    @Override
-    protected int getMaxIgnis() {
-        return this.getMenu().data.get(1);
-    }
+  @Override
+  protected int getMaxIgnis() {
+    return this.getMenu().data.get(1);
+  }
 }

@@ -5,14 +5,12 @@
     {
       "chance": 0.001,
       "item": {
-        "count": 1,
         "id": "cosmicore:lonsdaleite"
       }
     },
     {
       "chance": 0.01,
       "item": {
-        "count": 1,
         "id": "minecraft:diamond"
       }
     },
@@ -26,7 +24,6 @@
     {
       "chance": 0.25,
       "item": {
-        "count": 1,
         "id": "cosmicore:raw_titanium"
       }
     },
@@ -40,7 +37,6 @@
     {
       "chance": 0.19,
       "item": {
-        "count": 1,
         "id": "cosmicore:magnetite"
       }
     },
@@ -82,7 +78,6 @@
     {
       "chance": 0.06,
       "item": {
-        "count": 1,
         "id": "minecraft:cobblestone"
       }
     }

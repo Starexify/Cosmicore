@@ -11,12 +11,12 @@ import java.util.concurrent.CompletableFuture;
 import static net.nova.cosmicore.Cosmicore.MODID;
 
 public class CBannerPatternsTagsProvider extends BannerPatternTagsProvider {
-    public CBannerPatternsTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> provider) {
-        super(output, provider, MODID);
-    }
+  public CBannerPatternsTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> provider) {
+    super(output, provider, MODID);
+  }
 
-    @Override
-    protected void addTags(HolderLookup.Provider provider) {
-        tag(CTags.BannerPatternTags.PATTERN_ITEM_METEORITE).addOptional(CBannerPatterns.METEORITE.location());
-    }
+  @Override
+  protected void addTags(HolderLookup.Provider provider) {
+    tag(CTags.BannerPatternTags.PATTERN_ITEM_METEORITE).addOptional(CBannerPatterns.METEORITE);
+  }
 }

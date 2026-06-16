@@ -79,8 +79,8 @@ public class AdvancedCrusherTile extends AbstractCrusherTile {
         Optional<RecipeHolder<AdvancedCrushingRecipe>> additionalRecipe = getCurrentRecipe(this.inventory.getStackInSlot(ADDITIONAL_SLOT));
         if (recipe.isEmpty() && additionalRecipe.isEmpty()) return false;
 
-        ItemStack result = recipe.map(r -> r.value().assemble(createRecipeInput(), level.registryAccess()))
-                .orElseGet(() -> additionalRecipe.get().value().assemble(createAdditionalRecipeInput(), level.registryAccess()));
+        ItemStack result = recipe.map(r -> r.value().assemble(createRecipeInput()))
+                .orElseGet(() -> additionalRecipe.get().value().assemble(createAdditionalRecipeInput()));
 
         return canInsertAmountIntoOutputSlot(result.getCount()) && canInsertItemInOutputSlot(result.getItem());
     }
@@ -95,13 +95,13 @@ public class AdvancedCrusherTile extends AbstractCrusherTile {
         Optional<RecipeHolder<AdvancedCrushingRecipe>> additionalRecipe = getCurrentRecipe(inventory.getStackInSlot(ADDITIONAL_SLOT));
 
         if (recipe.isPresent()) {
-            ItemStack result = recipe.get().value().assemble(createRecipeInput(), level.registryAccess());
+            ItemStack result = recipe.get().value().assemble(createRecipeInput());
             inventory.getFirst().shrink(1);
             insertOrMergeResult(result);
         }
 
         if (additionalRecipe.isPresent()) {
-            ItemStack additionalResult = additionalRecipe.get().value().assemble(createAdditionalRecipeInput(), level.registryAccess());
+            ItemStack additionalResult = additionalRecipe.get().value().assemble(createAdditionalRecipeInput());
             inventory.getStackInSlot(ADDITIONAL_SLOT).shrink(1);
             insertOrMergeResult(additionalResult);
         }

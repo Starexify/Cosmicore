@@ -10,7 +10,17 @@
         "texture": "cosmicore:lonsdaleite"
       }
     ],
+    "humanoid_baby": [
+      {
+        "texture": "cosmicore:lonsdaleite"
+      }
+    ],
     "humanoid_leggings": [
+      {
+        "texture": "cosmicore:lonsdaleite"
+      }
+    ],
+    "nautilus_body": [
       {
         "texture": "cosmicore:lonsdaleite"
       }

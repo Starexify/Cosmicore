@@ -1,7 +1,5 @@
 {
   "type": "minecraft:blasting",
-  "category": "misc",
-  "cookingtime": 100,
   "experience": 0.1,
   "ingredient": [
     "cosmicore:titanium_pickaxe",
@@ -15,7 +13,6 @@
     "cosmicore:titanium_boots"
   ],
   "result": {
-    "count": 1,
     "id": "cosmicore:titanium_nugget"
   }
 }

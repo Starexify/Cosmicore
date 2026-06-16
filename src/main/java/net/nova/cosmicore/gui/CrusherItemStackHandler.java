@@ -17,7 +17,7 @@ public class CrusherItemStackHandler extends ItemStackHandler {
     @Override
     protected void onContentsChanged(int slot) {
         super.onContentsChanged(slot);
-        if (crusherTile != null && (crusherTile.getLevel() == null || !crusherTile.getLevel().isClientSide)) {
+        if (crusherTile != null && (crusherTile.getLevel() == null || !crusherTile.getLevel().isClientSide())) {
                 crusherTile.setChanged();
             crusherTile.getLevel().sendBlockUpdated(crusherTile.getBlockPos(), crusherTile.getBlockState(), crusherTile.getBlockState(), Block.UPDATE_ALL);
         }

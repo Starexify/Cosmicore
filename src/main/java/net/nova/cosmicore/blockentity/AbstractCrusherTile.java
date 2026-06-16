@@ -172,50 +172,46 @@ public abstract class AbstractCrusherTile extends BlockEntity implements MenuPro
     }
 
     // Stores NBT Data
-    @Override
-    protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
-        super.saveAdditional(tag, registries);
-        tag.put("Inventory", inventory.serializeNBT(registries));
-        tag.putInt("IgnisCharge", ignisCharge);
-        tag.putInt("IgnisPower", ignisPower);
-        tag.putInt("CrushingProgress", crushingProgress);
-    }
-
-    @Override
-    protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
-        super.loadAdditional(tag, registries);
-        inventory.deserializeNBT(registries, tag.getCompoundOrEmpty("Inventory"));
-        ignisCharge = tag.getIntOr("IgnisCharge", 0);
-        ignisPower = tag.getIntOr("IgnisPower", 0);
-        crushingProgress = tag.getIntOr("CrushingProgress", 0);
-    }
-
-    // Updates the BE between Client-Server
-    @Override
-    public void onDataPacket(Connection connection, ClientboundBlockEntityDataPacket packet, HolderLookup.Provider registries) {
-        super.onDataPacket(connection, packet, registries);
-        if (level != null && level.isClientSide) {
-            CompoundTag tag = packet.getTag();
-            handleUpdateTag(tag, level.registryAccess());
-        }
-    }
-
-    @Override
-    public void handleUpdateTag(CompoundTag tag, HolderLookup.Provider registries) {
-        super.handleUpdateTag(tag, registries);
-        inventory.deserializeNBT(registries, tag.getCompoundOrEmpty("Inventory"));
-        crushingProgress = tag.getIntOr("CrushingProgress", 0);
-        hasRecipe = tag.getBooleanOr("HasRecipe", false);
-    }
-
-    @Override
-    public CompoundTag getUpdateTag(HolderLookup.Provider registries) {
-        CompoundTag tag = super.getUpdateTag(registries);
-        tag.put("Inventory", inventory.serializeNBT(registries));
-        tag.putInt("CrushingProgress", crushingProgress);
-        tag.putBoolean("HasRecipe", hasRecipe());
-        return tag;
-    }
+//    protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
+//        super.saveAdditional(tag, registries);
+//        tag.put("Inventory", inventory.serializeNBT(registries));
+//        tag.putInt("IgnisCharge", ignisCharge);
+//        tag.putInt("IgnisPower", ignisPower);
+//        tag.putInt("CrushingProgress", crushingProgress);
+//    }
+//
+//    protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
+//        super.loadAdditional(tag, registries);
+//        inventory.deserializeNBT(registries, tag.getCompoundOrEmpty("Inventory"));
+//        ignisCharge = tag.getIntOr("IgnisCharge", 0);
+//        ignisPower = tag.getIntOr("IgnisPower", 0);
+//        crushingProgress = tag.getIntOr("CrushingProgress", 0);
+//    }
+//
+//    // Updates the BE between Client-Server
+//    public void onDataPacket(Connection connection, ClientboundBlockEntityDataPacket packet, HolderLookup.Provider registries) {
+//        super.onDataPacket(connection, packet, registries);
+//        if (level != null && level.isClientSide) {
+//            CompoundTag tag = packet.getTag();
+//            handleUpdateTag(tag, level.registryAccess());
+//        }
+//    }
+//
+//    public void handleUpdateTag(CompoundTag tag, HolderLookup.Provider registries) {
+//        super.handleUpdateTag(tag, registries);
+//        inventory.deserializeNBT(registries, tag.getCompoundOrEmpty("Inventory"));
+//        crushingProgress = tag.getIntOr("CrushingProgress", 0);
+//        hasRecipe = tag.getBooleanOr("HasRecipe", false);
+//    }
+//
+//    @Override
+//    public CompoundTag getUpdateTag(HolderLookup.Provider registries) {
+//        CompoundTag tag = super.getUpdateTag(registries);
+//        tag.put("Inventory", inventory.serializeNBT(registries));
+//        tag.putInt("CrushingProgress", crushingProgress);
+//        tag.putBoolean("HasRecipe", hasRecipe());
+//        return tag;
+//    }
 
     @Override
     public @Nullable Packet<ClientGamePacketListener> getUpdatePacket() {

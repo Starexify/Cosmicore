@@ -10,7 +10,17 @@
         "texture": "cosmicore:titanium"
       }
     ],
+    "humanoid_baby": [
+      {
+        "texture": "cosmicore:titanium"
+      }
+    ],
     "humanoid_leggings": [
+      {
+        "texture": "cosmicore:titanium"
+      }
+    ],
+    "nautilus_body": [
       {
         "texture": "cosmicore:titanium"
       }

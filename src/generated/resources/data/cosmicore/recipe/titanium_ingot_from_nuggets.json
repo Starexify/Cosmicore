@@ -1,6 +1,5 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "misc",
   "group": "titanium_ingot",
   "key": {
     "#": "cosmicore:titanium_nugget"
@@ -11,7 +10,6 @@
     "###"
   ],
   "result": {
-    "count": 1,
     "id": "cosmicore:titanium_ingot"
   }
 }

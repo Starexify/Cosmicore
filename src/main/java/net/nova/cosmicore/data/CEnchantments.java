@@ -16,34 +16,34 @@ import net.nova.cosmicore.enchantment.MagnetismEffect;
 import net.nova.cosmicore.init.CTags;
 
 public class CEnchantments {
-    public static final ResourceKey<Enchantment> MAGNETISM = key("magnetism");
+  public static final ResourceKey<Enchantment> MAGNETISM = key("magnetism");
 
-    public static void bootstrap(BootstrapContext<Enchantment> context) {
-        HolderGetter<Item> itemGetter = context.lookup(Registries.ITEM);
+  public static void bootstrap(BootstrapContext<Enchantment> context) {
+    HolderGetter<Item> itemGetter = context.lookup(Registries.ITEM);
 
-        register(context, MAGNETISM, Enchantment.enchantment(
-                        Enchantment.definition(
-                                itemGetter.getOrThrow(CTags.CItemTags.MAGNETIC_ENCHANTABLE),
-                                2,
-                                3,
-                                Enchantment.dynamicCost(12, 4),
-                                Enchantment.dynamicCost(23, 5),
-                                3,
-                                EquipmentSlotGroup.ANY
-                        ))
-                .withCustomName(component -> Component.literal("Magnetism"))
-                .withEffect(
-                        EnchantmentEffectComponents.TICK,
-                        new MagnetismEffect(new AddValue(LevelBasedValue.perLevel(3.0F, 1.0F)).value())
-                )
-        );
-    }
+    register(context, MAGNETISM, Enchantment.enchantment(
+            Enchantment.definition(
+                itemGetter.getOrThrow(CTags.CItemTags.MAGNETIC_ENCHANTABLE),
+                2,
+                3,
+                Enchantment.dynamicCost(12, 4),
+                Enchantment.dynamicCost(23, 5),
+                3,
+                EquipmentSlotGroup.ANY
+            ))
+        .withCustomName(component -> Component.literal("Magnetism"))
+        .withEffect(
+            EnchantmentEffectComponents.TICK,
+            new MagnetismEffect(new AddValue(LevelBasedValue.perLevel(3.0F, 1.0F)).value())
+        )
+    );
+  }
 
-    public static void register(BootstrapContext<Enchantment> pContext, ResourceKey<Enchantment> pKey, Enchantment.Builder pBuilder) {
-        pContext.register(pKey, pBuilder.build(pKey.location()));
-    }
+  public static void register(BootstrapContext<Enchantment> pContext, ResourceKey<Enchantment> pKey, Enchantment.Builder pBuilder) {
+    pContext.register(pKey, pBuilder.build(pKey.identifier()));
+  }
 
-    public static ResourceKey<Enchantment> key(String name) {
-        return ResourceKey.create(Registries.ENCHANTMENT, Cosmicore.rl(name));
-    }
+  public static ResourceKey<Enchantment> key(String name) {
+    return ResourceKey.create(Registries.ENCHANTMENT, Cosmicore.rl(name));
+  }
 }

@@ -10,82 +10,82 @@ import net.nova.cosmicore.recipe.crusher.AdvancedCrushingRecipeBuilder;
 import net.nova.cosmicore.recipe.crusher.CrushingRecipeBuilder;
 
 public class CrushingRecipes extends CRecipeProvider {
-    public CrushingRecipes(HolderLookup.Provider registries, RecipeOutput output) {
-        super(registries, output);
-    }
+  public CrushingRecipes(HolderLookup.Provider registries, RecipeOutput output) {
+    super(registries, output);
+  }
 
-    public void build() {
-        // Crusher Recipes
-        CrushingRecipeBuilder.crushing(Ingredient.of(CBlocks.ACHONDRITE))
-                .addResult(CItems.MAGNETITE, 1, 0.02f)
-                .addResult(Items.RAW_IRON, 2, 0.05f)
-                .addResult(Items.RAW_IRON, 1, 0.1f)
-                .addResult(Items.RAW_COPPER, 5, 0.1f)
-                .addResult(Items.RAW_COPPER, 3, 0.2f)
-                .addResult(Items.FLINT, 2, 0.2f)
-                .addResult(Items.FLINT, 1, 0.35f)
-                .addResult(Items.COBBLESTONE, 3, 0.25f)
-                .addResult(Items.COBBLESTONE, 2, 0.35f)
-                .addResult(Items.COBBLESTONE, 1, 0.5f)
-                .save(output, getCrushingRecipeName(CBlocks.ACHONDRITE));
+  public void build() {
+    // Crusher Recipes
+    CrushingRecipeBuilder.crushing(Ingredient.of(CBlocks.ACHONDRITE))
+        .addResult(CItems.MAGNETITE.get(), 1, 0.02f)
+        .addResult(Items.RAW_IRON, 2, 0.05f)
+        .addResult(Items.RAW_IRON, 1, 0.1f)
+        .addResult(Items.RAW_COPPER, 5, 0.1f)
+        .addResult(Items.RAW_COPPER, 3, 0.2f)
+        .addResult(Items.FLINT, 2, 0.2f)
+        .addResult(Items.FLINT, 1, 0.35f)
+        .addResult(Items.COBBLESTONE, 3, 0.25f)
+        .addResult(Items.COBBLESTONE, 2, 0.35f)
+        .addResult(Items.COBBLESTONE, 1, 0.5f)
+        .save(output, getCrushingRecipeName(CBlocks.ACHONDRITE));
 
-        CrushingRecipeBuilder.crushing(Ingredient.of(CBlocks.METEORITE))
-                .addResult(CItems.RAW_TITANIUM, 2, 0.05f)
-                .addResult(CItems.RAW_TITANIUM, 1, 0.12f)
-                .addResult(CItems.MAGNETITE, 1, 0.12f)
-                .addResult(Items.RAW_IRON, 3, 0.14f)
-                .addResult(Items.RAW_IRON, 2, 0.25f)
-                .addResult(Items.RAW_COPPER, 5, 0.2f)
-                .addResult(Items.RAW_COPPER, 3, 0.33f)
-                .addResult(Items.COAL, 3, 0.12f)
-                .addResult(Items.COAL, 2, 0.27f)
-                .addResult(Items.COBBLESTONE, 1, 0.16f)
-                .save(output, getCrushingRecipeName(CBlocks.METEORITE));
+    CrushingRecipeBuilder.crushing(Ingredient.of(CBlocks.METEORITE))
+        .addResult(CItems.RAW_TITANIUM.get(), 2, 0.05f)
+        .addResult(CItems.RAW_TITANIUM.get(), 1, 0.12f)
+        .addResult(CItems.MAGNETITE.get(), 1, 0.12f)
+        .addResult(Items.RAW_IRON, 3, 0.14f)
+        .addResult(Items.RAW_IRON, 2, 0.25f)
+        .addResult(Items.RAW_COPPER, 5, 0.2f)
+        .addResult(Items.RAW_COPPER, 3, 0.33f)
+        .addResult(Items.COAL, 3, 0.12f)
+        .addResult(Items.COAL, 2, 0.27f)
+        .addResult(Items.COBBLESTONE, 1, 0.16f)
+        .save(output, getCrushingRecipeName(CBlocks.METEORITE));
 
-        // Advanced Crusher Recipes
-        AdvancedCrushingRecipeBuilder.crushing(Ingredient.of(CBlocks.ACHONDRITE))
-                .addResult(CItems.MAGNETITE, 2, 0.05f)
-                .addResult(CItems.MAGNETITE, 1, 0.09f)
-                .addResult(Items.RAW_IRON, 2, 0.15f)
-                .addResult(Items.RAW_IRON, 1, 0.2f)
-                .addResult(Items.RAW_COPPER, 5, 0.2f)
-                .addResult(Items.RAW_COPPER, 3, 0.3f)
-                .addResult(Items.FLINT, 2, 0.25f)
-                .addResult(Items.FLINT, 1, 0.4f)
-                .addResult(Items.COBBLESTONE, 3, 0.2f)
-                .addResult(Items.COBBLESTONE, 2, 0.3f)
-                .addResult(Items.COBBLESTONE, 1, 0.45f)
-                .save(output, getAdvancedCrushingRecipeName(CBlocks.ACHONDRITE));
+    // Advanced Crusher Recipes
+    AdvancedCrushingRecipeBuilder.crushing(Ingredient.of(CBlocks.ACHONDRITE))
+        .addResult(CItems.MAGNETITE.get(), 2, 0.05f)
+        .addResult(CItems.MAGNETITE.get(), 1, 0.09f)
+        .addResult(Items.RAW_IRON, 2, 0.15f)
+        .addResult(Items.RAW_IRON, 1, 0.2f)
+        .addResult(Items.RAW_COPPER, 5, 0.2f)
+        .addResult(Items.RAW_COPPER, 3, 0.3f)
+        .addResult(Items.FLINT, 2, 0.25f)
+        .addResult(Items.FLINT, 1, 0.4f)
+        .addResult(Items.COBBLESTONE, 3, 0.2f)
+        .addResult(Items.COBBLESTONE, 2, 0.3f)
+        .addResult(Items.COBBLESTONE, 1, 0.45f)
+        .save(output, getAdvancedCrushingRecipeName(CBlocks.ACHONDRITE));
 
-        AdvancedCrushingRecipeBuilder.crushing(Ingredient.of(CBlocks.METEORITE))
-                .addResult(CItems.LONSDALEITE, 1, 0.001f)
-                .addResult(Items.DIAMOND, 1, 0.01f)
-                .addResult(CItems.RAW_TITANIUM, 2, 0.1f)
-                .addResult(CItems.RAW_TITANIUM, 1, 0.25f)
-                .addResult(CItems.MAGNETITE, 3, 0.1f)
-                .addResult(CItems.MAGNETITE, 1, 0.19f)
-                .addResult(Items.RAW_IRON, 3, 0.21f)
-                .addResult(Items.RAW_IRON, 2, 0.3f)
-                .addResult(Items.RAW_COPPER, 5, 0.27f)
-                .addResult(Items.RAW_COPPER, 3, 0.4f)
-                .addResult(Items.COAL, 2, 0.12f)
-                .addResult(Items.COBBLESTONE, 1, 0.06f)
-                .save(output, getAdvancedCrushingRecipeName(CBlocks.METEORITE));
+    AdvancedCrushingRecipeBuilder.crushing(Ingredient.of(CBlocks.METEORITE))
+        .addResult(CItems.LONSDALEITE.get(), 1, 0.001f)
+        .addResult(Items.DIAMOND, 1, 0.01f)
+        .addResult(CItems.RAW_TITANIUM.get(), 2, 0.1f)
+        .addResult(CItems.RAW_TITANIUM.get(), 1, 0.25f)
+        .addResult(CItems.MAGNETITE.get(), 3, 0.1f)
+        .addResult(CItems.MAGNETITE.get(), 1, 0.19f)
+        .addResult(Items.RAW_IRON, 3, 0.21f)
+        .addResult(Items.RAW_IRON, 2, 0.3f)
+        .addResult(Items.RAW_COPPER, 5, 0.27f)
+        .addResult(Items.RAW_COPPER, 3, 0.4f)
+        .addResult(Items.COAL, 2, 0.12f)
+        .addResult(Items.COBBLESTONE, 1, 0.06f)
+        .save(output, getAdvancedCrushingRecipeName(CBlocks.METEORITE));
 
-        AdvancedCrushingRecipeBuilder.crushing(Ingredient.of(CBlocks.PALLASITE))
-                .addResult(CItems.LONSDALEITE, 2, 0.005f)
-                .addResult(CItems.LONSDALEITE, 1, 0.02f)
-                .addResult(Items.DIAMOND, 2, 0.02f)
-                .addResult(Items.DIAMOND, 1, 0.06f)
-                .addResult(CItems.OLIVINE, 3, 0.045f)
-                .addResult(CItems.OLIVINE, 1, 0.1f)
-                .addResult(CItems.RAW_TITANIUM, 3, 0.15f)
-                .addResult(CItems.RAW_TITANIUM, 2, 0.23f)
-                .addResult(CItems.RAW_TITANIUM, 1, 0.4f)
-                .addResult(Items.RAW_GOLD, 4, 0.25f)
-                .addResult(Items.RAW_GOLD, 2, 0.37f)
-                .addResult(Items.RAW_IRON, 6, 0.18f)
-                .addResult(Items.RAW_IRON, 4, 0.3f)
-                .save(output, getAdvancedCrushingRecipeName(CBlocks.PALLASITE));
-    }
+    AdvancedCrushingRecipeBuilder.crushing(Ingredient.of(CBlocks.PALLASITE))
+        .addResult(CItems.LONSDALEITE.get(), 2, 0.005f)
+        .addResult(CItems.LONSDALEITE.get(), 1, 0.02f)
+        .addResult(Items.DIAMOND, 2, 0.02f)
+        .addResult(Items.DIAMOND, 1, 0.06f)
+        .addResult(CItems.OLIVINE.get(), 3, 0.045f)
+        .addResult(CItems.OLIVINE.get(), 1, 0.1f)
+        .addResult(CItems.RAW_TITANIUM.get(), 3, 0.15f)
+        .addResult(CItems.RAW_TITANIUM.get(), 2, 0.23f)
+        .addResult(CItems.RAW_TITANIUM.get(), 1, 0.4f)
+        .addResult(Items.RAW_GOLD, 4, 0.25f)
+        .addResult(Items.RAW_GOLD, 2, 0.37f)
+        .addResult(Items.RAW_IRON, 6, 0.18f)
+        .addResult(Items.RAW_IRON, 4, 0.3f)
+        .save(output, getAdvancedCrushingRecipeName(CBlocks.PALLASITE));
+  }
 }

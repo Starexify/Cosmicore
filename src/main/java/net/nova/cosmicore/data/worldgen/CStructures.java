@@ -19,103 +19,103 @@ import net.nova.cosmicore.data.worldgen.meteor_site.MeteorSitePools;
 import net.nova.cosmicore.init.CTags;
 
 public class CStructures {
-    public static ResourceKey<Structure> METEOR_SITE = createKey("meteor_site");
-    public static ResourceKey<Structure> DESERT_METEOR_SITE = createKey("desert_meteor_site");
-    public static ResourceKey<Structure> BADLANDS_METEOR_SITE = createKey("badlands_meteor_site");
-    public static ResourceKey<Structure> PALLASITE_METEOR_SITE = createKey("pallasite_meteor_site");
-    public static ResourceKey<Structure> DESERT_PALLASITE_METEOR_SITE = createKey("desert_pallasite_meteor_site");
-    public static ResourceKey<Structure> BADLANDS_PALLASITE_METEOR_SITE = createKey("badlands_pallasite_meteor_site");
-    public static ResourceKey<Structure> ACHONDRITE_METEOR = createKey("achondrite_meteor");
-    public static ResourceKey<Structure> METEORITE_METEOR = createKey("meteorite_meteor");
+  public static ResourceKey<Structure> METEOR_SITE = createKey("meteor_site");
+  public static ResourceKey<Structure> DESERT_METEOR_SITE = createKey("desert_meteor_site");
+  public static ResourceKey<Structure> BADLANDS_METEOR_SITE = createKey("badlands_meteor_site");
+  public static ResourceKey<Structure> PALLASITE_METEOR_SITE = createKey("pallasite_meteor_site");
+  public static ResourceKey<Structure> DESERT_PALLASITE_METEOR_SITE = createKey("desert_pallasite_meteor_site");
+  public static ResourceKey<Structure> BADLANDS_PALLASITE_METEOR_SITE = createKey("badlands_pallasite_meteor_site");
+  public static ResourceKey<Structure> ACHONDRITE_METEOR = createKey("achondrite_meteor");
+  public static ResourceKey<Structure> METEORITE_METEOR = createKey("meteorite_meteor");
 
-    public static void bootstrap(BootstrapContext<Structure> context) {
-        HolderGetter<Biome> holdergetter = context.lookup(Registries.BIOME);
-        HolderGetter<StructureTemplatePool> holdergetter1 = context.lookup(Registries.TEMPLATE_POOL);
+  public static void bootstrap(BootstrapContext<Structure> context) {
+    HolderGetter<Biome> holdergetter = context.lookup(Registries.BIOME);
+    HolderGetter<StructureTemplatePool> holdergetter1 = context.lookup(Registries.TEMPLATE_POOL);
 
-        // Meteor Site Structures
-        context.register(METEOR_SITE, new JigsawStructure(
-                new Structure.StructureSettings.Builder(holdergetter.getOrThrow(CTags.BiomeTags.HAS_METEOR_SITE))
-                        .terrainAdapation(TerrainAdjustment.BEARD_THIN).build(),
-                holdergetter1.getOrThrow(MeteorSitePools.METEOR_SITE),
-                7,
-                ConstantHeight.of(VerticalAnchor.absolute(0)),
-                true,
-                Heightmap.Types.WORLD_SURFACE_WG
-        ));
+    // Meteor Site Structures
+    context.register(METEOR_SITE, new JigsawStructure(
+        new Structure.StructureSettings.Builder(holdergetter.getOrThrow(CTags.BiomeTags.HAS_METEOR_SITE))
+            .terrainAdapation(TerrainAdjustment.BEARD_THIN).build(),
+        holdergetter1.getOrThrow(MeteorSitePools.METEOR_SITE),
+        7,
+        ConstantHeight.of(VerticalAnchor.absolute(0)),
+        true,
+        Heightmap.Types.WORLD_SURFACE_WG
+    ));
 
-        context.register(DESERT_METEOR_SITE, new JigsawStructure(
-                new Structure.StructureSettings.Builder(holdergetter.getOrThrow(CTags.BiomeTags.HAS_DESERT_METEOR_SITE))
-                        .terrainAdapation(TerrainAdjustment.BEARD_THIN).build(),
-                holdergetter1.getOrThrow(MeteorSitePools.DESERT_METEOR_SITE),
-                7,
-                ConstantHeight.of(VerticalAnchor.absolute(0)),
-                true,
-                Heightmap.Types.WORLD_SURFACE_WG
-        ));
+    context.register(DESERT_METEOR_SITE, new JigsawStructure(
+        new Structure.StructureSettings.Builder(holdergetter.getOrThrow(CTags.BiomeTags.HAS_DESERT_METEOR_SITE))
+            .terrainAdapation(TerrainAdjustment.BEARD_THIN).build(),
+        holdergetter1.getOrThrow(MeteorSitePools.DESERT_METEOR_SITE),
+        7,
+        ConstantHeight.of(VerticalAnchor.absolute(0)),
+        true,
+        Heightmap.Types.WORLD_SURFACE_WG
+    ));
 
-        context.register(BADLANDS_METEOR_SITE, new JigsawStructure(
-                new Structure.StructureSettings.Builder(holdergetter.getOrThrow(CTags.BiomeTags.HAS_BADLANDS_METEOR_SITE))
-                        .terrainAdapation(TerrainAdjustment.BEARD_THIN).build(),
-                holdergetter1.getOrThrow(MeteorSitePools.BADLANDS_METEOR_SITE),
-                7,
-                ConstantHeight.of(VerticalAnchor.absolute(0)),
-                true,
-                Heightmap.Types.WORLD_SURFACE_WG
-        ));
+    context.register(BADLANDS_METEOR_SITE, new JigsawStructure(
+        new Structure.StructureSettings.Builder(holdergetter.getOrThrow(CTags.BiomeTags.HAS_BADLANDS_METEOR_SITE))
+            .terrainAdapation(TerrainAdjustment.BEARD_THIN).build(),
+        holdergetter1.getOrThrow(MeteorSitePools.BADLANDS_METEOR_SITE),
+        7,
+        ConstantHeight.of(VerticalAnchor.absolute(0)),
+        true,
+        Heightmap.Types.WORLD_SURFACE_WG
+    ));
 
-        context.register(PALLASITE_METEOR_SITE, new JigsawStructure(
-                new Structure.StructureSettings.Builder(holdergetter.getOrThrow(CTags.BiomeTags.HAS_METEOR_SITE))
-                        .terrainAdapation(TerrainAdjustment.BEARD_THIN).build(),
-                holdergetter1.getOrThrow(MeteorSitePools.PALLASITE_METEOR_SITE),
-                7,
-                ConstantHeight.of(VerticalAnchor.absolute(0)),
-                true,
-                Heightmap.Types.WORLD_SURFACE_WG
-        ));
+    context.register(PALLASITE_METEOR_SITE, new JigsawStructure(
+        new Structure.StructureSettings.Builder(holdergetter.getOrThrow(CTags.BiomeTags.HAS_METEOR_SITE))
+            .terrainAdapation(TerrainAdjustment.BEARD_THIN).build(),
+        holdergetter1.getOrThrow(MeteorSitePools.PALLASITE_METEOR_SITE),
+        7,
+        ConstantHeight.of(VerticalAnchor.absolute(0)),
+        true,
+        Heightmap.Types.WORLD_SURFACE_WG
+    ));
 
-        context.register(DESERT_PALLASITE_METEOR_SITE, new JigsawStructure(
-                new Structure.StructureSettings.Builder(holdergetter.getOrThrow(CTags.BiomeTags.HAS_DESERT_METEOR_SITE))
-                        .terrainAdapation(TerrainAdjustment.BEARD_THIN).build(),
-                holdergetter1.getOrThrow(MeteorSitePools.DESERT_PALLASITE_METEOR_SITE),
-                7,
-                ConstantHeight.of(VerticalAnchor.absolute(0)),
-                true,
-                Heightmap.Types.WORLD_SURFACE_WG
-        ));
+    context.register(DESERT_PALLASITE_METEOR_SITE, new JigsawStructure(
+        new Structure.StructureSettings.Builder(holdergetter.getOrThrow(CTags.BiomeTags.HAS_DESERT_METEOR_SITE))
+            .terrainAdapation(TerrainAdjustment.BEARD_THIN).build(),
+        holdergetter1.getOrThrow(MeteorSitePools.DESERT_PALLASITE_METEOR_SITE),
+        7,
+        ConstantHeight.of(VerticalAnchor.absolute(0)),
+        true,
+        Heightmap.Types.WORLD_SURFACE_WG
+    ));
 
-        context.register(BADLANDS_PALLASITE_METEOR_SITE, new JigsawStructure(
-                new Structure.StructureSettings.Builder(holdergetter.getOrThrow(CTags.BiomeTags.HAS_BADLANDS_METEOR_SITE))
-                        .terrainAdapation(TerrainAdjustment.BEARD_THIN).build(),
-                holdergetter1.getOrThrow(MeteorSitePools.BADLANDS_PALLASITE_METEOR_SITE),
-                7,
-                ConstantHeight.of(VerticalAnchor.absolute(0)),
-                true,
-                Heightmap.Types.WORLD_SURFACE_WG
-        ));
+    context.register(BADLANDS_PALLASITE_METEOR_SITE, new JigsawStructure(
+        new Structure.StructureSettings.Builder(holdergetter.getOrThrow(CTags.BiomeTags.HAS_BADLANDS_METEOR_SITE))
+            .terrainAdapation(TerrainAdjustment.BEARD_THIN).build(),
+        holdergetter1.getOrThrow(MeteorSitePools.BADLANDS_PALLASITE_METEOR_SITE),
+        7,
+        ConstantHeight.of(VerticalAnchor.absolute(0)),
+        true,
+        Heightmap.Types.WORLD_SURFACE_WG
+    ));
 
-        // Meteor Structures
-        context.register(ACHONDRITE_METEOR, new JigsawStructure(
-                new Structure.StructureSettings.Builder(HolderSet.empty())
-                        .terrainAdapation(TerrainAdjustment.ENCAPSULATE).build(),
-                holdergetter1.getOrThrow(MeteorPools.ACHONDRITE_METEOR),
-                7,
-                ConstantHeight.of(VerticalAnchor.absolute(0)),
-                true,
-                Heightmap.Types.WORLD_SURFACE
-        ));
+    // Meteor Structures
+    context.register(ACHONDRITE_METEOR, new JigsawStructure(
+        new Structure.StructureSettings.Builder(HolderSet.empty())
+            .terrainAdapation(TerrainAdjustment.ENCAPSULATE).build(),
+        holdergetter1.getOrThrow(MeteorPools.ACHONDRITE_METEOR),
+        7,
+        ConstantHeight.of(VerticalAnchor.absolute(0)),
+        true,
+        Heightmap.Types.WORLD_SURFACE
+    ));
 
-        context.register(METEORITE_METEOR, new JigsawStructure(
-                new Structure.StructureSettings.Builder(HolderSet.empty())
-                        .terrainAdapation(TerrainAdjustment.ENCAPSULATE).build(),
-                holdergetter1.getOrThrow(MeteorPools.METEORITE_METEOR),
-                7,
-                ConstantHeight.of(VerticalAnchor.absolute(0)),
-                true,
-                Heightmap.Types.WORLD_SURFACE
-        ));
-    }
+    context.register(METEORITE_METEOR, new JigsawStructure(
+        new Structure.StructureSettings.Builder(HolderSet.empty())
+            .terrainAdapation(TerrainAdjustment.ENCAPSULATE).build(),
+        holdergetter1.getOrThrow(MeteorPools.METEORITE_METEOR),
+        7,
+        ConstantHeight.of(VerticalAnchor.absolute(0)),
+        true,
+        Heightmap.Types.WORLD_SURFACE
+    ));
+  }
 
-    public static ResourceKey<Structure> createKey(String name) {
-        return ResourceKey.create(Registries.STRUCTURE, Cosmicore.rl(name));
-    }
+  public static ResourceKey<Structure> createKey(String name) {
+    return ResourceKey.create(Registries.STRUCTURE, Cosmicore.rl(name));
+  }
 }

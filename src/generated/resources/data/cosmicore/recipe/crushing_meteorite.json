@@ -12,14 +12,12 @@
     {
       "chance": 0.12,
       "item": {
-        "count": 1,
         "id": "cosmicore:raw_titanium"
       }
     },
     {
       "chance": 0.12,
       "item": {
-        "count": 1,
         "id": "cosmicore:magnetite"
       }
     },
@@ -68,7 +66,6 @@
     {
       "chance": 0.16,
       "item": {
-        "count": 1,
         "id": "minecraft:cobblestone"
       }
     }

@@ -9,85 +9,85 @@ import net.nova.cosmicore.init.CBlocks;
 import net.nova.cosmicore.init.CItems;
 
 public class CraftingRecipes extends CRecipeProvider {
-    public CraftingRecipes(HolderLookup.Provider registries, RecipeOutput output) {
-        super(registries, output);
-    }
+  public CraftingRecipes(HolderLookup.Provider registries, RecipeOutput output) {
+    super(registries, output);
+  }
 
-    public void build() {
-        // Titanium Stuff
-        nineBlockStorageRecipes(RecipeCategory.MISC, CItems.RAW_TITANIUM, RecipeCategory.BUILDING_BLOCKS, CBlocks.RAW_TITANIUM_BLOCK);
-        nineBlockStorageRecipesWithCustomPacking(RecipeCategory.MISC, CItems.TITANIUM_NUGGET, RecipeCategory.MISC, CItems.TITANIUM_INGOT, "titanium_ingot_from_nuggets", "titanium_ingot");
-        nineBlockStorageRecipesRecipesWithCustomUnpacking(RecipeCategory.MISC, CItems.TITANIUM_INGOT, RecipeCategory.BUILDING_BLOCKS, CBlocks.TITANIUM_BLOCK, "titanium_ingot_from_titanium_block", "titanium_ingot");
-        nineBlockStorageRecipesRecipesWithCustomUnpacking(RecipeCategory.MISC, CItems.LONSDALEITE, RecipeCategory.BUILDING_BLOCKS, CBlocks.LONSDALEITE_BLOCK, "lonsdaleite_from_lonsdaleite_block", "lonsdaleite");
+  public void build() {
+    // Titanium Stuff
+    nineBlockStorageRecipes(RecipeCategory.MISC, CItems.RAW_TITANIUM, RecipeCategory.BUILDING_BLOCKS, CBlocks.RAW_TITANIUM_BLOCK);
+    nineBlockStorageRecipesWithCustomPacking(RecipeCategory.MISC, CItems.TITANIUM_NUGGET, RecipeCategory.MISC, CItems.TITANIUM_INGOT, "titanium_ingot_from_nuggets", "titanium_ingot");
+    nineBlockStorageRecipesRecipesWithCustomUnpacking(RecipeCategory.MISC, CItems.TITANIUM_INGOT, RecipeCategory.BUILDING_BLOCKS, CBlocks.TITANIUM_BLOCK, "titanium_ingot_from_titanium_block", "titanium_ingot");
+    nineBlockStorageRecipesRecipesWithCustomUnpacking(RecipeCategory.MISC, CItems.LONSDALEITE, RecipeCategory.BUILDING_BLOCKS, CBlocks.LONSDALEITE_BLOCK, "lonsdaleite_from_lonsdaleite_block", "lonsdaleite");
 
-        copySmithingTemplate(CItems.TITANIUM_UPGRADE_SMITHING_TEMPLATE, CBlocks.METEORITE, Items.IRON_INGOT);
-        copySmithingTemplate(CItems.LONSDALEITE_UPGRADE_SMITHING_TEMPLATE, CBlocks.PALLASITE, Items.DIAMOND);
+    copySmithingTemplate(CItems.TITANIUM_UPGRADE_SMITHING_TEMPLATE, CBlocks.METEORITE, Items.IRON_INGOT);
+    copySmithingTemplate(CItems.LONSDALEITE_UPGRADE_SMITHING_TEMPLATE, CBlocks.PALLASITE, Items.DIAMOND);
 
-        // Gears Recipes
-        shaped(RecipeCategory.MISC, CItems.IRON_GEAR)
-                .define('I', Items.IRON_INGOT)
-                .define('N', Items.IRON_NUGGET)
-                .pattern("NIN")
-                .pattern("I I")
-                .pattern("NIN")
-                .unlockedBy(getHasName(Items.IRON_INGOT), has(Items.IRON_INGOT))
-                .save(output);
-        shaped(RecipeCategory.MISC, CItems.TITANIUM_GEAR)
-                .define('G', CItems.IRON_GEAR)
-                .define('I', CItems.TITANIUM_INGOT)
-                .define('N', CItems.TITANIUM_NUGGET)
-                .pattern("NIN")
-                .pattern("IGI")
-                .pattern("NIN")
-                .unlockedBy(getHasName(CItems.IRON_GEAR), has(CItems.IRON_GEAR))
-                .save(output);
+    // Gears Recipes
+    shaped(RecipeCategory.MISC, CItems.IRON_GEAR)
+        .define('I', Items.IRON_INGOT)
+        .define('N', Items.IRON_NUGGET)
+        .pattern("NIN")
+        .pattern("I I")
+        .pattern("NIN")
+        .unlockedBy(getHasName(Items.IRON_INGOT), has(Items.IRON_INGOT))
+        .save(output);
+    shaped(RecipeCategory.MISC, CItems.TITANIUM_GEAR)
+        .define('G', CItems.IRON_GEAR)
+        .define('I', CItems.TITANIUM_INGOT)
+        .define('N', CItems.TITANIUM_NUGGET)
+        .pattern("NIN")
+        .pattern("IGI")
+        .pattern("NIN")
+        .unlockedBy(getHasName(CItems.IRON_GEAR), has(CItems.IRON_GEAR))
+        .save(output);
 
-        // Crusher
-        shaped(RecipeCategory.DECORATIONS, CBlocks.CRUSHER)
-                .define('G', CItems.IRON_GEAR)
-                .define('P', Blocks.PISTON)
-                .define('I', Items.IRON_INGOT)
-                .define('F', Blocks.GLASS_PANE)
-                .define('#', Blocks.IRON_BLOCK)
-                .pattern("GPG")
-                .pattern("IFI")
-                .pattern("###")
-                .unlockedBy(getHasName(CItems.IRON_GEAR), has(CItems.IRON_GEAR))
-                .save(output);
+    // Crusher
+    shaped(RecipeCategory.DECORATIONS, CBlocks.CRUSHER)
+        .define('G', CItems.IRON_GEAR)
+        .define('P', Blocks.PISTON)
+        .define('I', Items.IRON_INGOT)
+        .define('F', Blocks.GLASS_PANE)
+        .define('#', Blocks.IRON_BLOCK)
+        .pattern("GPG")
+        .pattern("IFI")
+        .pattern("###")
+        .unlockedBy(getHasName(CItems.IRON_GEAR), has(CItems.IRON_GEAR))
+        .save(output);
 
-        shaped(RecipeCategory.DECORATIONS, CBlocks.ADVANCED_CRUSHER)
-                .define('G', CItems.TITANIUM_GEAR)
-                .define('T', CItems.TITANIUM_INGOT)
-                .define('C', CBlocks.CRUSHER)
-                .define('#', CBlocks.TITANIUM_BLOCK)
-                .pattern("GGG")
-                .pattern("TCT")
-                .pattern("###")
-                .unlockedBy(getHasName(CBlocks.CRUSHER), has(CBlocks.CRUSHER))
-                .save(output);
+    shaped(RecipeCategory.DECORATIONS, CBlocks.ADVANCED_CRUSHER)
+        .define('G', CItems.TITANIUM_GEAR)
+        .define('T', CItems.TITANIUM_INGOT)
+        .define('C', CBlocks.CRUSHER)
+        .define('#', CBlocks.TITANIUM_BLOCK)
+        .pattern("GGG")
+        .pattern("TCT")
+        .pattern("###")
+        .unlockedBy(getHasName(CBlocks.CRUSHER), has(CBlocks.CRUSHER))
+        .save(output);
 
-        twoByTwoPacker(RecipeCategory.BUILDING_BLOCKS, CBlocks.INFERNIUM_BLOCK, CItems.INFERNIUM_CRYSTAL);
+    twoByTwoPacker(RecipeCategory.BUILDING_BLOCKS, CBlocks.INFERNIUM_BLOCK, CItems.INFERNIUM_CRYSTAL);
 
-        // Cosmic Shield
-        shaped(RecipeCategory.DECORATIONS, CBlocks.COSMIC_SHIELD)
-                .define('#', CBlocks.TITANIUM_BLOCK)
-                .define('X', CItems.TITANIUM_GEAR)
-                .define('I', CItems.TITANIUM_INGOT)
-                .pattern("  I")
-                .pattern("X#X")
-                .pattern("# #")
-                .unlockedBy(getHasName(CItems.TITANIUM_GEAR), has(CItems.TITANIUM_GEAR))
-                .save(output);
+    // Cosmic Shield
+    shaped(RecipeCategory.DECORATIONS, CBlocks.COSMIC_SHIELD)
+        .define('#', CBlocks.TITANIUM_BLOCK)
+        .define('X', CItems.TITANIUM_GEAR)
+        .define('I', CItems.TITANIUM_INGOT)
+        .pattern("  I")
+        .pattern("X#X")
+        .pattern("# #")
+        .unlockedBy(getHasName(CItems.TITANIUM_GEAR), has(CItems.TITANIUM_GEAR))
+        .save(output);
 
-        // Extra
-        shaped(RecipeCategory.DECORATIONS, CItems.FALLEN_METEOR_LOCATOR)
-                .define('M', CItems.MAGNETITE)
-                .define('R', Items.REDSTONE)
-                .define('I', Items.IRON_INGOT)
-                .pattern("R R")
-                .pattern("MIM")
-                .pattern(" I ")
-                .unlockedBy(getHasName(CItems.MAGNETITE), has(CItems.MAGNETITE))
-                .save(output);
-    }
+    // Extra
+    shaped(RecipeCategory.DECORATIONS, CItems.FALLEN_METEOR_LOCATOR)
+        .define('M', CItems.MAGNETITE)
+        .define('R', Items.REDSTONE)
+        .define('I', Items.IRON_INGOT)
+        .pattern("R R")
+        .pattern("MIM")
+        .pattern(" I ")
+        .unlockedBy(getHasName(CItems.MAGNETITE), has(CItems.MAGNETITE))
+        .save(output);
+  }
 }

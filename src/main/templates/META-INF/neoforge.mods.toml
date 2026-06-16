@@ -1,10 +1,6 @@
-modLoader="javafml"
-loaderVersion="${loader_version_range}"
 license="${mod_license}"
-#issueTrackerURL="https://change.me.to.your.issue.tracker.example.invalid/"
 
 [[mods]]
-
 modId="${mod_id}"
 version="${mod_version}"
 displayName="${mod_name}"
@@ -24,7 +20,7 @@ config="cosmicore.mixins.json"
 [[dependencies.${mod_id}]]
 modId="neoforge"
 type="required"
-versionRange="${neo_version_range}"
+versionRange="[${neo_version},)"
 ordering="NONE"
 side="BOTH"
 
@@ -34,9 +30,3 @@ type="required"
 versionRange="${minecraft_version_range}"
 ordering="NONE"
 side="BOTH"
-
-# Features are specific properties of the game environment, that you may want to declare you require. This example declares
-# that your mod requires GL version 3.2 or higher. Other features will be added. They are side aware so declaring this won't
-# stop your mod loading on the server for example.
-#[features.${mod_id}]
-#openGLVersion="[3.2,)"

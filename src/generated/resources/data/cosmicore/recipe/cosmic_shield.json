@@ -1,6 +1,5 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "misc",
   "key": {
     "#": "cosmicore:titanium_block",
     "I": "cosmicore:titanium_ingot",
@@ -12,7 +11,6 @@
     "# #"
   ],
   "result": {
-    "count": 1,
     "id": "cosmicore:cosmic_shield"
   }
 }

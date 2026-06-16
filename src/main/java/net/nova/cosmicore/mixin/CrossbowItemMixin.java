@@ -11,9 +11,9 @@ import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(CrossbowItem.class)
 public class CrossbowItemMixin {
-    @WrapOperation(method = "getChargeDuration", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/enchantment/EnchantmentHelper;modifyCrossbowChargingTime(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/entity/LivingEntity;F)F"))
-    private static float crossChangeChargingTime(ItemStack stack, LivingEntity entity, float crossbowChargingTime, Operation<Float> original) {
-        if (stack.is(CItems.TITANIUM_CROSSBOW)) return 1.1F;
-        return crossbowChargingTime;
-    }
+  @WrapOperation(method = "getChargeDuration", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/enchantment/EnchantmentHelper;modifyCrossbowChargingTime(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/entity/LivingEntity;F)F"))
+  private static float crossChangeChargingTime(ItemStack stack, LivingEntity entity, float crossbowChargingTime, Operation<Float> original) {
+    if (stack.is(CItems.TITANIUM_CROSSBOW)) return 1.1F;
+    return crossbowChargingTime;
+  }
 }

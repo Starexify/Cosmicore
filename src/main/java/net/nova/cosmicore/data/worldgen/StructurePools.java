@@ -9,16 +9,16 @@ import net.nova.cosmicore.data.worldgen.meteor_site.MeteorPools;
 import net.nova.cosmicore.data.worldgen.meteor_site.MeteorSitePools;
 
 public class StructurePools {
-    public static ResourceKey<StructureTemplatePool> createKey(String name) {
-        return ResourceKey.create(Registries.TEMPLATE_POOL, Cosmicore.rl(name));
-    }
+  public static ResourceKey<StructureTemplatePool> createKey(String name) {
+    return ResourceKey.create(Registries.TEMPLATE_POOL, Cosmicore.rl(name));
+  }
 
-    public static void register(BootstrapContext<StructureTemplatePool> pContext, String pName, StructureTemplatePool pPool) {
-        pContext.register(createKey(pName), pPool);
-    }
+  public static void register(BootstrapContext<StructureTemplatePool> pContext, String pName, StructureTemplatePool pPool) {
+    pContext.register(createKey(pName), pPool);
+  }
 
-    public static void bootstrap(BootstrapContext<StructureTemplatePool> pContext) {
-        MeteorSitePools.bootstrap(pContext);
-        MeteorPools.bootstrap(pContext);
-    }
+  public static void bootstrap(BootstrapContext<StructureTemplatePool> pContext) {
+    MeteorSitePools.bootstrap(pContext);
+    MeteorPools.bootstrap(pContext);
+  }
 }

@@ -70,7 +70,7 @@ public class CrusherTile extends AbstractCrusherTile {
     public boolean hasRecipe() {
         Optional<RecipeHolder<CrushingRecipe>> recipe = getCurrentRecipe();
         if (recipe.isEmpty()) return false;
-        ItemStack result = recipe.get().value().assemble(createRecipeInput(), level.registryAccess());
+        ItemStack result = recipe.get().value().assemble(createRecipeInput());
 
         return canInsertAmountIntoOutputSlot(result.getCount()) && canInsertItemInOutputSlot(result.getItem());
     }
@@ -79,7 +79,7 @@ public class CrusherTile extends AbstractCrusherTile {
     public void craftItem() {
         Optional<RecipeHolder<CrushingRecipe>> recipe = getCurrentRecipe();
         if (recipe.isPresent()) {
-            ItemStack result = recipe.get().value().assemble(createRecipeInput(), level.registryAccess());
+            ItemStack result = recipe.get().value().assemble(createRecipeInput());
             inventory.getFirst().shrink(1);
             insertOrMergeResult(result);
         }

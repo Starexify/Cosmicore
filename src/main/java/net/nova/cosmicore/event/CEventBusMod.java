@@ -11,30 +11,30 @@ import net.nova.cosmicore.init.CEntities;
 
 import static net.nova.cosmicore.Cosmicore.MODID;
 
-@EventBusSubscriber(modid = MODID, bus = EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = MODID)
 public class CEventBusMod {
-    @SubscribeEvent
-    public static void registerCapabilities(RegisterCapabilitiesEvent event) {
-        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, CBlockEntities.CRUSHER_TILE.get(), (be, side) -> {
-            if (side == null) return be.inventory;
-            return switch (side) {
-                case UP -> be.top;
-                case DOWN -> be.down;
-                default -> be.sides;
-            };
-        });
-        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, CBlockEntities.ADVANCED_CRUSHER_TILE.get(), (be, side) -> {
-            if (side == null) return be.inventory;
-            return switch (side) {
-                case UP -> be.top;
-                case DOWN -> be.down;
-                default -> be.sides;
-            };
-        });
-    }
+  @SubscribeEvent
+  public static void registerCapabilities(RegisterCapabilitiesEvent event) {
+    event.registerBlockEntity(Capabilities.Item.BLOCK, CBlockEntities.CRUSHER_TILE.get(), (be, side) -> {
+      if (side == null) return be.inventory;
+      return switch (side) {
+        case UP -> be.top;
+        case DOWN -> be.down;
+        default -> be.sides;
+      };
+    });
+    event.registerBlockEntity(Capabilities.Item.BLOCK, CBlockEntities.ADVANCED_CRUSHER_TILE.get(), (be, side) -> {
+      if (side == null) return be.inventory;
+      return switch (side) {
+        case UP -> be.top;
+        case DOWN -> be.down;
+        default -> be.sides;
+      };
+    });
+  }
 
-    @SubscribeEvent
-    public static void registerEntityAttributes(EntityAttributeCreationEvent event) {
-        event.put(CEntities.TITANIUM_GOLEM.get(), TitaniumGolem.createAttributes().build());
-    }
+  @SubscribeEvent
+  public static void registerEntityAttributes(EntityAttributeCreationEvent event) {
+    event.put(CEntities.TITANIUM_GOLEM.get(), TitaniumGolem.createAttributes().build());
+  }
 }

@@ -12,15 +12,15 @@ import java.util.List;
 
 @Mixin(ItemModelGenerators.class)
 public class ItemModelGeneratorsMixin {
-    @Shadow
-    @Final
-    public static List<ItemModelGenerators.TrimMaterialData> TRIM_MATERIAL_MODELS;
+  @Shadow
+  @Final
+  public static List<ItemModelGenerators.TrimMaterialData> TRIM_MATERIAL_MODELS;
 
-    static {
-        TRIM_MATERIAL_MODELS = ImmutableList.<ItemModelGenerators.TrimMaterialData>builder()
-                .addAll(TRIM_MATERIAL_MODELS)
-                .add(new ItemModelGenerators.TrimMaterialData(CMaterialAssetGroup.TITANIUM, CTrimMaterials.TITANIUM),
-                        new ItemModelGenerators.TrimMaterialData(CMaterialAssetGroup.LONSDALEITE, CTrimMaterials.LONSDALEITE))
-                .build();
-    }
+  static {
+    TRIM_MATERIAL_MODELS = ImmutableList.<ItemModelGenerators.TrimMaterialData>builder()
+        .addAll(TRIM_MATERIAL_MODELS)
+        .add(new ItemModelGenerators.TrimMaterialData(CMaterialAssetGroup.TITANIUM, CTrimMaterials.TITANIUM),
+            new ItemModelGenerators.TrimMaterialData(CMaterialAssetGroup.LONSDALEITE, CTrimMaterials.LONSDALEITE))
+        .build();
+  }
 }

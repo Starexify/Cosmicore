@@ -10,66 +10,66 @@ import net.nova.cosmicore.entity.Meteorite;
 import net.nova.cosmicore.init.CEntities;
 
 public class MeteorSpawner {
-    public final ServerLevel level;
-    public int tickCounter;
-    public int ticksUntilNextMeteor;
-    public final RandomSource random;
-    public final int minTicksUntilNextMeteor;
-    public final int maxTicksUntilNextMeteor;
-    private BlockPos lastMeteorSpawnPos;
+  public final ServerLevel level;
+  public int tickCounter;
+  public int ticksUntilNextMeteor;
+  public final RandomSource random;
+  public final int minTicksUntilNextMeteor;
+  public final int maxTicksUntilNextMeteor;
+  private BlockPos lastMeteorSpawnPos;
 
-    public MeteorSpawner(ServerLevel level, int minTicksUntilNextMeteor, int maxTicksUntilNextMeteor) {
-        this.level = level;
-        this.random = level.getRandom();
-        this.minTicksUntilNextMeteor = minTicksUntilNextMeteor;
-        this.maxTicksUntilNextMeteor = maxTicksUntilNextMeteor;
-        this.tickCounter = 0;
-        this.ticksUntilNextMeteor = random.nextIntBetweenInclusive(minTicksUntilNextMeteor, maxTicksUntilNextMeteor);
-        this.lastMeteorSpawnPos = null;
+  public MeteorSpawner(ServerLevel level, int minTicksUntilNextMeteor, int maxTicksUntilNextMeteor) {
+    this.level = level;
+    this.random = level.getRandom();
+    this.minTicksUntilNextMeteor = minTicksUntilNextMeteor;
+    this.maxTicksUntilNextMeteor = maxTicksUntilNextMeteor;
+    this.tickCounter = 0;
+    this.ticksUntilNextMeteor = random.nextIntBetweenInclusive(minTicksUntilNextMeteor, maxTicksUntilNextMeteor);
+    this.lastMeteorSpawnPos = null;
+  }
+
+  public BlockPos getLastMeteorSpawnPos() {
+    return lastMeteorSpawnPos;
+  }
+
+  public void resetAfterSpawn() {
+    this.tickCounter = 0;
+    this.ticksUntilNextMeteor = random.nextIntBetweenInclusive(minTicksUntilNextMeteor, maxTicksUntilNextMeteor);
+  }
+
+  public void onTick() {
+    if (level.players().isEmpty()) return;
+
+    tickCounter++;
+
+    if (tickCounter >= ticksUntilNextMeteor) {
+      spawnMeteorNearRandomPlayer();
+      resetAfterSpawn();
     }
+  }
 
-    public BlockPos getLastMeteorSpawnPos() {
-        return lastMeteorSpawnPos;
-    }
+  public void spawnMeteorNearRandomPlayer() {
+    if (level.players().isEmpty()) return;
 
-    public void resetAfterSpawn() {
-        this.tickCounter = 0;
-        this.ticksUntilNextMeteor = random.nextIntBetweenInclusive(minTicksUntilNextMeteor, maxTicksUntilNextMeteor);
-    }
+    ServerPlayer randomPlayer = level.players().get(random.nextInt(level.players().size()));
+    BlockPos playerPos = randomPlayer.blockPosition();
 
-    public void onTick() {
-        if (level.players().isEmpty()) return;
+    int distance = random.nextIntBetweenInclusive(900, 2800);
+    int angle = random.nextInt(360);
 
-        tickCounter++;
+    double radians = Math.toRadians(angle);
+    int x = playerPos.getX() + (int) (distance * Math.cos(radians));
+    int z = playerPos.getZ() + (int) (distance * Math.sin(radians));
 
-        if (tickCounter >= ticksUntilNextMeteor) {
-            spawnMeteorNearRandomPlayer();
-            resetAfterSpawn();
-        }
-    }
+    BlockPos spawnPos = new BlockPos(x, 320, z);
+    this.lastMeteorSpawnPos = spawnPos;
 
-    public void spawnMeteorNearRandomPlayer() {
-        if (level.players().isEmpty()) return;
+    // 70% chance for Achondrite, 30% chance for Meteorite
+    BaseMeteor meteor = random.nextFloat() < 0.7
+        ? new Achondrite(CEntities.ACHONDRITE.get(), level)
+        : new Meteorite(CEntities.METEORITE.get(), level);
 
-        ServerPlayer randomPlayer = level.players().get(random.nextInt(level.players().size()));
-        BlockPos playerPos = randomPlayer.blockPosition();
-
-        int distance = random.nextIntBetweenInclusive(900, 2800);
-        int angle = random.nextInt(360);
-
-        double radians = Math.toRadians(angle);
-        int x = playerPos.getX() + (int) (distance * Math.cos(radians));
-        int z = playerPos.getZ() + (int) (distance * Math.sin(radians));
-
-        BlockPos spawnPos = new BlockPos(x, 320, z);
-        this.lastMeteorSpawnPos = spawnPos;
-
-        // 70% chance for Achondrite, 30% chance for Meteorite
-        BaseMeteor meteor = random.nextFloat() < 0.7
-                ? new Achondrite(CEntities.ACHONDRITE.get(), level)
-                : new Meteorite(CEntities.METEORITE.get(), level);
-
-        meteor.setPos(spawnPos.getX() + 0.5, 320, spawnPos.getZ() + 0.5);
-        level.addFreshEntity(meteor);
-    }
+    meteor.setPos(spawnPos.getX() + 0.5, 320, spawnPos.getZ() + 0.5);
+    level.addFreshEntity(meteor);
+  }
 }

@@ -1,28 +1,25 @@
 package net.nova.cosmicore.init;
 
-import net.minecraft.Util;
+import com.google.common.collect.Maps;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.equipment.ArmorMaterial;
 import net.minecraft.world.item.equipment.ArmorType;
 import net.nova.cosmicore.equipment.CEquipmentAssets;
 
-import java.util.EnumMap;
+import java.util.Map;
 
 public interface CArmorMaterials {
-    ArmorMaterial TITANIUM = new ArmorMaterial(29, Util.make(new EnumMap<>(ArmorType.class), map -> {
-        map.put(ArmorType.BOOTS, 3);
-        map.put(ArmorType.LEGGINGS, 6);
-        map.put(ArmorType.CHESTPLATE, 8);
-        map.put(ArmorType.HELMET, 3);
-        map.put(ArmorType.BODY, 7);
-    }), 17, SoundEvents.ARMOR_EQUIP_IRON, 2.5F, 0.09F, CTags.CItemTags.REPAIRS_TITANIUM_ARMOR, CEquipmentAssets.TITANIUM);
+  ArmorMaterial TITANIUM = new ArmorMaterial(
+      29, makeDefense(3, 6, 8, 3, 7), 17, SoundEvents.ARMOR_EQUIP_IRON, 2.5F, 0.09F, CTags.CItemTags.REPAIRS_TITANIUM_ARMOR, CEquipmentAssets.TITANIUM
+  );
+  ArmorMaterial LONSDALEITE = new ArmorMaterial(
+      29, makeDefense(3, 6, 8, 3, 13), 18, SoundEvents.ARMOR_EQUIP_DIAMOND, 3.5F, 0.15F, CTags.CItemTags.REPAIRS_LONSDALEITE_ARMOR, CEquipmentAssets.LONSDALEITE
+  );
 
-    ArmorMaterial LONSDALEITE = new ArmorMaterial(29, Util.make(new EnumMap<>(ArmorType.class), map -> {
-        map.put(ArmorType.BOOTS, 3);
-        map.put(ArmorType.LEGGINGS, 6);
-        map.put(ArmorType.CHESTPLATE, 8);
-        map.put(ArmorType.HELMET, 3);
-        map.put(ArmorType.BODY, 13);
-    }), 18, SoundEvents.ARMOR_EQUIP_DIAMOND, 3.5F, 0.15F, CTags.CItemTags.REPAIRS_LONSDALEITE_ARMOR, CEquipmentAssets.LONSDALEITE);
+  private static Map<ArmorType, Integer> makeDefense(int boots, int legs, int chest, int helm, int body) {
+    return Maps.newEnumMap(
+        Map.of(ArmorType.BOOTS, boots, ArmorType.LEGGINGS, legs, ArmorType.CHESTPLATE, chest, ArmorType.HELMET, helm, ArmorType.BODY, body)
+    );
+  }
 }
 

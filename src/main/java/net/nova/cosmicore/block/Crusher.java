@@ -11,28 +11,28 @@ import net.nova.cosmicore.init.CBlockEntities;
 import org.jetbrains.annotations.Nullable;
 
 public class Crusher extends AbstractCrusher {
-    public Crusher(Properties properties) {
-        super(properties);
-    }
+  public Crusher(Properties properties) {
+    super(properties);
+  }
 
-    @Override
-    protected Class<? extends BlockEntity> getTileEntityClass() {
-        return CrusherTile.class;
-    }
+  @Override
+  protected Class<? extends BlockEntity> getTileEntityClass() {
+    return CrusherTile.class;
+  }
 
-    @Override
-    protected BlockEntityType<?> getBlockEntityType() {
-        return CBlockEntities.CRUSHER_TILE.get();
-    }
+  @Override
+  protected BlockEntityType<?> getBlockEntityType() {
+    return CBlockEntities.CRUSHER_TILE.get();
+  }
 
-    @Nullable
-    @Override
-    public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-        return new CrusherTile(pPos, pState);
-    }
+  @Nullable
+  @Override
+  public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
+    return new CrusherTile(pPos, pState);
+  }
 
-    @Override
-    protected MapCodec<? extends BaseEntityBlock> codec() {
-        return simpleCodec(Crusher::new);
-    }
+  @Override
+  protected MapCodec<? extends BaseEntityBlock> codec() {
+    return simpleCodec(Crusher::new);
+  }
 }

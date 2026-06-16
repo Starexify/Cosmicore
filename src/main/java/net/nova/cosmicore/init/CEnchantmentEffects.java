@@ -11,7 +11,7 @@ import java.util.function.Supplier;
 import static net.nova.cosmicore.Cosmicore.MODID;
 
 public class CEnchantmentEffects {
-    public static final DeferredRegister<MapCodec<? extends EnchantmentEntityEffect>> ENTITY_EFFECT = DeferredRegister.create(BuiltInRegistries.ENCHANTMENT_ENTITY_EFFECT_TYPE, MODID);
+  public static final DeferredRegister<MapCodec<? extends EnchantmentEntityEffect>> ENTITY_EFFECT = DeferredRegister.create(BuiltInRegistries.ENCHANTMENT_ENTITY_EFFECT_TYPE, MODID);
 
-    public static final Supplier<MapCodec<? extends EnchantmentEntityEffect>> MAGNETISM = ENTITY_EFFECT.register("magnetism", () -> MagnetismEffect.CODEC);
+  public static final Supplier<MapCodec<? extends EnchantmentEntityEffect>> MAGNETISM = ENTITY_EFFECT.register("magnetism", () -> MagnetismEffect.CODEC);
 }

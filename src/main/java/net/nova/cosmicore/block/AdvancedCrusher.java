@@ -10,27 +10,27 @@ import net.nova.cosmicore.blockentity.AdvancedCrusherTile;
 import net.nova.cosmicore.init.CBlockEntities;
 
 public class AdvancedCrusher extends AbstractCrusher {
-    public AdvancedCrusher(Properties properties) {
-        super(properties);
-    }
+  public AdvancedCrusher(Properties properties) {
+    super(properties);
+  }
 
-    @Override
-    protected Class<? extends BlockEntity> getTileEntityClass() {
-        return AdvancedCrusherTile.class;
-    }
+  @Override
+  protected Class<? extends BlockEntity> getTileEntityClass() {
+    return AdvancedCrusherTile.class;
+  }
 
-    @Override
-    protected BlockEntityType<?> getBlockEntityType() {
-        return CBlockEntities.ADVANCED_CRUSHER_TILE.get();
-    }
+  @Override
+  protected BlockEntityType<?> getBlockEntityType() {
+    return CBlockEntities.ADVANCED_CRUSHER_TILE.get();
+  }
 
-    @Override
-    public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-        return new AdvancedCrusherTile(pPos, pState);
-    }
+  @Override
+  public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
+    return new AdvancedCrusherTile(pPos, pState);
+  }
 
-    @Override
-    protected MapCodec<? extends BaseEntityBlock> codec() {
-        return simpleCodec(AdvancedCrusher::new);
-    }
+  @Override
+  protected MapCodec<? extends BaseEntityBlock> codec() {
+    return simpleCodec(AdvancedCrusher::new);
+  }
 }

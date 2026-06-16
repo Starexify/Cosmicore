@@ -1,6 +1,5 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "misc",
   "key": {
     "#": "minecraft:iron_block",
     "F": "minecraft:glass_pane",
@@ -14,7 +13,6 @@
     "###"
   ],
   "result": {
-    "count": 1,
     "id": "cosmicore:crusher"
   }
 }
