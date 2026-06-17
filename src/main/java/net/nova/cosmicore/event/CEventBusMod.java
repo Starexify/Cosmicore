@@ -16,7 +16,7 @@ public class CEventBusMod {
   @SubscribeEvent
   public static void registerCapabilities(RegisterCapabilitiesEvent event) {
     event.registerBlockEntity(Capabilities.Item.BLOCK, CBlockEntities.CRUSHER_TILE.get(), (be, side) -> {
-      if (side == null) return be.inventory;
+      if (side == null) return be.stackHandler;
       return switch (side) {
         case UP -> be.top;
         case DOWN -> be.down;
@@ -24,7 +24,7 @@ public class CEventBusMod {
       };
     });
     event.registerBlockEntity(Capabilities.Item.BLOCK, CBlockEntities.ADVANCED_CRUSHER_TILE.get(), (be, side) -> {
-      if (side == null) return be.inventory;
+      if (side == null) return be.stackHandler;
       return switch (side) {
         case UP -> be.top;
         case DOWN -> be.down;

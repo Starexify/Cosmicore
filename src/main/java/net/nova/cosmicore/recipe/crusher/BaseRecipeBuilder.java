@@ -27,7 +27,7 @@ public abstract class BaseRecipeBuilder implements RecipeBuilder {
   }
 
   public ItemStackTemplate getResult() {
-    return this.results.isEmpty() ? Items.AIR.getCraftingRemainder() : this.results.get(0).item.getCraftingRemainder();
+    return this.results.isEmpty() ? Items.AIR.getCraftingRemainder() : this.results.get(0).item().getCraftingRemainder();
   }
 
   @Override

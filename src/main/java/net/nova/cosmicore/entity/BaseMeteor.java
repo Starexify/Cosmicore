@@ -6,7 +6,6 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.SectionPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
@@ -307,7 +306,7 @@ public class BaseMeteor extends Entity {
             BlockState state = serverLevel.getBlockState(pos);
             if (isShieldBlock(state)) {
               BlockEntity blockEntity = serverLevel.getBlockEntity(pos);
-              if (blockEntity instanceof CosmicShieldTile && ((CosmicShieldTile) blockEntity).inventory.getItems().size() != 0)
+              if (blockEntity instanceof CosmicShieldTile && ((CosmicShieldTile) blockEntity).stackHandler.getItems().size() != 0)
                 return true;
             }
           }
@@ -349,16 +348,16 @@ public class BaseMeteor extends Entity {
   }
 
   @Override
-  protected void readAdditionalSaveData(ValueInput valueInput) {
-    if (valueInput.equals("LandingPos")) {
-      int[] pos = valueInput.getIntArray("LandingPos").get();
+  protected void readAdditionalSaveData(ValueInput in) {
+    if (in.equals("LandingPos")) {
+      int[] pos = in.getIntArray("LandingPos").get();
       if (pos.length == 3) this.landingPos = new BlockPos(pos[0], pos[1], pos[2]);
     }
   }
 
   @Override
-  protected void addAdditionalSaveData(ValueOutput valueOutput) {
+  protected void addAdditionalSaveData(ValueOutput out) {
     if (landingPos != null)
-      valueOutput.putIntArray("LandingPos", new int[]{landingPos.getX(), landingPos.getY(), landingPos.getZ()});
+      out.putIntArray("LandingPos", new int[]{landingPos.getX(), landingPos.getY(), landingPos.getZ()});
   }
 }

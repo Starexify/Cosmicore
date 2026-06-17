@@ -3,12 +3,10 @@ package net.nova.cosmicore.blockentity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.Container;
 import net.minecraft.world.Containers;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.item.Item;
@@ -20,7 +18,10 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.items.IItemHandler;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
+import net.neoforged.neoforge.transfer.ResourceHandler;
+import net.neoforged.neoforge.transfer.item.ItemResource;
 import net.nova.cosmicore.gui.CrusherItemStackHandler;
 import net.nova.cosmicore.init.CBlocks;
 import net.nova.cosmicore.init.CItems;
@@ -30,191 +31,199 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Map;
 
 public abstract class AbstractCrusherTile extends BlockEntity implements MenuProvider {
-    public CrusherItemStackHandler inventory;
-    public IItemHandler top;
-    public IItemHandler sides;
-    public IItemHandler down;
+  public CrusherItemStackHandler stackHandler;
+  public ResourceHandler<ItemResource> top;
+  public ResourceHandler<ItemResource> sides;
+  public ResourceHandler<ItemResource> down;
 
-    public int FUEL_SLOT;
-    public int RESULT_SLOT_START;
-    public int RESULT_SLOT_END;
+  public int FUEL_SLOT;
+  public int RESULT_SLOT_START;
+  public int RESULT_SLOT_END;
 
-    protected int ignisCharge;
-    protected int ignisPower = 44;
-    protected int crushingProgress;
-    protected int maxCrushingProgress = 400;
+  protected int ignisCharge;
+  protected int ignisPower = 44;
+  protected int crushingProgress;
+  protected int maxCrushingProgress = 10;
 
-    public boolean hasRecipe;
+  public boolean hasRecipe;
 
-    public static final Map<Item, Integer> FUEL_MAP = Map.of(
-            CItems.INFERNIUM_CRYSTAL.get(), 11,
-            CBlocks.INFERNIUM_BLOCK.asItem(), 44
-    );
+  public static final Map<Item, Integer> FUEL_MAP = Map.of(
+      CItems.INFERNIUM_CRYSTAL.get(), 11,
+      CBlocks.INFERNIUM_BLOCK.asItem(), 44
+  );
 
-    public final RecipeType<? extends BaseCrushingRecipe> recipeType;
-    public final RecipeManager.CachedCheck<SingleRecipeInput, ? extends BaseCrushingRecipe> quickCheck;
+  public final RecipeType<? extends BaseCrushingRecipe> recipeType;
+  public final RecipeManager.CachedCheck<SingleRecipeInput, ? extends BaseCrushingRecipe> quickCheck;
 
-    public abstract boolean hasRecipe();
+  public abstract boolean hasRecipe();
 
-    public abstract void craftItem();
+  public abstract void craftItem();
 
-    protected AbstractCrusherTile(BlockEntityType<?> pType, BlockPos pPos, BlockState pBlockState, RecipeType<? extends BaseCrushingRecipe> recipeType) {
-        super(pType, pPos, pBlockState);
-        this.quickCheck = RecipeManager.createCheck(recipeType);
-        this.recipeType = recipeType;
+  protected AbstractCrusherTile(BlockEntityType<?> pType, BlockPos pPos, BlockState pBlockState, RecipeType<? extends BaseCrushingRecipe> recipeType) {
+    super(pType, pPos, pBlockState);
+    this.quickCheck = RecipeManager.createCheck(recipeType);
+    this.recipeType = recipeType;
+  }
+
+  // Render Item
+  public ItemStack getRenderedStack() {
+    return stackHandler.getResource(0).toStack();
+  }
+
+  /// Crafting Logic
+  // Logic for GUI
+  public void serverTick(ServerLevel serverLevel, BlockPos pos, BlockState state) {
+    hasIgnis();
+    if (isCharged() && hasRecipe()) {
+      hasRecipe = true;
+      crushingProgress++;
+      setChanged(serverLevel, pos, state);
+      serverLevel.sendBlockUpdated(pos, state, state, Block.UPDATE_ALL);
+
+      if (hasProgressFinished()) {
+        craftItem();
+        resetProgress();
+        ignisCharge--;
+        setChanged(serverLevel, pos, state);
+        serverLevel.sendBlockUpdated(pos, state, state, Block.UPDATE_ALL);
+      }
     }
-
-    // Render Item
-    public ItemStack getRenderedStack() {
-        return inventory.getFirst();
+    else {
+      hasRecipe = false;
+      resetProgress();
     }
+  }
 
-    // Crafting Stuff
+  public boolean isCharged() {
+    return this.ignisCharge > 0;
+  }
 
-    // Logic for GUI
-    public void serverTick(ServerLevel serverLevel, BlockPos pos, BlockState state) {
-        hasIgnis();
-        if (isCharged() && hasRecipe()) {
-            hasRecipe = true;
-            crushingProgress++;
-            setChanged(serverLevel, pos, state);
-            serverLevel.sendBlockUpdated(pos, state, state, Block.UPDATE_ALL);
+  public void hasIgnis() {
+    Item fuelItem = stackHandler.getResource(FUEL_SLOT).getItem();
+    boolean hasFuel = isFuel(stackHandler.getResource(FUEL_SLOT).toStack());
 
-            if (hasProgressFinished()) {
-                craftItem();
-                resetProgress();
-                ignisCharge--;
-                setChanged(serverLevel, pos, state);
-                serverLevel.sendBlockUpdated(pos, state, state, Block.UPDATE_ALL);
-            }
-        } else {
-            hasRecipe = false;
-            resetProgress();
-        }
+    int fuel = FUEL_MAP.getOrDefault(fuelItem, 0);
+    if (hasFuel && ignisCharge <= ignisPower - fuel) {
+      ignisCharge += fuel;
+      stackHandler.removeStackFromSlot(FUEL_SLOT);
     }
+  }
 
-    public boolean isCharged() {
-        return this.ignisCharge > 0;
+  public boolean isFuel(ItemStack item) {
+    return FUEL_MAP.containsKey(item.getItem());
+  }
+
+  // Recipe progress Stuff
+  public boolean hasProgressFinished() {
+    return crushingProgress >= maxCrushingProgress;
+  }
+
+  public void resetProgress() {
+    crushingProgress = 0;
+  }
+
+  // Methods for checking Insertion
+  public void insertOrMergeResult(ItemStack result) {
+    for (int i = RESULT_SLOT_START; i <= RESULT_SLOT_END; i++) {
+      ItemStack slotStack = stackHandler.getResource(i).toStack();
+      if (slotStack.isEmpty()) {
+//        stackHandler.set(i, result.copy(), 1);
+        break;
+      }
+      else if (ItemStack.isSameItem(slotStack, result) && slotStack.getCount() + result.getCount() <= slotStack.getMaxStackSize()) {
+        slotStack.grow(result.getCount());
+        break;
+      }
     }
+  }
 
-    public void hasIgnis() {
-        Item fuelItem = inventory.getStackInSlot(FUEL_SLOT).getItem();
-        boolean hasFuel = isFuel(inventory.getStackInSlot(FUEL_SLOT));
-
-        int fuel = FUEL_MAP.getOrDefault(fuelItem, 0);
-        if (hasFuel && ignisCharge <= ignisPower - fuel) {
-            ignisCharge += fuel;
-            inventory.removeStackFromSlot(FUEL_SLOT);
-        }
+  public boolean canInsertItemInOutputSlot(Item item) {
+    for (int i = RESULT_SLOT_START; i <= RESULT_SLOT_END; i++) {
+      ItemStack slotStack = stackHandler.getResource(i).toStack();
+      if (slotStack.isEmpty() || (slotStack.is(item) && slotStack.getCount() < slotStack.getMaxStackSize())) {
+        return true;
+      }
     }
+    return false;
+  }
 
-    public boolean isFuel(ItemStack item) {
-        return FUEL_MAP.containsKey(item.getItem());
+  public boolean canInsertAmountIntoOutputSlot(int count) {
+    int availableSpace = 0;
+    for (int i = RESULT_SLOT_START; i <= RESULT_SLOT_END; i++) {
+      ItemStack slotStack = stackHandler.getResource(i).toStack();
+      if (slotStack.isEmpty()) {
+        availableSpace += slotStack.getMaxStackSize();
+      }
+      else {
+        availableSpace += slotStack.getMaxStackSize() - slotStack.getCount();
+      }
+
+      if (availableSpace >= count) return true;
     }
+    return false;
+  }
 
-    // Recipe progress Stuff
-    public boolean hasProgressFinished() {
-        return crushingProgress >= maxCrushingProgress;
-    }
+  public SingleRecipeInput createRecipeInput() {
+    return new SingleRecipeInput(this.stackHandler.getResource(0).toStack());
+  }
 
-    public void resetProgress() {
-        crushingProgress = 0;
-    }
+  // Drop Inventory
+  @Override
+  public void preRemoveSideEffects(BlockPos pos, BlockState state) {
+    if (level == null) return;
+    Containers.dropContents(level, pos, stackHandler.getItems());
+  }
 
-    // Methods for checking Insertion
-    public void insertOrMergeResult(ItemStack result) {
-        for (int i = RESULT_SLOT_START; i <= RESULT_SLOT_END; i++) {
-            ItemStack slotStack = inventory.getStackInSlot(i);
-            if (slotStack.isEmpty()) {
-                inventory.setStackInSlot(i, result.copy());
-                break;
-            } else if (ItemStack.isSameItem(slotStack, result) && slotStack.getCount() + result.getCount() <= slotStack.getMaxStackSize()) {
-                slotStack.grow(result.getCount());
-                break;
-            }
-        }
-    }
+  // Stores NBT Data
+  @Override
+  protected void saveAdditional(ValueOutput out) {
+    super.saveAdditional(out);
 
-    public boolean canInsertItemInOutputSlot(Item item) {
-        for (int i = RESULT_SLOT_START; i <= RESULT_SLOT_END; i++) {
-            ItemStack slotStack = inventory.getStackInSlot(i);
-            if (slotStack.isEmpty() || (slotStack.is(item) && slotStack.getCount() < slotStack.getMaxStackSize())) {
-                return true;
-            }
-        }
-        return false;
-    }
+    out.putChild("Inventory", stackHandler);
+    out.putInt("IgnisCharge", ignisCharge);
+    out.putInt("IgnisPower", ignisPower);
+    out.putInt("CrushingProgress", crushingProgress);
+  }
 
-    public boolean canInsertAmountIntoOutputSlot(int count) {
-        int availableSpace = 0;
-        for (int i = RESULT_SLOT_START; i <= RESULT_SLOT_END; i++) {
-            ItemStack slotStack = inventory.getStackInSlot(i);
-            if (slotStack.isEmpty()) {
-                availableSpace += slotStack.getMaxStackSize();
-            } else {
-                availableSpace += slotStack.getMaxStackSize() - slotStack.getCount();
-            }
-            if (availableSpace >= count) {
-                return true;
-            }
-        }
-        return false;
-    }
+  @Override
+  protected void loadAdditional(ValueInput in) {
+    super.loadAdditional(in);
 
-    public SingleRecipeInput createRecipeInput() {
-        return new SingleRecipeInput(this.inventory.getFirst());
-    }
+    in.child("Inventory").ifPresent(stackHandler::deserialize);
+    ignisCharge = in.getIntOr("IgnisCharge", 0);
+    ignisPower = in.getIntOr("IgnisPower", 0);
+    crushingProgress = in.getIntOr("CrushingProgress", 0);
+  }
 
-    // Drop Inventory
-    @Override
-    public void preRemoveSideEffects(BlockPos pos, BlockState state) {
-        if (level != null) Containers.dropContents(level, pos, inventory.getItems());
-    }
+  // Updates the BE between Client-Server
+//  @Override
+//  public void onDataPacket(Connection net, ValueInput valueInput) {
+//    super.onDataPacket(net, valueInput);
+//    if (level == null && !level.isClientSide()) return;
+//    handleUpdateTag(valueInput);
+//  }
 
-    // Stores NBT Data
-//    protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
-//        super.saveAdditional(tag, registries);
-//        tag.put("Inventory", inventory.serializeNBT(registries));
-//        tag.putInt("IgnisCharge", ignisCharge);
-//        tag.putInt("IgnisPower", ignisPower);
-//        tag.putInt("CrushingProgress", crushingProgress);
-//    }
-//
-//    protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
-//        super.loadAdditional(tag, registries);
-//        inventory.deserializeNBT(registries, tag.getCompoundOrEmpty("Inventory"));
-//        ignisCharge = tag.getIntOr("IgnisCharge", 0);
-//        ignisPower = tag.getIntOr("IgnisPower", 0);
-//        crushingProgress = tag.getIntOr("CrushingProgress", 0);
-//    }
-//
-//    // Updates the BE between Client-Server
-//    public void onDataPacket(Connection connection, ClientboundBlockEntityDataPacket packet, HolderLookup.Provider registries) {
-//        super.onDataPacket(connection, packet, registries);
-//        if (level != null && level.isClientSide) {
-//            CompoundTag tag = packet.getTag();
-//            handleUpdateTag(tag, level.registryAccess());
-//        }
-//    }
-//
-//    public void handleUpdateTag(CompoundTag tag, HolderLookup.Provider registries) {
-//        super.handleUpdateTag(tag, registries);
-//        inventory.deserializeNBT(registries, tag.getCompoundOrEmpty("Inventory"));
-//        crushingProgress = tag.getIntOr("CrushingProgress", 0);
-//        hasRecipe = tag.getBooleanOr("HasRecipe", false);
-//    }
-//
-//    @Override
-//    public CompoundTag getUpdateTag(HolderLookup.Provider registries) {
-//        CompoundTag tag = super.getUpdateTag(registries);
-//        tag.put("Inventory", inventory.serializeNBT(registries));
-//        tag.putInt("CrushingProgress", crushingProgress);
-//        tag.putBoolean("HasRecipe", hasRecipe());
-//        return tag;
-//    }
+  @Override
+  public void handleUpdateTag(ValueInput in) {
+    super.handleUpdateTag(in);
 
-    @Override
-    public @Nullable Packet<ClientGamePacketListener> getUpdatePacket() {
-        return ClientboundBlockEntityDataPacket.create(this);
-    }
+    stackHandler.deserialize(in.child("Inventory").get());
+    crushingProgress = in.getIntOr("CrushingProgress", 0);
+    hasRecipe = in.getBooleanOr("HasRecipe", false);
+  }
+
+  @Override
+  public CompoundTag getUpdateTag(HolderLookup.Provider registries) {
+    CompoundTag tag = super.getUpdateTag(registries);
+
+//    tag.putInt("CrushingProgress", crushingProgress);
+//    tag.putBoolean("HasRecipe", hasRecipe());
+
+    return tag;
+  }
+
+  @Override
+  public @Nullable Packet<ClientGamePacketListener> getUpdatePacket() {
+    return ClientboundBlockEntityDataPacket.create(this);
+  }
 }

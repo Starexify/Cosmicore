@@ -5,4 +5,5 @@ import net.minecraft.client.renderer.blockentity.state.BlockEntityRenderState;
 public class CrusherRenderState extends BlockEntityRenderState {
   public float neckOffset;
   public float headOffset;
+  public int lightCoords;
 }

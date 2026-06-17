@@ -10,6 +10,8 @@ import net.minecraft.client.renderer.feature.ModelFeatureRenderer;
 import net.minecraft.client.renderer.state.level.CameraRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.Identifier;
+import net.minecraft.util.LightCoordsUtil;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.phys.Vec3;
 import net.nova.cosmicore.client.model.CrusherPistonModel;
@@ -36,6 +38,9 @@ public abstract class AbstractCrusherTileRenderer<T extends BlockEntity, S exten
     float[] offsets = this.calculateVerticalOffsets(blockEntity, partialTicks);
     state.neckOffset = offsets[0];
     state.headOffset = offsets[1];
+
+    Level level = blockEntity.getLevel();
+    if (level != null) state.lightCoords = LightCoordsUtil.getLightCoords(level, blockEntity.getBlockPos());
   }
 
   @Override
@@ -48,7 +53,7 @@ public abstract class AbstractCrusherTileRenderer<T extends BlockEntity, S exten
         state,
         poseStack,
         this.pistonTexture,
-        15728880, OverlayTexture.NO_OVERLAY,
+        state.lightCoords, OverlayTexture.NO_OVERLAY,
         0,
         null
     );

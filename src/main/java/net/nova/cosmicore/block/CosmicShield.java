@@ -31,20 +31,20 @@ public class CosmicShield extends BaseModel {
   protected InteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
     BlockEntity blockEntity = level.getBlockEntity(pos);
     if (blockEntity instanceof CosmicShieldTile cosmicShieldTile) {
-      if (cosmicShieldTile.inventory.getItems().get(0).isEmpty() && stack.getItem() == CItems.INFERNIUM_CRYSTAL.get()) {
-        cosmicShieldTile.inventory.getItems().set(0, new ItemStack(stack.getItem(), 1));
+      if (cosmicShieldTile.stackHandler.getItems().get(0).isEmpty() && stack.getItem() == CItems.INFERNIUM_CRYSTAL.get()) {
+        cosmicShieldTile.stackHandler.getItems().set(0, new ItemStack(stack.getItem(), 1));
         stack.consume(1, player);
         level.playSound(player, pos, SoundEvents.ITEM_PICKUP, SoundSource.BLOCKS, 1f, 2f);
       }
-      else if (!cosmicShieldTile.inventory.getItems().get(0).isEmpty()) {
-        ItemStack tileStack = cosmicShieldTile.inventory.getItems().get(0);
+      else if (!cosmicShieldTile.stackHandler.getItems().get(0).isEmpty()) {
+        ItemStack tileStack = cosmicShieldTile.stackHandler.getItems().get(0);
         if (player.getItemInHand(InteractionHand.MAIN_HAND).isEmpty()) {
           player.setItemInHand(InteractionHand.MAIN_HAND, tileStack);
         }
         else {
           player.getInventory().placeItemBackInInventory(tileStack, true);
         }
-        cosmicShieldTile.inventory.getItems().set(0, ItemStack.EMPTY);
+        cosmicShieldTile.stackHandler.getItems().set(0, ItemStack.EMPTY);
         level.playSound(player, pos, SoundEvents.ITEM_FRAME_REMOVE_ITEM, SoundSource.BLOCKS, 1f, 2f);
         cosmicShieldTile.setChanged();
         level.sendBlockUpdated(pos, state, state, 3);

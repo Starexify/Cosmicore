@@ -18,7 +18,7 @@ import net.nova.cosmicore.init.CBlockEntities;
 import javax.annotation.Nullable;
 
 public class CosmicShieldTile extends BlockEntity {
-  public CosmicShieldItemStackHandler inventory = new CosmicShieldItemStackHandler(CosmicShieldTile.this);
+  public CosmicShieldItemStackHandler stackHandler = new CosmicShieldItemStackHandler(CosmicShieldTile.this);
 
   public CosmicShieldTile(BlockPos pPos, BlockState pBlockState) {
     super(CBlockEntities.COSMIC_SHIELD.get(), pPos, pBlockState);
@@ -27,29 +27,29 @@ public class CosmicShieldTile extends BlockEntity {
   // Drop Inventory
   @Override
   public void preRemoveSideEffects(BlockPos pos, BlockState state) {
-    if (level != null) Containers.dropContents(level, pos, inventory.getItems());
+    if (level != null) Containers.dropContents(level, pos, stackHandler.getItems());
   }
 
   // Store data
   @Override
   protected void saveAdditional(ValueOutput output) {
     super.saveAdditional(output);
-    inventory.serialize(output);
+    stackHandler.serialize(output);
   }
 
   @Override
   protected void loadAdditional(ValueInput input) {
     super.loadAdditional(input);
-    inventory.deserialize(input);
+    stackHandler.deserialize(input);
   }
 
   // Updates the BE between Client-Server
 
   @Override
-  public void onDataPacket(Connection net, ValueInput valueInput) {
+  public void onDataPacket(Connection net, ValueInput in) {
 //    super.onDataPacket(net, valueInput);
     if (level != null && level.isClientSide()) {
-      handleUpdateTag(valueInput);
+      handleUpdateTag(in);
     }
   }
 
@@ -57,7 +57,7 @@ public class CosmicShieldTile extends BlockEntity {
   public CompoundTag getUpdateTag(HolderLookup.Provider registries) {
     CompoundTag tag = super.getUpdateTag(registries);
 //    inventory.serialize(new ValueInput());
-    return super.getUpdateTag(registries);
+    return tag;
   }
 
   @Nullable

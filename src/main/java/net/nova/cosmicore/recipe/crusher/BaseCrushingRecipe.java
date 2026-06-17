@@ -34,7 +34,7 @@ public abstract class BaseCrushingRecipe implements Recipe<SingleRecipeInput> {
 
   @Override
   public ItemStack assemble(SingleRecipeInput input) {
-    return getRandomResult();
+    return getRandomResult().create();
   }
 
   @Override
@@ -50,19 +50,17 @@ public abstract class BaseCrushingRecipe implements Recipe<SingleRecipeInput> {
     return this.placementInfo;
   }
 
-  public ItemStack getRandomResult() {
-    float totalChance = results.stream().map(r -> r.chance).reduce(0f, Float::sum);
+  public ItemStackTemplate getRandomResult() {
+    float totalChance = results.stream().map(r -> r.chance()).reduce(0f, Float::sum);
     float roll = RANDOM.nextFloat() * totalChance;
     float currentSum = 0f;
 
     for (WeightedResult result : results) {
-      currentSum += result.chance;
-      if (roll < currentSum) {
-        return result.item.create();
-      }
+      currentSum += result.chance();
+      if (roll < currentSum) return result.item();
     }
 
-    return ItemStack.EMPTY;
+    return ItemStackTemplate.fromStack(ItemStack.EMPTY);
   }
 
   @Override
@@ -71,13 +69,13 @@ public abstract class BaseCrushingRecipe implements Recipe<SingleRecipeInput> {
   }
 
   private static final Codec<WeightedResult> WEIGHTED_RESULT_CODEC = RecordCodecBuilder.create(inst -> inst.group(
-      ItemStackTemplate.CODEC.fieldOf("item").forGetter(wr -> wr.item),
-      Codec.FLOAT.fieldOf("chance").forGetter(wr -> wr.chance)
+      ItemStackTemplate.CODEC.fieldOf("item").forGetter(wr -> wr.item()),
+      Codec.FLOAT.fieldOf("chance").forGetter(wr -> wr.chance())
   ).apply(inst, WeightedResult::new));
 
   private static final StreamCodec<RegistryFriendlyByteBuf, WeightedResult> WEIGHTED_RESULT_STREAM_CODEC = StreamCodec.composite(
-      ItemStack.STREAM_CODEC, wr -> wr.item.create(),
-      ByteBufCodecs.FLOAT, wr -> wr.chance,
+      ItemStack.STREAM_CODEC, wr -> wr.item().create(),
+      ByteBufCodecs.FLOAT, wr -> wr.chance(),
       (stack, chance) -> new WeightedResult(new ItemStackTemplate(stack.getItem()), chance)
   );
 

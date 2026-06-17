@@ -10,98 +10,100 @@ import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.items.wrapper.RangedWrapper;
+import net.neoforged.neoforge.transfer.RangedResourceHandler;
 import net.nova.cosmicore.gui.CrusherItemStackHandler;
 import net.nova.cosmicore.gui.crusher.CrusherMenu;
 import net.nova.cosmicore.init.CBlockEntities;
 import net.nova.cosmicore.init.CRecipeTypes;
 import net.nova.cosmicore.recipe.crusher.CrushingRecipe;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.util.Optional;
 
 public class CrusherTile extends AbstractCrusherTile {
-    protected final ContainerData dataAccess = new ContainerData() {
-        @Override
-        public int get(int pIndex) {
-            return switch (pIndex) {
-                case 0 -> CrusherTile.this.ignisCharge;
-                case 1 -> CrusherTile.this.ignisPower;
-                case 2 -> CrusherTile.this.crushingProgress;
-                case 3 -> CrusherTile.this.maxCrushingProgress;
-                default -> 0;
-            };
-        }
-
-        @Override
-        public void set(int pIndex, int pValue) {
-            switch (pIndex) {
-                case 0 -> CrusherTile.this.ignisCharge = pValue;
-                case 1 -> CrusherTile.this.ignisPower = pValue;
-                case 2 -> CrusherTile.this.crushingProgress = pValue;
-                case 3 -> CrusherTile.this.maxCrushingProgress = pValue;
-            }
-        }
-
-        @Override
-        public int getCount() {
-            return 4;
-        }
-    };
-
-    public CrusherTile(BlockPos pPos, BlockState pBlockState) {
-        super(CBlockEntities.CRUSHER_TILE.get(), pPos, pBlockState, CRecipeTypes.CRUSHING_RECIPE_TYPE.get());
-        this.FUEL_SLOT = 1;
-        this.RESULT_SLOT_START = 2;
-        this.RESULT_SLOT_END = 7;
-
-        this.inventory = new CrusherItemStackHandler(CrusherTile.this, 8);
-        this.top = new RangedWrapper(inventory, 0, FUEL_SLOT);
-        this.sides = new RangedWrapper(inventory, FUEL_SLOT, RESULT_SLOT_START);
-        this.down = new RangedWrapper(inventory, RESULT_SLOT_START, RESULT_SLOT_END + 1);
-    }
-
-    public int getCrushingProgress() {
-        return crushingProgress;
-    }
-
-    // Crafting stuff
+  protected final ContainerData dataAccess = new ContainerData() {
     @Override
-    public boolean hasRecipe() {
-        Optional<RecipeHolder<CrushingRecipe>> recipe = getCurrentRecipe();
-        if (recipe.isEmpty()) return false;
-        ItemStack result = recipe.get().value().assemble(createRecipeInput());
-
-        return canInsertAmountIntoOutputSlot(result.getCount()) && canInsertItemInOutputSlot(result.getItem());
+    public int get(int id) {
+      return switch (id) {
+        case 0 -> CrusherTile.this.ignisCharge;
+        case 1 -> CrusherTile.this.ignisPower;
+        case 2 -> CrusherTile.this.crushingProgress;
+        case 3 -> CrusherTile.this.maxCrushingProgress;
+        default -> 0;
+      };
     }
 
     @Override
-    public void craftItem() {
-        Optional<RecipeHolder<CrushingRecipe>> recipe = getCurrentRecipe();
-        if (recipe.isPresent()) {
-            ItemStack result = recipe.get().value().assemble(createRecipeInput());
-            inventory.getFirst().shrink(1);
-            insertOrMergeResult(result);
-        }
+    public void set(int index, int value) {
+      switch (index) {
+        case 0 -> CrusherTile.this.ignisCharge = value;
+        case 1 -> CrusherTile.this.ignisPower = value;
+        case 2 -> CrusherTile.this.crushingProgress = value;
+        case 3 -> CrusherTile.this.maxCrushingProgress = value;
+      }
     }
 
-    public Optional<RecipeHolder<CrushingRecipe>> getCurrentRecipe() {
-        if (level instanceof ServerLevel serverlevel) {
-            return serverlevel.recipeAccess().getRecipeFor(CRecipeTypes.CRUSHING_RECIPE_TYPE.get(), createRecipeInput(), serverlevel);
-        } else {
-            return Optional.empty();
-        }
-    }
-
-    // GUI title
     @Override
-    public Component getDisplayName() {
-        return Component.translatable("block.cosmicore.crusher");
+    public int getCount() {
+      return 4;
     }
+  };
 
-    // Menu
-    @Override
-    public @Nullable AbstractContainerMenu createMenu(int containerId, Inventory playerInventory, Player player) {
-        return new CrusherMenu(containerId, playerInventory, this, dataAccess, inventory);
+  public CrusherTile(BlockPos pPos, BlockState pBlockState) {
+    super(CBlockEntities.CRUSHER_TILE.get(), pPos, pBlockState, CRecipeTypes.CRUSHING_RECIPE_TYPE.get());
+    this.FUEL_SLOT = 1;
+    this.RESULT_SLOT_START = 2;
+    this.RESULT_SLOT_END = 7;
+
+    this.stackHandler = new CrusherItemStackHandler(CrusherTile.this, 8);
+    this.top = RangedResourceHandler.of(stackHandler, 0, FUEL_SLOT);
+    this.sides = RangedResourceHandler.of(stackHandler, FUEL_SLOT, RESULT_SLOT_START);
+    this.down = RangedResourceHandler.of(stackHandler, RESULT_SLOT_START, RESULT_SLOT_END + 1);
+  }
+
+  public int getCrushingProgress() {
+    return crushingProgress;
+  }
+
+  // Crafting stuff
+  @Override
+  public boolean hasRecipe() {
+    Optional<RecipeHolder<CrushingRecipe>> recipe = getCurrentRecipe();
+    if (recipe.isEmpty()) return false;
+    ItemStack result = recipe.get().value().assemble(createRecipeInput());
+
+    return canInsertAmountIntoOutputSlot(result.getCount()) && canInsertItemInOutputSlot(result.getItem());
+  }
+
+  @Override
+  public void craftItem() {
+    Optional<RecipeHolder<CrushingRecipe>> recipe = getCurrentRecipe();
+    if (recipe.isPresent()) {
+      ItemStack result = recipe.get().value().assemble(createRecipeInput());
+      stackHandler.getResource(0).toStack().shrink(1);
+      insertOrMergeResult(result);
     }
+  }
+
+  public Optional<RecipeHolder<CrushingRecipe>> getCurrentRecipe() {
+    if (level instanceof ServerLevel serverlevel) {
+      return serverlevel.recipeAccess().getRecipeFor(CRecipeTypes.CRUSHING_RECIPE_TYPE.get(), createRecipeInput(), serverlevel);
+    }
+    else {
+      return Optional.empty();
+    }
+  }
+
+  // GUI title
+  @Override
+  public Component getDisplayName() {
+    return Component.translatable("block.cosmicore.crusher");
+  }
+
+  // Menu
+
+  @Override
+  public @Nullable AbstractContainerMenu createMenu(int containerId, Inventory inventory, Player player) {
+    return new CrusherMenu(containerId, inventory, this, dataAccess, stackHandler);
+  }
 }
