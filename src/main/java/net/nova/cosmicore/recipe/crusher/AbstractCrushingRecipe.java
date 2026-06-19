@@ -16,20 +16,27 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public abstract class BaseCrushingRecipe implements Recipe<SingleRecipeInput> {
+public abstract class AbstractCrushingRecipe implements Recipe<SingleRecipeInput> {
   public Ingredient ingredient;
-  public Ingredient getIngredient() {
-    return ingredient;
-  }
-
   public List<WeightedResult> results;
+  public final int crushingProgress;
+
   public static final Random RANDOM = new Random();
 
   private PlacementInfo placementInfo;
 
-  public BaseCrushingRecipe(Ingredient ingredient, List<WeightedResult> results) {
+  public AbstractCrushingRecipe(Ingredient ingredient, List<WeightedResult> results, int crushingProgress) {
     this.ingredient = ingredient;
     this.results = results;
+    this.crushingProgress = crushingProgress;
+  }
+
+  public int crushingProgress() {
+    return this.crushingProgress;
+  }
+
+  public Ingredient ingredient() {
+    return ingredient;
   }
 
   @Override
@@ -39,7 +46,7 @@ public abstract class BaseCrushingRecipe implements Recipe<SingleRecipeInput> {
 
   @Override
   public boolean matches(SingleRecipeInput input, Level pLevel) {
-    return this.getIngredient().test(input.item());
+    return this.ingredient().test(input.item());
   }
 
   @Override
@@ -79,27 +86,30 @@ public abstract class BaseCrushingRecipe implements Recipe<SingleRecipeInput> {
       (stack, chance) -> new WeightedResult(new ItemStackTemplate(stack.getItem()), chance)
   );
 
-  public static <T extends BaseCrushingRecipe> MapCodec<T> crushingMapCodec(BaseCrushingRecipe.Factory<T> factory) {
+  public static <T extends AbstractCrushingRecipe> MapCodec<T> crushingMapCodec(AbstractCrushingRecipe.Factory<T> factory, int defaultCrushingProgress) {
     return RecordCodecBuilder.mapCodec(inst -> inst.group(
             Ingredient.CODEC.fieldOf("ingredient").forGetter(recipe -> recipe.ingredient),
-            Codec.list(WEIGHTED_RESULT_CODEC).fieldOf("results").forGetter(recipe -> recipe.results)
+            Codec.list(WEIGHTED_RESULT_CODEC).fieldOf("results").forGetter(recipe -> recipe.results),
+            Codec.INT.optionalFieldOf("crushingprogress", defaultCrushingProgress).forGetter(AbstractCrushingRecipe::crushingProgress)
         ).apply(inst, factory::create)
     );
   }
 
-  public static <T extends BaseCrushingRecipe> StreamCodec<RegistryFriendlyByteBuf, T> crushingStreamCodec(BaseCrushingRecipe.Factory<T> factory) {
+  public static <T extends AbstractCrushingRecipe> StreamCodec<RegistryFriendlyByteBuf, T> crushingStreamCodec(AbstractCrushingRecipe.Factory<T> factory) {
     return StreamCodec.composite(
         Ingredient.CONTENTS_STREAM_CODEC, recipe -> recipe.ingredient,
         ByteBufCodecs.collection(ArrayList::new, WEIGHTED_RESULT_STREAM_CODEC), recipe -> recipe.results,
+        ByteBufCodecs.INT, AbstractCrushingRecipe::crushingProgress,
         factory::create
     );
   }
 
   @FunctionalInterface
-  public interface Factory<T extends BaseCrushingRecipe> {
+  public interface Factory<T extends AbstractCrushingRecipe> {
     T create(
         Ingredient ingredient,
-        List<WeightedResult> results
+        List<WeightedResult> results,
+        int crushingProgress
     );
   }
 }

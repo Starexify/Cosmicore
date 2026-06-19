@@ -67,9 +67,8 @@ public abstract class BaseCrusherMenu extends AbstractContainerMenu {
   // Crash maybe?
   public int getChargedProgress() {
     int ignisChargeSize = AbstractCrusherScreen.IGNIS_TEXTURE_HEIGHT;
-    if (data.get(1) == 0) {
-      return 0;
-    }
+    if (data.get(1) == 0) return 0;
+
     return data.get(0) * ignisChargeSize / data.get(1);
   }
 

@@ -25,7 +25,7 @@ import net.neoforged.neoforge.transfer.item.ItemResource;
 import net.nova.cosmicore.gui.CrusherItemStackHandler;
 import net.nova.cosmicore.init.CBlocks;
 import net.nova.cosmicore.init.CItems;
-import net.nova.cosmicore.recipe.crusher.BaseCrushingRecipe;
+import net.nova.cosmicore.recipe.crusher.AbstractCrushingRecipe;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
@@ -52,14 +52,14 @@ public abstract class AbstractCrusherTile extends BlockEntity implements MenuPro
       CBlocks.INFERNIUM_BLOCK.asItem(), 44
   );
 
-  public final RecipeType<? extends BaseCrushingRecipe> recipeType;
-  public final RecipeManager.CachedCheck<SingleRecipeInput, ? extends BaseCrushingRecipe> quickCheck;
+  public final RecipeType<? extends AbstractCrushingRecipe> recipeType;
+  public final RecipeManager.CachedCheck<SingleRecipeInput, ? extends AbstractCrushingRecipe> quickCheck;
 
   public abstract boolean hasRecipe();
 
   public abstract void craftItem();
 
-  protected AbstractCrusherTile(BlockEntityType<?> pType, BlockPos pPos, BlockState pBlockState, RecipeType<? extends BaseCrushingRecipe> recipeType) {
+  protected AbstractCrusherTile(BlockEntityType<?> pType, BlockPos pPos, BlockState pBlockState, RecipeType<? extends AbstractCrushingRecipe> recipeType) {
     super(pType, pPos, pBlockState);
     this.quickCheck = RecipeManager.createCheck(recipeType);
     this.recipeType = recipeType;

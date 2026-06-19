@@ -9,13 +9,13 @@ import net.nova.cosmicore.recipe.WeightedResult;
 
 import java.util.List;
 
-public class CrushingRecipe extends BaseCrushingRecipe {
-  public static final MapCodec<CrushingRecipe> MAP_CODEC = crushingMapCodec(CrushingRecipe::new);
+public class CrushingRecipe extends AbstractCrushingRecipe {
+  public static final MapCodec<CrushingRecipe> MAP_CODEC = crushingMapCodec(CrushingRecipe::new, 400);
   public static final StreamCodec<RegistryFriendlyByteBuf, CrushingRecipe> STREAM_CODEC = crushingStreamCodec(CrushingRecipe::new);
   public static final RecipeSerializer<CrushingRecipe> SERIALIZER = new RecipeSerializer<>(MAP_CODEC, STREAM_CODEC);
 
-  public CrushingRecipe(Ingredient ingredient, List<WeightedResult> results) {
-    super(ingredient, results);
+  public CrushingRecipe(Ingredient ingredient, List<WeightedResult> results, int crushingProgress) {
+    super(ingredient, results, crushingProgress);
   }
 
   @Override

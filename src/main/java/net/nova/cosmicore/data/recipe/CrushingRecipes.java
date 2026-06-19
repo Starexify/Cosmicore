@@ -6,8 +6,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.nova.cosmicore.init.CBlocks;
 import net.nova.cosmicore.init.CItems;
-import net.nova.cosmicore.recipe.crusher.AdvancedCrushingRecipeBuilder;
-import net.nova.cosmicore.recipe.crusher.CrushingRecipeBuilder;
+import net.nova.cosmicore.recipe.crusher.SimpleCrushingRecipeBuilder;
 
 public class CrushingRecipes extends CRecipeProvider {
   public CrushingRecipes(HolderLookup.Provider registries, RecipeOutput output) {
@@ -16,7 +15,7 @@ public class CrushingRecipes extends CRecipeProvider {
 
   public void build() {
     // Crusher Recipes
-    CrushingRecipeBuilder.crushing(Ingredient.of(CBlocks.ACHONDRITE))
+    SimpleCrushingRecipeBuilder.crushing(Ingredient.of(CBlocks.ACHONDRITE), 400)
         .addResult(CItems.MAGNETITE.get(), 1, 0.02f)
         .addResult(Items.RAW_IRON, 2, 0.05f)
         .addResult(Items.RAW_IRON, 1, 0.1f)
@@ -29,7 +28,7 @@ public class CrushingRecipes extends CRecipeProvider {
         .addResult(Items.COBBLESTONE, 1, 0.5f)
         .save(output, getCrushingRecipeName(CBlocks.ACHONDRITE));
 
-    CrushingRecipeBuilder.crushing(Ingredient.of(CBlocks.METEORITE))
+    SimpleCrushingRecipeBuilder.crushing(Ingredient.of(CBlocks.METEORITE), 400)
         .addResult(CItems.RAW_TITANIUM.get(), 2, 0.05f)
         .addResult(CItems.RAW_TITANIUM.get(), 1, 0.12f)
         .addResult(CItems.MAGNETITE.get(), 1, 0.12f)
@@ -43,7 +42,7 @@ public class CrushingRecipes extends CRecipeProvider {
         .save(output, getCrushingRecipeName(CBlocks.METEORITE));
 
     // Advanced Crusher Recipes
-    AdvancedCrushingRecipeBuilder.crushing(Ingredient.of(CBlocks.ACHONDRITE))
+    SimpleCrushingRecipeBuilder.advanceCrushing(Ingredient.of(CBlocks.ACHONDRITE), 400)
         .addResult(CItems.MAGNETITE.get(), 2, 0.05f)
         .addResult(CItems.MAGNETITE.get(), 1, 0.09f)
         .addResult(Items.RAW_IRON, 2, 0.15f)
@@ -57,7 +56,7 @@ public class CrushingRecipes extends CRecipeProvider {
         .addResult(Items.COBBLESTONE, 1, 0.45f)
         .save(output, getAdvancedCrushingRecipeName(CBlocks.ACHONDRITE));
 
-    AdvancedCrushingRecipeBuilder.crushing(Ingredient.of(CBlocks.METEORITE))
+    SimpleCrushingRecipeBuilder.advanceCrushing(Ingredient.of(CBlocks.METEORITE), 400)
         .addResult(CItems.LONSDALEITE.get(), 1, 0.001f)
         .addResult(Items.DIAMOND, 1, 0.01f)
         .addResult(CItems.RAW_TITANIUM.get(), 2, 0.1f)
@@ -72,7 +71,7 @@ public class CrushingRecipes extends CRecipeProvider {
         .addResult(Items.COBBLESTONE, 1, 0.06f)
         .save(output, getAdvancedCrushingRecipeName(CBlocks.METEORITE));
 
-    AdvancedCrushingRecipeBuilder.crushing(Ingredient.of(CBlocks.PALLASITE))
+    SimpleCrushingRecipeBuilder.advanceCrushing(Ingredient.of(CBlocks.PALLASITE), 400)
         .addResult(CItems.LONSDALEITE.get(), 2, 0.005f)
         .addResult(CItems.LONSDALEITE.get(), 1, 0.02f)
         .addResult(Items.DIAMOND, 2, 0.02f)
