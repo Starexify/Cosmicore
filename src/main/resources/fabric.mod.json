@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "id": "cosmicore",
+  "version": "${version}",
+  "name": "Cosmicore",
+  "description": "Explore the world for the strange space stones, but beware the skies because- METEORS INCOMING!",
+  "authors": [
+    "ImVeryBad",
+    "Foxirion"
+  ],
+  "contact": {
+    "sources": "https://github.com/Starexify/Cosmicore"
+  },
+  "license": "MIT",
+  "icon": "assets/cosmicore/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "net.nova.cosmicore.Cosmicore"
+    ],
+    "client": [
+      "net.nova.cosmicore.CosmiClient"
+    ],
+    "fabric-datagen": [
+      "net.nova.cosmicore.DataGenerators"
+    ]
+  },
+  "mixins": [
+    "cosmicore.mixins.json",
+    {
+      "config": "cosmicore.client.mixins.json",
+      "environment": "client"
+    }
+  ],
+  "depends": {
+    "fabricloader": ">=0.19.3",
+    "minecraft": "~26.2",
+    "java": ">=25",
+    "fabric-api": "*"
+  }
+}
