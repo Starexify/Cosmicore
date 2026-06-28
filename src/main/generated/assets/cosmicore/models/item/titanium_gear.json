@@ -1,0 +1,6 @@
+{
+  "parent": "cosmicore:item/template_gear",
+  "textures": {
+    "layer0": "cosmicore:item/titanium_gear"
+  }
+}
