@@ -70,6 +70,16 @@ public abstract class AbstractCrusherTile extends BlockEntity implements MenuPro
     return stackHandler.getResource(0).toStack();
   }
 
+//  private static int getMaxCrushingProgress(ServerLevel level, AbstractCrusherTile entity) {
+//    SingleRecipeInput input = new SingleRecipeInput(entity.getItem(0));
+//    return entity.quickCheck.getRecipeFor(input, level).map(
+//        recipeHolder -> ((AbstractCrushingRecipe)recipeHolder.value()).crushingProgress()).orElse(400);
+//  }
+
+//  public ItemStack getItem(int slot) {
+//    return stackHandler.getItems().get(slot);
+//  }
+
   /// Crafting Logic
   // Logic for GUI
   public void serverTick(ServerLevel serverLevel, BlockPos pos, BlockState state) {

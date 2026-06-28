@@ -4,7 +4,7 @@ import net.minecraft.client.data.models.ItemModelGenerators;
 import net.minecraft.client.data.models.ItemModelOutput;
 import net.minecraft.client.data.models.model.*;
 import net.minecraft.resources.Identifier;
-import net.nova.cosmicore.equipment.CEquipmentAssets;
+import net.minecraft.world.item.Item;
 import net.nova.cosmicore.init.CItems;
 
 import java.util.function.BiConsumer;
@@ -17,10 +17,10 @@ public class CItemModelGenerator extends ItemModelGenerators {
   @Override
   public void run() {
     // Titanium Models
-    generateTrimmableItem(CItems.TITANIUM_HELMET.get(), CEquipmentAssets.TITANIUM, TRIM_PREFIX_HELMET, false);
-    generateTrimmableItem(CItems.TITANIUM_CHESTPLATE.get(), CEquipmentAssets.TITANIUM, TRIM_PREFIX_CHESTPLATE, false);
-    generateTrimmableItem(CItems.TITANIUM_LEGGINGS.get(), CEquipmentAssets.TITANIUM, TRIM_PREFIX_LEGGINGS, false);
-    generateTrimmableItem(CItems.TITANIUM_BOOTS.get(), CEquipmentAssets.TITANIUM, TRIM_PREFIX_BOOTS, false);
+    generateArmor(CItems.TITANIUM_HELMET.get(), TRIM_PREFIX_HELMET);
+    generateArmor(CItems.TITANIUM_CHESTPLATE.get(), TRIM_PREFIX_CHESTPLATE);
+    generateArmor(CItems.TITANIUM_LEGGINGS.get(), TRIM_PREFIX_LEGGINGS);
+    generateArmor(CItems.TITANIUM_BOOTS.get(), TRIM_PREFIX_BOOTS);
 
     generateFlatItem(CItems.TITANIUM_SWORD.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
     generateFlatItem(CItems.TITANIUM_PICKAXE.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
@@ -38,10 +38,10 @@ public class CItemModelGenerator extends ItemModelGenerators {
     generateFlatItem(CItems.TITANIUM_UPGRADE_SMITHING_TEMPLATE.get(), ModelTemplates.FLAT_ITEM);
 
     // Lonsdaleite Models
-    generateTrimmableItem(CItems.LONSDALEITE_HELMET.get(), CEquipmentAssets.LONSDALEITE, TRIM_PREFIX_HELMET, false);
-    generateTrimmableItem(CItems.LONSDALEITE_CHESTPLATE.get(), CEquipmentAssets.LONSDALEITE, TRIM_PREFIX_CHESTPLATE, false);
-    generateTrimmableItem(CItems.LONSDALEITE_LEGGINGS.get(), CEquipmentAssets.LONSDALEITE, TRIM_PREFIX_LEGGINGS, false);
-    generateTrimmableItem(CItems.LONSDALEITE_BOOTS.get(), CEquipmentAssets.LONSDALEITE, TRIM_PREFIX_BOOTS, false);
+    generateArmor(CItems.LONSDALEITE_HELMET.get(), TRIM_PREFIX_HELMET);
+    generateArmor(CItems.LONSDALEITE_CHESTPLATE.get(), TRIM_PREFIX_CHESTPLATE);
+    generateArmor(CItems.LONSDALEITE_LEGGINGS.get(), TRIM_PREFIX_LEGGINGS);
+    generateArmor(CItems.LONSDALEITE_BOOTS.get(), TRIM_PREFIX_BOOTS);
 
     generateFlatItem(CItems.LONSDALEITE_SWORD.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
     generateFlatItem(CItems.LONSDALEITE_PICKAXE.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
@@ -72,5 +72,16 @@ public class CItemModelGenerator extends ItemModelGenerators {
 
     // Spawn Eggs
 //        generateFlatItem(CItems.TITANIUM_GOLEM_SPAWN_EGG.get(), ModelTemplates.FLAT_ITEM);
+  }
+
+  // Methods
+  public void generateArmor(Item armor, Identifier slotTrimPrefix) {
+    // Generate model json because the game doesn't do that for some reason
+    ModelTemplates.FLAT_ITEM.create(
+        ModelLocationUtils.getModelLocation(armor),
+        TextureMapping.layer0(TextureMapping.getItemTexture(armor)),
+        this.modelOutput
+    );
+    generateDynamicTrimmableItem(armor, slotTrimPrefix);
   }
 }
